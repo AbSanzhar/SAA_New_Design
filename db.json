@@ -1,0 +1,121 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "abcde 1",
+      "lastName": "test 1",
+      "middleName": "test 1",
+      "email": "test@gmail.com",
+      "role": [
+        "professor",
+        "department of science",
+        "secretary of the council"
+      ]
+    },
+    {
+      "id": 2,
+      "firstName": "abcde 1",
+      "lastName": "test 1",
+      "middleName": "test 1",
+      "email": "test@gmail.com",
+      "role": [
+        "professor",
+        "department of science",
+        "secretary of the council"
+      ]
+    },
+    {
+      "id": 3,
+      "firstName": "abcde 1",
+      "lastName": "test 1",
+      "middleName": "test 1",
+      "email": "test@gmail.com",
+      "role": [
+        "professor",
+        "none",
+        "none"
+      ]
+    },
+    {
+      "id": 4,
+      "firstName": "abcde 1",
+      "lastName": "test 1",
+      "middleName": "test 1",
+      "email": "test@gmail.com",
+      "role": [
+        "professor",
+        "none",
+        "none"
+      ]
+    },
+    {
+      "id": 5,
+      "firstName": "abcde 1",
+      "lastName": "test 1",
+      "middleName": "test 1",
+      "email": "test@gmail.com",
+      "role": [
+        "professor",
+        "none",
+        "none"
+      ]
+    },
+    {
+      "id": 6,
+      "firstName": "abcde 1",
+      "lastName": "test 1",
+      "middleName": "test 1",
+      "email": "test@gmail.com",
+      "role": [
+        "professor",
+        "department of science",
+        "secretary of the council"
+      ]
+    }
+  ],
+  "patents": [
+    {
+      "id": 1,
+      "patentNumber": 12133,
+      "country": "Almaty",
+      "inventionPatent": "test-p",
+      "author": "Test Testtov",
+      "date": "2020-05-11",
+      "kz": "file",
+      "ru": "file"
+    }
+  ],
+  "publications": [
+    {
+      "id": 1,
+      "fileName": "file1",
+      "type": "test",
+      "jointAuthors": "Test1",
+      "titlePublication": "Test P",
+      "year": 2000,
+      "city": "Almaty",
+      "publisher": "Test"
+    }
+  ],
+  "dissets": [
+    {
+      "id": 1,
+      "universityName": "test univer",
+      "role": "test role",
+      "specialty": "test",
+      "activityPeriod": "test",
+      "orderNumber": "test",
+      "date": "test"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "firstName": "Admin",
+      "lastName": "Adminov",
+      "middleName": "Adminovich"
+    }
+  ]
+}

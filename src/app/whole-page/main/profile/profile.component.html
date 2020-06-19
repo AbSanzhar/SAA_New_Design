@@ -1,0 +1,115 @@
+<div class="content">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Информация">
+      <div class="Inner">
+        <div style="width: 33%;">
+          <div class="Img"></div>
+        </div>
+        <div style="align-items: center; display: flex;">
+          <div>
+            <div style="width: 100%; display: flex; justify-content: space-between" *ngIf="this.currentUser">
+              <h2 style="">{{this.currentUser.firstName}} {{this.currentUser.lastName}}</h2>
+              <mat-icon routerLink="./settings" style="cursor: pointer;">create</mat-icon>
+            </div>
+            <div style="width: 100%;" *ngIf="this.currentUser">
+              <h3>{{this.currentUser.email}}</h3>
+            </div>
+          </div>
+          </div>
+      </div>
+      <hr>
+      <div class="AddInf">
+        <div class="left-side">
+          <div>
+            <h3 style=" margin-bottom: 0;">Личная информация</h3>
+            <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">Вы заведующий этой кафедры</h3>
+          </div>
+          <div>
+            <h3 style="font-weight: bold;  margin-bottom: 0;">Образование</h3>
+            <h3>МУИТ (2009-2013)</h3>
+          </div>
+          <div>
+            <h3 routerLink="./password" class="passwd-btn button">Пароль <mat-icon>keyboard_arrow_right</mat-icon></h3>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="" *ngIf="userDepts[0]">
+            <h3 style="font-weight: bold; margin-bottom: 0;">Кафедра</h3>
+            <h3 >{{this.userDepts[0].deptName}} - {{this.userDepts[0].userType}}</h3>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Управление">
+      <div class="managing">
+        <div class="my-tables">
+          <div class="nav-head">
+            <h2>Мои таблицы</h2>
+          </div>
+          <div class="nav-link">
+            <a class="is-active" href="#">Мои публикации</a>
+            <a href="#">Мои мероприятия</a>
+            <a href="#">Мои диссоветы</a>
+            <a href="#">Мои патенты</a>
+            <a href="#">Мои сотрудники</a>
+            <a href="#">Мои научные проекты</a>
+          </div>
+        </div>
+        <div class="table">
+          <div class="sort-div">
+            <div class="form-div">
+              <div class="label-div">
+                <label>От </label>
+              </div>
+              <div class="input-div">
+                <input type="number">
+              </div>
+            </div>
+            <div class="form-div">
+              <div class="label-div">
+                <label>До </label>
+              </div>
+              <div class="input-div">
+                <input type="number">
+              </div>
+            </div>
+          </div>
+          <div class="main">
+            <mat-table [dataSource]="dataSource" class="">
+              <ng-container matColumnDef="No">
+                <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+                <mat-cell *matCellDef="let employee"> {{employee.No}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="File">
+                <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
+                <mat-cell *matCellDef="let employee"> {{employee.File}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Type">
+                <mat-header-cell *matHeaderCellDef> Тип публикации </mat-header-cell>
+                <mat-cell *matCellDef="let employee"> {{employee.Type}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Collaborators">
+                <mat-header-cell *matHeaderCellDef> Соавторы </mat-header-cell>
+                <mat-cell *matCellDef="let employee"> {{employee.Collaborators}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Title">
+                <mat-header-cell *matHeaderCellDef> Название публикации </mat-header-cell>
+                <mat-cell *matCellDef="let employee"> {{employee.Title}} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let employee; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+          <div>
+
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="content">
+    <div class="slide-bar">
+      <h2 class="title-slide-bar">Управление</h2>
+      <nav>
+        <ul>
+          <li><a routerLink="../" class="link">Все сотрудники</a></li>
+          <li><a routerLink="./" routerLinkActive="active" class="link">Все патенты</a></li>
+          <li><a routerLink="../all-publications" routerLinkActive="active" class="link">Все публикации</a></li>
+          <li><a routerLink="../all-dissets" routerLinkActive="active" class="link">Все диссоветы</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="main">
+      <mat-table [dataSource]="dataSource" class="">
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+          <mat-cell *matCellDef="let patent, let i = index"> {{i + 1}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="patentNumber">
+          <mat-header-cell *matHeaderCellDef> Номер патента </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.patentNumber}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="country">
+          <mat-header-cell *matHeaderCellDef> Страна </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.country}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="inventionPatent">
+          <mat-header-cell *matHeaderCellDef> Патент на изобретение </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.inventionPatent}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="author">
+          <mat-header-cell *matHeaderCellDef> Автор </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.author}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Дата ввода в базу </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="kz">
+          <mat-header-cell *matHeaderCellDef> kz </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.kz}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ru">
+          <mat-header-cell *matHeaderCellDef> ru </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ru}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
+          <mat-cell *matCellDef="let patent">
+            <button mat-icon-button color="accent" aria-label="Example icon button with a heart icon">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let employee; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

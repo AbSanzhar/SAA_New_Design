@@ -1,0 +1,113 @@
+.content{
+  margin: 6rem;
+}
+  /deep/.mat-tab-label, /deep/.mat-tab-label-active{
+  font-weight: bolder;
+  color: black;
+  opacity: 1 !important;
+  width: 50%;
+  border-bottom: 0;
+  z-index: 0 !important;
+}
+/deep/.mat-ink-bar {
+  margin-left: 15% !important;
+  max-width: 20%;
+}
+.Inner{
+  margin: 5rem 2rem;
+  display: flex;
+  margin-bottom: 2rem!important;
+
+}
+.Img{
+  background: url('https://media.istockphoto.com/photos/neon-heart-on-brick-wall-picture-id848235926?k=6&m=848235926&s=612x612&w=0&h=resOh2Qt0_wYIOoLGcbnGtu_rXw5Dkp_IsqrerWzWCQ=') no-repeat center;
+  width: 249px;
+  height: 214px;
+  background-size: cover;
+  clip-path: ellipse();
+}
+.AddInf{
+  margin: 2rem;
+  display: flex;
+}
+.left-side div{
+  margin: 2rem;
+}
+.passwd-btn{
+  font-weight: bolder;
+  cursor: pointer;
+  display: inline;
+}
+.passwd-btn mat-icon{
+  position: absolute;
+  margin: 2px 8px;
+}
+.right-side{
+  margin: 7.4rem;
+  display: flex;
+  align-items: center;
+}
+.managing{
+  display: flex;
+  justify-content: center;
+}
+.my-tables{
+  width: 25%;
+}
+.table{
+  width: 75%;
+}
+.nav-head{
+  margin: 1.5rem 1rem;
+}
+.nav-head h2 {
+  margin: .5rem;
+  font-weight: 600;
+  color: #827878;
+}
+.nav-link{
+  margin: 1.5rem 1rem;
+}
+.nav-link a{
+  display: block;
+  text-decoration: none;
+  color: black;
+  margin: .5rem;
+}
+.is-active {
+  color: #DC5441 !important;
+}
+.sort-div{
+  display: flex;
+}
+.form-div{
+  width: 50%;
+  margin: 2rem;
+  display: flex;
+}
+label{
+  font-family: Muli, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: #A8A4A4;
+}
+input:not(.btn){
+  background: #FDFDFD;
+  border: 1px solid #0CB5A0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: .7rem 1rem;
+  font-family: Ubuntu, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+.label-div{
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+}
+.input-div{
+  margin-left: 2rem;
+  width: 70%;
+}

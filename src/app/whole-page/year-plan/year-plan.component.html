@@ -1,0 +1,393 @@
+<div class="container">
+  <div id="content">
+    <div id="main-content">
+      <mat-tab-group>
+        <mat-tab label="Учебно-методическая работа">
+          <div *ngIf="!message.hide" [ngClass]="message.type">
+            <div class="alert alert-danger" role="alert" [ngClass]="message.type" *ngIf="!message.hide">
+              {{message.text}}
+            </div>
+          </div>
+          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+            <div class="row">
+            <p class="nameHeader">
+              1.Учебно-методическая работа
+            </p>
+            <form [formGroup]="AcadMetForm" *ngIf="AcadMetForm" style="overflow-x:auto;">
+              <table>
+
+                <thead>
+                <tr>
+                  <th scope="col" colspan="1" rowspan="2">Рет саны №</th>
+                  <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы, орындалу мерзімі</th>
+                  <th scope="col" colspan="2">Жұмыс көлемі</th>
+                </tr>
+                <tr>
+                  <th scope="col">Жоспардың орындалу уақытты</th>
+                  <th scope="col">Жоспардың орындалуы</th>
+                </tr>
+                </thead>
+
+                <tbody formArrayName="AcadMetAct">
+                <tr *ngFor="let item of AcadMetForm.controls.key; let i = index" [formGroupName]="i"> <!--AcadMetAct.controls-->
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="ID" formControlName="acId">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <input  matInput placeholder="Name, dd-mm-yy" formControlName="activities">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <input  matInput placeholder="dd-mm-yy" formControlName="timeFrame">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                      <input matInput formControlName="implementation">
+                      <mat-icon matSuffix>mode_edit</mat-icon>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                </tbody>
+
+              </table>
+            </form>
+              <mat-icon class="add" style="cursor: pointer" (click)="addAcadMetForm()" color="accent">add_circle</mat-icon>
+            </div>
+          </div>
+
+          <div style="margin-left: 37%">
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Вывести план</button>
+          </div>
+        </mat-tab>
+
+
+        <mat-tab label="Научная работа">
+          <div *ngIf="!message.hide" [ngClass]="message.type">
+            <div class="alert alert-danger" role="alert" [ngClass]="message.type" *ngIf="!message.hide">
+              {{message.text}}
+            </div>
+          </div>
+          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+            <div class="row">
+              <p class="nameHeader">
+                2.Научная работа
+              </p>
+              <form [formGroup]="AcadMetForm" *ngIf="AcadMetForm" style="overflow-x:auto;">
+                <table>
+
+                  <thead>
+                  <tr>
+                    <th scope="col" colspan="1" rowspan="2">Рет саны №</th>
+                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы, орындалу мерзімі</th>
+                    <th scope="col" colspan="2">Жұмыс көлемі</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Жоспардың орындалу уақытты</th>
+                    <th scope="col">Жоспардың орындалуы</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr *ngFor="let results of gettedResearch">
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput type="number" [(ngModel)]="results.comId">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput type="text" [(ngModel)]="results.activities">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput type="number" [(ngModel)]="results.output">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput type="number" [(ngModel)]="results.plan">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput type="number" [(ngModel)]="results.implementation">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <form [formGroup]="Research" (ngSubmit)="onSubmit()">
+                        <div formArrayName="comId" *ngFor="let actId of comId.controls; let i=index">
+                          <input type="number" class="form-control my-1" [formControlName]="i">
+                        </div>
+                      </form>
+                    </td>
+                    <td>
+                      <form [formGroup]="Research" (ngSubmit)="onSubmit()">
+                        <div formArrayName="activities" *ngFor="let acts of resAct.controls; let i=index">
+                          <input type="text" class="form-control my-1" [formControlName]="i">
+                        </div>
+                       </form>
+                    </td>
+                    <td > <form [formGroup]="Research" (ngSubmit)="onSubmit()">
+                      <div formArrayName="output" *ngFor="let tf of output.controls; let i=index">
+                        <input type="text" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td> <form [formGroup]="Research" (ngSubmit)="onSubmit()">
+                      <div formArrayName="plan" *ngFor="let tf of resPlan.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td> <form [formGroup]="Research" (ngSubmit)="onSubmit()">
+                      <div formArrayName="implementation" *ngFor="let tf of resImpl.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+                  </tr>
+
+                  </tbody>
+
+                </table>
+              </form>
+              <mat-icon class="add" style="cursor: pointer" (click)="addResId()" color="accent">add_circle</mat-icon> <!--Что это?)--> <!-- || addResAct()|| addResOutput() || addResPlan() || addResImpl()-->
+            </div>
+          </div>
+
+          <div style="margin-left: 37%">
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Вывести план</button>
+          </div>
+        </mat-tab>
+
+
+        <mat-tab label="НИР/НИРС">
+          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+            <div class="row">
+              <div class="col-12 text-center table-responsive">
+                <p class="nameHeader">2.2 Бюджетные НИР и руководство НИРС</p>
+                <table>
+                  <thead>
+                  <tr>
+                    <th scope="col" colspan="1" rowspan="2">№</th>
+                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>
+                    <th scope="col" colspan="2">Жұмыс көлемі <br>Объем работы<br>Output</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Жоспар<br>План<br>Plan</th>
+                    <th scope="col">Жоспардың орындалуы<br>Фактическое выполнение плана<br>Implementation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td >
+                      <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
+                        <div formArrayName="budId" *ngFor="let budIds of budId.controls; let i=index">
+                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                        </div>
+                      </form>
+                    </td>
+                    <td > <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
+                      <div formArrayName="activitiess" *ngFor="let acts of activitiess.controls; let i=index">
+                        <input type="text" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td > <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
+                      <div formArrayName="plan" *ngFor="let plans of plan.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td > <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
+                      <div formArrayName="implementation" *ngFor="let impls of implmentation.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <mat-icon class="add" style="cursor: pointer" (click)="addNewBudId()" color="accent">add_circle</mat-icon> <!-- || addNewActivitiess() || addNewPlan() || addNewImplementation()-->
+
+              </div>
+            </div>
+          </div>
+          <div style="margin-left: 37%">
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Вывести план</button>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Организационно-методическая работа">
+          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+            <div class="row">
+              <div class="col-12 text-center table-responsive">
+                <p class="nameHeader"> 3. Организационно-методическая работа</p>
+                <table (change)="somethingChanged()">
+                  <thead>
+                  <tr>
+                    <th scope="col" colspan="1" rowspan="2">Рет саны №п.п №</th>
+                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>
+                    <th scope="col" colspan="2">Жұмыс көлемі <br>Объем работы<br>Output</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Жоспар<br>План<br>Plan</th>
+                    <th scope="col">Жоспардың орындалуы<br>Фактическое выполнение плана<br>Implementation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td >
+                      <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
+                        <div formArrayName="orgId" *ngFor="let orgIds of orgId.controls; let i=index">
+                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                        </div>
+                      </form>
+                    </td>
+                    <td > <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
+                      <div formArrayName="acts" *ngFor="let acts of acts.controls; let i=index">
+                        <input type="text" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td > <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
+                      <div formArrayName="plan" *ngFor="let plans of orgPlan.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td > <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
+                      <div formArrayName="implementation" *ngFor="let impls of orgImpl.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <mat-icon  class="add" style="cursor: pointer" (click)="addNewOrgId()" color="accent">add_circle</mat-icon> <!-- || addNewOrgAct() || addNewOrgPlan()  || addNewOrgImpl()-->
+              </div>
+            </div>
+          </div>
+          <div style="margin-left: 37%">
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Вывести план</button>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Услуги">
+          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+            <div class="row">
+              <div class="col-12 text-center table-responsive">
+                <p class="nameHeader">4. Воспитательная, профориентационная, общественная работа, работа по оказанию платных услуг,
+                  оборудованию кабинетов, повышению квалификации </p>
+                <table (change)="somethingChanged()">
+                  <thead>
+                  <tr>
+                    <th scope="col" colspan="1" rowspan="2">Рет саны №п.п №</th>
+                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>
+                    <th scope="col" colspan="2">Орындау
+                      туралы
+                      мәлімет<br>
+                      Сведения о
+                      выполнении<br>
+                      Implementation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td >
+                      <form [formGroup]="edus" (ngSubmit)="onSubmit()">
+                        <div formArrayName="eduId" *ngFor="let orgIds of eduId.controls; let i=index">
+                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                        </div>
+                      </form>
+                    </td>
+                    <td > <form [formGroup]="edus" (ngSubmit)="onSubmit()">
+                      <div formArrayName="activities" *ngFor="let acts of eduAct.controls; let i=index">
+                        <input type="text" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td > <form [formGroup]="edus" (ngSubmit)="onSubmit()">
+                      <div formArrayName="implementation" *ngFor="let impls of eduImpl.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <mat-icon  class="add" style="cursor: pointer" (click)="addNewEduId() " color="accent">add_circle</mat-icon> <!--|| addNewEduAct() || addNewEduImpl()-->
+
+              </div>
+            </div>
+          </div>
+          <div style="margin-left: 37%">
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Вывести план</button>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Итоги ИПП">
+          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+            <div class="row">
+              <div class="col-12 text-center table-responsive">
+                <p class="nameHeader"> Итоги выполнения ИПП преподавателя</p>
+                <table (change)="somethingChanged()">
+                  <thead>
+                  <tr>
+                    <th scope="col" colspan="1" rowspan="2">Рет саны №п.п №</th>
+                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>
+                    <th scope="col" colspan="2">Орындау <br>Выполнение<br>Implementation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
+                        <div formArrayName="id" *ngFor="let orgIds of PlanPerId.controls; let i=index">
+                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                        </div>
+                      </form>
+                    </td>
+                    <td > <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
+                      <div formArrayName="activities" *ngFor="let acts of PlanPerAct.controls; let i=index">
+                        <input type="text" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+
+                    <td > <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
+                      <div formArrayName="implementation" *ngFor="let impls of PlanPerImpl.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+                  </tr>
+                  </tbody>
+                  <!--                  <button style="margin-top: 5%;" mat-stroked-button color="primary" (click)="addNewPPid() || addNewPPAct() || addNewPPImpl()">Добавить новую запись <mat-icon color="primary">add</mat-icon></button><br>-->
+                  <!--        <button type="button" class="btn btn-danger btn-sm m-3" (click)="deleteNewPPId() || deleteNewPPAct() || deleteNewPPImpl()">Удалить новую запись</button>-->
+                </table>
+                <mat-icon class="add" style="cursor: pointer" (click)="addNewPPid()" color="accent">add_circle</mat-icon> <!-- || addNewPPAct() || addNewPPImpl()-->
+
+              </div>
+            </div>
+          </div>
+          <div style="margin-left: 37%">
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Вывести план</button>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+
+

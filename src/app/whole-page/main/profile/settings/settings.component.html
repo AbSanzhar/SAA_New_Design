@@ -1,0 +1,47 @@
+<div style="min-height: 100%">
+  <div style="margin: 2rem;">
+    <button routerLink="./.." style="border: 0; background: none; font-size: 16px">Главная > </button>
+    <h4 style="display: inline; color: gray"> Настройки</h4>
+  </div>
+  <div class="content">
+    <div style="width: 70%">
+      <form class="" [formGroup]="updateProfileForm" *ngIf="updateProfileForm">
+        <div class="form-div">
+          <div class="label-div">
+            <label>Имя: </label>
+          </div>
+          <div class="input-div">
+            <input matInput type="text" formControlName="firstName">
+          </div>
+        </div>
+        <div class="form-div">
+          <div class="label-div">
+            <label>Фамилия: </label>
+          </div>
+          <div class="input-div">
+            <input type="text" formControlName="lastName">
+          </div>
+        </div>
+        <div class="form-div">
+          <div class="label-div">
+            <label>Отчество: </label>
+          </div>
+          <div  class="input-div">
+            <input type="text" formControlName="patronymic">
+          </div>
+        </div>
+        <div class="form-div">
+          <div class="label-div">
+            <label>E-mail: </label>
+          </div>
+          <div class="input-div">
+            <input type="text" formControlName="email">
+          </div>
+        </div>
+        <div style="text-align: center">
+          <input class="btn" type="submit" value="Сохранить" (click)="updateProfile()" routerLink="/..">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="content">
+
+    <div class="nav-text">
+      <button class="btn-nav-header">Доп. возможности</button> <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon> Диссоветы №{{idDisset}}
+    </div>
+
+    <div class="title-div">
+      <h1 class="title-text">Диссоветы №{{idDisset}}</h1>
+      <small class="small-title-text">Участники</small>
+      <div class="box">
+        <mat-table [dataSource]="dataSource" class="">
+
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
+            <mat-cell *matCellDef="let member"> {{member.email}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="fullName">
+            <mat-header-cell *matHeaderCellDef> ФИО </mat-header-cell>
+            <mat-cell *matCellDef="let member"> {{member.lastName + ' ' + member.firstName + ' ' + member.middleName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="role">
+            <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
+            <mat-cell *matCellDef="let member"> {{member.role}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+            <mat-cell *matCellDef="let member">
+              <button (click)="editRole(member)" mat-icon-button aria-label="Example icon button with a home icon">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let disset; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <div class="btn-div">
+          <button routerLink="add-account" mat-flat-button color="primary" class="btn-style">add <mat-icon aria-hidden="false" aria-label="Example home icon">add_circle_outline</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div class="content">
+
+    <div class="nav-text">
+      <button class="btn-nav-header">Доп. возможности</button> <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon> Диссоветы №{{idDisset}}
+    </div>
+
+    <div class="title-div">
+
+      <h1 class="title-text">Диссоветы №{{idDisset}}</h1>
+
+      <small class="small-title-text">Участники</small>
+    </div>
+
+    <div class="box">
+
+      <div class="form-box">
+        <form [formGroup]="form">
+          <div class="div-label">
+            <label for="email">e-mail:</label>
+            <input id="email" type="email" name="email" formControlName="email">
+          </div>
+
+          <div class="div-label">
+            <label for="role">Роль:</label>
+            <input id="role" type="text" name="role" formControlName="role">
+          </div>
+
+        </form>
+      </div>
+
+
+      <div class="btn-div">
+        <button routerLink="add-account" mat-flat-button color="primary" class="btn-style">add <mat-icon aria-hidden="false" aria-label="Example home icon">add_circle_outline</mat-icon></button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

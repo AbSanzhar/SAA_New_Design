@@ -1,0 +1,11 @@
+.full-name {
+  color: #8F1812;
+  font-family: 'Roboto' sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.dialog-div {
+  width: 250px;
+  text-align: center;
+}

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="content">
+    <div class="header">
+      <div id="logo">
+        <img src="./assets/images/header/logoIITU.png"  alt="IITU logo">
+      </div>
+      <div id="accountName">
+        <button mat-button (click)="openDialog()">Sign In</button>
+      </div>
+    </div>
+  </div>
+  <div class="content-center">
+    <div class="column">
+      <div class="content-center">
+        <div style="width: 55%;">
+          <div class="text">
+            For people interested <br> in science!
+          </div>
+        </div>
+      </div>
+      <div class="content-center">
+        <div class="join">
+          <mat-button-toggle-group>
+            <input matInput placeholder="Email address" [(ngModel)]="inputLogin">
+            <mat-button-toggle (click)="openDialog()" style="display: flex; align-items: center;"><p class="btnText">JOIN FOR FREE<mat-icon style="vertical-align: middle">keyboard_arrow_right</mat-icon></p></mat-button-toggle> <!--<i class="material-icons">keyboard_arrow_right</i>-->
+          </mat-button-toggle-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

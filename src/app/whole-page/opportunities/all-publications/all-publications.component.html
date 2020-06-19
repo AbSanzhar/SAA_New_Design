@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="content">
+    <div class="slide-bar">
+      <h2 class="title-slide-bar">Управление</h2>
+      <nav>
+        <ul>
+          <li><a routerLink="../" class="link">Все сотрудники</a></li>
+          <li><a routerLink="../all-patents" class="link">Все патенты</a></li>
+          <li><a routerLink="./" routerLinkActive="active" class="link">Все публикации</a></li>
+          <li><a routerLink="../all-dissets" class="link">Все диссоветы</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="main">
+      <mat-table [dataSource]="dataSource" class="">
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+          <mat-cell *matCellDef="let publication, let i = index"> {{i + 1}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fileName">
+          <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
+          <mat-cell *matCellDef="let publication"> {{publication.fileName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef> Тиб публикации </mat-header-cell>
+          <mat-cell *matCellDef="let publication"> {{publication.type}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="jointAuthors">
+          <mat-header-cell *matHeaderCellDef> Соавторы </mat-header-cell>
+          <mat-cell *matCellDef="let publication"> {{publication.jointAuthors}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="titlePublication">
+          <mat-header-cell *matHeaderCellDef> Название публикации </mat-header-cell>
+          <mat-cell *matCellDef="let publication"> {{publication.titlePublication}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="year">
+          <mat-header-cell *matHeaderCellDef> Год </mat-header-cell>
+          <mat-cell *matCellDef="let publication"> {{publication.year}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef> Город </mat-header-cell>
+          <mat-cell *matCellDef="let publication"> {{publication.city}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="publisher">
+          <mat-header-cell *matHeaderCellDef> Издатель </mat-header-cell>
+          <mat-cell *matCellDef="let publication"> {{publication.publisher}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
+          <mat-cell *matCellDef="let publication">
+            <button mat-icon-button color="accent" aria-label="Example icon button with a heart icon">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let publication; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

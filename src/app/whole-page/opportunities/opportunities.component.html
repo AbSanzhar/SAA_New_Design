@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="content">
+    <div class="slide-bar">
+      <h2 class="title-slide-bar">Управление</h2>
+      <nav>
+        <ul>
+          <li><a routerLink="./" routerLinkActive="active" class="link">Все сотрудники</a></li>
+          <li><a routerLink="all-patents" routerLinkActive="active" class="link">Все патенты</a></li>
+          <li><a routerLink="all-publications" routerLinkActive="active" class="link">Все публикации</a></li>
+          <li><a routerLink="all-dissets" routerLinkActive="active" class="link">Все диссоветы</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="main">
+      <mat-table [dataSource]="dataSource" class="">
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+          <mat-cell *matCellDef="let employee, let i = index"> {{i + 1}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef> Фамилия </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="middleName">
+          <mat-header-cell *matHeaderCellDef> Отчество </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.middleName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="e-mail">
+          <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
+          <mat-cell *matCellDef="let employee">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="openDialogEdit(employee)">edit</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let employee; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>
