@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './main/main.component';
 import { YearPlanComponent } from './year-plan/year-plan.component';
 import { OpportunitiesComponent } from './opportunities/opportunities.component';
 import {RouterModule, Routes} from "@angular/router";
-import {LoginComponent} from "../login/login.component";
 import {WholePageComponent} from "./whole-page.component";
 import {ProfileComponent} from './main/profile/profile.component';
 import {PasswordComponent} from './main/profile/password/password.component';
@@ -32,6 +30,10 @@ import {DialogEditRoleComponent} from "./secretary-diss-council/dialog-edit-role
 import {MatSelectModule} from "@angular/material/select";
 import {EditDissetComponent} from "./secretary-diss-council/edit-disset/edit-disset.component";
 import {MatMenu, MatMenuModule} from "@angular/material/menu";
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 
 const r: Routes = [
   {
@@ -69,24 +71,28 @@ const r: Routes = [
     EditAddDissetComponent,
     DialogEditRoleComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(r),
-    MatTableModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatSlideToggleModule,
-    MatButtonModule,
-    HttpClientModule,
-    MatDialogModule,
-    MatSidenavModule,
-    MatListModule,
-    MatTabsModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatMenuModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(r),
+        MatTableModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatSlideToggleModule,
+        MatButtonModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatSidenavModule,
+        MatListModule,
+        MatTabsModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule,
+        MatSelectModule,
+        MatMenuModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatSnackBarModule,
+        MatCardModule
+    ],
 })
 export class WholePageModule { }

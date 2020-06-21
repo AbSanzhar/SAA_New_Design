@@ -5,42 +5,74 @@
   </div>
   <div class="content">
     <div style="width: 70%">
-      <form class="" [formGroup]="updateProfileForm" *ngIf="updateProfileForm">
-        <div class="form-div">
-          <div class="label-div">
-            <label>Имя: </label>
-          </div>
-          <div class="input-div">
-            <input matInput type="text" formControlName="firstName">
-          </div>
+      <form [formGroup]="updateProfileForm">
+        <div class="forma">
+        <label>Имя: </label>
+        <mat-form-field>
+          <input placeholder="First Name" type="text" matInput required formControlName="firstName">
+          <mat-error>First Name Required!</mat-error>
+        </mat-form-field>
         </div>
-        <div class="form-div">
-          <div class="label-div">
-            <label>Фамилия: </label>
-          </div>
-          <div class="input-div">
-            <input type="text" formControlName="lastName">
-          </div>
+
+        <div class="forma">
+        <label>Фамилия: </label>
+        <mat-form-field>
+          <input placeholder="Last Name" type="text" matInput required formControlName="lastName">
+          <mat-error>Last Name Required!</mat-error>
+        </mat-form-field>
         </div>
-        <div class="form-div">
-          <div class="label-div">
-            <label>Отчество: </label>
-          </div>
-          <div  class="input-div">
-            <input type="text" formControlName="patronymic">
-          </div>
+
+        <div class="forma"><label>Отчество: </label>
+        <mat-form-field>
+          <input placeholder="Patronymic" type="text" matInput required formControlName="patronymic">
+          <mat-error>Patronymic Required!</mat-error>
+        </mat-form-field></div>
+
+       <div class="forma"> <label>E-mail: </label>
+        <mat-form-field>
+          <input placeholder="E-mail" type="text" matInput required formControlName="email">
+          <mat-error>E-mail Required!</mat-error>
+        </mat-form-field></div>
+
+        <div style="text-align: center; margin: 5%">
+          <button color="primary" (click)="updateProfile('Successfully changed', 'OK')" routerLink="/.." type="submit" mat-stroked-button>Сохранить</button>
         </div>
-        <div class="form-div">
-          <div class="label-div">
-            <label>E-mail: </label>
-          </div>
-          <div class="input-div">
-            <input type="text" formControlName="email">
-          </div>
-        </div>
-        <div style="text-align: center">
-          <input class="btn" type="submit" value="Сохранить" (click)="updateProfile()" routerLink="/..">
-        </div>
+
+<!--        <div class="form-div">-->
+<!--          <div class="label-div">-->
+<!--            <label>Имя: </label>-->
+<!--          </div>-->
+<!--          <div class="input-div">-->
+<!--            <input class="form-control" id="firstName" name="firstName" matInput type="text" formControlName="firstName" #firstName required>-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+<!--        <div class="form-div">-->
+<!--          <div class="label-div">-->
+<!--            <label>Фамилия: </label>-->
+<!--          </div>-->
+<!--          <div class="input-div">-->
+<!--            <input type="text" formControlName="lastName">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="form-div">-->
+<!--          <div class="label-div">-->
+<!--            <label>Отчество: </label>-->
+<!--          </div>-->
+<!--          <div  class="input-div">-->
+<!--            <input type="text" formControlName="patronymic">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="form-div">-->
+<!--          <div class="label-div">-->
+<!--            <label>E-mail: </label>-->
+<!--          </div>-->
+<!--          <div class="input-div">-->
+<!--            <input type="text" formControlName="email" required="required">-->
+<!--          </div>-->
+<!--        </div>-->
+
       </form>
     </div>
   </div>

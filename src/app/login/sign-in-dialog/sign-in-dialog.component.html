@@ -7,16 +7,17 @@
       <mat-form-field>
         <div style="justify-content: center; display:flex;">
           <img src="./assets/images/login/user.png" width="8%" alt="">
-          <input formControlName="username" class="input-dialog" placeholder="Username" required>
+          <input style="color: #FDFDFD" formControlName="username" class="input-dialog" placeholder="Username" required>
         </div>
       </mat-form-field>
       <mat-form-field>
         <div style="justify-content: center; display:flex;">
           <img src="./assets/images/login/passwd.png" width="8%" alt="">
-          <input formControlName="password" class="input-dialog" type="password" placeholder="Password" required>
+          <input style="color: #FDFDFD" formControlName="password" class="input-dialog" type="password" placeholder="Password" required>
         </div>
       </mat-form-field>
-        <div style="margin: 8rem 4rem 2rem 4rem;">
+      <mat-error *ngIf="error2">Login or password are incorrect!</mat-error>
+      <div style="margin: 8rem 4rem 2rem 4rem;">
           <input (click)="signIn()" id="sign-in-button" type="submit" value="Sign in">
         </div>
 

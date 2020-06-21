@@ -9,10 +9,12 @@ label{
   font-weight: normal;
   font-size: 20px;
   color: #A8A4A4;
+    width: 200px;
+    margin-right: 5%;
 }
 input:not(.btn){
   background: #FDFDFD;
-  border: 1px solid #0CB5A0;
+  /*border: 1px solid #0CB5A0;*/
   box-sizing: border-box;
   border-radius: 8px;
   padding: .5rem 1rem;
@@ -26,12 +28,12 @@ input:not(.btn){
   margin: 2rem;
   display: flex;
 }
-.label-div{
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
-  width: 30%;
-}
+/*.label-div{*/
+/*  align-items: center;*/
+/*  display: flex;*/
+/*  justify-content: flex-end;*/
+/*  width: 30%;*/
+/*}*/
 .input-div{
   margin-left: 2rem;
   width: 70%;
@@ -47,4 +49,13 @@ input:not(.btn){
   font-weight: normal;
   font-size: 20px;
   padding: .8rem 1.2rem;
+}
+mat-form-field{
+    width: 70%;
+}
+.forma{
+    horiz-align: right;
+    text-align: right;
+    width: 55%;
+    margin-left: 15%;
 }

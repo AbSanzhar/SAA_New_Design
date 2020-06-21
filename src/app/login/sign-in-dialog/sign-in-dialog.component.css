@@ -37,3 +37,8 @@ mat-form-field img{
   outline: none;
   font-size: 22px;
 }
+mat-error{
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+}

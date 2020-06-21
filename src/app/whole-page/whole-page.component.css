@@ -32,7 +32,7 @@ mat-toolbar{
   white-space: pre-line;
   text-align: center;
   color: #FFFFFF;
-
+  max-width: 200px;
 }
 .active-link{
   background-color: #0CB5A0;
@@ -151,7 +151,9 @@ footer{
 }
 .dropdown-menu:hover .options{
   display: block;
+  z-index: 15;
 }
 #dropDownMenu:hover{
   background-color: #0CB5A0;
+  z-index: 15;
 }

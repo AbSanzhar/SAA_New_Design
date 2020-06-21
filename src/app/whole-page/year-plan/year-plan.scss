@@ -37,7 +37,7 @@
   margin: 0 auto;
   text-align: left;
   height: 100%;
-  padding: 5% 0;
+  padding: 9% 0;
 }
 
 #content {
@@ -69,6 +69,7 @@
 }
 mat-tab{
   height: 100%;
+  z-index: 5;
 }
 
 .example-container {
@@ -134,3 +135,32 @@ th{
 
 
 
+.box {
+  padding-top: 100px;
+  width: 75%;
+  color: #fff;
+  margin: auto;
+  padding-bottom: 50px;
+}
+
+.title {
+  line-height: 26px;
+  font-weight: 400;
+  font-size: 23px;
+}
+
+.item {
+  width: 29%;
+  margin-bottom: 15px;
+}
+
+.box-films-2020-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.text {
+  text-align: justify;
+}

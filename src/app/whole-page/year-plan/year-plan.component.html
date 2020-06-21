@@ -10,52 +10,59 @@
           </div>
           <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
             <div class="row">
-            <p class="nameHeader">
-              1.Учебно-методическая работа
-            </p>
-            <form [formGroup]="AcadMetForm" *ngIf="AcadMetForm" style="overflow-x:auto;">
-              <table>
+              <p class="nameHeader">
+                1.Учебно-методическая работа
+              </p>
+              <form [formGroup]="AcadMetForm" *ngIf="AcadMetForm" style="overflow-x:auto;">
+                <table>
 
-                <thead>
-                <tr>
-                  <th scope="col" colspan="1" rowspan="2">Рет саны №</th>
-                  <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы, орындалу мерзімі</th>
-                  <th scope="col" colspan="2">Жұмыс көлемі</th>
-                </tr>
-                <tr>
-                  <th scope="col">Жоспардың орындалу уақытты</th>
-                  <th scope="col">Жоспардың орындалуы</th>
-                </tr>
-                </thead>
+                  <thead>
+                  <tr>
+                    <th scope="col" colspan="1" rowspan="2">Рет саны №</th>
+                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы, орындалу мерзімі</th>
+                    <th scope="col" colspan="2">Жұмыс көлемі</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Жоспардың орындалу уақытты</th>
+                    <th scope="col">Жоспардың орындалуы</th>
+                  </tr>
+                  </thead>
 
-                <tbody formArrayName="AcadMetAct">
-                <tr *ngFor="let item of AcadMetForm.controls.key; let i = index" [formGroupName]="i"> <!--AcadMetAct.controls-->
-                  <td>
-                    <mat-form-field class="example-full-width">
-                      <input matInput placeholder="ID" formControlName="acId">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field class="example-full-width">
-                      <input  matInput placeholder="Name, dd-mm-yy" formControlName="activities">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field class="example-full-width">
-                      <input  matInput placeholder="dd-mm-yy" formControlName="timeFrame">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field class="example-full-width">
-                      <input matInput formControlName="implementation">
-                      <mat-icon matSuffix>mode_edit</mat-icon>
-                    </mat-form-field>
-                  </td>
-                </tr>
-                </tbody>
+                  <tbody formArrayName="AcadMetAct">
+                  <tr *ngFor="let item of AcadMetForm.controls.key; let i = index" [formGroupName]="i"> <!--AcadMetAct.controls-->
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="ID" formControlName="acId">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input  matInput placeholder="Name, dd-mm-yy" formControlName="activities">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input  matInput placeholder="dd-mm-yy" formControlName="timeFrame">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput formControlName="implementation">
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  </tbody>
 
-              </table>
-            </form>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 25, 100]"
+                               [length]="length"
+                               [pageSize]="size"
+                               [pageIndex]="page"
+                               (change)="changeTableList($event)"
+                               (page)="changeTableList($event)"
+                               showFirstLastButtons></mat-paginator>
+              </form>
               <mat-icon class="add" style="cursor: pointer" (click)="addAcadMetForm()" color="accent">add_circle</mat-icon>
             </div>
           </div>
@@ -135,7 +142,7 @@
                         <div formArrayName="activities" *ngFor="let acts of resAct.controls; let i=index">
                           <input type="text" class="form-control my-1" [formControlName]="i">
                         </div>
-                       </form>
+                      </form>
                     </td>
                     <td > <form [formGroup]="Research" (ngSubmit)="onSubmit()">
                       <div formArrayName="output" *ngFor="let tf of output.controls; let i=index">
@@ -159,6 +166,13 @@
                   </tbody>
 
                 </table>
+                <mat-paginator [pageSizeOptions]="[5, 25, 100]"
+                               [length]="length"
+                               [pageSize]="size"
+                               [pageIndex]="page"
+                               (change)="changeTableList($event)"
+                               (page)="changeTableList($event)"
+                               showFirstLastButtons></mat-paginator>
               </form>
               <mat-icon class="add" style="cursor: pointer" (click)="addResId()" color="accent">add_circle</mat-icon> <!--Что это?)--> <!-- || addResAct()|| addResOutput() || addResPlan() || addResImpl()-->
             </div>
@@ -219,6 +233,14 @@
                 </table>
                 <mat-icon class="add" style="cursor: pointer" (click)="addNewBudId()" color="accent">add_circle</mat-icon> <!-- || addNewActivitiess() || addNewPlan() || addNewImplementation()-->
 
+                <mat-paginator [pageSizeOptions]="[5, 25, 100]"
+                               [length]="length"
+                               [pageSize]="size"
+                               [pageIndex]="page"
+                               (change)="changeTableList($event)"
+                               (page)="changeTableList($event)"
+                               showFirstLastButtons></mat-paginator>
+
               </div>
             </div>
           </div>
@@ -275,6 +297,15 @@
                   </tbody>
                 </table>
                 <mat-icon  class="add" style="cursor: pointer" (click)="addNewOrgId()" color="accent">add_circle</mat-icon> <!-- || addNewOrgAct() || addNewOrgPlan()  || addNewOrgImpl()-->
+
+                <mat-paginator [pageSizeOptions]="[5, 25, 100]"
+                               [length]="length"
+                               [pageSize]="size"
+                               [pageIndex]="page"
+                               (change)="changeTableList($event)"
+                               (page)="changeTableList($event)"
+                               showFirstLastButtons></mat-paginator>
+
               </div>
             </div>
           </div>
@@ -326,11 +357,59 @@
                   </tr>
                   </tbody>
                 </table>
+
+
+<!--                <div class="example-container mat-elevation-z8">-->
+
+<!--                  <mat-table [dataSource]="dataSource" matSort>-->
+
+<!--                    &lt;!&ndash; ID Column &ndash;&gt;-->
+<!--                    <ng-container matColumnDef="id">-->
+<!--                      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>-->
+<!--                      <mat-cell *matCellDef="let row">-->
+<!--                        <form [formGroup]="edus" (ngSubmit)="onSubmit()">-->
+<!--                          <div formArrayName="eduId" *ngFor="let orgIds of eduId.controls; let i=index">-->
+<!--                            <input type="number" class="form-control my-1" [formControlName]="i" readonly>-->
+<!--                          </div>-->
+<!--                        </form>-->
+<!--                      </mat-cell>-->
+<!--                    </ng-container>-->
+
+
+<!--                    <ng-container matColumnDef="activities">-->
+<!--                      <mat-header-cell *matHeaderCellDef> Activities </mat-header-cell>-->
+<!--                      <mat-cell *matCellDef="let row"> {{row.activities}} </mat-cell>-->
+<!--                    </ng-container>-->
+
+<!--                    <ng-container matColumnDef="implementation">-->
+<!--                      <mat-header-cell *matHeaderCellDef> Implementation </mat-header-cell>-->
+<!--                      <mat-cell *matCellDef="let row" > {{row.implementation}} </mat-cell>-->
+<!--                    </ng-container>-->
+
+<!--                    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>-->
+<!--                    <mat-row *matRowDef="let row; columns: displayedColumns2;">-->
+<!--                    </mat-row>-->
+<!--                  </mat-table>-->
+
+<!--                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
+<!--                </div>-->
+
                 <mat-icon  class="add" style="cursor: pointer" (click)="addNewEduId() " color="accent">add_circle</mat-icon> <!--|| addNewEduAct() || addNewEduImpl()-->
+
+                <mat-paginator [pageSizeOptions]="[5, 25, 100]"
+                               [length]="length"
+                               [pageSize]="size"
+                               [pageIndex]="page"
+                               (change)="changeTableList($event)"
+                               (page)="changeTableList($event)"
+                               showFirstLastButtons></mat-paginator>
 
               </div>
             </div>
           </div>
+
+
+
           <div style="margin-left: 37%">
             <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
             <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Вывести план</button>
@@ -377,6 +456,14 @@
                 </table>
                 <mat-icon class="add" style="cursor: pointer" (click)="addNewPPid()" color="accent">add_circle</mat-icon> <!-- || addNewPPAct() || addNewPPImpl()-->
 
+                <mat-paginator [pageSizeOptions]="[5, 25, 100]"
+                               [length]="length"
+                               [pageSize]="size"
+                               [pageIndex]="page"
+                               (change)="changeTableList($event)"
+                               (page)="changeTableList($event)"
+                               showFirstLastButtons></mat-paginator>
+
               </div>
             </div>
           </div>
@@ -389,5 +476,7 @@
     </div>
   </div>
 </div>
+
+
 
 
