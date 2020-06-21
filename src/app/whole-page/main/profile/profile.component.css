@@ -1,7 +1,7 @@
 .content{
   margin: 6rem;
 }
-  /deep/.mat-tab-label, /deep/.mat-tab-label-active{
+/deep/.mat-tab-label, /deep/.mat-tab-label-active{
   font-weight: bolder;
   color: black;
   opacity: 1 !important;
@@ -65,7 +65,7 @@
   font-weight: 600;
   color: #827878;
 }
-.nav-link{
+.nav-link {
   margin: 1.5rem 1rem;
 }
 .nav-link a{
@@ -73,6 +73,8 @@
   text-decoration: none;
   color: black;
   margin: .5rem;
+  cursor:pointer
+
 }
 .is-active {
   color: #DC5441 !important;
