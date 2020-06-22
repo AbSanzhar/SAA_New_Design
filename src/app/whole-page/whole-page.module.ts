@@ -34,14 +34,12 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
-import { TestsComponent } from './tests/tests.component';
 
 const r: Routes = [
   {
     path: '',
     component: WholePageComponent,
     children: [
-      {path: 'test', component: TestsComponent},
       {path: '', component: ProfileComponent},
       {path: 'opportunities', component: OpportunitiesComponent},
       {path: 'yearPlan', component: YearPlanComponent},
@@ -71,8 +69,7 @@ const r: Routes = [
     AddDissetComponent,
     EditDissetComponent,
     EditAddDissetComponent,
-    DialogEditRoleComponent,
-    TestsComponent
+    DialogEditRoleComponent
   ],
     imports: [
         CommonModule,

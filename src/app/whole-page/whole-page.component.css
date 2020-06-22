@@ -67,18 +67,7 @@ mat-toolbar-row{
   display: flex;
   margin-right: 80%;
 }
-footer{
-  font-family: Muli, serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 19px;
-  background: #212121;
-  color: white;
-  padding-top: 1rem;
-  padding-bottom: 3rem;
-  text-align: center;
-}
+
 .notifications{
   color: white;
 }
