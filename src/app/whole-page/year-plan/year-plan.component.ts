@@ -1,9 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from '../../api/api.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-year-plan',
@@ -86,23 +83,22 @@ export class YearPlanComponent implements OnInit {
     gettedResearch = [];
 
     length = 0;
-    size = 3;
+    size = 5;
     page = 0;
     gettedActs = [];
     displayedColumns: string[] = ['acId', 'activities', 'timeFrame', 'implementation'];
-    displayedColumns2: string[] = ['id', 'activities', 'implementation'];
-    dataSource = this.gettedActs;
+    displayedColumns2: string[] = ['eduId', 'eduAct', 'eduImpl'];
+    dataSource: any[];
 
     constructor(private api: ApiService, private fb: FormBuilder) {
     }
 
     getPageLimit() {
-        const str = '_page=' + (this.page + 1) + '&_limit=' + this.size;
-        this.api.getActivity().subscribe(res => {
-            this.data = res;
+        const url = '_page=' + (this.page + 1) + '&_limit=' + this.size;
+        this.api.getEdu().subscribe(res => {
+            this.dataSource = res;
         });
     }
-
 
     changeTableList(event) {
         this.page = event.pageIndex;
@@ -112,7 +108,7 @@ export class YearPlanComponent implements OnInit {
     }
 
     getData() {
-        this.api.getActivity().subscribe(res => {
+        this.api.getEdu().subscribe(res => {
             this.length = res.length;
         });
     }
@@ -258,6 +254,7 @@ export class YearPlanComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getEdus();
         this.message.hide = true;
         this.AcadMetForm = this.fb.group({
             AcadMetAct: this.fb.array([this.initAcadMetForm()])
@@ -840,6 +837,28 @@ export class YearPlanComponent implements OnInit {
         this.message.type = 'error';
         this.message.text = 'Нажмите "Отправить план", что бы сохранить изменения';
         this.message.hide = false;
+    }
+
+    getEdus() {
+        this.api.getEdu().subscribe(
+            res => {
+                let i = 0;
+                this.edusLength = res.length;
+                for (; i < res.length; i++) {
+                    this.eduId.push(this.fb.control(res[i].eduId));
+                    this.eduAct.push(this.fb.control(res[i].activities));
+                    this.eduImpl.push(this.fb.control(res[i].implementation));
+                }
+                this.dataSource = res;
+                console.log('7891: ' + this.dataSource.length);
+                console.log('7892: ' + this.eduId.length);
+                console.log('7893: ' + this.eduAct.length);
+                console.log('7894: ' + this.eduImpl.length);
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 
     onSubmit() {

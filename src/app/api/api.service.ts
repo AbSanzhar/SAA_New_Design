@@ -215,6 +215,7 @@ export class ApiService {
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(this.base + url + id).pipe(catchError(this.errorHandler));
   }
+
   uploadEdu(Edu): Observable<any> {
     const url = 'edu-social/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;

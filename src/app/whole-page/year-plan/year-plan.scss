@@ -73,9 +73,10 @@ mat-tab{
 }
 
 .example-container {
-  width: 90%;
+  width: 50%;
   margin: 10px;
   height: 100%;
+  //display: ;
 }
 mat-drawer{
   width: 20%;
@@ -106,6 +107,8 @@ mat-drawer{
 }
 table{
   width: 100%;
+  text-align: center;
+  margin: 0 auto;
 }
 th{
   font-family: "Essays 1743", "Linux Libertine", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
@@ -164,3 +167,6 @@ th{
 .text {
   text-align: justify;
 }
+
+
+
