@@ -1,0 +1,157 @@
+<div class="content">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Создать публикацию">
+            <div class="Inner">
+                <form [formGroup]="publicationForm" class="example-form">
+
+                    <mat-form-field>
+                        <mat-label>Тип источника</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" required>
+                            <mat-option *ngFor="let i of elements" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Cоавтор</mat-label>
+                        <input matInput formControlName="pubCoAuthor" type="text" placeholder="Ex. Will Smith">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Название</mat-label>
+                        <input matInput formControlName="pubName" type="text" placeholder="Ex. name">
+                        <mat-error>
+                            Publication Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Год</mat-label>
+                        <input matInput formControlName="pubYear" type="date">
+                        <mat-error>
+                            Publication Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Название журнала/издательства</mat-label>
+                        <input matInput formControlName="pubPubName" type="text" placeholder="Ex. name">
+                        <mat-error>
+                            Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Город</mat-label>
+                        <input matInput formControlName="pubCity" type="text" placeholder="Ex. Almaty">
+                        <mat-error>
+                            City is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Номер страницы публикации</mat-label>
+                        <input matInput formControlName="pubPage" type="text" placeholder="Ex. 230">
+                        <mat-error>
+                            Publication's number of pages is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>URL</mat-label>
+                        <input matInput formControlName="pubUrl" type="text" placeholder="Ex. https//iitu.kz">
+                        <mat-error>
+                            URL is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>DOI</mat-label>
+                        <input matInput formControlName="pubDoi" type="text" placeholder="Ex. https//iitu.kz">
+                        <mat-error>
+                            DOI is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <div>
+                        <button mat-stroked-button>Загрузить файл</button>
+                    </div>
+
+                    <button mat-raised-button color="primary" [disabled]="publicationForm.invalid"><p
+                            style="color: white; margin: 0; padding: 0">Сохранить публикацию</p></button>
+
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Создать мероприятие">
+            <div class="Inner">
+                <form [formGroup]="eventForm" class="example-form">
+
+                    <mat-form-field>
+                        <mat-label>Тип мероприятия</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" required formControlName="event_type">
+                            <mat-option *ngFor="let i of elements2" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Роль</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" required formControlName="event_role">
+                            <mat-option *ngFor="let i of elements3" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Название</mat-label>
+                        <input matInput formControlName="event_name" type="text" placeholder="Ex. Smth.">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Год</mat-label>
+                        <input matInput formControlName="event_date" type="date">
+                        <mat-error>
+                            Publication Year is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Город</mat-label>
+                        <input matInput formControlName="event_city" type="text" placeholder="Ex. Almaty">
+                        <mat-error>
+                            City is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>URL</mat-label>
+                        <input matInput formControlName="event_url" type="text" placeholder="Ex. https//iitu.kz">
+                        <mat-error>
+                            URL is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <div>
+                        <button mat-stroked-button>Загрузить файл</button>
+                    </div>
+
+                    <button mat-raised-button color="primary" [disabled]="publicationForm.invalid"><p
+                            style="color: white; margin: 0; padding: 0">Сохранить публикацию</p></button>
+
+                </form>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
