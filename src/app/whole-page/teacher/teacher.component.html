@@ -1,9 +1,13 @@
 <div class="content">
     <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Создать публикацию">
+<!--            <div style="display: flex; justify-content: center;">-->
+<!--                TODO: do the following-->
+<!--            <div style="margin: 1.5rem 0rem; display: block" class="nav-head"> &lt;!&ndash;(click)="generatePdf()"&ndash;&gt;-->
+<!--                <button  style="margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>-->
+<!--            </div>-->
             <div class="Inner">
                 <form [formGroup]="publicationForm" class="example-form">
-
                     <mat-form-field>
                         <mat-label>Тип источника</mat-label>
                         <mat-select [(ngModel)]="selectedValue" required>
@@ -85,7 +89,9 @@
 
                 </form>
             </div>
+<!--            </div>-->
         </mat-tab>
+
         <mat-tab label="Создать мероприятие">
             <div class="Inner">
                 <form [formGroup]="eventForm" class="example-form">
@@ -151,6 +157,296 @@
                             style="color: white; margin: 0; padding: 0">Сохранить публикацию</p></button>
 
                 </form>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Создать научный проект">
+            <div class="Inner" style="display: flex">
+                <div>
+                <button (click)="generatePdf()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>
+                </div>
+                <div style="margin-left: 5%">
+                    <h5>Научный проект</h5>
+                    <form [formGroup]="newProjForm" class="example-form">
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>ИРН</mat-label>
+                            <input matInput formControlName="scId" type="text" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Наименование</mat-label>
+                            <input matInput formControlName="scName" type="text" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Тип</mat-label>
+                            <input matInput formControlName="scType" type="text" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Раздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scPriority" required>
+                                <mat-option *ngFor="let i of dividers" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>This is the required field!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-0'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority" required>
+                                <mat-option *ngFor="let i of array1" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>This is the required field!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-1'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority" required>
+                                <mat-option *ngFor="let i of array2" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>This is the required field!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority" required>
+                                <mat-option *ngFor="let i of array3" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>This is the required field!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-0'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array31" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-1'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array32" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-2'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array33" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-3'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array34" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-4'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array35" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-5'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array36" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array4" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-4'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array5" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-0'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array51" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-1'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array52" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-2'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array53" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array6" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5' && newProjForm.get('scSubPriority').value === 'element-0'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array61" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5' && newProjForm.get('scSubPriority').value === 'element-2'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                                <mat-option *ngFor="let i of array63" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-6'">
+                            <mat-label>Подраздел</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority">
+                                <mat-option *ngFor="let i of array7" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Заказчик</mat-label>
+                            <input matInput formControlName="scCustomer" type="text" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Научный руководитель</mat-label>
+                            <input matInput formControlName="scFirstName" type="text" required readonly>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Исполнитель</mat-label>
+                            <input matInput formControlName="scExecutor" type="text" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Дата договора</mat-label>
+                            <input matInput formControlName="scAgrDate" type="date" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Регистрационный номер</mat-label>
+                            <input matInput formControlName="scNum" type="text" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Дата начала проекта</mat-label>
+                            <input matInput formControlName="scStDate" type="date" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Дата сдачи проекта</mat-label>
+                            <input matInput formControlName="scEndDate" type="date" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Общая сумма гранта</mat-label>
+                            <input matInput formControlName="scTotalSum" type="number" required>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Подразделение</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" formControlName="scDept">
+                                <mat-option *ngFor="let i of div" [value]="i.value">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>
+                                This field is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <button mat-raised-button [disabled]="newProjForm.invalid">Создать научный проект</button>
+
+
+                    </form>
+                </div>
             </div>
         </mat-tab>
     </mat-tab-group>
