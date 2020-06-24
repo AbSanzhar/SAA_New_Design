@@ -8,14 +8,19 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  dataSource: any[] = [];
-  dataSource2: any[] = [];
+  TeacherPublications: any[] = [];
+  TeacherEvents: any[] = [];
+  TeacherDisSovet: any[] = [];
+  TeacherPatents: any[] = [];
+  DepUsers: any[] = [];
+  TeacherScienceProjects: any[] = [];
+  TeacherCourses: any[] = [];
 
-  displayedColumns = ['No', 'File', 'Type', 'Collaborators', 'Title'];
-  displayedColumns1 = ['No', 'File', 'Type', 'Role', 'Title', 'Year', 'City', 'Url'];
-  displayedColumns2 = ['No', 'university', 'Role', 'specialty', 'stopDate', 'numberAndDate'];
-  displayedColumns3 = ['No', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
-  displayedColumns4 = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
+  displayedColumnsPublication = ['No', 'File', 'Type', 'Collaborators', 'Title', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi'];
+  displayedColumnsEvent = ['No', 'File', 'Type', 'Role', 'Title', 'Year', 'City', 'Url'];
+  displayedColumnsDisSovet = ['No', 'university', 'Role', 'specialty', 'stopDate', 'numberAndDate'];
+  displayedColumnsPatent = ['No', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
+  displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
   displayedColumns6 = ['No', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level'];
 
@@ -39,16 +44,24 @@ export class ProfileComponent implements OnInit {
               private _api: ApiService) { }
 
   ngOnInit(): void {
-    this.getAllPublications();
-    this.getAllCourses();
     this._api.getUserById(this.tokenId).subscribe(
         res => {
           this.currentUser = res;
           this.userDepts = res.usersDepts;
           for (let i = 0; i < res.roles.length; i++) {
             this.roles.push(res.roles[i].roleName);
+            if(res.roles[i].roleName == 'Teacher') {
+              this.getTeacherPublications();
+              this.getTeacherEvents();
+              this.getTeacherDisSovet();
+              this.getTeacherPatents();
+              this.getTeacherScienceProjects();
+              this.getTeacherCourses();
+            } else if(res.roles[i].roleName == 'Head_Of_Dept') {
+              this.getDepUsers(this.userDepts[0].deptId);
+            }
           }
-          console.log(this.roles);
+          console.log(res);
         },
         err => {
           console.log(err);
@@ -56,31 +69,88 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  getAllPublications() {
-    // this.http.getAllPublications().subscribe(response => {
-    //   this.dataSource = response;
-    // });
-    this.dataSource = [{
-      No: 1,
-      File: 'ABC',
-      Type: 'es',
-      Collaborators: 'QWE',
-      Title: 'WF'
-    }];
+  getTeacherPublications() {
+    this._api.getPublications().subscribe(res => {
+      console.log(res);
+      this.TeacherPublications = res;
+    }, err => {
+      console.log(err);
+    });
   }
 
-  getAllCourses() {
-    this.dataSource2 = [{
-      No: 1,
-      FL: 'Сербин В.В., ассоц.проф.,к.т.н.,зав.каф ИС',
-      form: 'Очное участие \"Электронная комерция\"',
-      center: 'V Профессиональная интернет-конференция iProf \"E-commerce, Marketing&Sales\" 2015',
-      hours: '8 часов',
-      price: '5000 тенге',
-      deadlines: '26-27 ноября 2015',
-      certificates: 'Сертификат №123 от 26 ноября 2016 г.',
-      level: 'Международный'
-    }];
+  getTeacherEvents() {
+    this._api.getEvent().subscribe(res => {
+      console.log(res);
+      this.TeacherEvents = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getTeacherDisSovet() {
+    this._api.getSecDisSovet().subscribe(
+      res => {
+        console.log(res);
+        this.TeacherDisSovet = res;
+      }, err => {
+        console.log(err);
+        }
+    );
+  }
+
+  getTeacherPatents() {
+    this._api.getPatent().subscribe(
+      res => {
+        console.log(res);
+        this.TeacherPatents = res;
+      }, err => {
+        console.log(err);
+      }
+    );
+  }
+
+  getDepUsers(id) {
+    this._api.getDepUsers(id).subscribe(
+        res => {
+          console.log(res);
+          for (let i = 0; i < res.usersDeptsEntities.length; i++) {
+            const tempUser = {
+              userId: res.usersDeptsEntities[i].primaryKey.userEntity.userId,
+              firstName: res.usersDeptsEntities[i].primaryKey.userEntity.firstName,
+              lastName: res.usersDeptsEntities[i].primaryKey.userEntity.lastName,
+              email: res.usersDeptsEntities[i].primaryKey.userEntity.email,
+              description: res.usersDeptsEntities[i].primaryKey.userEntity.description,
+              userType: res.usersDeptsEntities[i].userType
+            };
+            this.DepUsers.push(tempUser);
+          }
+        }, err => {
+          console.log(err);
+        }
+    );
+  }
+
+  getTeacherScienceProjects() {
+    this._api.getScienceProject().subscribe(
+        res => {
+          console.log(res);
+          this.TeacherScienceProjects = res;
+        },
+        error1 => {
+          console.log(error1);
+        }
+    );
+  }
+
+  getTeacherCourses() {
+    this._api.getCourses().subscribe(
+        res => {
+          console.log(res);
+          this.TeacherCourses = res;
+        }, err => {
+          console.log(err);
+        }
+    );
   }
 
   // tslint:disable-next-line:variable-name

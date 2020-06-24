@@ -198,7 +198,6 @@ export class ApiService {
     const user = {
       event_user_id : this.getDecodedAccessToken(localStorage.getItem('token')).jti
     };
-    console.log(user);
     return this.http.post<any>(this.base + url, user).pipe(catchError(this.errorHandler));
   }
   uploadEvent(Event1): Observable<any> {
@@ -358,8 +357,11 @@ export class ApiService {
     return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), patent);
   }
 
-  getPatent(userId): Observable<any> {
+  getPatent(): Observable<any> {
     const url = 'patent/getByUserId';
+    const userId = {
+      ptnt_user_id: this.getDecodedAccessToken(localStorage.getItem('token')).jti
+    };
     return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), userId);
   }
 
@@ -397,6 +399,12 @@ export class ApiService {
 
   getPublishCount(): Observable<any> {
     const url = 'publication/publishedCount';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getCourses(): Observable<any> {
+    const url = 'courses/all';
+    const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 

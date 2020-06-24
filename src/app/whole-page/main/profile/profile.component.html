@@ -76,95 +76,125 @@
             </div>
           </div>
           <div class="main">
-            <mat-table [dataSource]="dataSource" class="" *ngIf="whichTable === 0 ? true : false">
+            <mat-table [dataSource]="TeacherPublications" class="" *ngIf="whichTable === 0 ? true : false">
               <ng-container matColumnDef="No">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.No}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubId}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="File">
                 <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.File}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubFile}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Type">
                 <mat-header-cell *matHeaderCellDef> Тип публикации </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.Type}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubType}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Collaborators">
                 <mat-header-cell *matHeaderCellDef> Соавторы </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.Collaborators}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubCoAuthor}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Title">
                 <mat-header-cell *matHeaderCellDef> Название публикации </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.Title}} </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let publication; columns: displayedColumns;"></mat-row>
-            </mat-table>
-
-            <mat-table [dataSource]="dataSource" class="" *ngIf="whichTable === 1 ? true : false">
-              <ng-container matColumnDef="No">
-                <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.No}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="File">
-                <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.File}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="Type">
-                <mat-header-cell *matHeaderCellDef> Тип мероприятия </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.Type}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="Role">
-                <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.Role}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="Title">
-                <mat-header-cell *matHeaderCellDef> Название </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.Title}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubName}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Year">
                 <mat-header-cell *matHeaderCellDef> Год </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.Year}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubYear}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="City">
                 <mat-header-cell *matHeaderCellDef> Город </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.City}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubCity}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Publisher">
+                <mat-header-cell *matHeaderCellDef> Издатель </mat-header-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubPubName}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Page">
+                <mat-header-cell *matHeaderCellDef> Страница </mat-header-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubPage}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Url">
                 <mat-header-cell *matHeaderCellDef> URL </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.Url}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubUrl}} </mat-cell>
               </ng-container>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
-              <mat-row *matRowDef="let activity; columns: displayedColumns1;"></mat-row>
+              <ng-container matColumnDef="Doi">
+                <mat-header-cell *matHeaderCellDef> DOI </mat-header-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubDoi}} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>
+              <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
             </mat-table>
 
-            <mat-table [dataSource]="dataSource" class="" *ngIf="whichTable === 2 ? true : false">
+            <mat-table [dataSource]="TeacherEvents" class="" *ngIf="whichTable === 1 ? true : false">
               <ng-container matColumnDef="No">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-                <mat-cell *matCellDef="let disset"> {{disset.No}} </mat-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="File">
+                <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventFile}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Type">
+                <mat-header-cell *matHeaderCellDef> Тип мероприятия </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventType}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Role">
+                <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventRole}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Title">
+                <mat-header-cell *matHeaderCellDef> Название </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventName}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Year">
+                <mat-header-cell *matHeaderCellDef> Год </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventYear}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="City">
+                <mat-header-cell *matHeaderCellDef> Город </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventCity}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Url">
+                <mat-header-cell *matHeaderCellDef> URL </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventUrl}} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumnsEvent"></mat-header-row>
+              <mat-row *matRowDef="let activity; columns: displayedColumnsEvent;"></mat-row>
+            </mat-table>
+
+            <mat-table [dataSource]="TeacherDisSovet" class="" *ngIf="whichTable === 2 ? true : false">
+              <ng-container matColumnDef="No">
+                <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="university">
                 <mat-header-cell *matHeaderCellDef> Высшее учебное заведение </mat-header-cell>
-                <mat-cell *matCellDef="let disset"> {{disset.university}} </mat-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Role">
                 <mat-header-cell *matHeaderCellDef> Роль в диссовете </mat-header-cell>
-                <mat-cell *matCellDef="let disset"> {{disset.Role}} </mat-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disRole}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="specialty">
@@ -174,22 +204,22 @@
 
               <ng-container matColumnDef="stopDate">
                 <mat-header-cell *matHeaderCellDef> Период деятельности </mat-header-cell>
-                <mat-cell *matCellDef="let disset"> {{disset.stopDate}} </mat-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disStopDate}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="numberAndDate">
                 <mat-header-cell *matHeaderCellDef> Номер и дата приказа </mat-header-cell>
-                <mat-cell *matCellDef="let disset"> {{disset.numberAndDate}} </mat-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.ministryOrder}} </mat-cell>
               </ng-container>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
-              <mat-row *matRowDef="let disset; columns: displayedColumns2;"></mat-row>
+              <mat-header-row *matHeaderRowDef="displayedColumnsDisSovet"></mat-header-row>
+              <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>
             </mat-table>
 
-            <mat-table [dataSource]="dataSource" class="" *ngIf="whichTable === 3 ? true : false">
+            <mat-table [dataSource]="TeacherPatents" class="" *ngIf="whichTable === 3 ? true : false">
               <ng-container matColumnDef="No">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.No}} </mat-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntId}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="ptntNumber">
@@ -229,7 +259,7 @@
 
               <ng-container matColumnDef="whoCheck">
                 <mat-header-cell *matHeaderCellDef> Кем проверено </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntCheckedUser.fisrtName}} {{patent.ptntCheckedUser.lastName}} </mat-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntCheckedUser}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="kz">
@@ -247,11 +277,11 @@
                 <mat-cell *matCellDef="let patent"> {{patent.ptntFileUrlEn}} </mat-cell>
               </ng-container>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
-              <mat-row *matRowDef="let patent; columns: displayedColumns3;"></mat-row>
+              <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>
+              <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>
             </mat-table>
 
-            <mat-table [dataSource]="dataSource" class="" *ngIf="whichTable === 4 ? true : false">
+            <mat-table [dataSource]="DepUsers" class="" *ngIf="whichTable === 4 ? true : false">
               <ng-container matColumnDef="userId">
                 <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                 <mat-cell *matCellDef="let employee"> {{employee.userId}} </mat-cell>
@@ -282,11 +312,11 @@
                 <mat-cell *matCellDef="let employee"> {{employee.userType}} </mat-cell>
               </ng-container>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
-              <mat-row *matRowDef="let employee; columns: displayedColumns4;"></mat-row>
+              <mat-header-row *matHeaderRowDef="displayedColumnsDepUsers"></mat-header-row>
+              <mat-row *matRowDef="let employee; columns: displayedColumnsDepUsers;"></mat-row>
             </mat-table>
 
-            <mat-table [dataSource]="dataSource" class="" *ngIf="whichTable === 5 ? true : false">
+            <mat-table [dataSource]="TeacherScienceProjects" class="" *ngIf="whichTable === 5 ? true : false">
               <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef> ИРН </mat-header-cell>
                 <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
@@ -366,50 +396,50 @@
               <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
             </mat-table>
 
-            <mat-table [dataSource]="dataSource2" class="" *ngIf="whichTable === 6 ? true : false">
+            <mat-table [dataSource]="TeacherCourses" class="" *ngIf="whichTable === 6 ? true : false">
               <ng-container matColumnDef="No">
                 <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>
-                <mat-cell *matCellDef="let course">{{course.No}}</mat-cell>
+                <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="FL">
                 <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
-                <mat-cell style="color: darkred!important;"  *matCellDef="let course">{{course.FL}}</mat-cell>
+                <mat-cell style="color: darkred!important;"  *matCellDef="let course">{{course.courseUser.firstName}} {{course.courseUser.lastName}} {{course.courseUser.patronymic}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="form">
                 <mat-header-cell *matHeaderCellDef>Форма обучения и тема</mat-header-cell>
-                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.form}}</mat-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.courseForm}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="center">
                 <mat-header-cell *matHeaderCellDef>Базовый центр повышения квалификации</mat-header-cell>
-                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.center}}</mat-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.courseCenter}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="hours">
                 <mat-header-cell *matHeaderCellDef>Объем часов</mat-header-cell>
-                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.hours}}</mat-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.courseHours}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="price">
                 <mat-header-cell *matHeaderCellDef>Стоимость курсов</mat-header-cell>
-                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.price}}</mat-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.coursePrice}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="deadlines">
                 <mat-header-cell *matHeaderCellDef>Сроки прохождения</mat-header-cell>
-                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.deadlines}}</mat-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.startdate}} - {{course.enddate}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="certificates">
                 <mat-header-cell *matHeaderCellDef>№ Сертификата и дата</mat-header-cell>
-                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.certificates}}</mat-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.courseCertificateNumber}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="level">
                 <mat-header-cell *matHeaderCellDef>Уровень</mat-header-cell>
-                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.level}}</mat-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.courseDegree}}</mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
