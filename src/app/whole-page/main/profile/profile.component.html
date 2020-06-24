@@ -53,6 +53,7 @@
             <a [ngClass]="{'is-active': whichTable === 3 ? true : false}" (click)="setWhichTable(3)">Мои патенты</a>
             <a [ngClass]="{'is-active': whichTable === 4 ? true : false}" (click)="setWhichTable(4)">Мои сотрудники</a>
             <a [ngClass]="{'is-active': whichTable === 5 ? true : false}" (click)="setWhichTable(5)">Мои научные проекты</a>
+            <a [ngClass]="{'is-active': whichTable === 6 ? true : false}" (click)="setWhichTable(6)">Мои курсы</a>
           </div>
         </div>
         <div class="table">
@@ -364,6 +365,53 @@
               <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
               <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
             </mat-table>
+
+            <mat-table [dataSource]="dataSource2" class="" *ngIf="whichTable === 6 ? true : false">
+              <ng-container matColumnDef="No">
+                <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>
+                <mat-cell *matCellDef="let course">{{course.No}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="FL">
+                <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+                <mat-cell style="color: darkred!important;"  *matCellDef="let course">{{course.FL}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="form">
+                <mat-header-cell *matHeaderCellDef>Форма обучения и тема</mat-header-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.form}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="center">
+                <mat-header-cell *matHeaderCellDef>Базовый центр повышения квалификации</mat-header-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.center}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="hours">
+                <mat-header-cell *matHeaderCellDef>Объем часов</mat-header-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.hours}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef>Стоимость курсов</mat-header-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.price}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="deadlines">
+                <mat-header-cell *matHeaderCellDef>Сроки прохождения</mat-header-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.deadlines}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="certificates">
+                <mat-header-cell *matHeaderCellDef>№ Сертификата и дата</mat-header-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.certificates}}</mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
+              <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>
+
+            </mat-table>
+
           </div>
           <div>
 
