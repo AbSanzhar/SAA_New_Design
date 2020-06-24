@@ -19,6 +19,7 @@ export class TeacherComponent implements OnInit {
   eventForm: FormGroup;
   newProjForm: FormGroup;
   courseForm: FormGroup;
+  patentForm: FormGroup;
   selectedValue: string;
   selectedValue1: string;
   selectedValue2: string;
@@ -40,8 +41,6 @@ export class TeacherComponent implements OnInit {
   selectedValue18: string;
   selectedValue19: string;
   selectedValue20: string;
-  selectedValue21: string;
-  selectedValue22: string;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
   public publications = [];
@@ -101,6 +100,21 @@ export class TeacherComponent implements OnInit {
       deadlines: new FormControl('', Validators.required),
       certificates: new FormControl('', Validators.required),
       level: new FormControl('', Validators.required)
+    });
+
+    this.patentForm = formBuilder.group({
+      No: new FormControl('', Validators.required),
+      id: new FormControl('', Validators.required),
+      country: new FormControl('', Validators.required),
+      patentS: new FormControl('', Validators.required),
+      TR: new FormControl('', Validators.required),
+      author: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      date: new FormControl('', Validators.required),
+      checkedPerson: new FormControl('', Validators.required),
+      kz: new FormControl('', Validators.required),
+      ru: new FormControl('', Validators.required),
+      en: new FormControl('', Validators.required)
     });
 
   }

@@ -163,6 +163,90 @@
             </div>
         </mat-tab>
 
+
+        <mat-tab label="Создать патент">
+            <div class="Inner">
+                <form [formGroup]="patentForm" class="example-form">
+                    <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в патенты: </p>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>№</mat-label>
+                        <input matInput formControlName="No" type="number">
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Номер патента</mat-label>
+                        <input matInput formControlName="id" type="number">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Страна</mat-label>
+                        <input matInput formControlName="country" type="text" placeholder="Ex. Kazakhstan">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Патент на изобретение</mat-label>
+                        <input matInput formControlName="patentS" type="text">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Опубликован в TR</mat-label>
+                        <input matInput formControlName="TR" type="text">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Автор</mat-label>
+                        <input matInput formControlName="author" type="text">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Статус модерации</mat-label>
+                        <input matInput formControlName="status" type="text">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Дата ввода в базу</mat-label>
+                        <input matInput formControlName="date" type="date">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Кем проверено</mat-label>
+                        <input matInput formControlName="checkedPerson" type="text">
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" [disabled]="publicationForm.invalid"><p
+                            style="color: white; margin: 0; padding: 0">Сохранить</p></button>
+
+                </form>
+            </div>
+        </mat-tab>
+
+
         <mat-tab label="Создать научный проект">
             <div class="Inner" style="display: flex">
                 <div>
