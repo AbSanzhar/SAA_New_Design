@@ -407,6 +407,11 @@
                 <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.certificates}}</mat-cell>
               </ng-container>
 
+              <ng-container matColumnDef="level">
+                <mat-header-cell *matHeaderCellDef>Уровень</mat-header-cell>
+                <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.level}}</mat-cell>
+              </ng-container>
+
               <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
               <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>
 

@@ -20,6 +20,28 @@ export class TeacherComponent implements OnInit {
   newProjForm: FormGroup;
   courseForm: FormGroup;
   selectedValue: string;
+  selectedValue1: string;
+  selectedValue2: string;
+  selectedValue3: string;
+  selectedValue4: string;
+  selectedValue5: string;
+  selectedValue6: string;
+  selectedValue7: string;
+  selectedValue8: string;
+  selectedValue9: string;
+  selectedValue10: string;
+  selectedValue11: string;
+  selectedValue12: string;
+  selectedValue13: string;
+  selectedValue14: string;
+  selectedValue15: string;
+  selectedValue16: string;
+  selectedValue17: string;
+  selectedValue18: string;
+  selectedValue19: string;
+  selectedValue20: string;
+  selectedValue21: string;
+  selectedValue22: string;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
   public publications = [];
@@ -78,6 +100,7 @@ export class TeacherComponent implements OnInit {
       price: new FormControl('', Validators.required),
       deadlines: new FormControl('', Validators.required),
       certificates: new FormControl('', Validators.required),
+      level: new FormControl('', Validators.required)
     });
 
   }
@@ -529,6 +552,17 @@ export class TeacherComponent implements OnInit {
 
   array7: Sourse[] = [
     {value: 'element-0', viewValue: '7.1. Разработка технических средств в интересах национальной безопасности и обороны'},
+  ];
+
+  level: Sourse[] = [
+    {
+      value: 'element-0',
+      viewValue: 'Международный'
+    },
+    {
+      value: 'element-1',
+      viewValue: 'Республиканский'
+    }
   ];
 
   getDecodedAccessToken(token: string): any {

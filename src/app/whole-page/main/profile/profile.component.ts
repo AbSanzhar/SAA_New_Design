@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   displayedColumns3 = ['No', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
   displayedColumns4 = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
-  displayedColumns6 = ['No', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates'];
+  displayedColumns6 = ['No', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level'];
 
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;
@@ -78,7 +78,8 @@ export class ProfileComponent implements OnInit {
       hours: '8 часов',
       price: '5000 тенге',
       deadlines: '26-27 ноября 2015',
-      certificates: 'Сертификат №123 от 26 ноября 2016 г.'
+      certificates: 'Сертификат №123 от 26 ноября 2016 г.',
+      level: 'Международный'
     }];
   }
 

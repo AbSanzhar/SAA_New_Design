@@ -100,7 +100,7 @@
 
                     <mat-form-field>
                         <mat-label>Тип мероприятия</mat-label>
-                        <mat-select [(ngModel)]="selectedValue" required formControlName="event_type">
+                        <mat-select [(ngModel)]="selectedValue3" required formControlName="event_type">
                             <mat-option *ngFor="let i of elements2" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
@@ -209,7 +209,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority" required>
+                            <mat-select [(ngModel)]="selectedValue1" formControlName="scSubPriority" required>
                                 <mat-option *ngFor="let i of array1" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -219,7 +219,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-1'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority" required>
+                            <mat-select [(ngModel)]="selectedValue2" formControlName="scSubPriority" required>
                                 <mat-option *ngFor="let i of array2" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -229,7 +229,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority" required>
+                            <mat-select [(ngModel)]="selectedValue3" formControlName="scSubPriority" required>
                                 <mat-option *ngFor="let i of array3" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -239,7 +239,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue4" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array31" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -248,7 +248,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-1'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue5" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array32" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -257,7 +257,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue6" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array33" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -266,7 +266,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-3'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue7" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array34" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -275,7 +275,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-4'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue8" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array35" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -284,7 +284,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-5'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue9" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array36" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -293,7 +293,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue10" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array4" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -302,7 +302,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-4'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue11" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array5" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -311,7 +311,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue12" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array51" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -320,7 +320,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-1'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue13" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array52" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -330,7 +330,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue14" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array53" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -339,7 +339,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue15" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array6" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -348,7 +348,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5' && newProjForm.get('scSubPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue16" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array61" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -357,7 +357,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5' && newProjForm.get('scSubPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubSubPriority">
+                            <mat-select [(ngModel)]="selectedValue17" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array63" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -366,7 +366,7 @@
 
                         <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-6'">
                             <mat-label>Подраздел</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scSubPriority">
+                            <mat-select [(ngModel)]="selectedValue18" formControlName="scSubPriority">
                                 <mat-option *ngFor="let i of array7" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -436,7 +436,7 @@
 
                         <mat-form-field class="example-full-width">
                             <mat-label>Подразделение</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" formControlName="scDept">
+                            <mat-select [(ngModel)]="selectedValue19" formControlName="scDept">
                                 <mat-option *ngFor="let i of div" [value]="i.value">
                                     {{i.viewValue}}
                                 </mat-option>
@@ -502,6 +502,16 @@
                     <mat-form-field class="example-full-width">
                         <mat-label>№ Сертификата и дата</mat-label>
                         <input type="number" matInput formControlName="certificates">
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Уровень</mat-label>
+                        <mat-select [(ngModel)]="selectedValue20" required>
+                            <mat-option *ngFor="let i of level" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
