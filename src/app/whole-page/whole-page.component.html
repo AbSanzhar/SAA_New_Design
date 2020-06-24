@@ -17,17 +17,17 @@
       <div class="navButton">
         <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./" [routerLinkActiveOptions]="{ exact: true }">Главная </a>
       </div>
-      <div class="navButton">
+      <div class="navButton" *ngIf="this.userRoles.indexOf('Teacher') != -1">
         <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./yearPlan" > Годовой план </a>
       </div>
       <div class="navButton dropdown-menu">
         <a id="dropDownMenu" routerLinkActive="active-link" class="navTool" mat-button> Дополнительные возможности </a>
           <div class="options">
-            <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./teacher"> Преподавателя </a>
-            <hr>
-            <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./opportunities"> СОпН </a>
-            <hr>
-            <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./secretary-of-the-diss-council"> Секретаря диссовета </a>
+            <a *ngIf="this.userRoles.indexOf('Teacher') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./teacher"> Преподавателя </a>
+            <hr *ngIf="this.userRoles.indexOf('Teacher') != -1">
+            <a *ngIf="this.userRoles.indexOf('Science_Dept') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./opportunities"> СОпН </a>
+            <hr *ngIf="this.userRoles.indexOf('Science_Dept') != -1">
+            <a *ngIf="this.userRoles.indexOf('Science_Secretary_Dissovet') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./secretary-of-the-diss-council"> Секретаря диссовета </a>
           </div>
       </div>
         </span>
