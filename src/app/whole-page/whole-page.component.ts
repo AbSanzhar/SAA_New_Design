@@ -12,6 +12,7 @@ import {Validators} from '@angular/forms';
 export class WholePageComponent implements OnInit {
   showFiller = false;
   currentUserId: string;
+  userRoles = [];
   currentUser;
   name;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
@@ -34,6 +35,9 @@ export class WholePageComponent implements OnInit {
       res => {
         this.currentUser = res;
         this.name = res.username;
+        for (let i = 0; i < res.roles.length; i++) {
+          this.userRoles.push(res.roles[i].roleName);
+        }
       },
       err => {
         console.log(err);

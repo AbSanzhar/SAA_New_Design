@@ -40,7 +40,7 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Управление">
+    <mat-tab label="Управление" *ngIf="this.roles.indexOf('Teacher') != -1">
       <div class="managing">
         <div class="my-tables">
           <div class="nav-head">
@@ -51,7 +51,7 @@
             <a [ngClass]="{'is-active': whichTable === 1 ? true : false}" (click)="setWhichTable(1)">Мои мероприятия</a>
             <a [ngClass]="{'is-active': whichTable === 2 ? true : false}" (click)="setWhichTable(2)">Мои диссоветы</a>
             <a [ngClass]="{'is-active': whichTable === 3 ? true : false}" (click)="setWhichTable(3)">Мои патенты</a>
-            <a [ngClass]="{'is-active': whichTable === 4 ? true : false}" (click)="setWhichTable(4)">Мои сотрудники</a>
+            <a *ngIf="this.roles.indexOf('Head_Of_Dept') != - 1" [ngClass]="{'is-active': whichTable === 4 ? true : false}" (click)="setWhichTable(4)">Мои сотрудники</a>
             <a [ngClass]="{'is-active': whichTable === 5 ? true : false}" (click)="setWhichTable(5)">Мои научные проекты</a>
             <a [ngClass]="{'is-active': whichTable === 6 ? true : false}" (click)="setWhichTable(6)">Мои курсы</a>
           </div>
