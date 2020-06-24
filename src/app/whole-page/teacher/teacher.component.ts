@@ -18,6 +18,7 @@ export class TeacherComponent implements OnInit {
   publicationForm: FormGroup;
   eventForm: FormGroup;
   newProjForm: FormGroup;
+  courseForm: FormGroup;
   selectedValue: string;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
@@ -67,6 +68,17 @@ export class TeacherComponent implements OnInit {
       scDept: new FormControl('', Validators.required),
       scDirector: this.IdToken
     }, {validators: StartEndDateValidator});
+
+    this.courseForm = formBuilder.group({
+      No: new FormControl('', Validators.required),
+      FL: new FormControl('', Validators.required),
+      form: new FormControl('', Validators.required),
+      center: new FormControl('', Validators.required),
+      hours: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      deadlines: new FormControl('', Validators.required),
+      certificates: new FormControl('', Validators.required),
+    });
 
   }
 
