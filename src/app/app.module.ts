@@ -25,7 +25,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { SignInDialogComponent } from './login/sign-in-dialog/sign-in-dialog.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +53,7 @@ import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
     MatSidenavModule,
     MatTableModule,
     MatButtonToggleModule,
+    MatDatepickerModule,
     ReactiveFormsModule,
     _MatMenuDirectivesModule,
     MatMenuModule,

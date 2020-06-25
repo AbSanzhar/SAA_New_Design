@@ -35,6 +35,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
 import {TeacherComponent} from './teacher/teacher.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 const r: Routes = [
     {
@@ -95,7 +96,8 @@ const r: Routes = [
         MatSortModule,
         MatPaginatorModule,
         MatSnackBarModule,
-        MatCardModule
+        MatCardModule,
+        MatDatepickerModule
     ],
 })
 export class WholePageModule { }

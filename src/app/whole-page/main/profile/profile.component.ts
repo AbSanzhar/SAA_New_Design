@@ -16,13 +16,13 @@ export class ProfileComponent implements OnInit {
   TeacherScienceProjects: any[] = [];
   TeacherCourses: any[] = [];
 
-  displayedColumnsPublication = ['No', 'File', 'Type', 'Collaborators', 'Title', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi'];
-  displayedColumnsEvent = ['No', 'File', 'Type', 'Role', 'Title', 'Year', 'City', 'Url'];
-  displayedColumnsDisSovet = ['No', 'university', 'Role', 'specialty', 'stopDate', 'numberAndDate'];
-  displayedColumnsPatent = ['No', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
+  displayedColumnsPublication = ['pubId', 'File', 'Type', 'Collaborators', 'Title', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi'];
+  displayedColumnsEvent = ['eventId', 'File', 'Type', 'Role', 'Title', 'Year', 'City', 'Url'];
+  displayedColumnsDisSovet = ['disId', 'university', 'Role', 'specialty', 'stopDate', 'numberAndDate'];
+  displayedColumnsPatent = ['ptntId', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
   displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
-  displayedColumns6 = ['No', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level'];
+  displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level'];
 
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;

@@ -86,7 +86,7 @@
                     </div>
 
                     <button mat-raised-button color="primary" [disabled]="publicationForm.invalid"><p
-                            style="color: white; margin: 0; padding: 0">Сохранить публикацию</p></button>
+                            style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication()">Сохранить публикацию</p></button>
 
                 </form>
             </div>
@@ -171,7 +171,7 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>№</mat-label>
-                        <input matInput formControlName="No" type="number">
+                        <input matInput formControlName="ptntId" type="number">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
@@ -251,6 +251,7 @@
             <div class="Inner" style="display: flex">
                 <div>
                 <button (click)="generatePdf()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>
+                <button (click)="download()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать рейтинг лист</button>
                 </div>
                 <div style="margin-left: 5%">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои проекты: </p>
@@ -540,67 +541,80 @@
 
         <mat-tab label="Создать курсы повышения квалификации">
             <div class="Inner">
-                <form [formGroup]="courseForm"  class="example-form">
+                <form [formGroup]="teacherCourseForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои курсы: </p>
                     <mat-form-field>
                         <mat-label>№</mat-label>
-                        <input type="number" matInput formControlName="No">
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width">
-                        <mat-label>ФИО</mat-label>
-                        <input type="number" matInput formControlName="FL">
-                        <mat-error>This is the required field!</mat-error>
+                        <input type="number" matInput formControlName="courseId">
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Форма обучения и тема</mat-label>
-                        <input type="number" matInput formControlName="form">
+                        <input type="text" matInput formControlName="courseForm">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Базовый центр повышения квалификации</mat-label>
-                        <input type="number" matInput formControlName="center">
+                        <input type="text" matInput formControlName="courseCenter">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Объем часов</mat-label>
-                        <input type="number" matInput formControlName="hours">
+                        <input type="number" matInput formControlName="courseHours">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Стоимость курсов</mat-label>
-                        <input type="number" matInput formControlName="price">
+                        <input type="number" matInput formControlName="coursePrice">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Сроки прохождения</mat-label>
-                        <input type="number" matInput formControlName="deadlines">
+                        <input type="date" matInput formControlName="startdate">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
+<!--                    <mat-form-field class="example-full-width">-->
+<!--                        <mat-label>Enter a date range</mat-label>-->
+<!--                        <mat-date-range-input [formGroup]="teacherCourseForm">-->
+<!--                            <input matStartDate formControlName="startDate" placeholder="Start date">-->
+<!--                            <input matEndDate formControlName="endDate" placeholder="End date">-->
+<!--                        </mat-date-range-input>-->
+<!--                        <mat-datepicker-toggle matSuffix></mat-datepicker-toggle>-->
+<!--                        <mat-error *ngIf="teacherCourseForm.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>-->
+<!--                        <mat-error *ngIf="teacherCourseForm.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>-->
+<!--                    </mat-form-field>-->
+
+<!--                    <p>Selected range: {{teacherCourseForm.value | json}}</p>-->
+
                     <mat-form-field class="example-full-width">
                         <mat-label>№ Сертификата и дата</mat-label>
-                        <input type="number" matInput formControlName="certificates">
+                        <input type="number" matInput formControlName="certificateNumber">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Уровень</mat-label>
-                        <mat-select [(ngModel)]="selectedValue20" required>
-                            <mat-option *ngFor="let i of level" [value]="i.value">
+<!--                        <mat-select [(ngModel)]="selectedValue20" required>-->
+<!--                            <mat-option *ngFor="let i of level" [value]="i.value">-->
+<!--                                {{i.viewValue}}-->
+<!--                            </mat-option>-->
+<!--                        </mat-select>-->
+
+                        <select matNativeControl [formControl]="courseDegree" name="car">
+                            <option *ngFor="let i of level" [value]="i.value">
                                 {{i.viewValue}}
-                            </mat-option>
-                        </mat-select>
+                            </option>
+                        </select>
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
-                    <button mat-raised-button [disabled]="courseForm.invalid">Создать курс</button>
-
+                    <button mat-raised-button [disabled]="teacherCourseForm.invalid" (click)="sendTeacherCourse()">Создать курс</button>
+                    {{teacherCourseForm.value | json}}
                 </form>
             </div>
         </mat-tab>

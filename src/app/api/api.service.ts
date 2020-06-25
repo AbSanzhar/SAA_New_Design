@@ -63,11 +63,6 @@ export class ApiService {
     const url = 'users/dis';
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
-  //Не рабочий метод. Следует ожидать когда будет доведен до ума на беке
-  // getExUsers(): Observable<any> {
-  //   const url = 'users/ex/dis';
-  //   return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
-  // }
   getUserDocs(id: number): Observable<any> {
     const url = 'docs/user/';
     return this.http.get<any>(this.base + url + id)
@@ -403,12 +398,25 @@ export class ApiService {
   }
 
   getCourses(): Observable<any> {
-    const url = 'courses/all';
+    const url = 'courses/getByUserId/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
+    return this.http.get(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  uploadCourse(course): Observable<any> {
+    const url = 'courses/add';
+    return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), course);
+  }
+
+  getCourseCount(): Observable<any> {
+    const url = 'ratingList/RefresherCourseCount';
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
-
+  getDisMembersCount(): Observable<any> {
+    const url = 'ratingList/DissovetParticipationsCount';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }

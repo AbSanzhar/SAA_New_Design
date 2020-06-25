@@ -77,7 +77,7 @@
           </div>
           <div class="main">
             <mat-table [dataSource]="TeacherPublications" class="" *ngIf="whichTable === 0 ? true : false">
-              <ng-container matColumnDef="No">
+              <ng-container matColumnDef="pubId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let publication"> {{publication.pubId}} </mat-cell>
               </ng-container>
@@ -137,7 +137,7 @@
             </mat-table>
 
             <mat-table [dataSource]="TeacherEvents" class="" *ngIf="whichTable === 1 ? true : false">
-              <ng-container matColumnDef="No">
+              <ng-container matColumnDef="eventId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>
               </ng-container>
@@ -182,7 +182,7 @@
             </mat-table>
 
             <mat-table [dataSource]="TeacherDisSovet" class="" *ngIf="whichTable === 2 ? true : false">
-              <ng-container matColumnDef="No">
+              <ng-container matColumnDef="disId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>
               </ng-container>
@@ -217,7 +217,7 @@
             </mat-table>
 
             <mat-table [dataSource]="TeacherPatents" class="" *ngIf="whichTable === 3 ? true : false">
-              <ng-container matColumnDef="No">
+              <ng-container matColumnDef="ptntId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let patent"> {{patent.ptntId}} </mat-cell>
               </ng-container>
@@ -397,7 +397,7 @@
             </mat-table>
 
             <mat-table [dataSource]="TeacherCourses" class="" *ngIf="whichTable === 6 ? true : false">
-              <ng-container matColumnDef="No">
+              <ng-container matColumnDef="courseId">
                 <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>
                 <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
               </ng-container>

@@ -5,7 +5,9 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import {ApiService} from '../../api/api.service';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {StartEndDateValidator} from '../../shared/start-end-date.validator';
-
+import { Packer } from 'docx';
+import { saveAs } from 'file-saver';
+import { DocumentCreator } from './rate-list-generator';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -18,8 +20,13 @@ export class TeacherComponent implements OnInit {
   publicationForm: FormGroup;
   eventForm: FormGroup;
   newProjForm: FormGroup;
-  courseForm: FormGroup;
+  teacherCourseForm: FormGroup;
   patentForm: FormGroup;
+  PubTypeCounts;
+  UserDegreeCounts;
+  publishCount;
+  courceCount;
+  disMembersCount;
   selectedValue: string;
   selectedValue1: string;
   selectedValue2: string;
@@ -44,7 +51,6 @@ export class TeacherComponent implements OnInit {
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
   public publications = [];
-  public Allpublications = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -90,20 +96,37 @@ export class TeacherComponent implements OnInit {
       scDirector: this.IdToken
     }, {validators: StartEndDateValidator});
 
-    this.courseForm = formBuilder.group({
-      No: new FormControl('', Validators.required),
-      FL: new FormControl('', Validators.required),
-      form: new FormControl('', Validators.required),
-      center: new FormControl('', Validators.required),
-      hours: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      deadlines: new FormControl('', Validators.required),
-      certificates: new FormControl('', Validators.required),
-      level: new FormControl('', Validators.required)
+    /*
+
+     "courseId": 1,
+ "courseForm":"Очное участие, 'Электронная коммерция'",
+ "courseCenter":"Профессиональная интернет конференция",
+ "courseHours":7,
+ "coursePrice": 40000,
+ "startdate":"2015-11-26",
+ "enddate":"2015-11-27",
+ "courseDegree":"Международная",
+ "certificateNumber":123,
+ "certificateDate":"2015-11-26",
+ "userId":4
+     */
+    this.teacherCourseForm = formBuilder.group({
+      courseId: new FormControl('', Validators.required),
+      userId: new FormControl(this.IdToken, Validators.required),
+      courseForm: new FormControl('', Validators.required),
+      courseCenter: new FormControl('', Validators.required),
+      courseHours: new FormControl('', Validators.required),
+      coursePrice: new FormControl('', Validators.required),
+      // deadlines: new FormControl('', Validators.required),
+      startdate: new FormControl('2015-11-26', Validators.required),
+      enddate: '2015-11-26',
+      certificateNumber: new FormControl('', Validators.required),
+      certificateDate: '2015-11-26',
+      courseDegree: this.courseDegree
     });
 
     this.patentForm = formBuilder.group({
-      No: new FormControl('', Validators.required),
+      ptntId: new FormControl('', Validators.required),
       id: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
       patentS: new FormControl('', Validators.required),
@@ -570,14 +593,16 @@ export class TeacherComponent implements OnInit {
 
   level: Sourse[] = [
     {
-      value: 'element-0',
+      value: 'Международный',
       viewValue: 'Международный'
     },
     {
-      value: 'element-1',
+      value: 'Республиканский',
       viewValue: 'Республиканский'
     }
   ];
+  courseDegree = new FormControl(this.level[1].value);
+
 
   getDecodedAccessToken(token: string): any {
     try {
@@ -589,12 +614,48 @@ export class TeacherComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this._api.getPublications().subscribe(res => {
-          this.publications = res;
-          this.Allpublications = res;
+    this._api.getPubTypeCount().subscribe(
+        res => {
+          console.log(res);
+          this.PubTypeCounts = res;
         },
-        error => {
-          console.log(error);
+        err => {
+          console.log(err);
+        }
+    );
+
+    this._api.getUserDegreeCount().subscribe(
+        res => {
+          console.log(res);
+          this.UserDegreeCounts = res;
+        },
+        err => {
+          console.log(err);
+        }
+    );
+    this._api.getPublishCount().subscribe(
+        res => {
+          console.log(res);
+          this.publishCount = res;
+        },
+        err => {
+          console.log(err);
+        }
+    );
+    this._api.getCourseCount().subscribe(
+        res => {
+          console.log(res);
+          this.courceCount = res;
+        }, err => {
+          console.log(err);
+        }
+    );
+    this._api.getDisMembersCount().subscribe(
+        res => {
+          console.log(res);
+          this.disMembersCount = res;
+        }, err => {
+          console.log(err);
         }
     );
   }
@@ -703,6 +764,50 @@ export class TeacherComponent implements OnInit {
         }
       }
     };
+  }
+
+  sendTeacherPublication() {
+    this._api.uploadPub(this.publicationForm.value).subscribe(
+        res => {
+          console.log(res);
+        }, err => {
+          console.log(err);
+        }
+    );
+  }
+
+  sendTeacherCourse() {
+    console.log(this.teacherCourseForm.value);
+    let course = {
+      "courseForm":"Очное участие, 'Электронная коммерция'",
+      "courseCenter":"Профессиональная интернет конференция",
+      "courseHours":8,
+      "coursePrice": 50000,
+      "startdate":"2015-11-26",
+      "enddate":"2015-11-27",
+      "courseDegree":"Международная",
+      "certificateNumber":123,
+      "certificateDate":"2015-11-26",
+      "userId":4
+    }
+    this._api.uploadCourse(this.teacherCourseForm.value).subscribe(
+        res => {
+          console.log(res);
+        }, err => {
+          console.log(err);
+        }
+    );
+  }
+
+  public download(): void {
+    const documentCreator = new DocumentCreator();
+    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount);
+
+    Packer.toBlob(doc).then(blob => {
+      console.log(blob);
+      saveAs(blob, "Рейтинг лист.docx");
+      console.log("Document created successfully");
+    });
   }
 
 }
