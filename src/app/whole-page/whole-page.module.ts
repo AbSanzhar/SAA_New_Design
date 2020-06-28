@@ -36,6 +36,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
 import {TeacherComponent} from './teacher/teacher.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { PublicationUploadComponent } from './teacher/publication-upload/publication-upload.component';
+import { EventUploadComponent } from './teacher/event-upload/event-upload.component';
+import { PatentUploadComponent } from './teacher/patent-upload/patent-upload.component';
 
 const r: Routes = [
     {
@@ -73,7 +76,10 @@ const r: Routes = [
       EditDissetComponent,
       EditAddDissetComponent,
       DialogEditRoleComponent,
-      TeacherComponent
+      TeacherComponent,
+      PublicationUploadComponent,
+      EventUploadComponent,
+      PatentUploadComponent
   ],
     imports: [
         CommonModule,

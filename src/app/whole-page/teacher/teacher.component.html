@@ -11,8 +11,27 @@
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои публикации: </p>
                     <mat-form-field>
                         <mat-label>Тип источника</mat-label>
-                        <mat-select [(ngModel)]="selectedValue" required>
+                        <mat-select [(ngModel)]="selectedValue" formControlName="pubType" required>
                             <mat-option *ngFor="let i of elements" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="publicationForm.get('pubType').value != 'Учебник'">
+                        <mat-label>Где опубликовано</mat-label>
+                        <mat-select formControlName="pubPublished" required>
+                            <mat-option *ngFor="let i of elements1;" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="publicationForm.get('pubType').value == 'Учебник'">
+                        <mat-label>Где опубликовано</mat-label>
+                        <mat-select formControlName="pubPublished" required>
+                            <mat-option *ngFor="let i of elements0" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
@@ -26,7 +45,7 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Название</mat-label>
-                        <input matInput formControlName="pubName" type="text" placeholder="Ex. name">
+                        <input matInput formControlName="pubName" type="text" placeholder="Ex. name" required>
                         <mat-error>
                             Publication Name is <strong>required</strong>
                         </mat-error>
@@ -34,7 +53,7 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Год</mat-label>
-                        <input matInput formControlName="pubYear" type="date">
+                        <input matInput formControlName="pubYear" type="date" required>
                         <mat-error>
                             Publication Name is <strong>required</strong>
                         </mat-error>
@@ -42,7 +61,7 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Название журнала/издательства</mat-label>
-                        <input matInput formControlName="pubPubName" type="text" placeholder="Ex. name">
+                        <input matInput formControlName="pubPubName" type="text" placeholder="Ex. name" required>
                         <mat-error>
                             Name is <strong>required</strong>
                         </mat-error>
@@ -50,15 +69,23 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Город</mat-label>
-                        <input matInput formControlName="pubCity" type="text" placeholder="Ex. Almaty">
+                        <input matInput formControlName="pubCity" type="text" placeholder="Ex. Almaty" required>
                         <mat-error>
                             City is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Номер страницы публикации</mat-label>
-                        <input matInput formControlName="pubPage" type="text" placeholder="Ex. 230">
+                        <mat-label>Начало публикаци(страницы)</mat-label>
+                        <input matInput formControlName="pubPage" type="number" placeholder="Ex. 230" required>
+                        <mat-error>
+                            Publication's number of pages is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Конец страницы публикации(страница)</mat-label>
+                        <input matInput formControlName="pubEndPage" type="number" placeholder="Ex. 230" required>
                         <mat-error>
                             Publication's number of pages is <strong>required</strong>
                         </mat-error>
@@ -68,26 +95,18 @@
                     <mat-form-field class="example-full-width">
                         <mat-label>URL</mat-label>
                         <input matInput formControlName="pubUrl" type="text" placeholder="Ex. https//iitu.kz">
-                        <mat-error>
-                            URL is <strong>required</strong>
-                        </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>DOI</mat-label>
                         <input matInput formControlName="pubDoi" type="text" placeholder="Ex. https//iitu.kz">
-                        <mat-error>
-                            DOI is <strong>required</strong>
-                        </mat-error>
                     </mat-form-field>
-
                     <div>
-                        <button mat-stroked-button>Загрузить файл</button>
+                        <button mat-raised-button (click)="openUploadPubDialog()">Загрузить файл</button>
                     </div>
 
-                    <button mat-raised-button color="primary" [disabled]="publicationForm.invalid"><p
-                            style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication()">Сохранить публикацию</p></button>
-
+                    <button mat-raised-button color="primary" [disabled]="publicationForm.invalid" style="margin-top: 3%;">
+                        <p style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication()">Сохранить публикацию</p></button>
                 </form>
             </div>
 <!--            </div>-->
@@ -120,28 +139,23 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Название</mat-label>
-                        <input matInput formControlName="event_name" type="text" placeholder="Ex. Smth.">
+                        <input matInput formControlName="event_name" type="text" placeholder="Ex. Smth." required>
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Год</mat-label>
-                        <input matInput formControlName="event_date" type="date">
-                        <mat-error>
-                            Publication Year is <strong>required</strong>
-                        </mat-error>
+                        <mat-label>Дата</mat-label>
+                        <input matInput formControlName="event_date" type="date" required>
+                        <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
-
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Город</mat-label>
-                        <input matInput formControlName="event_city" type="text" placeholder="Ex. Almaty">
+                        <input matInput formControlName="event_city" type="text" placeholder="Ex. Almaty" required>
                         <mat-error>
                             City is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
-
-
 
                     <mat-form-field class="example-full-width">
                         <mat-label>URL</mat-label>
@@ -151,97 +165,73 @@
                         </mat-error>
                     </mat-form-field>
 
-
                     <div>
-                        <button mat-stroked-button>Загрузить файл</button>
+                        <button mat-stroked-button (click)="openUploadEventDialog()">Загрузить файл/Сертификат</button>
                     </div>
 
-                    <button mat-raised-button color="primary" [disabled]="publicationForm.invalid"><p
-                            style="color: white; margin: 0; padding: 0">Сохранить публикацию</p></button>
-
+                    <button mat-raised-button color="primary" [disabled]="eventForm.invalid" style="margin-top: 3%" (click)="sendTeacherEvent()">
+                        <p style="color: white; margin: 0; padding: 0">Добавить мероприятие</p></button>
                 </form>
             </div>
         </mat-tab>
 
 
-        <mat-tab label="Создать патент">
+        <mat-tab label="Добавить патент">
             <div class="Inner">
                 <form [formGroup]="patentForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в патенты: </p>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>№</mat-label>
-                        <input matInput formControlName="ptntId" type="number">
+                        <mat-label>Номер патента</mat-label>
+                        <input matInput formControlName="ptnt_number" type="number" required>
+                        <mat-error>
+                            This is the required field!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Страна</mat-label>
+                        <mat-select formControlName="ptnt_country_id" required>
+                            <mat-option *ngFor="let i of elements5" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Тип патента</mat-label>
+                        <mat-select formControlName="ptnt_type_id" required>
+                            <mat-option *ngFor="let i of elements4" [value]="i.value">
+                                {{i.viewValue}}
+                            </mat-option>
+                        </mat-select>
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Номер патента</mat-label>
-                        <input matInput formControlName="id" type="number">
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Страна</mat-label>
-                        <input matInput formControlName="country" type="text" placeholder="Ex. Kazakhstan">
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Патент на изобретение</mat-label>
-                        <input matInput formControlName="patentS" type="text">
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width">
                         <mat-label>Опубликован в TR</mat-label>
-                        <input matInput formControlName="TR" type="text">
+                        <input matInput formControlName="ptnt_published_TR" type="text" required>
                         <mat-error>
                             This is the required field!
                         </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Автор</mat-label>
-                        <input matInput formControlName="author" type="text">
+                        <mat-label>Дата выдачи</mat-label>
+                        <input matInput formControlName="ptnt_issue_date" type="date" required>
                         <mat-error>
                             This is the required field!
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Статус модерации</mat-label>
-                        <input matInput formControlName="status" type="text">
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
-                    </mat-form-field>
+                    <div>
+                        <button mat-raised-button (click)="openUploadPatentDialog()">Загрузить файл</button>
+                    </div>
 
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Дата ввода в базу</mat-label>
-                        <input matInput formControlName="date" type="date">
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Кем проверено</mat-label>
-                        <input matInput formControlName="checkedPerson" type="text">
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
-                    </mat-form-field>
-
-                    <button mat-raised-button color="primary" [disabled]="publicationForm.invalid"><p
-                            style="color: white; margin: 0; padding: 0">Сохранить</p></button>
-
+                    <button mat-raised-button color="primary" [disabled]="patentForm.invalid" style="margin-top: 3%" (click)="sendTeacherPatent()">
+                        <p style="color: white; margin: 0; padding: 0">Сохранить</p></button>
+                        {{patentForm.value | json}}
                 </form>
             </div>
         </mat-tab>

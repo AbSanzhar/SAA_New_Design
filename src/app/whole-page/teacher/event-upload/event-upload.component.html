@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Загрузите сертификат</h2>
+<mat-dialog-content>
+    <div>
+        <form  enctype="multipart/form-data">
+            <label for="Pubfile">Выберите файл</label>
+            <input type="file" id="Pubfile" (change)="onEventFileSelected($event)">
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close [disabled]="!selectedEventFile" [mat-dialog-close]="this.selectedEventFile">Загрузить</button>
+    <button mat-button mat-dialog-close mat-dialog-close="false">Закрыть</button>
+</mat-dialog-actions>

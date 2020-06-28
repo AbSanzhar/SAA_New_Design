@@ -9,7 +9,11 @@ import { Packer } from 'docx';
 import { saveAs } from 'file-saver';
 import { DocumentCreator } from './rate-list-generator';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
+import * as $ from 'jquery';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {PublicationUploadComponent} from './publication-upload/publication-upload.component';
+import {EventUploadComponent} from './event-upload/event-upload.component';
+import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 @Component({
   selector: 'app-teachers',
   templateUrl: './teacher.component.html',
@@ -27,6 +31,8 @@ export class TeacherComponent implements OnInit {
   publishCount;
   courceCount;
   disMembersCount;
+  selectedPublicationFile: File = null;
+  selectedEventFile: File = null;
   selectedValue: string;
   selectedValue1: string;
   selectedValue2: string;
@@ -47,23 +53,32 @@ export class TeacherComponent implements OnInit {
   selectedValue17: string;
   selectedValue18: string;
   selectedValue19: string;
-  selectedValue20: string;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
   public publications = [];
-
+  private PatentFileRu: any;
+  private PatentFileKz: any;
+  private PatentFileEn: any;
+  private PatentLinkRu: any;
+  private PatentLinkKz: any;
+  private PatentLinkEn: any;
 
   constructor(private formBuilder: FormBuilder,
-              private _api: ApiService) {
+              private _api: ApiService,
+              public dialog: MatDialog) {
     this.publicationForm = formBuilder.group({
-      pubCoAuthor: new FormControl('', Validators.required),
+      pubPublished: new FormControl('', Validators.required),
+      pubType: new FormControl('', Validators.required),
+      pubCoAuthor: new FormControl(''),
       pubName: new FormControl('', Validators.required),
       pubYear: new FormControl('', Validators.required),
       pubPubName: new FormControl('', Validators.required),
       pubCity: new FormControl('', Validators.required),
       pubPage: new FormControl('', Validators.required),
-      pubUrl: new FormControl('', Validators.required),
-      pubDoi: new FormControl('', Validators.required),
+      pubEndPage: new FormControl('', Validators.required),
+      pubUrl: new FormControl(''),
+      pubDoi: new FormControl(''),
+      pubFile: new FormControl('', Validators.required)
     });
 
     this.eventForm = formBuilder.group({
@@ -71,9 +86,9 @@ export class TeacherComponent implements OnInit {
       event_role: new FormControl(''),
       event_name: new FormControl('', Validators.required),
       event_city: new FormControl('', Validators.required),
-      event_url: new FormControl('', Validators.required),
+      event_url: new FormControl(''),
       event_date: new FormControl('', Validators.required),
-      event_file: new FormControl(''),
+      event_file: new FormControl('', Validators.required),
       event_user_id: this.IdToken
     });
 
@@ -96,20 +111,6 @@ export class TeacherComponent implements OnInit {
       scDirector: this.IdToken
     }, {validators: StartEndDateValidator});
 
-    /*
-
-     "courseId": 1,
- "courseForm":"Очное участие, 'Электронная коммерция'",
- "courseCenter":"Профессиональная интернет конференция",
- "courseHours":7,
- "coursePrice": 40000,
- "startdate":"2015-11-26",
- "enddate":"2015-11-27",
- "courseDegree":"Международная",
- "certificateNumber":123,
- "certificateDate":"2015-11-26",
- "userId":4
-     */
     this.teacherCourseForm = formBuilder.group({
       courseId: new FormControl('', Validators.required),
       userId: new FormControl(this.IdToken, Validators.required),
@@ -117,7 +118,6 @@ export class TeacherComponent implements OnInit {
       courseCenter: new FormControl('', Validators.required),
       courseHours: new FormControl('', Validators.required),
       coursePrice: new FormControl('', Validators.required),
-      // deadlines: new FormControl('', Validators.required),
       startdate: new FormControl('2015-11-26', Validators.required),
       enddate: '2015-11-26',
       certificateNumber: new FormControl('', Validators.required),
@@ -126,18 +126,20 @@ export class TeacherComponent implements OnInit {
     });
 
     this.patentForm = formBuilder.group({
-      ptntId: new FormControl('', Validators.required),
-      id: new FormControl('', Validators.required),
-      country: new FormControl('', Validators.required),
-      patentS: new FormControl('', Validators.required),
-      TR: new FormControl('', Validators.required),
-      author: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required),
-      checkedPerson: new FormControl('', Validators.required),
-      kz: new FormControl('', Validators.required),
-      ru: new FormControl('', Validators.required),
-      en: new FormControl('', Validators.required)
+      ptnt_number: new FormControl('', Validators.required),
+      ptnt_country_id: new FormControl('', Validators.required),
+      ptnt_type_id: new FormControl('', Validators.required),
+      ptnt_published_TR: new FormControl('', Validators.required),
+      ptnt_user_id: [this.IdToken],
+      ptnt_status_id: new FormControl('1'),
+      ptnt_issue_date: new FormControl('', Validators.required),
+      ptnt_inserted_date: [new Date()],
+      ptnt_file_kz: '',
+      ptnt_file_en: '',
+      ptnt_file_ru: '',
+      ptnt_file_name_ru: '',
+      ptnt_file_name_kz: '',
+      ptnt_file_name_en: '',
     });
 
   }
@@ -148,25 +150,47 @@ export class TeacherComponent implements OnInit {
   ];
 
   elements: Sourse[] = [
-    {value: 'element-0', viewValue: 'Материалы конференции'},
-    {value: 'element-1', viewValue: 'Монография'},
-    {value: 'element-2', viewValue: 'Учебник'},
-    {value: 'element-3', viewValue: 'Пособие'},
-    {value: 'element-4', viewValue: 'Охранный документ'},
-    {value: 'element-5', viewValue: 'Периодическое издание'},
+    {value: 'Материалы конференции', viewValue: 'Материалы конференции'},
+    {value: 'Монография', viewValue: 'Монография'},
+    {value: 'Учебник', viewValue: 'Учебник'},
+    {value: 'Пособие', viewValue: 'Пособие'},
+    {value: 'Охранный документ', viewValue: 'Охранный документ'},
+    {value: 'Периодическое издание', viewValue: 'Периодическое издание'},
+  ];
+
+  elements0: Sourse[] = [
+    {value: 'МОН РК', viewValue: 'МОН РК'},
+    {value: 'Учебно-методическое объединение (УМО) по специальности', viewValue: 'Учебно-методическое объединение (УМО) по специальности'},
+    {value: 'Ученый совет университета (УС)', viewValue: 'Ученый совет университета (УС)'},
+  ];
+
+  elements1: Sourse[] = [
+    {value: 'в международных рецензируемых научных журналах(по JCR, или имеющих в базе данных Scopus, в Web of Science)', viewValue: 'в международных рецензируемых научных журналах(по JCR, или имеющих в базе данных Scopus, в Web of Science)'},
+    {value: 'в научных журналах, индексируемых РИНЦ и других международных базах с ненулевым импакт-фактором', viewValue: 'в научных журналах, индексируемых РИНЦ и других международных базах с ненулевым импакт-фактором'},
+    {value: 'в научных изданиях, рекомендованных КОКСОН МОН РК', viewValue: 'в научных изданиях, рекомендованных КОКСОН МОН РК'},
+    {value: 'в материалах конференций, форумов, съездов, симпозиумов, конгрессов', viewValue: 'в материалах конференций, форумов, съездов, симпозиумов, конгрессов'},
   ];
 
   elements2: Sourse[] = [
-    {value: 'element-0', viewValue: 'Конференция'},
-    {value: 'element-1', viewValue: 'Форум'},
-    {value: 'element-2', viewValue: 'Семинар'},
+    {value: 'Конференция', viewValue: 'Конференция'},
+    {value: 'Форум', viewValue: 'Форум'},
+    {value: 'Семинар', viewValue: 'Семинар'},
   ];
 
   elements3: Sourse[] = [
-    {value: 'element-0', viewValue: 'Председатель'},
-    {value: 'element-1', viewValue: 'Участник'},
-    {value: 'element-2', viewValue: 'Слушатель'},
-    {value: 'element-3', viewValue: 'Секретарь/Модератор'},
+    {value: 'Председатель', viewValue: 'Председатель'},
+    {value: 'Участник', viewValue: 'Участник'},
+    {value: 'Слушатель', viewValue: 'Слушатель'},
+    {value: 'Секретарь/Модератор', viewValue: 'Секретарь/Модератор'},
+  ];
+
+  elements4: Sourse[] = [
+    {value: '1', viewValue: 'Отчественный'},
+    {value: '2', viewValue: 'Зарубежный'},
+  ];
+
+  elements5: Sourse[] = [
+    {value: '1', viewValue: 'Казахстан'},
   ];
 
   dividers: Sourse[] = [
@@ -776,20 +800,35 @@ export class TeacherComponent implements OnInit {
     );
   }
 
+  sendTeacherEvent() {
+    this._api.uploadEvent(this.eventForm.value).subscribe(
+        res => {
+          console.log(res);
+        }, err => {
+          console.log(err);
+        }
+    );
+  }
+
+  sendTeacherPatent() {
+    this.patentForm.patchValue({
+      ptnt_file_kz: this.PatentLinkKz,
+      ptnt_file_en: this.PatentLinkEn,
+      ptnt_file_ru: this.PatentLinkRu,
+      ptnt_file_name_ru: this.PatentFileRu.name,
+      ptnt_file_name_kz: this.PatentFileKz.name,
+      ptnt_file_name_en: this.PatentFileEn.name,
+    });
+    console.log(this.patentForm.value);
+    this._api.addPatent(this.patentForm.value).subscribe(res => {
+      console.log(res);
+    }, error1 => {
+      console.log(error1);
+    });
+  }
+
   sendTeacherCourse() {
     console.log(this.teacherCourseForm.value);
-    let course = {
-      "courseForm":"Очное участие, 'Электронная коммерция'",
-      "courseCenter":"Профессиональная интернет конференция",
-      "courseHours":8,
-      "coursePrice": 50000,
-      "startdate":"2015-11-26",
-      "enddate":"2015-11-27",
-      "courseDegree":"Международная",
-      "certificateNumber":123,
-      "certificateDate":"2015-11-26",
-      "userId":4
-    }
     this._api.uploadCourse(this.teacherCourseForm.value).subscribe(
         res => {
           console.log(res);
@@ -807,6 +846,157 @@ export class TeacherComponent implements OnInit {
       console.log(blob);
       saveAs(blob, "Рейтинг лист.docx");
       console.log("Document created successfully");
+    });
+  }
+
+  uploadPublicationFile() {
+    const formData = new FormData();
+    let pubLink;
+    formData.append('file', this.selectedPublicationFile);
+    $.ajax({
+      url: 'https://nir.iitu.kz:8443/saa-uploader/uploadPublicationFile',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      async: false,
+    }).done(function(data) {
+      const obj = JSON.parse(data);
+      console.log(obj);
+      pubLink = obj.filePath;
+    });
+    this.publicationForm.patchValue({
+      pubFile: pubLink
+    });
+    console.log(pubLink);
+  }
+
+  openUploadPubDialog() {
+    let dialogRef = this.dialog.open(PublicationUploadComponent);
+    dialogRef.afterClosed().subscribe(res => {
+      if (typeof  res != 'undefined' && res != 'false') {
+        this.selectedPublicationFile = res;
+        console.log(this.selectedPublicationFile);
+        this.uploadPublicationFile();
+      }
+      console.log(`Result is ${res}`);
+    });
+  }
+
+  uploadEventFile() {
+    const formData = new FormData();
+    let EventLink;
+    formData.append('file', this.selectedEventFile);
+    $.ajax({
+      url: 'https://nir.iitu.kz:8443/saa-uploader/uploadEventFile',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      async: false,
+    }).done(function(data) {
+      const obj = JSON.parse(data);
+      console.log(obj);
+      EventLink = obj.filePath;
+    });
+    this.eventForm.patchValue({
+      event_file: EventLink
+    });
+    console.log(EventLink);
+  }
+
+  openUploadEventDialog() {
+    let EventDialog = this.dialog.open(EventUploadComponent);
+    EventDialog.afterClosed().subscribe(
+        res => {
+          if (typeof  res != 'undefined' && res != 'false') {
+            this.selectedEventFile = res;
+            console.log(this.selectedEventFile);
+            this.uploadEventFile();
+          }
+          console.log(`Result is ${res}`);
+        }
+    );
+  }
+
+  openUploadPatentDialog() {
+    let PatentDialog = this.dialog.open(PatentUploadComponent);
+    PatentDialog.afterClosed().subscribe(
+        res => {
+          if (typeof  res != 'undefined' && res != 'false') {
+            this.PatentFileEn = res[0];
+            this.PatentFileKz = res[1];
+            this.PatentFileRu = res[2];
+            this.uploadPatentFiles();
+          }
+          console.log(res);
+        }
+    );
+  }
+
+  uploadPatentFiles() {
+    console.log('12345');
+    console.log(this.PatentFileRu);
+    console.log(this.PatentFileKz);
+    console.log(this.PatentFileEn);
+    const formData = new FormData();
+    let linkRu;
+    formData.append('file', this.PatentFileRu);
+    $.ajax({
+      url: 'https://nir.iitu.kz:8443/saa-uploader/uploadPatentFile',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      async: false,
+    }).done(function(data) {
+      const obj = JSON.parse(data);
+      console.log(obj);
+      linkRu = obj.filePath;
+    });
+    this.PatentLinkRu = linkRu;
+    let linkKZ;
+    const formDataKZ = new FormData();
+    formDataKZ.append('file', this.PatentFileKz);
+    $.ajax({
+      url: 'https://nir.iitu.kz:8443/saa-uploader/uploadPatentFile',
+      type: 'POST',
+      data: formDataKZ,
+      processData: false,
+      contentType: false,
+      async: false,
+    }).done(function(data) {
+      const obj = JSON.parse(data);
+      console.log(obj);
+      linkKZ = obj.filePath;
+    });
+    this.PatentLinkKz = linkKZ;
+    let linkEN;
+    const formDataEN = new FormData();
+    formDataEN.append('file', this.PatentFileEn);
+    $.ajax({
+      url: 'https://nir.iitu.kz:8443/saa-uploader/uploadPatentFile',
+      type: 'POST',
+      data: formDataEN,
+      processData: false,
+      contentType: false,
+      async: false,
+    }).done(function(data) {
+      const obj = JSON.parse(data);
+      console.log(obj);
+      linkEN = obj.filePath;
+    });
+    this.PatentLinkEn = linkEN;
+
+    console.log(this.PatentLinkRu);
+
+    this.patentForm.patchValue({
+      ptnt_file_kz: this.PatentLinkKz,
+      ptnt_file_en: this.PatentLinkEn,
+      ptnt_file_ru: this.PatentLinkRu,
+      ptnt_file_name_ru: this.PatentFileRu.name,
+      ptnt_file_name_kz: this.PatentFileKz.name,
+      ptnt_file_name_en: this.PatentFileEn.name,
     });
   }
 

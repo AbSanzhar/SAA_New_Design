@@ -73,6 +73,9 @@ export class ProfileComponent implements OnInit {
     this._api.getPublications().subscribe(res => {
       console.log(res);
       this.TeacherPublications = res;
+      for(let i = 0; i < res.length; i++) {
+        this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
+      }
     }, err => {
       console.log(err);
     });
@@ -82,6 +85,12 @@ export class ProfileComponent implements OnInit {
     this._api.getEvent().subscribe(res => {
       console.log(res);
       this.TeacherEvents = res;
+      for(let i = 0; i < res.length; i++) {
+        let year = new Date(res[i].eventDate).getFullYear();
+        let month = new Date(res[i].eventDate).getMonth() < 0 ? '0' + (new Date(res[i].eventDate).getMonth() + 1) : (new Date(res[i].eventDate).getMonth() + 1);
+        let day = new Date(res[i].eventDate).getDate() < 0 ? '0' + new Date(res[i].eventDate).getDate() : new Date(res[i].eventDate).getDate();
+        this.TeacherEvents[i].eventDate = day + '/' + month + '/' + year;
+      }
     }, err => {
       console.log(err);
     });
@@ -102,7 +111,19 @@ export class ProfileComponent implements OnInit {
     this._api.getPatent().subscribe(
       res => {
         console.log(res);
+        //ptntIssueDate
         this.TeacherPatents = res;
+        for(let i = 0; i < res.length; i++) {
+          let year = new Date(res[i].ptntInsertedDate).getFullYear();
+          let month = new Date(res[i].ptntInsertedDate).getMonth() < 0 ? '0' + (new Date(res[i].ptntInsertedDate).getMonth() + 1) : (new Date(res[i].ptntInsertedDate).getMonth() + 1);
+          let day = new Date(res[i].ptntInsertedDate).getDate() < 0 ? '0' + new Date(res[i].ptntInsertedDate).getDate() : new Date(res[i].ptntInsertedDate).getDate();
+          this.TeacherPatents[i].ptntInsertedDate = day + '/' + month + '/' + year;
+
+          let year2 = new Date(res[i].ptntIssueDate).getFullYear();
+          let month2 = new Date(res[i].ptntIssueDate).getMonth() < 0 ? '0' + (new Date(res[i].ptntIssueDate).getMonth() + 1) : (new Date(res[i].ptntIssueDate).getMonth() + 1);
+          let day2 = new Date(res[i].ptntIssueDate).getDate() < 0 ? '0' + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
+          this.TeacherPatents[i].ptntIssueDate = day2 + '/' + month2 + '/' + year2;
+        }
       }, err => {
         console.log(err);
       }
@@ -147,6 +168,18 @@ export class ProfileComponent implements OnInit {
         res => {
           console.log(res);
           this.TeacherCourses = res;
+          for(let i = 0; i < res.length; i++) {
+            let startYear = new Date(res[i].startdate).getFullYear();
+            let startmMonth = new Date(res[i].startdate).getMonth() < 0 ? '0' + (new Date(res[i].startdate).getMonth() + 1) : (new Date(res[i].startdate).getMonth() + 1);
+            let startDay = new Date(res[i].startdate).getDate() < 0 ? '0' + new Date(res[i].startdate).getDate() : new Date(res[i].startdate).getDate();
+            this.TeacherCourses[i].startdate = startDay + '/' + startmMonth + '/' + startYear;
+
+            let endYear = new Date(res[i].enddate).getFullYear();
+            let endMonth = new Date(res[i].enddate).getMonth() < 0 ? '0' + (new Date(res[i].enddate).getMonth() + 1) : (new Date(res[i].enddate).getMonth() + 1);
+            let endDay = new Date(res[i].enddate).getDate() < 0 ? '0' + new Date(res[i].enddate).getDate() : new Date(res[i].enddate).getDate();
+            this.TeacherCourses[i].enddate = endDay + '/' + endMonth + '/' + endYear;
+          }
+
         }, err => {
           console.log(err);
         }

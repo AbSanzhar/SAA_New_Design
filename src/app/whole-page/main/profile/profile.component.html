@@ -24,9 +24,11 @@
             <h3 style=" margin-bottom: 0;">Личная информация</h3>
             <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">Вы заведующий этой кафедры</h3>
           </div>
-          <div>
+          <div *ngIf="currentUser">
             <h3 style="font-weight: bold;  margin-bottom: 0;">Образование</h3>
-            <h3>МУИТ (2009-2013)</h3>
+            <div *ngFor="let degree of this.currentUser.degree">
+              <h3>{{degree.degreeName}}</h3>
+            </div>
           </div>
           <div>
             <h3 routerLink="./password" class="passwd-btn button">Пароль <mat-icon>keyboard_arrow_right</mat-icon></h3>
@@ -84,7 +86,7 @@
 
               <ng-container matColumnDef="File">
                 <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubFile}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">{{publication.pubName}}</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Type">
@@ -118,8 +120,8 @@
               </ng-container>
 
               <ng-container matColumnDef="Page">
-                <mat-header-cell *matHeaderCellDef> Страница </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubPage}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Страницы </mat-header-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubPage}} - {{publication.pubEndPage}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Url">
@@ -144,7 +146,7 @@
 
               <ng-container matColumnDef="File">
                 <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.eventFile}} </mat-cell>
+                <mat-cell *matCellDef="let activity"> <a href="https://nir.iitu.kz/{{activity.eventFile}}" download="">{{activity.eventName}}</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Type">
@@ -163,8 +165,8 @@
               </ng-container>
 
               <ng-container matColumnDef="Year">
-                <mat-header-cell *matHeaderCellDef> Год </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.eventYear}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Дата </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventDate}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="City">
@@ -218,8 +220,8 @@
 
             <mat-table [dataSource]="TeacherPatents" class="" *ngIf="whichTable === 3 ? true : false">
               <ng-container matColumnDef="ptntId">
-                <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntId}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="ptntNumber">
@@ -233,7 +235,7 @@
               </ng-container>
 
               <ng-container matColumnDef="ptntIssueDate">
-                <mat-header-cell *matHeaderCellDef> Патент на изобретение </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Дата выдачи </mat-header-cell>
                 <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
               </ng-container>
 
@@ -264,17 +266,17 @@
 
               <ng-container matColumnDef="kz">
                 <mat-header-cell *matHeaderCellDef> KZ </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntFileUrlKz}} </mat-cell>
+                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrlKz}}" download="">Скачать</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="ru">
                 <mat-header-cell *matHeaderCellDef> RU </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntFileUrlRu}} </mat-cell>
+                <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlRu}}" download="">Скачать</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="en">
                 <mat-header-cell *matHeaderCellDef> EN </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntFileUrlEn}} </mat-cell>
+                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrlEn}}" download="">Скачать</a> </mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>

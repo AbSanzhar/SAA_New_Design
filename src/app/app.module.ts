@@ -26,6 +26,9 @@ import { SignInDialogComponent } from './login/sign-in-dialog/sign-in-dialog.com
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {PublicationUploadComponent} from './whole-page/teacher/publication-upload/publication-upload.component';
+import {EventUploadComponent} from './whole-page/teacher/event-upload/event-upload.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +37,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ProfileComponent,
     PasswordComponent,
     SettingsComponent,
-    SignInDialogComponent
+    SignInDialogComponent,
   ],
+  entryComponents: [PublicationUploadComponent, EventUploadComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
