@@ -20,37 +20,52 @@
 
         <ng-container matColumnDef="patentNumber">
           <mat-header-cell *matHeaderCellDef> Номер патента </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.patentNumber}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="country">
           <mat-header-cell *matHeaderCellDef> Страна </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.country}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="inventionPatent">
-          <mat-header-cell *matHeaderCellDef> Патент на изобретение </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.inventionPatent}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="author">
           <mat-header-cell *matHeaderCellDef> Автор </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.author}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="date">
+        <ng-container matColumnDef="issueDate">
+          <mat-header-cell *matHeaderCellDef> Дата выдачи </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="insertedDay">
           <mat-header-cell *matHeaderCellDef> Дата ввода в базу </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.date}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="kz">
           <mat-header-cell *matHeaderCellDef> kz </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.kz}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlKz}}" download="">Скачать</a>  </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="ru">
           <mat-header-cell *matHeaderCellDef> ru </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.ru}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlRu}}" download="">Скачать</a> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="en">
+          <mat-header-cell *matHeaderCellDef> en </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlEn}}" download="">Скачать</a> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Статус модерации </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntStatus}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
@@ -63,6 +78,11 @@
               <mat-icon>clear</mat-icon>
             </button>
           </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="checkedUser">
+          <mat-header-cell *matHeaderCellDef> Кем проверено </mat-header-cell>
+          <mat-cell *matCellDef="let patent"> <p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p> </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

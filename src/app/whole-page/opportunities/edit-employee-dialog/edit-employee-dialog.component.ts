@@ -44,11 +44,15 @@ export class EditEmployeeDialogComponent implements OnInit {
       ])
     });
      console.log(this.newForm.get('role'));
-     console.log(this.newForm.get('role').controls[0].value)
-     if(this.userRoles.indexOf('Teacher') != - 1 && !this.newForm.get('role').controls[0].value) {
+     console.log(this.newForm.get('role')['controls'][0].value);
+     let isTeacher = (this.newForm.get('role') as FormArray).controls[0].value;
+     let isSciencePM = (this.newForm.get('role') as FormArray).controls[1].value;
+     let isDisSec = (this.newForm.get('role') as FormArray).controls[2].value;
+     console.log(isTeacher);
+     if(this.userRoles.indexOf('Teacher') != - 1 && !isTeacher) {
         //delete role
        console.log("Delete teacher role");
-     } else if(this.userRoles.indexOf('Teacher') == -1 && this.newForm.get('role').controls[0].value) {
+     } else if(this.userRoles.indexOf('Teacher') == -1 && isTeacher) {
          let role = {
            userId: this.data.userId,
            roleName: 'Teacher'
@@ -60,14 +64,14 @@ export class EditEmployeeDialogComponent implements OnInit {
                console.log(err);
              }
          );
-     } else if(this.userRoles.indexOf('Science_Project_Manager') != - 1 && !this.newForm.get('role').controls[1].value) {
+     } else if(this.userRoles.indexOf('Science_Project_Manager') != - 1 && !isSciencePM) {
          this._api.deleteScPrRole(this.data.userId).subscribe(
              res => {
                console.log(res);
              }, err => {
                console.log(err);
              });
-     } else if(this.userRoles.indexOf('Science_Project_Manager') == -1 && this.newForm.get('role').controls[1].value) {
+     } else if(this.userRoles.indexOf('Science_Project_Manager') == -1 && isSciencePM) {
          let role = {
            userId: this.data.userId,
            roleName: 'Science_Project_Manager'
@@ -79,9 +83,9 @@ export class EditEmployeeDialogComponent implements OnInit {
                console.log(err);
              }
          );
-     } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') != - 1 && !this.newForm.get('role').controls[2].value) {
+     } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') != - 1 && !isDisSec) {
        // delete role
-     } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') == -1 && this.newForm.get('role').controls[2].value) {
+     } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') == -1 && isDisSec) {
        let role = {
          userId: this.data.userId,
          roleName: 'Science_Secretary_Dissovet'
