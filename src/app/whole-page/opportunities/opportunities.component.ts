@@ -29,6 +29,7 @@ export class OpportunitiesComponent implements OnInit {
   openDialogEdit(employee) {
     this.editDialog.open(EditEmployeeDialogComponent, {data: employee
     }).afterClosed().subscribe(result => {
+      console.log(result);
       this.getAllEmployees();
     });
   }

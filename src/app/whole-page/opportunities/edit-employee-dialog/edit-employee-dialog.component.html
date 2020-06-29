@@ -1,11 +1,11 @@
 <div mat-dialog-content class="box">
-  <p>Пользователь: <span>{{data.firstName + ' ' + data.lastName + ' ' + data.patronymic}}</span></p>
+  <p>Пользователь: <span style="margin-left: 0%;">{{data.firstName + ' ' + data.lastName + ' ' + data.patronymic}}</span></p>
   <div class="flex-options-box">
     <div class="flex-label"><p style="margin-right: 15%">Роли:</p></div>
     <div class="flex-options-list">
       <form [formGroup]="formOptions">
         <div class="option-text"><mat-slide-toggle formControlName="option1">Преподаватель</mat-slide-toggle></div>
-        <div class="option-text"><mat-slide-toggle formControlName="option2">Сотрудник отдела по науке</mat-slide-toggle></div>
+        <div class="option-text"><mat-slide-toggle formControlName="option2">Научный руководитель</mat-slide-toggle></div>
         <div class="option-text"><mat-slide-toggle formControlName="option3">Секретарь диссовета</mat-slide-toggle></div>
       </form>
     </div>
