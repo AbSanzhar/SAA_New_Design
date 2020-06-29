@@ -36,6 +36,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
 import {TeacherComponent} from './teacher/teacher.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { PublicationUploadComponent } from './teacher/publication-upload/publication-upload.component';
+import { EventUploadComponent } from './teacher/event-upload/event-upload.component';
+import { PatentUploadComponent } from './teacher/patent-upload/patent-upload.component';
 import { AddMemberDialogComponent } from './secretary-diss-council/add-disset/add-member-dialog/add-member-dialog.component';
 import { AddNewExMemberDialogComponent } from './secretary-diss-council/add-disset/add-new-ex-member-dialog/add-new-ex-member-dialog.component';
 

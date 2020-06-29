@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Загрузите файлы</h2>
+<mat-dialog-content>
+    <div>
+        <form  enctype="multipart/form-data">
+            <label for="EnPatent">Выберите файл(EN)</label>
+            <input type="file" id="EnPatent" (change)="onENPatentFileChange($event)">
+        </form>
+    </div>
+    <div>
+        <form  enctype="multipart/form-data">
+            <label for="KzPatent">Выберите файл(KZ)</label>
+            <input type="file" id="KzPatent" (change)="onKZPatentFileChange($event)">
+        </form>
+    </div>
+    <div>
+        <form  enctype="multipart/form-data">
+            <label for="RuPatent">Выберите файл(RU)</label>
+            <input type="file" id="RuPatent" (change)="onRUPatentFileChange($event)">
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close [disabled]="(!PatentFileRu && !PatentFileEn && !PatentFileKz)" [mat-dialog-close]="[this.PatentFileEn, this.PatentFileKz, this.PatentFileRu]">Загрузить</button>
+    <button mat-button mat-dialog-close mat-dialog-close="false">Закрыть</button>
+</mat-dialog-actions>

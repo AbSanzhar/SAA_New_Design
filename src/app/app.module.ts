@@ -26,7 +26,6 @@ import { SignInDialogComponent } from './login/sign-in-dialog/sign-in-dialog.com
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {JwPaginationComponent} from 'jw-angular-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +34,7 @@ import {JwPaginationComponent} from 'jw-angular-pagination';
     ProfileComponent,
     PasswordComponent,
     SettingsComponent,
-    SignInDialogComponent
+    SignInDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +57,8 @@ import {JwPaginationComponent} from 'jw-angular-pagination';
     ReactiveFormsModule,
     _MatMenuDirectivesModule,
     MatMenuModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

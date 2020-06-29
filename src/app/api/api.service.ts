@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpErrorResponse, HttpEventType, HttpRequest,} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import {catchError, expand, filter, map} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpHeaders,} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 // import {Http, Headers} from '@angular/http';
 // import ResponseContentType;
@@ -172,17 +172,24 @@ export class ApiService {
   }
 
 
-
   getPublications(): Observable<any> {
     const url = 'publication/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
   }
+
+  getPublicationsPage(query): Observable<any> {
+    const url = 'publication/';
+    const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
+    return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token') + query).pipe(catchError(this.errorHandler));
+  }
+
   uploadPub(pub): Observable<any> {
     const url = 'publication/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'), pub).pipe(catchError(this.errorHandler));
   }
+
   updatePub(id, pub): Observable<any> {
     const url = 'publication/update/';
     return this.http.patch<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'), pub);
@@ -210,11 +217,18 @@ export class ApiService {
     return this.http.get<any>(this.base + url + id).pipe(catchError(this.errorHandler));
   }
 
+  getAllEduPage(query): Observable<any> {
+    const url = 'edu-social/';
+    const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
+    return this.http.get<any>(this.base + url + id + query).pipe(catchError(this.errorHandler));
+  }
+
   uploadEdu(Edu): Observable<any> {
     const url = 'edu-social/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id, Edu).pipe(catchError(this.errorHandler));
   }
+
   getPlanPerfomance(): Observable<any> {
     const url = 'plan-perform/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;

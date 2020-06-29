@@ -8,6 +8,11 @@ import {ApiService} from '../../api/api.service';
     styleUrls: ['./year-plan.scss']
 })
 export class YearPlanComponent implements OnInit {
+    paginator = {
+        length: 0,
+        size: 1,
+        page: 0
+    };
     data = [];
     public AcadMetForm: FormGroup;
     public AcadMetAct: FormArray;
@@ -93,19 +98,14 @@ export class YearPlanComponent implements OnInit {
     constructor(private api: ApiService, private fb: FormBuilder) {
     }
 
-    getPageLimit() {
-        const url = '_page=' + (this.page + 1) + '&_limit=' + this.size;
-        this.api.getEdu().subscribe(res => {
-            this.dataSource = res;
-        });
-    }
 
     changeTableList(event) {
-        this.page = event.pageIndex;
-        this.size = event.pageSize;
-        this.getPageLimit();
+        console.log('asda');
+        this.paginator.page = event.pageIndex;
+        this.paginator.size = event.pageSize;
         this.getData();
     }
+
 
     getData() {
         this.api.getEdu().subscribe(res => {
@@ -840,25 +840,37 @@ export class YearPlanComponent implements OnInit {
     }
 
     getEdus() {
-        this.api.getEdu().subscribe(
+        let query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
+        this.api.getAllEduPage(query).subscribe(
             res => {
-                let i = 0;
-                this.edusLength = res.length;
-                for (; i < res.length; i++) {
-                    this.eduId.push(this.fb.control(res[i].eduId));
-                    this.eduAct.push(this.fb.control(res[i].activities));
-                    this.eduImpl.push(this.fb.control(res[i].implementation));
-                }
-                this.dataSource = res;
-                console.log('7891: ' + this.dataSource.length);
-                console.log('7892: ' + this.eduId.length);
-                console.log('7893: ' + this.eduAct.length);
-                console.log('7894: ' + this.eduImpl.length);
-            },
+            let i = 0;
+            this.edusLength = res.length;
+            for (; i < res.length; i++) {
+                this.eduId.push(this.fb.control(res[i].eduId));
+                this.eduAct.push(this.fb.control(res[i].activities));
+                this.eduImpl.push(this.fb.control(res[i].implementation));
+            }
+            this.dataSource = res;
+        },
             err => {
                 console.log(err);
             }
-        );
+            );
+        // this.api.getEdu().subscribe(
+        //     res => {
+        //         let i = 0;
+        //         this.edusLength = res.length;
+        //         for (; i < res.length; i++) {
+        //             this.eduId.push(this.fb.control(res[i].eduId));
+        //             this.eduAct.push(this.fb.control(res[i].activities));
+        //             this.eduImpl.push(this.fb.control(res[i].implementation));
+        //         }
+        //         this.dataSource = res;
+        //     },
+        //     err => {
+        //         console.log(err);
+        //     }
+        // );
     }
 
     onSubmit() {

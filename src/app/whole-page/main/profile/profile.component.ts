@@ -8,6 +8,11 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  paginator = {
+    length: 0,
+    size: 1,
+    page: 0,
+  };
   TeacherPublications: any[] = [];
   TeacherEvents: any[] = [];
   TeacherDisSovet: any[] = [];
@@ -47,6 +52,7 @@ export class ProfileComponent implements OnInit {
     this.pageOfItems = pageOfItems;
   }
   ngOnInit(): void {
+    this.getTeacherPublications();
     this._api.getUserById(this.tokenId).subscribe(
         res => {
           this.currentUser = res;
@@ -73,12 +79,31 @@ export class ProfileComponent implements OnInit {
   }
 
   getTeacherPublications() {
-    this._api.getPublications().subscribe(res => {
+    const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
+
+    this._api.getPublicationsPage(query).subscribe(res => {
       console.log(res);
       this.TeacherPublications = res;
+      this._api.getPublications().subscribe(res2 => {
+        this.paginator.length = res2.length;
+      });
     }, err => {
       console.log(err);
     });
+    // this._api.getPublications().subscribe(res => {
+    //   console.log(res);
+    //   this.TeacherPublications = res;
+    // }, err => {
+    //   console.log(err);
+    // });
+  }
+
+
+  changeTableList(event) {
+    console.log('asda');
+    this.paginator.page = event.pageIndex;
+    this.paginator.size = event.pageSize;
+    this.getTeacherPublications();
   }
 
   getTeacherEvents() {
@@ -106,6 +131,17 @@ export class ProfileComponent implements OnInit {
       res => {
         console.log(res);
         this.TeacherPatents = res;
+        for(let i = 0; i < res.length; i++) {
+          let year = new Date(res[i].ptntInsertedDate).getFullYear();
+          let month = new Date(res[i].ptntInsertedDate).getMonth() < 0 ? '0' + (new Date(res[i].ptntInsertedDate).getMonth() + 1) : (new Date(res[i].ptntInsertedDate).getMonth() + 1);
+          let day = new Date(res[i].ptntInsertedDate).getDate() < 0 ? '0' + new Date(res[i].ptntInsertedDate).getDate() : new Date(res[i].ptntInsertedDate).getDate();
+          this.TeacherPatents[i].ptntInsertedDate = day + '/' + month + '/' + year;
+
+          let year2 = new Date(res[i].ptntIssueDate).getFullYear();
+          let month2 = new Date(res[i].ptntIssueDate).getMonth() < 0 ? '0' + (new Date(res[i].ptntIssueDate).getMonth() + 1) : (new Date(res[i].ptntIssueDate).getMonth() + 1);
+          let day2 = new Date(res[i].ptntIssueDate).getDate() < 0 ? '0' + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
+          this.TeacherPatents[i].ptntIssueDate = day2 + '/' + month2 + '/' + year2;
+        }
       }, err => {
         console.log(err);
       }

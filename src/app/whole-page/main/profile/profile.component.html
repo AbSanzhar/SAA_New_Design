@@ -24,9 +24,11 @@
             <h3 style=" margin-bottom: 0;">Личная информация</h3>
             <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">Вы заведующий этой кафедры</h3>
           </div>
-          <div>
+          <div *ngIf="currentUser">
             <h3 style="font-weight: bold;  margin-bottom: 0;">Образование</h3>
-            <h3>МУИТ (2009-2013)</h3>
+            <div *ngFor="let degree of this.currentUser.degree">
+              <h3>{{degree.degreeName}}</h3>
+            </div>
           </div>
           <div>
             <h3 routerLink="./password" class="passwd-btn button">Пароль <mat-icon>keyboard_arrow_right</mat-icon></h3>
@@ -85,7 +87,7 @@
 
               <ng-container matColumnDef="File">
                 <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubFile}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">{{publication.pubName}}</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Type">
@@ -119,8 +121,8 @@
               </ng-container>
 
               <ng-container matColumnDef="Page">
-                <mat-header-cell *matHeaderCellDef> Страница </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubPage}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Страницы </mat-header-cell>
+                <mat-cell *matCellDef="let publication"> {{publication.pubPage}} - {{publication.pubEndPage}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Url">
@@ -136,9 +138,20 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>
               <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
             </mat-table>
-<!--              <jw-pagination [items]="TeacherPublications" (changePage)="onChangePage($event)"></jw-pagination>-->
+
+              <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
+                             [pageSize]="paginator.size"
+                             [pageIndex]="paginator.page"
+                             (change)="changeTableList($event)"
+                             (page)="changeTableList($event)"
+
+                             showFirstLastButtons></mat-paginator>
+
+
             </div>
-            <mat-table [dataSource]="TeacherEvents" class="" *ngIf="whichTable === 1 ? true : false">
+
+            <div *ngIf="whichTable === 1 ? true : false">
+              <mat-table [dataSource]="TeacherEvents" class="">
               <ng-container matColumnDef="eventId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>
@@ -146,7 +159,7 @@
 
               <ng-container matColumnDef="File">
                 <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.eventFile}} </mat-cell>
+                <mat-cell *matCellDef="let activity"> <a href="https://nir.iitu.kz/{{activity.eventFile}}" download="">{{activity.eventName}}</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Type">
@@ -165,8 +178,8 @@
               </ng-container>
 
               <ng-container matColumnDef="Year">
-                <mat-header-cell *matHeaderCellDef> Год </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.eventYear}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Дата </mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventDate}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="City">
@@ -182,8 +195,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsEvent"></mat-header-row>
               <mat-row *matRowDef="let activity; columns: displayedColumnsEvent;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherDisSovet" class="" *ngIf="whichTable === 2 ? true : false">
+            <div *ngIf="whichTable === 2 ? true : false">
+              <mat-table [dataSource]="TeacherDisSovet" class="">
               <ng-container matColumnDef="disId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>
@@ -217,11 +232,13 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsDisSovet"></mat-header-row>
               <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherPatents" class="" *ngIf="whichTable === 3 ? true : false">
+            <div *ngIf="whichTable === 3 ? true : false">
+              <mat-table [dataSource]="TeacherPatents" class="">
               <ng-container matColumnDef="ptntId">
-                <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntId}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="ptntNumber">
@@ -235,7 +252,7 @@
               </ng-container>
 
               <ng-container matColumnDef="ptntIssueDate">
-                <mat-header-cell *matHeaderCellDef> Патент на изобретение </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Дата выдачи </mat-header-cell>
                 <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
               </ng-container>
 
@@ -266,24 +283,26 @@
 
               <ng-container matColumnDef="kz">
                 <mat-header-cell *matHeaderCellDef> KZ </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntFileUrlKz}} </mat-cell>
+                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrlKz}}" download="">Скачать</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="ru">
                 <mat-header-cell *matHeaderCellDef> RU </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntFileUrlRu}} </mat-cell>
+                <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlRu}}" download="">Скачать</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="en">
                 <mat-header-cell *matHeaderCellDef> EN </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntFileUrlEn}} </mat-cell>
+                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrlEn}}" download="">Скачать</a> </mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>
               <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="DepUsers" class="" *ngIf="whichTable === 4 ? true : false">
+            <div *ngIf="whichTable === 4 ? true : false">
+              <mat-table [dataSource]="DepUsers" class="">
               <ng-container matColumnDef="userId">
                 <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                 <mat-cell *matCellDef="let employee"> {{employee.userId}} </mat-cell>
@@ -317,8 +336,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsDepUsers"></mat-header-row>
               <mat-row *matRowDef="let employee; columns: displayedColumnsDepUsers;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherScienceProjects" class="" *ngIf="whichTable === 5 ? true : false">
+            <div *ngIf="whichTable === 5 ? true : false">
+              <mat-table [dataSource]="TeacherScienceProjects" class="">
               <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef> ИРН </mat-header-cell>
                 <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
@@ -397,8 +418,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
               <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherCourses" class="" *ngIf="whichTable === 6 ? true : false">
+            <div *ngIf="whichTable === 6 ? true : false">
+              <mat-table [dataSource]="TeacherCourses" class="">
               <ng-container matColumnDef="courseId">
                 <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>
                 <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
@@ -448,6 +471,7 @@
               <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>
 
             </mat-table>
+            </div>
 
           </div>
           <div>
