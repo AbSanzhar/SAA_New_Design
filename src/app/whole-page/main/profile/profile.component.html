@@ -87,7 +87,7 @@
 
               <ng-container matColumnDef="File">
                 <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">{{publication.pubName}}</a> </mat-cell>
+                <mat-cell *matCellDef="let publication"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">Cкачать</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Type">
@@ -263,7 +263,7 @@
 
               <ng-container matColumnDef="ptntOwnerName">
                 <mat-header-cell *matHeaderCellDef> Автор </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntUser.fisrtName}} {{patent.ptntUser.lastName}} </mat-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="status">
@@ -278,7 +278,7 @@
 
               <ng-container matColumnDef="whoCheck">
                 <mat-header-cell *matHeaderCellDef> Кем проверено </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntCheckedUser}}</mat-cell>
+                <mat-cell *matCellDef="let patent"><p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p></mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="kz">
