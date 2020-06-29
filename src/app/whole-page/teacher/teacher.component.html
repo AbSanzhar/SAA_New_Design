@@ -53,7 +53,14 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Год</mat-label>
-                        <input matInput formControlName="pubYear" type="date" required>
+<!--                        <input matInput formControlName="pubYear" type="date" required>-->
+                        <mat-select  required formControlName="pubYear">
+                            <mat-option *ngFor="let i of years" [value]="i">
+                                {{i}}
+                            </mat-option>
+<!--                            <option *ngFor="let i of years" [selected]="yy === i">{{i}}</option>-->
+<!--                        </mat-select>-->
+                        </mat-select>
                         <mat-error>
                             Publication Name is <strong>required</strong>
                         </mat-error>

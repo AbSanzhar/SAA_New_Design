@@ -5,15 +5,17 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import {ApiService} from '../../api/api.service';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {StartEndDateValidator} from '../../shared/start-end-date.validator';
-import { Packer } from 'docx';
-import { saveAs } from 'file-saver';
-import { DocumentCreator } from './rate-list-generator';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import {Packer} from 'docx';
+import {saveAs} from 'file-saver';
+import {DocumentCreator} from './rate-list-generator';
 import * as $ from 'jquery';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {PublicationUploadComponent} from './publication-upload/publication-upload.component';
 import {EventUploadComponent} from './event-upload/event-upload.component';
 import {PatentUploadComponent} from './patent-upload/patent-upload.component';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-teachers',
   templateUrl: './teacher.component.html',
@@ -144,10 +146,20 @@ export class TeacherComponent implements OnInit {
 
   }
 
+  getYear() {
+    var today = new Date();
+    this.yy = today.getFullYear();
+    for(var i = (this.yy-100); i <= this.yy; i++){
+      this.years.push(i);}
+  }
+
   div: Sourse[] = [
     {value: '1', viewValue: 'Information systems'},
     {value: '2', viewValue: 'RET'}
   ];
+
+  years: number[] = [];
+  yy: number;
 
   elements: Sourse[] = [
     {value: 'Материалы конференции', viewValue: 'Материалы конференции'},
@@ -638,6 +650,7 @@ export class TeacherComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getYear();
     this._api.getPubTypeCount().subscribe(
         res => {
           console.log(res);
