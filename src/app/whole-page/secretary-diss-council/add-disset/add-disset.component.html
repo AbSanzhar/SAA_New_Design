@@ -1,54 +1,94 @@
 <div class="container">
   <div class="content">
     <div class="nav-text">
-      <button class="btn-nav-header">Доп. возможности</button> <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon> Добавить диссовет
+      <button routerLink="../" class="btn-nav-header">Доп. возможности</button>
+      <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+      Добавить диссовет
     </div>
 
     <div class="form-box">
+      <!--      <form [formGroup]="form">-->
+      <!--        <div class="form-div">-->
+      <!--          <div class="label-div">-->
+      <!--            <label>ВУЗ: </label>-->
+      <!--          </div>-->
+      <!--          <div class="input-div">-->
+      <!--            <input type="text">-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="form-div">-->
+      <!--          <div class="label-div">-->
+      <!--            <label>Роль: </label>-->
+      <!--          </div>-->
+      <!--          <div class="input-div">-->
+      <!--            <input type="text">-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="form-div">-->
+      <!--          <div class="label-div">-->
+      <!--            <label>Специальность: </label>-->
+      <!--          </div>-->
+      <!--          <div  class="input-div">-->
+      <!--            <input type="text">-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="form-div">-->
+      <!--          <div class="label-div">-->
+      <!--            <label>Период деятельности: </label>-->
+      <!--          </div>-->
+      <!--          <div class="input-div">-->
+      <!--            <input type="text">-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="form-div">-->
+      <!--          <div class="label-div">-->
+      <!--            <label>Номер и дата приказа: </label>-->
+      <!--          </div>-->
+      <!--          <div class="input-div">-->
+      <!--            <input type="text">-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div style="text-align: center">-->
+      <!--          <input class="btn" type="submit" value="save">-->
+      <!--        </div>-->
+      <!--      </form>-->
       <form [formGroup]="form">
-        <div class="form-div">
-          <div class="label-div">
-            <label>ВУЗ: </label>
-          </div>
-          <div class="input-div">
-            <input type="text">
-          </div>
-        </div>
-        <div class="form-div">
-          <div class="label-div">
-            <label>Роль: </label>
-          </div>
-          <div class="input-div">
-            <input type="text">
-          </div>
-        </div>
-        <div class="form-div">
-          <div class="label-div">
-            <label>Специальность: </label>
-          </div>
-          <div  class="input-div">
-            <input type="text">
-          </div>
-        </div>
-        <div class="form-div">
-          <div class="label-div">
-            <label>Период деятельности: </label>
-          </div>
-          <div class="input-div">
-            <input type="text">
-          </div>
-        </div>
-        <div class="form-div">
-          <div class="label-div">
-            <label>Номер и дата приказа: </label>
-          </div>
-          <div class="input-div">
-            <input type="text">
-          </div>
-        </div>
-        <div style="text-align: center">
-          <input class="btn" type="submit" value="save">
-        </div>
+        <p style="color: darkred; font-weight: 500; font-size: 18px">Новый диссовет: </p>
+
+        <mat-form-field>
+          <mat-label>Название</mat-label>
+          <input matInput formControlName="universityName" type="text" required>
+          <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Начиная с</mat-label>
+          <input matInput formControlName="startTime" type="date" required>
+          <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Заканчивая в</mat-label>
+          <input matInput formControlName="endTime" type="date" required>
+          <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Основание создания(№ приказа МОНРК)</mat-label>
+          <input matInput formControlName="foundationNo" type="number" required>
+          <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Количественный состав</mat-label>
+          <input matInput formControlName="quantity" type="number" required>
+          <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <!--TODO [disabled]="form.invalid"-->
+        <button [disabled]="form.invalid" mat-raised-button color="primary" ><p
+                style="color: white; margin: 0; padding: 0" (click)="add()">Создать</p></button>
+
       </form>
     </div>
   </div>

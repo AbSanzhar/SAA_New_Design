@@ -76,7 +76,8 @@
             </div>
           </div>
           <div class="main">
-            <mat-table [dataSource]="TeacherPublications" class="" *ngIf="whichTable === 0 ? true : false">
+            <div *ngIf="whichTable === 0 ? true : false">
+            <mat-table [dataSource]="TeacherPublications" class="">
               <ng-container matColumnDef="pubId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let publication"> {{publication.pubId}} </mat-cell>
@@ -135,7 +136,8 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>
               <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
             </mat-table>
-
+<!--              <jw-pagination [items]="TeacherPublications" (changePage)="onChangePage($event)"></jw-pagination>-->
+            </div>
             <mat-table [dataSource]="TeacherEvents" class="" *ngIf="whichTable === 1 ? true : false">
               <ng-container matColumnDef="eventId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>

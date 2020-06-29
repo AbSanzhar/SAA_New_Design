@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
   public roles = [];
 
   public whichTable = 0;
+  pageOfItems: Array<any>;
 
   getDecodedAccessToken(token: string): any {
     try {
@@ -42,7 +43,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(private http: DataControlService,
               private _api: ApiService) { }
-
+  onChangePage(pageOfItems: Array<any>) {
+    this.pageOfItems = pageOfItems;
+  }
   ngOnInit(): void {
     this._api.getUserById(this.tokenId).subscribe(
         res => {

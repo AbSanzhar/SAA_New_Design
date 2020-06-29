@@ -25,6 +25,7 @@
     "file-saver": "^2.0.2",
     "json": "^9.0.6",
     "json-server": "^0.16.1",
+    "jw-angular-pagination": "^1.2.0",
     "jwt-decode": "^2.2.0",
     "pdfmake": "^0.1.65",
     "rxjs": "~6.5.4",

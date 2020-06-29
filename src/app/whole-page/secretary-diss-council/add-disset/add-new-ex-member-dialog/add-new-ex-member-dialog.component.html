@@ -1,0 +1,53 @@
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>ИИН</mat-label>
+        <input matInput formControlName="IIN" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Место работы</mat-label>
+        <input matInput formControlName="workPlace" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Имя</mat-label>
+        <input matInput formControlName="firstName" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Фамилия</mat-label>
+        <input matInput formControlName="lastName" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Описание</mat-label>
+        <input matInput formControlName="description" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Логин</mat-label>
+        <input matInput formControlName="login" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Пароль</mat-label>
+        <input matInput formControlName="password" type="text" required>
+        <mat-error>The field is required.</mat-error>
+    </mat-form-field>
+
+    <button [disabled]="form.invalid" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%">Создать внешнего пользователя</button>
+    <button mat-raised-button color="primary" style="color: white; margin: 1% 0 1% 1%">Назад</button>
+
+</form>

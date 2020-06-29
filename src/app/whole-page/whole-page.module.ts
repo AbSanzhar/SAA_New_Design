@@ -36,6 +36,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
 import {TeacherComponent} from './teacher/teacher.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { AddMemberDialogComponent } from './secretary-diss-council/add-disset/add-member-dialog/add-member-dialog.component';
+import { AddNewExMemberDialogComponent } from './secretary-diss-council/add-disset/add-new-ex-member-dialog/add-new-ex-member-dialog.component';
 
 const r: Routes = [
     {
@@ -73,7 +75,9 @@ const r: Routes = [
       EditDissetComponent,
       EditAddDissetComponent,
       DialogEditRoleComponent,
-      TeacherComponent
+      TeacherComponent,
+      AddMemberDialogComponent,
+      AddNewExMemberDialogComponent
   ],
     imports: [
         CommonModule,

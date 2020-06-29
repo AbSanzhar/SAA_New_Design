@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {AddMemberDialogComponent} from './add-member-dialog/add-member-dialog.component';
 
 @Component({
   selector: 'app-add-disset',
@@ -9,17 +11,22 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class AddDissetComponent implements OnInit {
   form: FormGroup;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
     this.form = new FormGroup({
       universityName: new FormControl(''),
-      role: new FormControl(''),
-      specialty: new FormControl(''),
-      activityPeriod: new FormControl(''),
-      orderNumberAndDate: new FormControl('')
+      startTime: new FormControl(''),
+      endTime: new FormControl(''),
+      foundationNo: new FormControl(''),
+      quantity: new FormControl('')
     });
   }
 
   ngOnInit(): void {
   }
 
+  add(): void {
+    const dialogRef = this.dialog.open(AddMemberDialogComponent, {
+      width: '50%',
+    });
+  }
 }

@@ -26,6 +26,7 @@ import { SignInDialogComponent } from './login/sign-in-dialog/sign-in-dialog.com
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {JwPaginationComponent} from 'jw-angular-pagination';
 @NgModule({
   declarations: [
     AppComponent,

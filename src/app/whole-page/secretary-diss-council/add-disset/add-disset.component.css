@@ -17,44 +17,47 @@
   border: none;
   padding: 5px;
   font-size: 14px;
+  cursor: pointer;
 }
+.btn-nav-header:hover{
+  border-style: none;
+}
+/*.form-div{*/
+/*  margin: 2rem;*/
+/*  display: flex;*/
+/*}*/
 
-.form-div{
-  margin: 2rem;
-  display: flex;
-}
+/*label{*/
+/*  font-style: normal;*/
+/*  font-weight: normal;*/
+/*  font-size: 20px;*/
+/*  color: #A8A4A4;*/
+/*}*/
 
-label{
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  color: #A8A4A4;
-}
+/*.label-div{*/
+/*  align-items: center;*/
+/*  display: flex;*/
+/*  justify-content: flex-end;*/
+/*  width: 300px;*/
+/*}*/
 
-.label-div{
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
-  width: 300px;
-}
+/*input:not(.btn){*/
+/*  background: #FDFDFD;*/
+/*  border: 1px solid #0CB5A0;*/
+/*  box-sizing: border-box;*/
+/*  border-radius: 8px;*/
+/*  padding: .5rem 1rem;*/
+/*  font-family: Ubuntu, sans-serif;*/
+/*  font-style: normal;*/
+/*  font-weight: normal;*/
+/*  font-size: 20px;*/
+/*  width: 120%;*/
+/*}*/
 
-input:not(.btn){
-  background: #FDFDFD;
-  border: 1px solid #0CB5A0;
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: .5rem 1rem;
-  font-family: Ubuntu, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  width: 120%;
-}
-
-.input-div{
-  margin-left: 2rem;
-  width: 70%;
-}
+/*.input-div{*/
+/*  margin-left: 2rem;*/
+/*  width: 70%;*/
+/*}*/
 
 .btn {
   background: #0CB5A0;
@@ -71,6 +74,13 @@ input:not(.btn){
 }
 
 .form-box {
-  display: flex;
   justify-content: center;
+  display: flex;
+  padding: 2% 10%;
+}
+form{
+  width: 50%;
+}
+mat-form-field{
+  width: 100%;
 }

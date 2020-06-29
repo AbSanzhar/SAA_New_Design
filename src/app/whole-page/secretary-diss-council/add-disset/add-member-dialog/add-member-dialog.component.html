@@ -1,0 +1,63 @@
+    <form [formGroup]="membersForm">
+        <p style="color: darkred; font-weight: 500; font-size: 18px">Добавление участников дис. совета: </p>
+
+        <mat-form-field>
+            <mat-label>Фамилия и Имя</mat-label>
+            <mat-select formControlName="name" required>
+                <mat-option *ngFor="let i of members" [value]="i.userId">
+                    {{i.firstName}} {{i.lastName}}
+                </mat-option>
+            </mat-select>
+            <mat-error>This is the required field.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Тип сотрудника
+            </mat-label>
+            <mat-select formControlName="type" required>
+                <mat-option *ngFor="let i of elements" [value]="i.value">
+                    {{i.viewValue}}
+                </mat-option>
+            </mat-select>
+            <mat-error>This is the required field!</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+            <mat-label>Ученная степень</mat-label>
+            <input matInput formControlName="level" type="text" required>
+            <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Шифр специальности</mat-label>
+            <input matInput formControlName="speciality" type="text" required>
+            <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Шифр специальности в диссовете</mat-label>
+            <input matInput formControlName="specialityInDis" type="text" required>
+            <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Место работы и должность</mat-label>
+            <input matInput formControlName="workPlace" type="text" required>
+            <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Тип сотрудника
+            </mat-label>
+            <mat-select formControlName="type" required>
+                <mat-option *ngFor="let i of elements2" [value]="i.value">
+                    {{i.viewValue}}
+                </mat-option>
+            </mat-select>
+            <mat-error>This is the required field!</mat-error>
+        </mat-form-field>
+
+        <button [disabled]="membersForm.invalid" (click)="addNewMember()" style="color: white" mat-raised-button color="primary">Создать внешнего пользователя</button>
+
+    </form>
