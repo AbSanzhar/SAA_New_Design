@@ -1,15 +1,15 @@
-<!--<div mat-dialog-content class="box">-->
-<!--  <p>Пользователь: <span>{{data.firstName + ' ' + data.lastName + ' ' + data.middleName}}</span></p>-->
-<!--  <div class="flex-options-box">-->
-<!--    <div class="flex-label"><p style="margin-right: 15%">Роли:</p></div>-->
-<!--    <div class="flex-options-list">-->
-<!--      <form [formGroup]="formOptions">-->
-<!--        <div class="option-text"><mat-slide-toggle formControlName="option1">Преподаватель</mat-slide-toggle></div>-->
-<!--        <div class="option-text"><mat-slide-toggle formControlName="option2">Сотрудник отдела по науке</mat-slide-toggle></div>-->
-<!--        <div class="option-text"><mat-slide-toggle formControlName="option3">Секретарь диссовета</mat-slide-toggle></div>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
+<div mat-dialog-content class="box">
+  <p>Пользователь: <span>{{data.firstName + ' ' + data.lastName + ' ' + data.patronymic}}</span></p>
+  <div class="flex-options-box">
+    <div class="flex-label"><p style="margin-right: 15%">Роли:</p></div>
+    <div class="flex-options-list">
+      <form [formGroup]="formOptions">
+        <div class="option-text"><mat-slide-toggle formControlName="option1">Преподаватель</mat-slide-toggle></div>
+        <div class="option-text"><mat-slide-toggle formControlName="option2">Сотрудник отдела по науке</mat-slide-toggle></div>
+        <div class="option-text"><mat-slide-toggle formControlName="option3">Секретарь диссовета</mat-slide-toggle></div>
+      </form>
+    </div>
+  </div>
 
-<!--  <div class="center"><button mat-flat-button color="accent" class="center" (click)="saveChange()"><p style="color: #FFFFFF">Сохранить</p></button></div>-->
-<!--</div>-->
+  <div class="center"><button mat-flat-button color="accent" class="center" (click)="saveChange()"><p style="color: #FFFFFF">Сохранить</p></button></div>
+</div>
