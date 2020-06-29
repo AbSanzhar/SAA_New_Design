@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {DataControlService} from "../../services/data-control.service";
 import {EditEmployeeDialogComponent} from "./edit-employee-dialog/edit-employee-dialog.component";
+import {ApiService} from '../../api/api.service';
 
 @Component({
   selector: 'app-opportunities',
@@ -12,21 +13,21 @@ export class OpportunitiesComponent implements OnInit {
   dataSource: any[] = [];
   displayedColumns = ['index', 'firstName', 'lastName', 'middleName', 'e-mail', 'actions'];
 
-  constructor(private http: DataControlService, private editDialog: MatDialog) { }
+  constructor(private http: DataControlService, private editDialog: MatDialog, private _api: ApiService) { }
 
   ngOnInit(): void {
     this.getAllEmployees();
   }
 
   getAllEmployees() {
-    this.http.getAllEmployees().subscribe(response => {
+    this._api.getAllTeachers().subscribe(response => {
+      console.log(response);
       this.dataSource = response;
     });
   }
 
   openDialogEdit(employee) {
     this.editDialog.open(EditEmployeeDialogComponent, {
-      data: employee
     }).afterClosed().subscribe(result => {
       this.getAllEmployees();
     });

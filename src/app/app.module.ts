@@ -27,6 +27,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {PatentUploadComponent} from './whole-page/teacher/patent-upload/patent-upload.component';
+import {EventUploadComponent} from './whole-page/teacher/event-upload/event-upload.component';
+import {PublicationUploadComponent} from './whole-page/teacher/publication-upload/publication-upload.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +40,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     PasswordComponent,
     SettingsComponent,
     SignInDialogComponent,
+    PatentUploadComponent,
+    EventUploadComponent,
+    PublicationUploadComponent
   ],
   imports: [
     BrowserModule,
