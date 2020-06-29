@@ -8,6 +8,11 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  paginator = {
+    length: 0,
+    size: 1,
+    page: 0,
+  };
   TeacherPublications: any[] = [];
   TeacherEvents: any[] = [];
   TeacherDisSovet: any[] = [];
@@ -44,6 +49,7 @@ export class ProfileComponent implements OnInit {
               private _api: ApiService) { }
 
   ngOnInit(): void {
+    this.getTeacherPublications();
     this._api.getUserById(this.tokenId).subscribe(
         res => {
           this.currentUser = res;
@@ -70,27 +76,37 @@ export class ProfileComponent implements OnInit {
   }
 
   getTeacherPublications() {
-    this._api.getPublications().subscribe(res => {
+    const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
+
+    this._api.getPublicationsPage(query).subscribe(res => {
       console.log(res);
       this.TeacherPublications = res;
-      for(let i = 0; i < res.length; i++) {
-        this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
-      }
+      this._api.getPublications().subscribe(res2 => {
+        this.paginator.length = res2.length;
+      });
     }, err => {
       console.log(err);
     });
+    // this._api.getPublications().subscribe(res => {
+    //   console.log(res);
+    //   this.TeacherPublications = res;
+    // }, err => {
+    //   console.log(err);
+    // });
+  }
+
+
+  changeTableList(event) {
+    console.log('asda');
+    this.paginator.page = event.pageIndex;
+    this.paginator.size = event.pageSize;
+    this.getTeacherPublications();
   }
 
   getTeacherEvents() {
     this._api.getEvent().subscribe(res => {
       console.log(res);
       this.TeacherEvents = res;
-      for(let i = 0; i < res.length; i++) {
-        let year = new Date(res[i].eventDate).getFullYear();
-        let month = new Date(res[i].eventDate).getMonth() < 0 ? '0' + (new Date(res[i].eventDate).getMonth() + 1) : (new Date(res[i].eventDate).getMonth() + 1);
-        let day = new Date(res[i].eventDate).getDate() < 0 ? '0' + new Date(res[i].eventDate).getDate() : new Date(res[i].eventDate).getDate();
-        this.TeacherEvents[i].eventDate = day + '/' + month + '/' + year;
-      }
     }, err => {
       console.log(err);
     });
@@ -111,7 +127,6 @@ export class ProfileComponent implements OnInit {
     this._api.getPatent().subscribe(
       res => {
         console.log(res);
-        //ptntIssueDate
         this.TeacherPatents = res;
         for(let i = 0; i < res.length; i++) {
           let year = new Date(res[i].ptntInsertedDate).getFullYear();
@@ -168,18 +183,6 @@ export class ProfileComponent implements OnInit {
         res => {
           console.log(res);
           this.TeacherCourses = res;
-          for(let i = 0; i < res.length; i++) {
-            let startYear = new Date(res[i].startdate).getFullYear();
-            let startmMonth = new Date(res[i].startdate).getMonth() < 0 ? '0' + (new Date(res[i].startdate).getMonth() + 1) : (new Date(res[i].startdate).getMonth() + 1);
-            let startDay = new Date(res[i].startdate).getDate() < 0 ? '0' + new Date(res[i].startdate).getDate() : new Date(res[i].startdate).getDate();
-            this.TeacherCourses[i].startdate = startDay + '/' + startmMonth + '/' + startYear;
-
-            let endYear = new Date(res[i].enddate).getFullYear();
-            let endMonth = new Date(res[i].enddate).getMonth() < 0 ? '0' + (new Date(res[i].enddate).getMonth() + 1) : (new Date(res[i].enddate).getMonth() + 1);
-            let endDay = new Date(res[i].enddate).getDate() < 0 ? '0' + new Date(res[i].enddate).getDate() : new Date(res[i].enddate).getDate();
-            this.TeacherCourses[i].enddate = endDay + '/' + endMonth + '/' + endYear;
-          }
-
         }, err => {
           console.log(err);
         }

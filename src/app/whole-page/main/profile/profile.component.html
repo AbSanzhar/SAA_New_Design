@@ -78,7 +78,8 @@
             </div>
           </div>
           <div class="main">
-            <mat-table [dataSource]="TeacherPublications" class="" *ngIf="whichTable === 0 ? true : false">
+            <div *ngIf="whichTable === 0 ? true : false">
+            <mat-table [dataSource]="TeacherPublications" class="">
               <ng-container matColumnDef="pubId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let publication"> {{publication.pubId}} </mat-cell>
@@ -138,7 +139,19 @@
               <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
             </mat-table>
 
-            <mat-table [dataSource]="TeacherEvents" class="" *ngIf="whichTable === 1 ? true : false">
+              <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
+                             [pageSize]="paginator.size"
+                             [pageIndex]="paginator.page"
+                             (change)="changeTableList($event)"
+                             (page)="changeTableList($event)"
+
+                             showFirstLastButtons></mat-paginator>
+
+
+            </div>
+
+            <div *ngIf="whichTable === 1 ? true : false">
+              <mat-table [dataSource]="TeacherEvents" class="">
               <ng-container matColumnDef="eventId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>
@@ -182,8 +195,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsEvent"></mat-header-row>
               <mat-row *matRowDef="let activity; columns: displayedColumnsEvent;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherDisSovet" class="" *ngIf="whichTable === 2 ? true : false">
+            <div *ngIf="whichTable === 2 ? true : false">
+              <mat-table [dataSource]="TeacherDisSovet" class="">
               <ng-container matColumnDef="disId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>
@@ -217,8 +232,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsDisSovet"></mat-header-row>
               <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherPatents" class="" *ngIf="whichTable === 3 ? true : false">
+            <div *ngIf="whichTable === 3 ? true : false">
+              <mat-table [dataSource]="TeacherPatents" class="">
               <ng-container matColumnDef="ptntId">
                 <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
                 <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
@@ -282,8 +299,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>
               <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="DepUsers" class="" *ngIf="whichTable === 4 ? true : false">
+            <div *ngIf="whichTable === 4 ? true : false">
+              <mat-table [dataSource]="DepUsers" class="">
               <ng-container matColumnDef="userId">
                 <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                 <mat-cell *matCellDef="let employee"> {{employee.userId}} </mat-cell>
@@ -317,8 +336,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumnsDepUsers"></mat-header-row>
               <mat-row *matRowDef="let employee; columns: displayedColumnsDepUsers;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherScienceProjects" class="" *ngIf="whichTable === 5 ? true : false">
+            <div *ngIf="whichTable === 5 ? true : false">
+              <mat-table [dataSource]="TeacherScienceProjects" class="">
               <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef> ИРН </mat-header-cell>
                 <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
@@ -397,8 +418,10 @@
               <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
               <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
             </mat-table>
+            </div>
 
-            <mat-table [dataSource]="TeacherCourses" class="" *ngIf="whichTable === 6 ? true : false">
+            <div *ngIf="whichTable === 6 ? true : false">
+              <mat-table [dataSource]="TeacherCourses" class="">
               <ng-container matColumnDef="courseId">
                 <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>
                 <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
@@ -448,6 +471,7 @@
               <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>
 
             </mat-table>
+            </div>
 
           </div>
           <div>

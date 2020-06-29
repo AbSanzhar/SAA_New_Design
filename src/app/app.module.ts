@@ -26,9 +26,7 @@ import { SignInDialogComponent } from './login/sign-in-dialog/sign-in-dialog.com
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {PublicationUploadComponent} from './whole-page/teacher/publication-upload/publication-upload.component';
-import {EventUploadComponent} from './whole-page/teacher/event-upload/event-upload.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +37,6 @@ import {EventUploadComponent} from './whole-page/teacher/event-upload/event-uplo
     SettingsComponent,
     SignInDialogComponent,
   ],
-  entryComponents: [PublicationUploadComponent, EventUploadComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -61,7 +58,8 @@ import {EventUploadComponent} from './whole-page/teacher/event-upload/event-uplo
     ReactiveFormsModule,
     _MatMenuDirectivesModule,
     MatMenuModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

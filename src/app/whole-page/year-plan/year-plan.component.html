@@ -361,7 +361,13 @@
                   <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
 
                 </table>
+                <mat-paginator [pageSizeOptions]="[1, 5, 10, 15]" [length]="paginator.length"
+                               [pageSize]="paginator.size"
+                               [pageIndex]="paginator.page"
+                               (change)="changeTableList($event)"
+                               (page)="changeTableList($event)"
 
+                               showFirstLastButtons></mat-paginator>
                 <mat-icon class="add" style="cursor: pointer" (click)="addNewEduId() " color="accent">add_circle
                 </mat-icon> <!--|| addNewEduAct() || addNewEduImpl()-->
 
