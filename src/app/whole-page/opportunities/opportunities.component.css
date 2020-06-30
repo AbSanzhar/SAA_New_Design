@@ -53,6 +53,11 @@ li {
 table {
   width: 100%;
 }
-
+.mat-column-index {
+  max-width: 3rem;
+}
+.mat-column-actions {
+  max-width: 6rem;
+}
 
 

@@ -6,8 +6,9 @@
         <ul>
           <li><a routerLink="./" routerLinkActive="active" class="link">Все преподаватели</a></li>
           <li><a routerLink="all-patents" routerLinkActive="active" class="link">Все патенты</a></li>
-          <li><a routerLink="all-publications" routerLinkActive="active" class="link">Все публикации</a></li>
-          <li><a routerLink="all-dissets" routerLinkActive="active" class="link">Все диссоветы</a></li>
+<!--          <li><a routerLink="all-publications" routerLinkActive="active" class="link">Все публикации</a></li>-->
+<!--          <li><a routerLink="all-dissets" routerLinkActive="active" class="link">Все диссоветы</a></li>-->
+          <li><a routerLink="all-science-projects" routerLinkActive="active" class="link">Все научные проекты</a></li>
         </ul>
       </nav>
     </div>
@@ -18,14 +19,14 @@
           <mat-cell *matCellDef="let employee, let i = index"> {{i + 1}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="firstName">
-          <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
-          <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="lastName">
           <mat-header-cell *matHeaderCellDef> Фамилия </mat-header-cell>
           <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="middleName">
@@ -40,8 +41,8 @@
 
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
-          <mat-cell *matCellDef="let employee">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="openDialogEdit(employee)">edit</mat-icon>
+          <mat-cell *matCellDef="let employee" (click)="openDialogEdit(employee)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
               Изменить роли
           </mat-cell>
         </ng-container>

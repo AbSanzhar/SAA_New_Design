@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="content">
+        <div class="slide-bar">
+            <h2 class="title-slide-bar">Управление</h2>
+            <nav>
+                <ul>
+                    <li><a routerLink="../" class="link">Все преподаватели</a></li>
+                    <li><a routerLink="../all-patents" class="link">Все патенты</a></li>
+                    <!--          <li><a routerLink="../all-publications" routerLinkActive="active" class="link">Все публикации</a></li>-->
+                    <!--          <li><a routerLink="../all-dissets" routerLinkActive="active" class="link">Все диссоветы</a></li>-->
+                    <li><a routerLink="./" routerLinkActive="active" class="link">Все научные проекты</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="main">
+                <mat-table [dataSource]="allScienceProjecrs" class="">
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef> ИРН </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Наименование </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef> Тип </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scType}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="priority">
+                        <mat-header-cell *matHeaderCellDef> Раздел </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scPriority}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="subPriority">
+                        <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scSubPriority}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="subSubPriority">
+                        <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scSubSubPriority}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="executor">
+                        <mat-header-cell *matHeaderCellDef> Исполнитель </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scExecutor}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customer">
+                        <mat-header-cell *matHeaderCellDef> Заказчик </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scCustomer}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dirFullName">
+                        <mat-header-cell *matHeaderCellDef> Научный руководитель </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scDirFullName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dept">
+                        <mat-header-cell *matHeaderCellDef> Подразделение </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scDept}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="agrDate">
+                        <mat-header-cell *matHeaderCellDef> Дата договора </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scAgrDate}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="registerNumber">
+                        <mat-header-cell *matHeaderCellDef> Регистрационный номер </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scNum}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="startDate">
+                        <mat-header-cell *matHeaderCellDef> Дата начала проекта </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scStDate}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="endDate">
+                        <mat-header-cell *matHeaderCellDef> Дата сдачи проекта </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scEndDate}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="totalSum">
+                        <mat-header-cell *matHeaderCellDef> Общая сумма гранта </mat-header-cell>
+                        <mat-cell *matCellDef="let project"> {{project.scTotalSum}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+                    <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
+                </mat-table>
+        </div>
+    </div>
+</div>

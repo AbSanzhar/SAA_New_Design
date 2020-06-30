@@ -42,7 +42,7 @@ import {PublicationUploadComponent} from './whole-page/teacher/publication-uploa
     SignInDialogComponent,
     PatentUploadComponent,
     EventUploadComponent,
-    PublicationUploadComponent
+    PublicationUploadComponent,
   ],
   imports: [
     BrowserModule,

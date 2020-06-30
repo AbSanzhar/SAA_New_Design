@@ -41,6 +41,7 @@ import { EventUploadComponent } from './teacher/event-upload/event-upload.compon
 import { PatentUploadComponent } from './teacher/patent-upload/patent-upload.component';
 import { AddMemberDialogComponent } from './secretary-diss-council/add-disset/add-member-dialog/add-member-dialog.component';
 import { AddNewExMemberDialogComponent } from './secretary-diss-council/add-disset/add-new-ex-member-dialog/add-new-ex-member-dialog.component';
+import {AllScienceProjectsComponent} from './opportunities/all-science-projects/all-science-projects.component';
 
 const r: Routes = [
     {
@@ -55,6 +56,7 @@ const r: Routes = [
         {path: 'opportunities/all-patents', component: AllPatentsComponent},
         {path: 'opportunities/all-publications', component: AllPublicationsComponent},
         {path: 'opportunities/all-dissets', component: AllDissetsComponent},
+        {path: 'opportunities/all-science-projects', component: AllScienceProjectsComponent},
         {path: 'secretary-of-the-diss-council', component: SecretaryDissCouncilComponent},
         {path: 'secretary-of-the-diss-council/add-disset', component: AddDissetComponent},
         {path: 'secretary-of-the-diss-council/edit-disset/:id', component: EditDissetComponent},
@@ -80,7 +82,8 @@ const r: Routes = [
       DialogEditRoleComponent,
       TeacherComponent,
       AddMemberDialogComponent,
-      AddNewExMemberDialogComponent
+      AddNewExMemberDialogComponent,
+      AllScienceProjectsComponent
   ],
     imports: [
         CommonModule,

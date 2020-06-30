@@ -11,7 +11,7 @@ import {ApiService} from '../../api/api.service';
 })
 export class OpportunitiesComponent implements OnInit {
   dataSource: any[] = [];
-  displayedColumns = ['index', 'firstName', 'lastName', 'middleName', 'e-mail', 'actions'];
+  displayedColumns = ['index', 'lastName', 'firstName', 'middleName', 'e-mail', 'actions'];
 
   constructor(private http: DataControlService, private editDialog: MatDialog, private _api: ApiService) { }
 
