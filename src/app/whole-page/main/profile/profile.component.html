@@ -90,7 +90,7 @@
                 <mat-cell *matCellDef="let publication"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">Cкачать</a> </mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="Type">
+              <ng-container matColumnDef="pubType">
                 <mat-header-cell *matHeaderCellDef> Тип публикации </mat-header-cell>
                 <mat-cell *matCellDef="let publication"> {{publication.pubType}} </mat-cell>
               </ng-container>
@@ -162,27 +162,27 @@
                 <mat-cell *matCellDef="let activity"> <a href="https://nir.iitu.kz/{{activity.eventFile}}" download="">{{activity.eventName}}</a> </mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="Type">
+              <ng-container matColumnDef="eventType">
                 <mat-header-cell *matHeaderCellDef> Тип мероприятия </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventType}} </mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="Role">
+              <ng-container matColumnDef="eventRole">
                 <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventRole}} </mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="Title">
-                <mat-header-cell *matHeaderCellDef> Название </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.eventName}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="Year">
+              <ng-container matColumnDef="eventDate">
                 <mat-header-cell *matHeaderCellDef> Дата </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventDate}} </mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="City">
+                <ng-container matColumnDef="eventTitle">
+                  <mat-header-cell *matHeaderCellDef> Название </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.eventName}} </mat-cell>
+                </ng-container>
+
+              <ng-container matColumnDef="eventCity">
                 <mat-header-cell *matHeaderCellDef> Город </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventCity}} </mat-cell>
               </ng-container>
@@ -209,7 +209,7 @@
                 <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="Role">
+              <ng-container matColumnDef="disRole">
                 <mat-header-cell *matHeaderCellDef> Роль в диссовете </mat-header-cell>
                 <mat-cell *matCellDef="let disset"> {{disset.disRole}} </mat-cell>
               </ng-container>

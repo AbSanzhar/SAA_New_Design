@@ -21,9 +21,9 @@ export class ProfileComponent implements OnInit {
   TeacherScienceProjects: any[] = [];
   TeacherCourses: any[] = [];
 
-  displayedColumnsPublication = ['pubId', 'File', 'Type', 'Collaborators', 'Title', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi'];
-  displayedColumnsEvent = ['eventId', 'File', 'Type', 'Role', 'Title', 'Year', 'City', 'Url'];
-  displayedColumnsDisSovet = ['disId', 'university', 'Role', 'specialty', 'stopDate', 'numberAndDate'];
+  displayedColumnsPublication = ['pubId', 'File', 'pubType', 'Collaborators', 'Title', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi'];
+  displayedColumnsEvent = ['eventId', 'File', 'eventType', 'eventRole', 'eventTitle', 'eventDate', 'eventCity', 'Url'];
+  displayedColumnsDisSovet = ['disId', 'university', 'disRole', 'specialty', 'stopDate', 'numberAndDate'];
   displayedColumnsPatent = ['ptntId', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
   displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
