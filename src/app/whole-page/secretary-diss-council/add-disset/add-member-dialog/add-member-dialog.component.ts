@@ -47,7 +47,6 @@ export class AddMemberDialogComponent implements OnInit {
   getMembers() {
     this.service.getOwnUsers().subscribe(res => {
       this.members = res;
-      console.log(res);
     });
   }
 

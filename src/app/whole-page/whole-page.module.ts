@@ -41,6 +41,7 @@ import { EventUploadComponent } from './teacher/event-upload/event-upload.compon
 import { PatentUploadComponent } from './teacher/patent-upload/patent-upload.component';
 import { AddMemberDialogComponent } from './secretary-diss-council/add-disset/add-member-dialog/add-member-dialog.component';
 import { AddNewExMemberDialogComponent } from './secretary-diss-council/add-disset/add-new-ex-member-dialog/add-new-ex-member-dialog.component';
+import { AddProjectMemberDialogComponent } from './teacher/add-project-member-dialog/add-project-member-dialog.component';
 
 const r: Routes = [
     {
@@ -80,7 +81,8 @@ const r: Routes = [
       DialogEditRoleComponent,
       TeacherComponent,
       AddMemberDialogComponent,
-      AddNewExMemberDialogComponent
+      AddNewExMemberDialogComponent,
+      AddProjectMemberDialogComponent
   ],
     imports: [
         CommonModule,

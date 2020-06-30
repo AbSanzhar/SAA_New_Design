@@ -253,10 +253,9 @@
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои проекты: </p>
                     <form [formGroup]="newProjForm" class="example-form">
 
-
                         <mat-form-field class="example-full-width">
                             <mat-label>ИРН</mat-label>
-                            <input matInput formControlName="scId" type="text" required>
+                            <input matInput formControlName="scId" type="number" required>
                             <mat-error>
                                 This field is <strong>required</strong>
                             </mat-error>
@@ -464,7 +463,7 @@
 
                         <mat-form-field class="example-full-width">
                             <mat-label>Научный руководитель</mat-label>
-                            <input matInput formControlName="scFirstName" type="text" required readonly>
+                            <input matInput formControlName="scFirstName" type="text" readonly>
                         </mat-form-field>
 
                         <mat-form-field class="example-full-width">
@@ -485,7 +484,7 @@
 
                         <mat-form-field class="example-full-width">
                             <mat-label>Регистрационный номер</mat-label>
-                            <input matInput formControlName="scNum" type="text" required>
+                            <input matInput formControlName="scNum" type="number" required>
                             <mat-error>
                                 This field is <strong>required</strong>
                             </mat-error>
@@ -527,8 +526,11 @@
                             </mat-error>
                         </mat-form-field>
 
-                        <button mat-raised-button [disabled]="newProjForm.invalid">Создать научный проект</button>
+                        <mat-error style="margin: 2% 0" *ngIf="newProjForm.invalid">
+                            *End date must be later than start date*
+                        </mat-error>
 
+                        <button (click)="openAddMemberDialog()" mat-raised-button [disabled]="newProjForm.invalid">Создать научный проект</button>
 
                     </form>
                 </div>
