@@ -123,7 +123,7 @@ export class TeacherComponent implements OnInit {
       courseHours: new FormControl('', Validators.required),
       coursePrice: new FormControl('', Validators.required),
       startdate: new FormControl('2015-11-26', Validators.required),
-      enddate: '2015-11-26',
+      enddate: new FormControl('2015-12-26', Validators.required),
       certificateNumber: new FormControl('', Validators.required),
       certificateDate: '2015-11-26',
       courseDegree: this.courseDegree
