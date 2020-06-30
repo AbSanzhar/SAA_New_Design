@@ -20,6 +20,6 @@
     </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close [disabled]="(!PatentFileRu && !PatentFileEn && !PatentFileKz)" [mat-dialog-close]="[this.PatentFileEn, this.PatentFileKz, this.PatentFileRu]">Загрузить</button>
+    <button mat-button mat-dialog-close [disabled]="!(PatentFileRu && PatentFileEn && PatentFileKz)" [mat-dialog-close]="[this.PatentFileEn, this.PatentFileKz, this.PatentFileRu]">Загрузить</button>
     <button mat-button mat-dialog-close mat-dialog-close="false">Закрыть</button>
 </mat-dialog-actions>

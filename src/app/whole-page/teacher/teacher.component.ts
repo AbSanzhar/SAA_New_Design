@@ -136,12 +136,12 @@ export class TeacherComponent implements OnInit {
       ptnt_status_id: new FormControl('1'),
       ptnt_issue_date: new FormControl('', Validators.required),
       ptnt_inserted_date: [new Date()],
-      ptnt_file_kz: '',
-      ptnt_file_en: '',
-      ptnt_file_ru: '',
-      ptnt_file_name_ru: '',
-      ptnt_file_name_kz: '',
-      ptnt_file_name_en: '',
+      ptnt_file_kz: new FormControl('', Validators.required),
+      ptnt_file_en: new FormControl('', Validators.required),
+      ptnt_file_ru: new FormControl('', Validators.required),
+      ptnt_file_name_ru: new FormControl('', Validators.required),
+      ptnt_file_name_kz: new FormControl('', Validators.required),
+      ptnt_file_name_en: new FormControl('', Validators.required),
     });
 
   }

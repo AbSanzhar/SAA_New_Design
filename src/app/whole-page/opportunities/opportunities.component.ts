@@ -23,7 +23,14 @@ export class OpportunitiesComponent implements OnInit {
     this._api.getAllTeachers().subscribe(response => {
       console.log(response);
       this.dataSource = response;
+      this.dataSource.sort(this.compareEmployees);
     });
+  }
+
+  compareEmployees(a, b) {
+    if (a.userId > b.userId) return 1;
+    if (a.userId == b.userId) return 0;
+    if (a.userId < b.userId) return -1;
   }
 
   openDialogEdit(employee) {
