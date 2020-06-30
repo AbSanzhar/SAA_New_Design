@@ -113,7 +113,7 @@
                     </div>
 
                     <button mat-raised-button color="primary" [disabled]="publicationForm.invalid" style="margin-top: 3%;">
-                        <p style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication()">Сохранить публикацию</p></button>
+                        <p style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication('Successfully saved', 'OK')">Сохранить публикацию</p></button>
                 </form>
             </div>
 <!--            </div>-->
@@ -176,7 +176,7 @@
                         <button mat-stroked-button (click)="openUploadEventDialog()">Загрузить файл/Сертификат</button>
                     </div>
 
-                    <button mat-raised-button color="primary" [disabled]="eventForm.invalid" style="margin-top: 3%" (click)="sendTeacherEvent()">
+                    <button mat-raised-button color="primary" [disabled]="eventForm.invalid" style="margin-top: 3%" (click)="sendTeacherEvent('Successfully saved', 'OK')">
                         <p style="color: white; margin: 0; padding: 0">Добавить мероприятие</p></button>
                 </form>
             </div>
@@ -236,7 +236,7 @@
                         <button mat-raised-button (click)="openUploadPatentDialog()">Загрузить файл</button>
                     </div>
 
-                    <button mat-raised-button color="primary" [disabled]="patentForm.invalid" style="margin-top: 3%" (click)="sendTeacherPatent()">
+                    <button mat-raised-button color="primary" [disabled]="patentForm.invalid" style="margin-top: 3%" (click)="sendTeacherPatent('Successfully saved', 'OK')">
                         <p style="color: white; margin: 0; padding: 0">Сохранить</p></button>
                 </form>
             </div>
@@ -609,7 +609,7 @@
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
-                    <button mat-raised-button [disabled]="teacherCourseForm.invalid" (click)="sendTeacherCourse()">Создать курс</button>
+                    <button mat-raised-button [disabled]="teacherCourseForm.invalid" (click)="sendTeacherCourse('Successfully saved', 'OK')">Создать курс</button>
                     {{teacherCourseForm.value | json}}
                 </form>
             </div>

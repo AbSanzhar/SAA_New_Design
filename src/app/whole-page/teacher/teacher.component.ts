@@ -13,6 +13,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {PublicationUploadComponent} from './publication-upload/publication-upload.component';
 import {EventUploadComponent} from './event-upload/event-upload.component';
 import {PatentUploadComponent} from './patent-upload/patent-upload.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -67,7 +68,8 @@ export class TeacherComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private _api: ApiService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private _snackBar: MatSnackBar) {
     this.publicationForm = formBuilder.group({
       pubPublished: new FormControl('', Validators.required),
       pubType: new FormControl('', Validators.required),
@@ -803,7 +805,7 @@ export class TeacherComponent implements OnInit {
     };
   }
 
-  sendTeacherPublication() {
+  sendTeacherPublication(message: string, action: string) {
     this._api.uploadPub(this.publicationForm.value).subscribe(
         res => {
           console.log(res);
@@ -811,9 +813,13 @@ export class TeacherComponent implements OnInit {
           console.log(err);
         }
     );
+    this.publicationForm.reset();
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
-  sendTeacherEvent() {
+  sendTeacherEvent(message: string, action: string) {
     this._api.uploadEvent(this.eventForm.value).subscribe(
         res => {
           console.log(res);
@@ -821,9 +827,13 @@ export class TeacherComponent implements OnInit {
           console.log(err);
         }
     );
+    this.eventForm.reset();
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
-  sendTeacherPatent() {
+  sendTeacherPatent(message: string, action: string) {
     this.patentForm.patchValue({
       ptnt_file_kz: this.PatentLinkKz,
       ptnt_file_en: this.PatentLinkEn,
@@ -838,9 +848,13 @@ export class TeacherComponent implements OnInit {
     }, error1 => {
       console.log(error1);
     });
+    this.patentForm.reset();
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
-  sendTeacherCourse() {
+  sendTeacherCourse(message: string, action: string) {
     console.log(this.teacherCourseForm.value);
     this._api.uploadCourse(this.teacherCourseForm.value).subscribe(
         res => {
@@ -849,6 +863,10 @@ export class TeacherComponent implements OnInit {
           console.log(err);
         }
     );
+    this.teacherCourseForm.reset();
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   public download(): void {
