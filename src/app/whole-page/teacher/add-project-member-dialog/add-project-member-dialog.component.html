@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Члены НП</p>
+
+    <div>
+    <mat-form-field>
+        <mat-label>Фамилия и Имя</mat-label>
+        <mat-select formControlName="name" required>
+            <mat-option *ngFor="let i of members" [value]="i.userId">
+                {{i.firstName}} {{i.lastName}}
+            </mat-option>
+        </mat-select>
+        <mat-error>This is the required field.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Роль в НП</mat-label>
+        <mat-select formControlName="role" required>
+            <mat-option *ngFor="let i of elements" [value]="i.value">
+                {{i.viewValue}}
+            </mat-option>
+        </mat-select>
+        <mat-error>This is the required field.</mat-error>
+    </mat-form-field>
+    </div>
+    <button (click)="addNewMember()" style="color: white; margin-right: 5%" mat-raised-button color="accent">Добавить участника</button>
+    <button (click)="addNewMember()" style="color: white" mat-raised-button color="warn">Убрать из НП</button>
+    <br>
+
+    <button [disabled]="form.invalid" style="color: white; margin: 5% 5% 2% 70%" mat-raised-button color="primary">Создать</button>
+
+</form>

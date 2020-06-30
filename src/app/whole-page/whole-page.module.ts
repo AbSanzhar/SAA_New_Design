@@ -43,6 +43,7 @@ import { AddMemberDialogComponent } from './secretary-diss-council/add-disset/ad
 import { AddNewExMemberDialogComponent } from './secretary-diss-council/add-disset/add-new-ex-member-dialog/add-new-ex-member-dialog.component';
 import {AllScienceProjectsComponent} from './opportunities/all-science-projects/all-science-projects.component';
 
+
 const r: Routes = [
     {
         path: '',
@@ -83,7 +84,6 @@ const r: Routes = [
       TeacherComponent,
       AddMemberDialogComponent,
       AddNewExMemberDialogComponent,
-      AllScienceProjectsComponent
   ],
     imports: [
         CommonModule,

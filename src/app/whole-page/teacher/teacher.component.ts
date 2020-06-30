@@ -14,6 +14,7 @@ import {PublicationUploadComponent} from './publication-upload/publication-uploa
 import {EventUploadComponent} from './event-upload/event-upload.component';
 import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {AddProjectMemberDialogComponent} from './add-project-member-dialog/add-project-member-dialog.component';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -1031,6 +1032,9 @@ export class TeacherComponent implements OnInit {
     });
   }
 
+  openAddMemberDialog() {
+    let dialogRef = this.dialog.open(AddProjectMemberDialogComponent);
+  }
 }
 
 interface Sourse {
