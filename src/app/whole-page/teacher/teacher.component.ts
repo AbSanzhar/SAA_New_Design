@@ -29,7 +29,7 @@ export class TeacherComponent implements OnInit {
 
   publicationForm: FormGroup;
   eventForm: FormGroup;
-  scienceProjForm: FormGroup;
+  newProjForm: FormGroup;
   teacherCourseForm: FormGroup;
   patentForm: FormGroup;
   PubTypeCounts;
@@ -100,7 +100,7 @@ export class TeacherComponent implements OnInit {
       event_user_id: this.IdToken
     });
 
-    this.scienceProjForm = formBuilder.group({
+    this.newProjForm = formBuilder.group({
       scId: new FormControl('', Validators.required),
       scName: new FormControl('', Validators.required),
       scType: new FormControl('', Validators.required),
