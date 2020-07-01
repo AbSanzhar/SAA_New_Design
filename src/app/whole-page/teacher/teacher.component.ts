@@ -16,6 +16,7 @@ import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddProjectMemberDialogComponent} from './add-project-member-dialog/add-project-member-dialog.component';
 import {MatDatepickerInput} from '@angular/material/datepicker';
+import {CourseUploadComponent} from './course-upload/course-upload.component';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -67,6 +68,7 @@ export class TeacherComponent implements OnInit {
   private PatentLinkRu: any;
   private PatentLinkKz: any;
   private PatentLinkEn: any;
+  private selectedCourseFile: File = null;
 
   constructor(private formBuilder: FormBuilder,
               private _api: ApiService,
@@ -124,11 +126,12 @@ export class TeacherComponent implements OnInit {
       courseCenter: new FormControl('', Validators.required),
       courseHours: new FormControl('', Validators.required),
       coursePrice: new FormControl('', Validators.required),
-      startdate: new FormControl('2015-11-26', Validators.required),
-      enddate: new FormControl('2015-12-26', Validators.required),
+      startdate: new FormControl('', Validators.required),
+      enddate: new FormControl('', Validators.required),
       certificateNumber: new FormControl('', Validators.required),
-      certificateDate: '2015-11-26',
-      courseDegree: this.courseDegree
+      certificateDate: new FormControl('', Validators.required),
+      courseDegree: this.courseDegree,
+      courseFile: new FormControl('', Validators.required)
     });
 
     this.patentForm = formBuilder.group({
@@ -1035,6 +1038,42 @@ export class TeacherComponent implements OnInit {
 
   openAddMemberDialog() {
     let dialogRef = this.dialog.open(AddProjectMemberDialogComponent);
+  }
+
+  openUploadCourseDialog() {
+    let CourseDialog = this.dialog.open(CourseUploadComponent);
+    CourseDialog.afterClosed().subscribe(
+        res => {
+          if (typeof  res != 'undefined' && res != 'false') {
+            this.selectedCourseFile = res;
+            console.log(this.selectedCourseFile);
+            this.uploadCourseFile();
+          }
+          console.log(res);
+        }
+    );
+  }
+
+  uploadCourseFile() {
+    const formData = new FormData();
+    let CourseLink;
+    formData.append('file', this.selectedCourseFile);
+    $.ajax({
+      url: 'https://nir.iitu.kz:8443/saa-uploader/certificate',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      async: false,
+    }).done(function(data) {
+      const obj = JSON.parse(data);
+      console.log(obj);
+      CourseLink = obj.filePath;
+    });
+    this.teacherCourseForm.patchValue({
+      courseFile: CourseLink
+    });
+    console.log(CourseLink);
   }
 }
 

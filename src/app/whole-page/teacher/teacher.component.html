@@ -571,7 +571,7 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Enter a date range</mat-label>
+                        <mat-label>Сроки прохождения</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
                             <input formControlName="startdate" matStartDate placeholder="Start date">
                             <input formControlName="enddate" matEndDate placeholder="End date">
@@ -606,19 +606,19 @@
 <!--                    <p>Selected range: {{teacherCourseForm.value | json}}</p>-->
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>№ Сертификата и дата</mat-label>
+                        <mat-label>№ Сертификата</mat-label>
                         <input type="number" matInput formControlName="certificateNumber">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Уровень</mat-label>
-<!--                        <mat-select [(ngModel)]="selectedValue20" required>-->
-<!--                            <mat-option *ngFor="let i of level" [value]="i.value">-->
-<!--                                {{i.viewValue}}-->
-<!--                            </mat-option>-->
-<!--                        </mat-select>-->
+                        <mat-label>Дата выдачи сертификата</mat-label>
+                        <input type="date" matInput formControlName="certificateDate">
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
 
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Уровень</mat-label>
                         <select matNativeControl [formControl]="courseDegree" name="car">
                             <option *ngFor="let i of level" [value]="i.value">
                                 {{i.viewValue}}
@@ -626,9 +626,10 @@
                         </select>
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
-
-                    <button mat-raised-button [disabled]="teacherCourseForm.invalid" (click)="sendTeacherCourse('Successfully saved', 'OK')">Создать курс</button>
-                    {{teacherCourseForm.value | json}}
+                    <div>
+                        <button mat-raised-button (click)="openUploadCourseDialog()">Загрузить сертификат</button>
+                    </div>
+                    <button mat-raised-button [disabled]="teacherCourseForm.invalid" style="margin-top: 3%" (click)="sendTeacherCourse('Successfully saved', 'OK')">Создать курс</button>
                 </form>
             </div>
         </mat-tab>
