@@ -49,15 +49,27 @@ export class EditEmployeeDialogComponent implements OnInit {
      let isSciencePM = (this.newForm.get('role') as FormArray).controls[1].value;
      let isDisSec = (this.newForm.get('role') as FormArray).controls[2].value;
      console.log(isTeacher);
+      let teacherRole = {
+          userId: this.data.userId,
+          roleName: 'Teacher'
+      };
+      let scincePmRole = {
+          userId: this.data.userId,
+          roleName: 'Science_Project_Manager'
+      };
+      let disSecRole = {
+          userId: this.data.userId,
+          roleName: 'Science_Secretary_Dissovet'
+      }
      if(this.userRoles.indexOf('Teacher') != - 1 && !isTeacher) {
-        //delete role
-       console.log("Delete teacher role");
+        this._api.deleteRole(teacherRole).subscribe(
+            res => {
+                console.log(res);
+            }, err => {
+                console.log(err);
+            });
      } else if(this.userRoles.indexOf('Teacher') == -1 && isTeacher) {
-         let role = {
-           userId: this.data.userId,
-           roleName: 'Teacher'
-         }
-         this._api.addRole(role).subscribe(
+         this._api.addRole(teacherRole).subscribe(
              res => {console.log(res);
              },
              err => {
@@ -65,18 +77,14 @@ export class EditEmployeeDialogComponent implements OnInit {
              }
          );
      } else if(this.userRoles.indexOf('Science_Project_Manager') != - 1 && !isSciencePM) {
-         this._api.deleteScPrRole(this.data.userId).subscribe(
+         this._api.deleteRole(scincePmRole).subscribe(
              res => {
                console.log(res);
              }, err => {
                console.log(err);
              });
      } else if(this.userRoles.indexOf('Science_Project_Manager') == -1 && isSciencePM) {
-         let role = {
-           userId: this.data.userId,
-           roleName: 'Science_Project_Manager'
-         }
-         this._api.addRole(role).subscribe(
+         this._api.addRole(scincePmRole).subscribe(
              res => {console.log(res);
              },
              err => {
@@ -84,13 +92,14 @@ export class EditEmployeeDialogComponent implements OnInit {
              }
          );
      } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') != - 1 && !isDisSec) {
-       // delete role
+         this._api.deleteRole(disSecRole).subscribe(
+             res => {
+                 console.log(res);
+             }, err => {
+                 console.log(err);
+             });
      } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') == -1 && isDisSec) {
-       let role = {
-         userId: this.data.userId,
-         roleName: 'Science_Secretary_Dissovet'
-       }
-       this._api.addRole(role).subscribe(
+       this._api.addRole(disSecRole).subscribe(
            res => {console.log(res);
            },
            err => {
@@ -99,10 +108,6 @@ export class EditEmployeeDialogComponent implements OnInit {
        );
      }
      this.dialog.close();
-    //{userId: 4, roleName: "Science_Project_Manager"}
-    // this.http.updateEmployess(newForm.getRawValue()).subscribe(response => {
-    //   this.dialog.close();
-    // });
   }
 
 }

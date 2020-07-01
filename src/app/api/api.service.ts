@@ -350,9 +350,10 @@ export class ApiService {
     const url = 'roles/add';
     return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), role);
   }
-  deleteScPrRole(id): Observable<any> {
-    const url = 'roles/del/';
-    return this.http.delete(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));
+  deleteRole(role): Observable<any> {
+    const url = 'roles/delete';
+    console.log(role);
+    return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), role);
   }
 
   getNotifications(): Observable<any> {
