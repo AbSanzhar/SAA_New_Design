@@ -133,9 +133,6 @@ export class ApiService {
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));
   }
-  selectTable(table) {
-    this.table = table;
-  }
 
   uploadActivity(activity): Observable<any> {
     const url = 'academic-method/add/';
@@ -170,7 +167,6 @@ export class ApiService {
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id, org).pipe(catchError(this.errorHandler));
   }
-
 
   getPublications(): Observable<any> {
     const url = 'publication/';
@@ -254,41 +250,6 @@ export class ApiService {
     const url = 'comm-work/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id, research).pipe(catchError(this.errorHandler));
-  }
-
-  downloadPubFile(filePath): Observable<any>{
-    let headers = new HttpHeaders();
-    const url = 'publication/uploads/';
-    headers = headers.set('Content-Type', 'application/octet-stream');
-    // const blob = new Blob(filePath, { type: 'application/octet-stream' });
-    //
-    // this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
-    return this.http.get<any>(this.base + url + filePath + '?jwt_token=' + window.localStorage.getItem('token'), { headers, responseType: 'blob' as 'json'});
-  }
-  generatePubFile() : Observable<any> {
-    const url = 'publication/reportPdf/';
-    const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    let headers = new HttpHeaders();
-    headers = headers.set('Accept', 'application/pdf');
-    // @ts-ignore
-    return this.http.get<any>(this.base + url + id, { headers, responseType: 'blob' });
-  }
-  uploadPubFile(id, file): Observable<any> {
-    const url = 'publication/addFile/';
-    console.log(id);
-    console.log(file);
-    console.log(file.name);
-    // const newBlob = new Blob([file], { type: 'multipart/form-data' });
-    const formData: FormData = new FormData();
-    formData.append('file', file, file.name);
-    // formData.append('id', id);
-    // const httpHeaders = new HttpHeaders ({
-    //   'Content-Type': 'multipart/form-data',
-    //   Authorization: 'Bearer ' + localStorage.getItem('token')
-    // });
-    console.log(formData.get('file'));
-    // console.log(formData.get('id'));
-    return this.http.post<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'), formData);
   }
 
   getAllMyDisSovets(): Observable<any> {

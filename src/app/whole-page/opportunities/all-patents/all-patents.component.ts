@@ -53,4 +53,24 @@ export class AllPatentsComponent implements OnInit {
     );
   }
 
+  setPatentStatus(patId, statusId) {
+    const status = {
+      ptnt_id: patId,
+      ptnt_user_id: this.IdToken,
+      ptnt_status_id: statusId,
+    };
+
+    this._api.setPatentStatus(status).subscribe(
+        res => {
+          console.log(res);
+          this.getAllPatents();
+        },
+        err => {
+          this.getAllPatents();
+          console.log(err);
+        }
+    );
+  }
+
+
 }
