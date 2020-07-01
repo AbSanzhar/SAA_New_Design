@@ -78,7 +78,7 @@
               <p class="nameHeader">
                 2.Научная работа
               </p>
-              <form [formGroup]="AcadMetForm" *ngIf="AcadMetForm" style="overflow-x:auto;">
+              <form *ngIf="AcadMetForm" style="overflow-x:auto;">
                 <table>
 
                   <thead>
@@ -97,27 +97,27 @@
                   <tr *ngFor="let results of gettedResearch">
                     <td>
                       <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.comId">
+                        <input matInput type="number" [(ngModel)]="results.comId" [ngModelOptions]="{standalone: true}">
                       </mat-form-field>
                     </td>
                     <td>
                       <mat-form-field class="example-full-width">
-                        <input matInput type="text" [(ngModel)]="results.activities">
+                        <input matInput type="text" [(ngModel)]="results.activities" [ngModelOptions]="{standalone: true}">
                       </mat-form-field>
                     </td>
                     <td>
                       <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.output">
+                        <input matInput type="number" [(ngModel)]="results.output" [ngModelOptions]="{standalone: true}">
                       </mat-form-field>
                     </td>
                     <td>
                       <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.plan">
+                        <input matInput type="number" [(ngModel)]="results.plan" [ngModelOptions]="{standalone: true}">
                       </mat-form-field>
                     </td>
                     <td>
                       <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.implementation">
+                        <input matInput type="number" [(ngModel)]="results.implementation" [ngModelOptions]="{standalone: true}">
                       </mat-form-field>
                     </td>
                   </tr>
@@ -193,7 +193,7 @@
                     <td >
                       <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
                         <div formArrayName="budId" *ngFor="let budIds of budId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                          <input type="number" class="form-control my-1"  readonly>
                         </div>
                       </form>
                     </td>
@@ -250,7 +250,7 @@
                     <td >
                       <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
                         <div formArrayName="orgId" *ngFor="let orgIds of orgId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                          <input type="number" class="form-control my-1" readonly>
                         </div>
                       </form>
                     </td>
@@ -292,67 +292,30 @@
               <p class="nameHeader">4. Воспитательная, профориентационная, общественная работа, работа по оказанию
                 платных услуг,
                 оборудованию кабинетов, повышению квалификации </p>
-              <!--                <table (change)="somethingChanged()">-->
-              <!--                  <thead>-->
-              <!--                  <tr>-->
-              <!--                    <th scope="col" colspan="1" rowspan="2">Рет саны №п.п №</th>-->
-              <!--                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>-->
-              <!--                    <th scope="col" colspan="2">Орындау-->
-              <!--                      туралы-->
-              <!--                      мәлімет<br>-->
-              <!--                      Сведения о-->
-              <!--                      выполнении<br>-->
-              <!--                      Implementation</th>-->
-              <!--                  </tr>-->
-              <!--                  </thead>-->
-              <!--                  <tbody>-->
-              <!--                  <tr>-->
-              <!--                    <td >-->
-              <!--                      <form [formGroup]="edus" (ngSubmit)="onSubmit()">-->
-              <!--                        <div formArrayName="eduId" *ngFor="let orgIds of eduId.controls; let i=index">-->
-              <!--                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>-->
-              <!--                        </div>-->
-              <!--                      </form>-->
-              <!--                    </td>-->
-              <!--                    <td > <form [formGroup]="edus" (ngSubmit)="onSubmit()">-->
-              <!--                      <div formArrayName="activities" *ngFor="let acts of eduAct.controls; let i=index">-->
-              <!--                        <input type="text" class="form-control my-1" [formControlName]="i">-->
-              <!--                      </div>-->
-              <!--                    </form></td>-->
-
-              <!--                    <td > <form [formGroup]="edus" (ngSubmit)="onSubmit()">-->
-              <!--                      <div formArrayName="implementation" *ngFor="let impls of eduImpl.controls; let i=index">-->
-              <!--                        <input type="number" class="form-control my-1" [formControlName]="i">{{i}}-->
-              <!--                        {{edus.getRawValue() | json}}-->
-              <!--                      </div>-->
-              <!--                    </form></td>-->
-              <!--                  </tr>-->
-              <!--                  </tbody>-->
-              <!--                </table>-->
 
 
               <div class="example-container">
 
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <table mat-table class="mat-elevation-z8">
 
                   <ng-container matColumnDef="eduId">
                     <th mat-header-cell *matHeaderCellDef> No. </th>
                     <td mat-cell *matCellDef="let element">
-                      <input matInput type="number" [(ngModel)]="element.eduId" readonly>
+                      <input matInput type="number"  readonly>
                     </td>
                   </ng-container>
 
                   <ng-container matColumnDef="eduAct">
                     <th mat-header-cell *matHeaderCellDef> Activities </th>
                     <td mat-cell *matCellDef="let element">
-                      <input matInput type="text" [(ngModel)]="element.activities">
+                      <input matInput type="text" [(ngModel)]="element.activities" [ngModelOptions]="{standalone: true}">
                     </td>
                   </ng-container>
 
                   <ng-container matColumnDef="eduImpl">
                     <th mat-header-cell *matHeaderCellDef> Implementation </th>
                     <td mat-cell *matCellDef="let element">
-                      <input matInput type="text" [(ngModel)]="element.implementation">
+                      <input matInput type="text" [(ngModel)]="element.implementation" [ngModelOptions]="{standalone: true}">
                     </td>
                   </ng-container>
 
@@ -403,21 +366,21 @@
                   <tbody>
                   <tr>
                     <td>
-                      <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
+                      <form (ngSubmit)="onSubmit()">
                         <div formArrayName="id" *ngFor="let orgIds of PlanPerId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                          <input type="number" class="form-control my-1" readonly>
                         </div>
                       </form>
                     </td>
-                    <td > <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
+                    <td > <form (ngSubmit)="onSubmit()">
                       <div formArrayName="activities" *ngFor="let acts of PlanPerAct.controls; let i=index">
-                        <input type="text" class="form-control my-1" [formControlName]="i">
+                        <input type="text" class="form-control my-1" >
                       </div>
                     </form></td>
 
-                    <td > <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
+                    <td > <form (ngSubmit)="onSubmit()">
                       <div formArrayName="implementation" *ngFor="let impls of PlanPerImpl.controls; let i=index">
-                        <input type="number" class="form-control my-1" [formControlName]="i">
+                        <input type="number" class="form-control my-1">
                       </div>
                     </form></td>
                   </tr>
