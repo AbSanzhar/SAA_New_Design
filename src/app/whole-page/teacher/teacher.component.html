@@ -251,7 +251,7 @@
                 </div>
                 <div style="margin-left: 5%">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои проекты: </p>
-                    <form [formGroup]="newProjForm" class="example-form">
+                    <form [formGroup]="scienceProjForm" class="example-form">
 
                         <mat-form-field class="example-full-width">
                             <mat-label>ИРН</mat-label>
@@ -287,7 +287,7 @@
                             <mat-error>This is the required field!</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-0'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue1" formControlName="scSubPriority" required>
                                 <mat-option *ngFor="let i of array1" [value]="i.value">
@@ -297,7 +297,7 @@
                             <mat-error>This is the required field!</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-1'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-1'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue2" formControlName="scSubPriority" required>
                                 <mat-option *ngFor="let i of array2" [value]="i.value">
@@ -307,7 +307,7 @@
                             <mat-error>This is the required field!</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue3" formControlName="scSubPriority" required>
                                 <mat-option *ngFor="let i of array3" [value]="i.value">
@@ -317,7 +317,7 @@
                             <mat-error>This is the required field!</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-0'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-2' && this.scienceProjForm.get('scSubPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue4" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array31" [value]="i.value">
@@ -326,7 +326,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-1'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-2' && this.scienceProjForm.get('scSubPriority').value === 'element-1'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue5" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array32" [value]="i.value">
@@ -335,7 +335,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-2'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-2' && this.scienceProjForm.get('scSubPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue6" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array33" [value]="i.value">
@@ -344,7 +344,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-3'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-2' && this.scienceProjForm.get('scSubPriority').value === 'element-3'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue7" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array34" [value]="i.value">
@@ -353,7 +353,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-4'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-2' && this.scienceProjForm.get('scSubPriority').value === 'element-4'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue8" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array35" [value]="i.value">
@@ -362,7 +362,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-2' && this.newProjForm.get('scSubPriority').value === 'element-5'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-2' && this.scienceProjForm.get('scSubPriority').value === 'element-5'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue9" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array36" [value]="i.value">
@@ -371,7 +371,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-3'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue10" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array4" [value]="i.value">
@@ -380,7 +380,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-4'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-4'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue11" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array5" [value]="i.value">
@@ -389,7 +389,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-0'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-3' && scienceProjForm.get('scSubPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue12" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array51" [value]="i.value">
@@ -398,7 +398,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-1'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-3' && scienceProjForm.get('scSubPriority').value === 'element-1'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue13" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array52" [value]="i.value">
@@ -408,7 +408,7 @@
                         </mat-form-field>
 
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-3' && newProjForm.get('scSubPriority').value === 'element-2'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-3' && scienceProjForm.get('scSubPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue14" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array53" [value]="i.value">
@@ -417,7 +417,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-5'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue15" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array6" [value]="i.value">
@@ -426,7 +426,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5' && newProjForm.get('scSubPriority').value === 'element-0'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-5' && scienceProjForm.get('scSubPriority').value === 'element-0'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue16" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array61" [value]="i.value">
@@ -435,7 +435,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-5' && newProjForm.get('scSubPriority').value === 'element-2'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-5' && scienceProjForm.get('scSubPriority').value === 'element-2'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue17" formControlName="scSubSubPriority">
                                 <mat-option *ngFor="let i of array63" [value]="i.value">
@@ -444,7 +444,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field *ngIf="newProjForm.get('scPriority').value === 'element-6'">
+                        <mat-form-field *ngIf="scienceProjForm.get('scPriority').value === 'element-6'">
                             <mat-label>Подраздел</mat-label>
                             <mat-select [(ngModel)]="selectedValue18" formControlName="scSubPriority">
                                 <mat-option *ngFor="let i of array7" [value]="i.value">
@@ -526,11 +526,11 @@
                             </mat-error>
                         </mat-form-field>
 
-                        <mat-error style="margin: 2% 0" *ngIf="newProjForm.invalid">
+                        <mat-error style="margin: 2% 0" *ngIf="scienceProjForm.invalid">
                             *End date must be later than start date*
                         </mat-error>
 
-                        <button (click)="openAddMemberDialog()" mat-raised-button [disabled]="newProjForm.invalid">Создать научный проект</button>
+                        <button (click)="openAddMemberDialog()" mat-raised-button [disabled]="scienceProjForm.invalid">Создать научный проект</button>
 
                     </form>
                 </div>
@@ -579,31 +579,6 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
-
-<!--                    <mat-form-field class="example-full-width">-->
-<!--                        <mat-label>Сроки прохождения</mat-label>-->
-<!--                        <input type="date" matInput formControlName="startdate">-->
-<!--                        <mat-error>This is the required field!</mat-error>-->
-<!--                    </mat-form-field>-->
-
-<!--                    <mat-form-field class="example-full-width">-->
-<!--                        <mat-label>Сроки прохождения</mat-label>-->
-<!--                        <input type="date" matInput formControlName="enddate">-->
-<!--                        <mat-error>This is the required field!</mat-error>-->
-<!--                    </mat-form-field>-->
-
-<!--                    <mat-form-field class="example-full-width">-->
-<!--                        <mat-label>Enter a date range</mat-label>-->
-<!--                        <mat-date-range-input [formGroup]="teacherCourseForm">-->
-<!--                            <input matStartDate formControlName="startDate" placeholder="Start date">-->
-<!--                            <input matEndDate formControlName="endDate" placeholder="End date">-->
-<!--                        </mat-date-range-input>-->
-<!--                        <mat-datepicker-toggle matSuffix></mat-datepicker-toggle>-->
-<!--                        <mat-error *ngIf="teacherCourseForm.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>-->
-<!--                        <mat-error *ngIf="teacherCourseForm.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>-->
-<!--                    </mat-form-field>-->
-
-<!--                    <p>Selected range: {{teacherCourseForm.value | json}}</p>-->
 
                     <mat-form-field class="example-full-width">
                         <mat-label>№ Сертификата</mat-label>

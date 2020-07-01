@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from '../../../api/api.service';
 
 @Component({
@@ -11,16 +11,19 @@ export class AddProjectMemberDialogComponent implements OnInit {
 
   form: FormGroup;
   members: any;
-
+  newProjMemForm: FormGroup;
 
   elements: Sourse[] = [
-    {value: 'element-0', viewValue: 'Ведущий научный сотрудник'},
-    {value: 'element-1', viewValue: 'Старший научный сотрудник'},
-    {value: 'element-2', viewValue: 'Младший научный сотрудник'}
+    {value: 'Ведущий научный сотрудник', viewValue: 'Ведущий научный сотрудник'},
+    {value: 'Старший научный сотрудник', viewValue: 'Старший научный сотрудник'},
+    {value: 'Младший научный сотрудник', viewValue: 'Младший научный сотрудник'}
   ];
 
   constructor(private formBuilder: FormBuilder,
               private service: ApiService) {
+    this.newProjMemForm = this.formBuilder.group({
+      ScienceMember: this.formBuilder.array([])
+    });
     this.form = this.formBuilder.group({
       name: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required)
@@ -34,11 +37,34 @@ export class AddProjectMemberDialogComponent implements OnInit {
   getMembers() {
     this.service.getOwnUsers().subscribe(res => {
       this.members = res;
+      console.log(res);
     });
   }
 
-  addNewMember() {
+  addProjectMemberRow(scId) {
+    const control = this.newProjMemForm.controls.ScienceMember as FormArray;
 
+    // instantiate a new day FormGroup;
+    const newScienceMember: FormGroup = this.initProjectMember(scId);
+
+    // Add it to our formArray
+    control.push(newScienceMember);
+  }
+
+  initProjectMember(scId): FormGroup {
+    return this.formBuilder.group({
+      scAddDate: [new Date()],
+      scRole: [null, Validators.required],
+      scId: [scId],
+      userId: [null, Validators.required]
+    });
+  }
+
+  deleteProjectMember() {
+    const control = this.newProjMemForm.controls.ScienceMember as FormArray;
+    if (control.length > 1) {
+      control.removeAt(control.length - 1);
+    }
   }
 }
 
