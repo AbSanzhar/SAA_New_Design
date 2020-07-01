@@ -15,6 +15,7 @@ import {EventUploadComponent} from './event-upload/event-upload.component';
 import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddProjectMemberDialogComponent} from './add-project-member-dialog/add-project-member-dialog.component';
+import {MatDatepickerInput} from '@angular/material/datepicker';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 

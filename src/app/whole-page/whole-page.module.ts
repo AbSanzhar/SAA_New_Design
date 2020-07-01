@@ -45,6 +45,7 @@ import { AddNewExMemberDialogComponent } from './secretary-diss-council/add-diss
 import {AllScienceProjectsComponent} from './opportunities/all-science-projects/all-science-projects.component';
 
 import { AddProjectMemberDialogComponent } from './teacher/add-project-member-dialog/add-project-member-dialog.component';
+import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 
 
 const r: Routes = [
@@ -112,7 +113,8 @@ const r: Routes = [
         MatPaginatorModule,
         MatSnackBarModule,
         MatCardModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
 })
 export class WholePageModule { }
