@@ -1,10 +1,11 @@
-<form [formGroup]="form">
+<form [formGroup]="this.newProjMemForm">
     <p style="color: darkred; font-weight: 500; font-size: 18px">Члены НП</p>
 
-    <div>
+    <div formArrayName="ScienceMember">
+        <div *ngFor="let row of scienceMemberControls; let i= index"  [formGroupName]="i">
     <mat-form-field>
         <mat-label>Фамилия и Имя</mat-label>
-        <mat-select formControlName="name" required>
+        <mat-select formControlName="userId" required>
             <mat-option *ngFor="let i of members" [value]="i.userId">
                 {{i.firstName}} {{i.lastName}}
             </mat-option>
@@ -14,18 +15,18 @@
 
     <mat-form-field>
         <mat-label>Роль в НП</mat-label>
-        <mat-select formControlName="role" required>
+        <mat-select formControlName="scRole" required>
             <mat-option *ngFor="let i of elements" [value]="i.value">
                 {{i.viewValue}}
             </mat-option>
         </mat-select>
         <mat-error>This is the required field.</mat-error>
     </mat-form-field>
+        </div>
     </div>
     <button (click)="addProjectMemberRow(2)" style="color: white; margin-right: 5%" mat-raised-button color="accent">Добавить участника</button>
     <button (click)="deleteProjectMember()" style="color: white" mat-raised-button color="warn">Убрать из НП</button>
     <br>
 
-    <button [disabled]="form.invalid" style="color: white; margin: 5% 5% 2% 70%" mat-raised-button color="primary">Создать</button>
-
+    <button [disabled]="newProjMemForm.invalid" style="color: white; margin: 5% 5% 2% 70%" mat-raised-button color="primary" [mat-dialog-close]="newProjMemForm">Создать</button>
 </form>

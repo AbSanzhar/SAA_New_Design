@@ -427,6 +427,11 @@
                 <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
               </ng-container>
 
+              <ng-container matColumnDef="File">
+              <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
+              <mat-cell *matCellDef="let course"> <a href="https://nir.iitu.kz/{{course.courseFile}}" download="">Cкачать</a> </mat-cell>
+              </ng-container>
+
               <ng-container matColumnDef="FL">
                 <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
                 <mat-cell style="color: darkred!important;"  *matCellDef="let course">{{course.courseUser.firstName}} {{course.courseUser.lastName}} {{course.courseUser.patronymic}}</mat-cell>

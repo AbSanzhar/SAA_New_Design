@@ -12,7 +12,7 @@ export class AddProjectMemberDialogComponent implements OnInit {
   form: FormGroup;
   members: any;
   newProjMemForm: FormGroup;
-
+  scienceMemberControls: any[];
   elements: Sourse[] = [
     {value: 'Ведущий научный сотрудник', viewValue: 'Ведущий научный сотрудник'},
     {value: 'Старший научный сотрудник', viewValue: 'Старший научный сотрудник'},
@@ -31,7 +31,9 @@ export class AddProjectMemberDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.scienceMemberControls = this.newProjMemForm.controls.ScienceMember['controls'];
     this.getMembers();
+    this.addProjectMemberRow(2);
   }
 
   getMembers() {

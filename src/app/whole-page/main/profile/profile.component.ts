@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
   displayedColumnsPatent = ['ptntId', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
   displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
-  displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level'];
+  displayedColumns6 = ['courseId','File', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level'];
 
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;

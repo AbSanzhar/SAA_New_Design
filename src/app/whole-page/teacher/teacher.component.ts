@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
 import pdfMake from 'pdfmake/build/pdfmake';
 import {ApiService} from '../../api/api.service';
@@ -1037,7 +1037,13 @@ export class TeacherComponent implements OnInit {
   }
 
   openAddMemberDialog() {
-    let dialogRef = this.dialog.open(AddProjectMemberDialogComponent);
+    let ScienceMemberRef = this.dialog.open(AddProjectMemberDialogComponent);
+    ScienceMemberRef.afterClosed().subscribe(
+        res => {
+          this.sendProject(res);
+          console.log(res);
+        }
+    );
   }
 
   openUploadCourseDialog() {
@@ -1074,6 +1080,85 @@ export class TeacherComponent implements OnInit {
       courseFile: CourseLink
     });
     console.log(CourseLink);
+  }
+
+  sendProject(newProjMemForm) {
+    console.log(this.newProjForm.value);
+    this._api.addProject(this.newProjForm.value).subscribe(
+        res => {
+          console.log(res);
+          const control = newProjMemForm.controls.ScienceMember as FormArray;
+          const members = control.value;
+          const mainMember = {
+            scAddDate: new Date(),
+            scRole: 'Научный руководитель',
+            scId: res.scId,
+            userId: this.IdToken
+          };
+          this._api.addMemberToProject(mainMember).subscribe(
+              res => {
+                console.log(res);
+              },
+              err => {
+                console.log(err);
+              }
+          );
+          for (let i = 0; i < control.length; i++) {
+            if (members[i].scRole == 'Ведущий научный сотрудник') {
+              const role = {
+                userId: members[i].userId,
+                roleName: 'Leading_Researcher'
+              };
+              this._api.addRole(role).subscribe(
+                  res1 => {
+                    console.log(res1);
+                  },
+                  err => {
+                    console.log(err);
+                  }
+              );
+            } else if (members[i].scRole == 'Старший научный сотрудник') {
+              const role = {
+                userId: members[i].userId,
+                roleName: 'Senior_Researcher'
+              };
+              this._api.addRole(role).subscribe(
+                  res1 => {
+                    console.log(res1);
+                  },
+                  err => {
+                    console.log(err);
+                  }
+              );
+            } else if (members[i].scRole == 'Младший научный сотрудник') {
+              const role = {
+                userId: members[i].userId,
+                roleName: 'Junior_Researcher'
+              };
+              this._api.addRole(role).subscribe(
+                  res1 => {
+                    console.log(res1);
+                  },
+                  err => {
+                    console.log(err);
+                  }
+              );
+            }
+            members[i].scId = res.scId;
+            this._api.addMemberToProject(members[i]).subscribe(
+                result => {
+                  console.log(result);
+                },
+                error => {
+                  console.log(error);
+                }
+            );
+          }
+        },
+        err => {
+          console.log(err);
+        }
+    );
   }
 }
 
