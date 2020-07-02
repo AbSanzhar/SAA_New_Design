@@ -82,8 +82,8 @@ export class TeacherComponent implements OnInit {
       pubYear: new FormControl('', Validators.required),
       pubPubName: new FormControl('', Validators.required),
       pubCity: new FormControl('', Validators.required),
-      pubPage: new FormControl('', Validators.required),
-      pubEndPage: new FormControl('', Validators.required),
+      pubPage: new FormControl(''),
+      pubEndPage: new FormControl(''),
       pubUrl: new FormControl(''),
       pubDoi: new FormControl(''),
       pubFile: new FormControl('', Validators.required)
