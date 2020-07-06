@@ -1041,7 +1041,9 @@ export class TeacherComponent implements OnInit {
     let ScienceMemberRef = this.dialog.open(AddProjectMemberDialogComponent);
     ScienceMemberRef.afterClosed().subscribe(
         res => {
-          this.sendProject(res);
+          if (typeof  res != 'undefined' && res != 'false') {
+            this.sendProject(res);
+          }
           console.log(res);
         }
     );

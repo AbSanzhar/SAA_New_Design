@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {AddMemberDialogComponent} from './add-member-dialog/add-member-dialog.component';
 import * as jwt_decode from 'jwt-decode';
+import {ApiService} from '../../../api/api.service';
 @Component({
   selector: 'app-add-disset',
   templateUrl: './add-disset.component.html',
@@ -20,7 +21,8 @@ export class AddDissetComponent implements OnInit {
     }
   }
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              private _api: ApiService) {
     this.form = new FormGroup({
       disInfo: new FormControl('', Validators.required),
       disStartDate: new FormControl('', Validators.required),
@@ -38,5 +40,29 @@ export class AddDissetComponent implements OnInit {
     const dialogRef = this.dialog.open(AddMemberDialogComponent, {
       width: '50%',
     });
+    dialogRef.afterClosed().subscribe(
+        res => {
+          if (typeof  res != 'undefined' && res != 'false') {
+            console.log('eboy');
+            const control = res;
+            const members = control.value.disMember;
+            console.log(members);
+            this._api.uploadDisSovet(this.form.value).subscribe(
+                disId => {
+                  console.log(disId);
+                  for(let i = 0; i < members.length; i++) {
+                    this._api.uploadDisMember(disId, members[i]).subscribe(
+                        mem => {console.log(mem); },
+                        memErr => {console.log(memErr); }
+                    );
+                  }
+                }, err => {
+                  console.log(err);
+                }
+            );
+          }
+          console.log(res);
+        }
+    );
   }
 }

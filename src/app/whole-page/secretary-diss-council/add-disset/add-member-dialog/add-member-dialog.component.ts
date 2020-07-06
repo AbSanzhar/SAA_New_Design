@@ -33,17 +33,11 @@ export class AddMemberDialogComponent implements OnInit {
               private dialog: MatDialog) {
     this.membersForm = formBuilder.group({
       disMember: this.formBuilder.array([]),
-      // name: new FormControl('', Validators.required),
-      // type: new FormControl('', Validators.required),
-      // level: new FormControl('', Validators.required),
-      // speciality: new FormControl('', Validators.required),
-      // specialityInDis: new FormControl('', Validators.required),
-      // workPlace: new FormControl('', Validators.required),
-      // position: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit(): void {
+    this.selectedValue = 'Внутренний сотрудник';
     this.disMember = this.membersForm.controls.disMember['controls'];
     this.getMembers();
     this.getExUsers();
@@ -81,8 +75,6 @@ export class AddMemberDialogComponent implements OnInit {
 
   initItems(): FormGroup {
     return this.formBuilder.group({
-      // firstName: [null, Validators.required],
-      // lastName : [null, Validators.required],
       memberType: [null, Validators.required],
       academicDegree: [null, Validators.required],
       specCode: [null, Validators.required],

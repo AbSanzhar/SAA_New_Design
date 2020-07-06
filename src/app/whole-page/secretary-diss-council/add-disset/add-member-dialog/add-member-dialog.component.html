@@ -13,16 +13,14 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Тип сотрудника
-            </mat-label>
-            <mat-select formControlName="memberType" required>
+            <mat-label>Тип сотрудника</mat-label>
+            <mat-select [(ngModel)]="selectedValue" formControlName="memberType" required>
                 <mat-option *ngFor="let i of elements" [value]="i.value">
                     {{i.viewValue}}
                 </mat-option>
             </mat-select>
             <mat-error>This is the required field!</mat-error>
         </mat-form-field>
-
 
         <mat-form-field>
             <mat-label>Ученная степень</mat-label>
@@ -49,7 +47,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Тип сотрудника
+            <mat-label>Позиция в дис. совете
             </mat-label>
             <mat-select formControlName="disPosition" required>
                 <mat-option *ngFor="let i of elements2" [value]="i.value">
@@ -65,6 +63,6 @@
             <button mat-raised-button style="color: white; margin-left: 2%" (click)="deleteDisMember()" color="warn">Удалить участника</button>
             <button (click)="addNewMember()" style="margin-left: 3%" mat-raised-button>Создать внешнего пользователя</button>
         </div>
-        <button [disabled]="membersForm.invalid" style="color: white; margin-top: 2%" mat-raised-button color="primary">Создать дис. совет</button>
+        <button [disabled]="membersForm.invalid" style="color: white; margin-top: 2%" mat-raised-button color="primary" [mat-dialog-close]="membersForm">Создать дис. совет</button>
 
     </form>
