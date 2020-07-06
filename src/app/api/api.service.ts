@@ -63,6 +63,10 @@ export class ApiService {
     const url = 'users/dis';
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
+  getExUsers(): Observable<any> {
+    const url = 'users/ex/dis';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
   getUserDocs(id: number): Observable<any> {
     const url = 'docs/user/';
     return this.http.get<any>(this.base + url + id)

@@ -57,38 +57,37 @@
 
         <mat-form-field>
           <mat-label>Название</mat-label>
-          <input matInput formControlName="universityName" type="text" required>
+          <input matInput formControlName="disInfo" type="text" required>
           <mat-error>The field is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Начиная с</mat-label>
-          <input matInput formControlName="startTime" type="date" required>
+          <input matInput formControlName="disStartDate" type="date" required>
           <mat-error>The field is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Заканчивая в</mat-label>
-          <input matInput formControlName="endTime" type="date" required>
+          <input matInput formControlName="disStopDate" type="date" required>
           <mat-error>The field is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Основание создания(№ приказа МОНРК)</mat-label>
-          <input matInput formControlName="foundationNo" type="number" required>
+          <input matInput formControlName="ministryOrder" type="number" required>
           <mat-error>The field is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Количественный состав</mat-label>
-          <input matInput formControlName="quantity" type="number" required>
+          <input matInput formControlName="membersNum" type="number" required>
           <mat-error>The field is required.</mat-error>
         </mat-form-field>
 
         <!--TODO [disabled]="form.invalid"-->
         <button [disabled]="form.invalid" mat-raised-button color="primary" ><p
                 style="color: white; margin: 0; padding: 0" (click)="add()">Создать</p></button>
-
       </form>
     </div>
   </div>

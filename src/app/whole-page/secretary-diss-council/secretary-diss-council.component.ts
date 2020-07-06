@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataControlService} from '../../services/data-control.service';
+import {ApiService} from '../../api/api.service';
 
 @Component({
   selector: 'app-secretary-diss-council',
@@ -10,14 +11,14 @@ export class SecretaryDissCouncilComponent implements OnInit {
   dataSource: any[];
   displayedColumns = ['index', 'universityName', 'actions'];
 
-  constructor(private http: DataControlService) { }
+  constructor(private _api: ApiService) { }
 
   ngOnInit(): void {
     this.getAllDissets();
   }
 
   getAllDissets() {
-    this.http.getAllDissets().subscribe(res => {
+    this._api.getSecDisSovet().subscribe(res => {
       this.dataSource = res;
     });
   }

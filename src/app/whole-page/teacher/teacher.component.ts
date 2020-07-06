@@ -86,7 +86,8 @@ export class TeacherComponent implements OnInit {
       pubEndPage: new FormControl(''),
       pubUrl: new FormControl(''),
       pubDoi: new FormControl(''),
-      pubFile: new FormControl('', Validators.required)
+      pubFile: new FormControl('', Validators.required),
+      pubScopusUrl: ''
     });
 
     this.eventForm = formBuilder.group({

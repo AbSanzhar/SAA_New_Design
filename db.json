@@ -100,7 +100,7 @@
   "dissets": [
     {
       "id": 1,
-      "universityName": "test univer",
+      "disInfo": "test univer",
       "role": "test role",
       "specialty": "test",
       "activityPeriod": "test",
