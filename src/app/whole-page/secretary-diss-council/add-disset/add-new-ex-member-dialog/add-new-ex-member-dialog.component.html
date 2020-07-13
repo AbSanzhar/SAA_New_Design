@@ -47,7 +47,7 @@
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <button [disabled]="form.invalid" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%">Создать внешнего пользователя</button>
+    <button [disabled]="form.invalid" (click)="createNewExUser()" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%" [mat-dialog-close]="form.value">Создать внешнего пользователя</button>
     <button mat-raised-button color="primary" style="color: white; margin: 1% 0 1% 1%" mat-dialog-close>Назад</button>
 
 </form>

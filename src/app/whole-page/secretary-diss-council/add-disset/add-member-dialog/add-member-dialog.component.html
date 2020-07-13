@@ -2,7 +2,8 @@
         <p style="color: darkred; font-weight: 500; font-size: 18px">Добавление участников дис. совета: </p>
         <div formArrayName="disMember">
             <div *ngFor="let row of this.disMember; let i= index"  [formGroupName]="i">
-        <mat-form-field>
+
+        <mat-form-field *ngIf="this.selectedValue[i] == 'Внутренний сотрудник'">
             <mat-label>Фамилия и Имя</mat-label>
             <mat-select formControlName="userId" required>
                 <mat-option *ngFor="let i of members" [value]="i.userId">
@@ -12,9 +13,20 @@
             <mat-error>This is the required field.</mat-error>
         </mat-form-field>
 
+        <mat-form-field *ngIf="this.selectedValue[i] == 'Внешний сотрудник'">
+            <mat-label>Фамилия и Имя</mat-label>
+            <mat-select formControlName="userId" required>
+                <mat-option *ngFor="let i of exUsers" [value]="i.userId">
+                    {{i.firstName}} {{i.lastName}}
+                </mat-option>
+            </mat-select>
+            <mat-error>This is the required field.</mat-error>
+        </mat-form-field>
+
+
         <mat-form-field>
             <mat-label>Тип сотрудника</mat-label>
-            <mat-select [(ngModel)]="selectedValue" formControlName="memberType" required>
+            <mat-select [(ngModel)]="selectedValue[i]" formControlName="memberType" required>
                 <mat-option *ngFor="let i of elements" [value]="i.value">
                     {{i.viewValue}}
                 </mat-option>
@@ -63,6 +75,8 @@
             <button mat-raised-button style="color: white; margin-left: 2%" (click)="deleteDisMember()" color="warn">Удалить участника</button>
             <button (click)="addNewMember()" style="margin-left: 3%" mat-raised-button>Создать внешнего пользователя</button>
         </div>
+        {{this.selectedValue}}
+        {{this.membersForm.value | json}}
         <button [disabled]="membersForm.invalid" style="color: white; margin-top: 2%" mat-raised-button color="primary" [mat-dialog-close]="membersForm">Создать дис. совет</button>
 
     </form>
