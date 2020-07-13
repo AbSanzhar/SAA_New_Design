@@ -60,11 +60,11 @@ export class ApiService {
 
   }
   getOwnUsers(): Observable<any> {
-    const url = 'users/dis';
+    const url = 'users/dis/true';
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
   getExUsers(): Observable<any> {
-    const url = 'users/ex/dis';
+    const url = 'users/dis/false';
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
   getUserDocs(id: number): Observable<any> {
