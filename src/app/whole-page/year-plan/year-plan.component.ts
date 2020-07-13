@@ -228,12 +228,18 @@ export class YearPlanComponent implements OnInit {
         } else {
             this.budId.push(this.fb.control(this.budgetLength + 1));
         }
+        this.activitiess.push(this.fb.control(''));
+        this.plan.push(this.fb.control(''));
+        this.implmentation.push(this.fb.control(''));
         this.budgetLength++;
     }
 
 
     addNewOrgId() {
         this.orgId.push(this.fb.control(''));
+        this.acts.push(this.fb.control(''));
+        this.orgPlan.push(this.fb.control(''));
+        this.orgImpl.push(this.fb.control(''));
     }
 
     addNewEduId() {
@@ -242,6 +248,8 @@ export class YearPlanComponent implements OnInit {
         } else {
             this.eduId.push(this.fb.control(this.edusLength + 1));
         }
+        this.eduAct.push(this.fb.control(''));
+        this.eduImpl.push(this.fb.control(''));
         this.edusLength++;
     }
 
@@ -251,11 +259,17 @@ export class YearPlanComponent implements OnInit {
         } else {
             this.PlanPerId.push(this.fb.control(this.planPerfomLength + 1));
         }
+        this.PlanPerAct.push(this.fb.control(''));
+        this.PlanPerImpl.push(this.fb.control(''));
         this.planPerfomLength++;
     }
 
     addResId() {
         this.comId.push(this.fb.control(''));
+        this.resAct.push(this.fb.control(''));
+        this.output.push(this.fb.control(''));
+        this.resPlan.push(this.fb.control(''));
+        this.resImpl.push(this.fb.control(''));
     }
 
     ngOnInit() {

@@ -50,7 +50,6 @@
                     </td>
                   </tr>
                   </tbody>
-
                 </table>
               </form>
               <mat-icon class="add" style="cursor: pointer" (click)="addAcadMetForm()" color="accent">add_circle</mat-icon>
@@ -183,7 +182,7 @@
                     <td >
                       <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
                         <div formArrayName="budId" *ngFor="let budIds of budId.controls; let i=index">
-                          <input type="number" class="form-control my-1"  readonly>
+                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
                         </div>
                       </form>
                     </td>
@@ -237,7 +236,7 @@
                     <td >
                       <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
                         <div formArrayName="orgId" *ngFor="let orgIds of orgId.controls; let i=index">
-                          <input type="number" class="form-control my-1" readonly>
+                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
                         </div>
                       </form>
                     </td>
@@ -282,37 +281,37 @@
 
 
               <div class="example-container">
-<!--                <table (change)="somethingChanged()">-->
-<!--                  <thead>-->
-<!--                  <tr>-->
-<!--                    <th scope="col" colspan="1" rowspan="2">п.п №</th>-->
-<!--                    <th scope="col" colspan="1" rowspan="2">Activities</th>-->
-<!--                    <th scope="col">Implementation</th>-->
-<!--                  </tr>-->
-<!--                  </thead>-->
-<!--                  <tbody>-->
-<!--                  <tr>-->
-<!--                    <td >-->
-<!--                      <form [formGroup]="orgs" (ngSubmit)="onSubmit()">-->
-<!--                        <div formArrayName="orgId" *ngFor="let eduId of eduId.controls; let i=index">-->
-<!--                          <input type="number" class="form-control my-1" readonly>-->
-<!--                        </div>-->
-<!--                      </form>-->
-<!--                    </td>-->
-<!--                    <td > <form [formGroup]="orgs" (ngSubmit)="onSubmit()">-->
-<!--                      <div formArrayName="acts" *ngFor="let activities of eduAct.controls; let i=index">-->
-<!--                        <input type="text" class="form-control my-1" [formControlName]="i">-->
-<!--                      </div>-->
-<!--                    </form></td>-->
+                <table (change)="somethingChanged()">
+                  <thead>
+                  <tr>
+                    <th scope="col" colspan="1" rowspan="2">п.п №</th>
+                    <th scope="col" colspan="1" rowspan="2">Activities</th>
+                    <th scope="col">Implementation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td >
+                      <form [formGroup]="edus" (ngSubmit)="onSubmit()">
+                        <div formArrayName="eduId" *ngFor="let eduId of eduId.controls; let i=index">
+                          <input type="number" class="form-control my-1" readonly>
+                        </div>
+                      </form>
+                    </td>
+                    <td > <form [formGroup]="edus" (ngSubmit)="onSubmit()">
+                      <div formArrayName="activities" *ngFor="let activities of eduAct.controls; let i=index">
+                        <input type="text" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
 
-<!--                    <td > <form [formGroup]="orgs" (ngSubmit)="onSubmit()">-->
-<!--                      <div formArrayName="plan" *ngFor="let implementation of eduImpl.controls; let i=index">-->
-<!--                        <input type="number" class="form-control my-1" [formControlName]="i">-->
-<!--                      </div>-->
-<!--                    </form></td>-->
-<!--                  </tr>-->
-<!--                  </tbody>-->
-<!--                </table>-->
+                    <td > <form [formGroup]="edus" (ngSubmit)="onSubmit()">
+                      <div formArrayName="implementation" *ngFor="let implementation of eduImpl.controls; let i=index">
+                        <input type="number" class="form-control my-1" [formControlName]="i">
+                      </div>
+                    </form></td>
+                  </tr>
+                  </tbody>
+                </table>
 
 
                 <!--                <table mat-table class="mat-elevation-z8">-->
@@ -378,9 +377,9 @@
                   <tbody>
                   <tr>
                     <td>
-                      <form (ngSubmit)="onSubmit()">
+                      <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
                         <div formArrayName="id" *ngFor="let orgIds of PlanPerId.controls; let i=index">
-                          <input type="number" class="form-control my-1" readonly>
+                          <input type="number" [formControlName]="i" class="form-control my-1" readonly>
                         </div>
                       </form>
                     </td>
