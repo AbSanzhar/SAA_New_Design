@@ -5,7 +5,7 @@
   font-weight: bolder;
   color: black;
   opacity: 1 !important;
-  width: 50%;
+  width: 90%;
   border-bottom: 0;
   z-index: 0 !important;
 }
@@ -251,4 +251,91 @@ input:not(.btn){
 .mat-column-certificates {
   flex: 5rem;
   max-width: 5rem;
+}
+.mat-column-id {
+  flex: 5rem;
+  max-width: 2rem;
+}
+.mat-column-name {
+  flex: 5rem;
+  max-width: 4rem;
+  margin-right: 1%;
+}
+.mat-column-type {
+  flex: 2rem;
+  max-width: 2rem;
+  margin-right: 1%;
+}
+.mat-column-priority {
+  flex: 2rem;
+  max-width: 3rem;
+  margin-right: 1%;
+}
+.mat-column-subPriority {
+  flex: 2rem;
+  max-width: 3rem;
+  margin-right: 1%;
+}
+.mat-column-subSubPriority {
+  flex: 2rem;
+  max-width: 3rem;
+  margin-right: 1%;
+}
+.mat-column-executor {
+  flex: 2rem;
+  max-width: 3rem;
+  margin-right: 1%;
+}
+.mat-column-customer {
+  flex: 2rem;
+  max-width: 4rem;
+  margin-right: 1%;
+}
+.mat-column-dirFullName {
+  flex: 2rem;
+  max-width: 4rem;
+  margin-right: 1%;
+}
+.mat-column-dept {
+  flex: 2rem;
+  max-width: 3rem;
+  margin-right: 1%;
+}
+.mat-column-agrDate {
+  flex: 2rem;
+  max-width: 3rem;
+  margin-right: 1%;
+}
+.mat-column-registerNumber {
+  flex: 2rem;
+  max-width: 5rem;
+  margin-right: 1%;
+}
+mat-table {
+  width: 100%;
+}
+#projectName {
+  width: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#projectName:hover{
+  overflow: visible;
+  white-space: normal;
+  width: auto;
+  position: absolute;
+  background-color:#FFF;
+}
+.Razdely {
+  white-space: nowrap;
+  width: 76.5px !important;
+  height: 200px;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.Razdely:hover {
+  overflow: visible !important;
+  white-space: pre-line;
 }

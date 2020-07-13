@@ -17,3 +17,21 @@
 .example-full-width {
     width: 100%;
 }
+@media (max-width: 1200px) {
+  .wrapper {
+        max-width: 970px;
+      }
+}
+
+@media (max-width: 970px) {
+  .wrapper {
+        max-width: 750px;
+      }
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+        max-width: none;
+        display: block;
+    }
+}

@@ -18,13 +18,10 @@
 
                   <thead>
                   <tr>
-                    <th scope="col" colspan="1" rowspan="2">Рет саны №</th>
-                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы, орындалу мерзімі</th>
-                    <th scope="col" colspan="2">Жұмыс көлемі</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Жоспардың орындалу уақытты</th>
-                    <th scope="col">Жоспардың орындалуы</th>
+                    <th scope="col" colspan="1" rowspan="2">Порядковый номер №</th>
+                    <th scope="col" colspan="1" rowspan="2">Наименование работы, срок</th>
+                    <th scope="col">Время выполнения плана</th>
+                    <th scope="col">Фактическое выполнение плана</th>
                   </tr>
                   </thead>
 
@@ -80,16 +77,12 @@
               </p>
               <form *ngIf="AcadMetForm" style="overflow-x:auto;">
                 <table>
-
                   <thead>
                   <tr>
-                    <th scope="col" colspan="1" rowspan="2">Рет саны №</th>
-                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы, орындалу мерзімі</th>
-                    <th scope="col" colspan="2">Жұмыс көлемі</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Жоспардың орындалу уақытты</th>
-                    <th scope="col">Жоспардың орындалуы</th>
+                    <th scope="col" colspan="1" rowspan="2">Порядковый номер №</th>
+                    <th scope="col" colspan="1" rowspan="2">Наименование работы, срок</th>
+                    <th scope="col">Время выполнения плана</th>
+                    <th scope="col">Фактическое выполнение</th>
                   </tr>
                   </thead>
 
@@ -180,12 +173,9 @@
                   <thead>
                   <tr>
                     <th scope="col" colspan="1" rowspan="2">№</th>
-                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>
-                    <th scope="col" colspan="2">Жұмыс көлемі <br>Объем работы<br>Output</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Жоспар<br>План<br>Plan</th>
-                    <th scope="col">Жоспардың орындалуы<br>Фактическое выполнение плана<br>Implementation</th>
+                    <th scope="col" colspan="1" rowspan="2">Наименование работ</th>
+                    <th scope="col">План</th>
+                    <th scope="col">Фактическое выполнение плана</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -236,13 +226,10 @@
                 <table (change)="somethingChanged()">
                   <thead>
                   <tr>
-                    <th scope="col" colspan="1" rowspan="2">Рет саны №п.п №</th>
-                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>
-                    <th scope="col" colspan="2">Жұмыс көлемі <br>Объем работы<br>Output</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Жоспар<br>План<br>Plan</th>
-                    <th scope="col">Жоспардың орындалуы<br>Фактическое выполнение плана<br>Implementation</th>
+                    <th scope="col" colspan="1" rowspan="2">п.п №</th>
+                    <th scope="col" colspan="1" rowspan="2">Наименование работ</th>
+                    <th scope="col">План</th>
+                    <th scope="col">Фактическое выполнение плана</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -295,42 +282,67 @@
 
 
               <div class="example-container">
+<!--                <table (change)="somethingChanged()">-->
+<!--                  <thead>-->
+<!--                  <tr>-->
+<!--                    <th scope="col" colspan="1" rowspan="2">п.п №</th>-->
+<!--                    <th scope="col" colspan="1" rowspan="2">Activities</th>-->
+<!--                    <th scope="col">Implementation</th>-->
+<!--                  </tr>-->
+<!--                  </thead>-->
+<!--                  <tbody>-->
+<!--                  <tr>-->
+<!--                    <td >-->
+<!--                      <form [formGroup]="orgs" (ngSubmit)="onSubmit()">-->
+<!--                        <div formArrayName="orgId" *ngFor="let eduId of eduId.controls; let i=index">-->
+<!--                          <input type="number" class="form-control my-1" readonly>-->
+<!--                        </div>-->
+<!--                      </form>-->
+<!--                    </td>-->
+<!--                    <td > <form [formGroup]="orgs" (ngSubmit)="onSubmit()">-->
+<!--                      <div formArrayName="acts" *ngFor="let activities of eduAct.controls; let i=index">-->
+<!--                        <input type="text" class="form-control my-1" [formControlName]="i">-->
+<!--                      </div>-->
+<!--                    </form></td>-->
 
-                <table mat-table class="mat-elevation-z8">
-
-                  <ng-container matColumnDef="eduId">
-                    <th mat-header-cell *matHeaderCellDef> No. </th>
-                    <td mat-cell *matCellDef="let element">
-                      <input matInput type="number"  readonly>
-                    </td>
-                  </ng-container>
-
-                  <ng-container matColumnDef="eduAct">
-                    <th mat-header-cell *matHeaderCellDef> Activities </th>
-                    <td mat-cell *matCellDef="let element">
-                      <input matInput type="text" [(ngModel)]="element.activities" [ngModelOptions]="{standalone: true}">
-                    </td>
-                  </ng-container>
-
-                  <ng-container matColumnDef="eduImpl">
-                    <th mat-header-cell *matHeaderCellDef> Implementation </th>
-                    <td mat-cell *matCellDef="let element">
-                      <input matInput type="text" [(ngModel)]="element.implementation" [ngModelOptions]="{standalone: true}">
-                    </td>
-                  </ng-container>
+<!--                    <td > <form [formGroup]="orgs" (ngSubmit)="onSubmit()">-->
+<!--                      <div formArrayName="plan" *ngFor="let implementation of eduImpl.controls; let i=index">-->
+<!--                        <input type="number" class="form-control my-1" [formControlName]="i">-->
+<!--                      </div>-->
+<!--                    </form></td>-->
+<!--                  </tr>-->
+<!--                  </tbody>-->
+<!--                </table>-->
 
 
-                  <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+                <!--                <table mat-table class="mat-elevation-z8">-->
 
-                </table>
-                <mat-paginator [pageSizeOptions]="[1, 5, 10, 15]" [length]="paginator.length"
-                               [pageSize]="paginator.size"
-                               [pageIndex]="paginator.page"
-                               (change)="changeTableList($event)"
-                               (page)="changeTableList($event)"
+<!--                  <ng-container matColumnDef="eduId">-->
+<!--                    <th mat-header-cell *matHeaderCellDef> No. </th>-->
+<!--                    <td mat-cell *matCellDef="let element">-->
+<!--                      <input matInput type="number"  readonly>-->
+<!--                    </td>-->
+<!--                  </ng-container>-->
 
-                               showFirstLastButtons></mat-paginator>
+<!--                  <ng-container matColumnDef="eduAct">-->
+<!--                    <th mat-header-cell *matHeaderCellDef> Activities </th>-->
+<!--                    <td mat-cell *matCellDef="let element">-->
+<!--                      <input matInput type="text" [(ngModel)]="element.activities" [ngModelOptions]="{standalone: true}">-->
+<!--                    </td>-->
+<!--                  </ng-container>-->
+
+<!--                  <ng-container matColumnDef="eduImpl">-->
+<!--                    <th mat-header-cell *matHeaderCellDef> Implementation </th>-->
+<!--                    <td mat-cell *matCellDef="let element">-->
+<!--                      <input matInput type="text" [(ngModel)]="element.implementation" [ngModelOptions]="{standalone: true}">-->
+<!--                    </td>-->
+<!--                  </ng-container>-->
+
+
+<!--                  <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>-->
+<!--                  <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>-->
+
+<!--                </table>-->
                 <mat-icon class="add" style="cursor: pointer" (click)="addNewEduId() " color="accent">add_circle
                 </mat-icon> <!--|| addNewEduAct() || addNewEduImpl()-->
 
@@ -358,9 +370,9 @@
                 <table (change)="somethingChanged()">
                   <thead>
                   <tr>
-                    <th scope="col" colspan="1" rowspan="2">Рет саны №п.п №</th>
-                    <th scope="col" colspan="1" rowspan="2">Жұмыс аталуы<br>Наименование работ<br>Activities</th>
-                    <th scope="col" colspan="2">Орындау <br>Выполнение<br>Implementation</th>
+                    <th scope="col" colspan="1" rowspan="2">п.п №</th>
+                    <th scope="col" colspan="1" rowspan="2">Наименование работ</th>
+                    <th scope="col" colspan="2">Выполнение</th>
                   </tr>
                   </thead>
                   <tbody>

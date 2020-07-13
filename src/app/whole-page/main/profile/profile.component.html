@@ -42,7 +42,7 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Управление" *ngIf="this.roles.indexOf('Teacher') != -1">
+    <mat-tab label="Мои таблицы" *ngIf="this.roles.indexOf('Teacher') != -1">
       <div class="managing">
         <div class="my-tables">
           <div class="nav-head">
@@ -347,52 +347,62 @@
 
               <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef> Наименование </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scName}} </mat-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"> {{project.scName}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="type">
                 <mat-header-cell *matHeaderCellDef> Тип </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scType}} </mat-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"> {{project.scType}} </mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="priority">
-                <mat-header-cell *matHeaderCellDef> Раздел </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scPriority}} </mat-cell>
-              </ng-container>
+<!--              <ng-container matColumnDef="priority">-->
+<!--                <mat-header-cell *matHeaderCellDef> Раздел </mat-header-cell>-->
+<!--                <mat-cell *matCellDef="let project"> {{project.scPriority}} </mat-cell>-->
+<!--              </ng-container>-->
 
-              <ng-container matColumnDef="subPriority">
-                <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scSubPriority}} </mat-cell>
-              </ng-container>
+<!--              <ng-container matColumnDef="subPriority">-->
+<!--                <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>-->
+<!--                <mat-cell *matCellDef="let project"> {{project.scSubPriority}} </mat-cell>-->
+<!--              </ng-container>-->
+
+                <ng-container matColumnDef="priority">
+                  <mat-header-cell class="Razdel" *matHeaderCellDef> Раздел </mat-header-cell>
+                  <mat-cell class="Razdel Razdely"  *matCellDef="let project"> {{project.scPriority}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="subPriority">
+                  <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>
+                  <mat-cell class="Razdely"  *matCellDef="let project"> {{project.scSubPriority}} </mat-cell>
+                </ng-container>
 
               <ng-container matColumnDef="subSubPriority">
                 <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scSubSubPriority}} </mat-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"> {{project.scSubSubPriority}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="executor">
                 <mat-header-cell *matHeaderCellDef> Исполнитель </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scExecutor}} </mat-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"> {{project.scExecutor}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="customer">
                 <mat-header-cell *matHeaderCellDef> Заказчик </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scCustomer}} </mat-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"> {{project.scCustomer}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="dirFullName">
                 <mat-header-cell *matHeaderCellDef> Научный руководитель </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scDirFullName}} </mat-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"> {{project.scDirFullName}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="dept">
                 <mat-header-cell *matHeaderCellDef> Подразделение </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scDept}} </mat-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"> {{project.scDept}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="agrDate">
                 <mat-header-cell *matHeaderCellDef> Дата договора </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scAgrDate}} </mat-cell>
+                <mat-cell *matCellDef="let project"> {{project.scAgrDate | date}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="registerNumber">
@@ -402,12 +412,12 @@
 
               <ng-container matColumnDef="startDate">
                 <mat-header-cell *matHeaderCellDef> Дата начала проекта </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scStDate}} </mat-cell>
+                <mat-cell *matCellDef="let project"> {{project.scStDate | date}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="endDate">
                 <mat-header-cell *matHeaderCellDef> Дата сдачи проекта </mat-header-cell>
-                <mat-cell *matCellDef="let project"> {{project.scEndDate}} </mat-cell>
+                <mat-cell *matCellDef="let project"> {{project.scEndDate | date}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="totalSum">
@@ -487,3 +497,4 @@
     </mat-tab>
   </mat-tab-group>
 </div>
+<div id="projectName">2: oianset osietnoasiedj oino aosietnoin oasiento oaseitnoind oisentoasintoon oisentoiansetoino oiasentoin oi asetin doinae oidnoajosi doinalketn oiwdnota onioiante oaidno</div>

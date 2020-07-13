@@ -141,6 +141,11 @@ export class YearPlanComponent implements OnInit {
         this.AcadMetAct.push(this.initAcadMetForm());
     }
 
+    addAcadMetFormParam(id, activity, timeFrame, implementation) {
+        this.AcadMetAct = this.AcadMetForm.get('AcadMetAct') as FormArray;
+        this.AcadMetAct.push(this.initAcadMetFormParam(id, activity, timeFrame, implementation));
+    }
+
     get budId() {
         return this.budgets.get('budId') as FormArray;
     }
