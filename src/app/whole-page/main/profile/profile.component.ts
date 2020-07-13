@@ -8,6 +8,8 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  from: any = 1900;
+  to: any = 2021;
   paginator = {
     length: 0,
     size: 1,

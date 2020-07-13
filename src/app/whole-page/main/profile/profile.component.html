@@ -65,7 +65,7 @@
                 <label>От </label>
               </div>
               <div class="input-div">
-                <input type="number">
+                <input [(ngModel)]="from" type="number">
               </div>
             </div>
             <div class="form-div">
@@ -73,66 +73,68 @@
                 <label>До </label>
               </div>
               <div class="input-div">
-                <input type="number">
+                <input [(ngModel)]="to" type="number">
               </div>
             </div>
           </div>
           <div class="main">
             <div *ngIf="whichTable === 0 ? true : false">
-            <mat-table [dataSource]="TeacherPublications" class="">
-              <ng-container matColumnDef="pubId">
-                <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubId}} </mat-cell>
-              </ng-container>
 
-              <ng-container matColumnDef="File">
-                <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">Cкачать</a> </mat-cell>
+              <mat-table [dataSource]="TeacherPublications" class="">
+                <ng-container matColumnDef="pubId">
+                  <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+
+                    <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubId}} </div></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="File">
+                  <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                  <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">Cкачать</a></div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="pubType">
                 <mat-header-cell *matHeaderCellDef> Тип публикации </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubType}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubType}}</div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Collaborators">
                 <mat-header-cell *matHeaderCellDef> Соавторы </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubCoAuthor}} </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCoAuthor}} </div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Title">
                 <mat-header-cell *matHeaderCellDef> Название публикации </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubName}} </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Year">
                 <mat-header-cell *matHeaderCellDef> Год </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubYear}} </mat-cell>
+                <mat-cell *matCellDef="let publication"> <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubYear}}</div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="City">
                 <mat-header-cell *matHeaderCellDef> Город </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubCity}} </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCity}}</div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Publisher">
                 <mat-header-cell *matHeaderCellDef> Издатель </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubPubName}} </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPubName}} </div></mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Page">
                 <mat-header-cell *matHeaderCellDef> Страницы </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubPage}} - {{publication.pubEndPage}} </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPage}} - {{publication.pubEndPage}}</div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Url">
                 <mat-header-cell *matHeaderCellDef> URL </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubUrl}} </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubUrl}}</div> </mat-cell>
               </ng-container>
-
+>
               <ng-container matColumnDef="Doi">
                 <mat-header-cell *matHeaderCellDef> DOI </mat-header-cell>
-                <mat-cell *matCellDef="let publication"> {{publication.pubDoi}} </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubDoi}}</div> </mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>
