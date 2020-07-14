@@ -20,6 +20,7 @@ export class SecretaryDissCouncilComponent implements OnInit {
   getAllDissets() {
     this._api.getSecDisSovet().subscribe(res => {
       this.dataSource = res;
+      console.log(res);
     });
   }
 

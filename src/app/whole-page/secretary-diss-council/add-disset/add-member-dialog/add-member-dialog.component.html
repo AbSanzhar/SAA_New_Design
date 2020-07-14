@@ -75,8 +75,6 @@
             <button mat-raised-button style="color: white; margin-left: 2%" (click)="deleteDisMember()" color="warn">Удалить участника</button>
             <button (click)="addNewMember()" style="margin-left: 3%" mat-raised-button>Создать внешнего пользователя</button>
         </div>
-        {{this.selectedValue}}
-        {{this.membersForm.value | json}}
         <button [disabled]="membersForm.invalid" style="color: white; margin-top: 2%" mat-raised-button color="primary" [mat-dialog-close]="membersForm">Создать дис. совет</button>
 
     </form>
