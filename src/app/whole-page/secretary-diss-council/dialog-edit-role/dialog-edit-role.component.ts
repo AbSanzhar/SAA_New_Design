@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-edit-role',
@@ -7,11 +8,12 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./dialog-edit-role.component.css']
 })
 export class DialogEditRoleComponent implements OnInit {
-  selectValue = new FormControl('1'); //секретарь
-
+  @Inject(MAT_DIALOG_DATA) public data: any;
+  selectValue = new FormControl('1');
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

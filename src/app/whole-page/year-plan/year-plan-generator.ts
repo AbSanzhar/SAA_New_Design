@@ -1711,6 +1711,289 @@ export class DocumentCreator {
                 }),
 
 
+                new Table({
+                    rows: [
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    children: [
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Рет',
+                                                    size: 20,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black',
+                                                    bold: true
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'саны',
+                                                    size: 20,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black',
+                                                    bold: true
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: '№п.п',
+                                                    size: 20,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black',
+                                                    bold: true
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: '№',
+                                                    size: 20,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black',
+                                                    bold: true
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        })
+
+                                    ],
+                                }),
+                                new TableCell({
+                                    children: [new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: 'Жұмыс аталуы',
+                                                size: 20,
+                                                bold: true,
+                                                font: {
+                                                    name: 'Times New Roman',
+                                                },
+                                                color: 'black'
+                                            }),
+                                        ],
+                                        alignment: AlignmentType.CENTER
+                                    }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Наименование работ',
+                                                    size: 20,
+                                                    bold: true,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Activities',
+                                                    size: 20,
+                                                    bold: true,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                    ],
+                                }),
+
+                                new TableCell({
+                                    children: [new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: 'Орындау',
+                                                size: 20,
+                                                bold: true,
+                                                font: {
+                                                    name: 'Times New Roman',
+                                                },
+                                                color: 'black'
+                                            }),
+                                        ],
+                                        alignment: AlignmentType.CENTER
+                                    }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'туралы',
+                                                    size: 20,
+                                                    bold: true,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'мәлімет',
+                                                    size: 20,
+                                                    bold: true,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Сведения о',
+                                                    size: 20,
+                                                    bold: true,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'выполнении',
+                                                    size: 20,
+                                                    bold: true,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Implementation',
+                                                    size: 20,
+                                                    bold: true,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+
+
+
+                                    ],
+                                }),
+                            ],
+                        }),
+
+                    ]}),
+
+                new Paragraph(''),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'Оқытушының колы (подпись преподавателя) Teacher’s signature__________________________',
+                        bold: true,
+                        size: 24,
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                }),
+                new Paragraph(''),
+                new Paragraph(''),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'Кафедра мәжілісінде қарастырылды (рассмотрено на заседании кафедры)',
+                        size: 24,
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                }),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'Reviewed at the meeting of the Department',
+                        size: 24,
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                }),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: '№____хаттама (протокол) Minutes №. __  dated «______»___________________20___ж.(г.)',
+                        size: 24,
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                }),
+                new Paragraph(''),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'Кафедра меңгерушісі (зав. кафедрой) Head of Department   ___________________________',
+                        size: 24,
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                }),
+                new Paragraph(''),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'АЖ факультет деканы/Декан факультета /Faculty Dean____________________________',
+                        size: 24,
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                }),
+
+
+
+
+
 
 
             ]

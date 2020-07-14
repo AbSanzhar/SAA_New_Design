@@ -12,22 +12,25 @@
         <mat-table [dataSource]="dataSource" class="">
 
           <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
-            <mat-cell *matCellDef="let member"> {{member.email}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Тип сотрудника </mat-header-cell>
+            <mat-cell *matCellDef="let member">
+              <p *ngIf="!member.own">Внешний представитель</p>
+              <p *ngIf="member.own">Внутренний сотрудник</p>
+            </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="fullName">
             <mat-header-cell *matHeaderCellDef> ФИО </mat-header-cell>
-            <mat-cell *matCellDef="let member"> {{member.lastName + ' ' + member.firstName + ' ' + member.middleName}} </mat-cell>
+            <mat-cell *matCellDef="let member"> {{member.lastname + ' ' + member.firstname + ' ' + member.patronymic}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="role">
             <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
-            <mat-cell *matCellDef="let member"> {{member.role}} </mat-cell>
+            <mat-cell *matCellDef="let member"> {{member.disposition}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Изменить позицию в дис. совете </mat-header-cell>
             <mat-cell *matCellDef="let member">
               <button (click)="editRole(member)" mat-icon-button aria-label="Example icon button with a home icon">
                 <mat-icon>edit</mat-icon>

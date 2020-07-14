@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogEditRoleComponent} from '../dialog-edit-role/dialog-edit-role.component';
+import {ApiService} from '../../../api/api.service';
 
 @Component({
   selector: 'app-edit-disset',
@@ -42,14 +43,14 @@ export class EditDissetComponent implements OnInit {
     }
   ]
 
-  constructor(private route: ActivatedRoute, private editRoleDialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private editRoleDialog: MatDialog, private service: ApiService) {
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(param => {
       this.idDisset = parseInt(param.id);
     });
-    this.dataSource = this.arrMembers;
+    this.getOneDisMembers();
   }
 
   editRole(member) {
@@ -58,5 +59,16 @@ export class EditDissetComponent implements OnInit {
     }).afterClosed().subscribe(result => {
 
     });
+  }
+
+  getOneDisMembers() {
+    this.service.getOneDisMembers(this.idDisset).subscribe(
+        res => {
+          console.log(res);
+          this.dataSource = res;
+        }, err => {
+          console.log(err);
+        }
+    );
   }
 }
