@@ -1,0 +1,47 @@
+<div class="registration-container">
+    <h2>Выберите свои ученные степени</h2>
+    <div class="degrees">
+        <tr *ngFor="let degrees of degreeList">
+            <td>
+                <h4> {{degrees.degreeName}} </h4>
+            </td>
+            <td>
+                <input type="checkbox" class="degrees_checkbox" [value]="degrees.degreeId" >
+            </td>
+        </tr>
+    </div>
+    <br>
+    <h2>Выберите Департамент</h2>
+    <div class="depts">
+        <tr *ngFor="let depts of deptslist">
+            <td>
+                <h4> {{depts.name}} </h4>
+            </td>
+            <td>
+                <input type="checkbox" class="depts_checkbox" [value]="depts.id" >
+            </td>
+        </tr>
+    </div>
+    <br>
+    <h2>Выберите свои ученные степени</h2>
+    <div class="roles">
+        <tr *ngFor="let roles of rolesList">
+            <td>
+                <h4> {{roles.name}} </h4>
+            </td>
+            <td>
+                <input type="checkbox" class="roles_checkbox" [value]="roles.id" >
+            </td>
+        </tr>
+    </div>
+    <br>
+    <button (click)="SkipBtn()">Пропустить</button>
+    <button (click)="SaveBtn()">Сохранить</button>
+
+</div>
+
+
+
+
+
+

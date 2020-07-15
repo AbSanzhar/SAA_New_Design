@@ -30,6 +30,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {PatentUploadComponent} from './whole-page/teacher/patent-upload/patent-upload.component';
 import {EventUploadComponent} from './whole-page/teacher/event-upload/event-upload.component';
 import {PublicationUploadComponent} from './whole-page/teacher/publication-upload/publication-upload.component';
+import { RegistrationComponent } from './login/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {PublicationUploadComponent} from './whole-page/teacher/publication-uploa
     PatentUploadComponent,
     EventUploadComponent,
     PublicationUploadComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,

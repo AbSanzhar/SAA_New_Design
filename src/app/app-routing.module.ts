@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {WholePageComponent} from "./whole-page/whole-page.component";
 import {AuthGuardService} from "./api/auth-guard";
+import {RegistrationComponent} from './login/registration/registration.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,11 @@ const routes: Routes = [
     path: 'whole',
     loadChildren: () => import('./whole-page/whole-page.module').then(m => m.WholePageModule),
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent
+
   },
   {path: 'login', component: LoginComponent},
   // { path: 'whole', component: WholePageComponent },

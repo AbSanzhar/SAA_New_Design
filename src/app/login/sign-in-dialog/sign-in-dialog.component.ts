@@ -35,7 +35,11 @@ export class SignInDialogComponent implements OnInit {
             // console.log(res);
             localStorage.setItem('token', res.token);
             this.dialog.close();
-            this.router.navigate(['/whole']);
+            if (res.isNew === true){
+                this.router.navigate(['/registration']);
+            }else{
+                this.router.navigate(['/whole']);
+            }
         }, error1 => {
             this.error2 = true;
             // alert('Login or password are incorrect!');

@@ -91,7 +91,7 @@ const r: Routes = [
       AddNewExMemberDialogComponent,
       AllScienceProjectsComponent,
       AddProjectMemberDialogComponent,
-      CourseUploadComponent
+      CourseUploadComponent,
   ],
     imports: [
         CommonModule,

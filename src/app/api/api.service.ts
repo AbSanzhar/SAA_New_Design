@@ -35,7 +35,7 @@ export class ApiService {
 
   login(user): Observable<any> {
 
-    const url = 'auth/login';
+    const url = 'auth/login2';
     return this.http.post<any>(this.base + url, user)
       .pipe(catchError(this.errorHandler));
   }
@@ -299,6 +299,26 @@ export class ApiService {
   getAllTeachers(): Observable<any> {
     const url = 'users/teachers';
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getAllRoles(): Observable<any> {
+    const url = 'roles/all';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getAllDepartments(): Observable<any> {
+    const url = 'depts/all';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getAllDegrees(): Observable<any> {
+    const url = 'users/getAllDegrees';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  registerUser(user): Observable<any>{
+    const url = 'auth/register';
+    return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), user);
   }
 
   addProject(project): Observable<any> {
