@@ -14,7 +14,8 @@
 }
 
 .main {
-  width: calc(100% - 66px - 254px);
+  /*width: calc(100% - 66px - 254px);*/
+  width: 100%;
 }
 
 .title-slide-bar {
@@ -53,4 +54,27 @@ li {
 table {
   width: 100%;
 }
-
+.mat-column-index {
+  flex: 2rem;
+  max-width: 2rem;
+}
+.mat-column-patentNumber {
+  flex: 2rem;
+  max-width: 4rem;
+}
+.mat-column-country {
+  flex: 2rem;
+  max-width: 5rem;
+}
+.mat-column-inventionPatent {
+  flex: 2rem;
+  max-width: 5rem;
+}
+.mat-column-author {
+  flex: 2rem;
+  max-width: 4rem;
+}
+.mat-column-kz, .mat-column-ru, .mat-column-en {
+  flex: 2rem;
+  max-width: 2rem;
+}

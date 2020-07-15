@@ -14,7 +14,9 @@
 }
 
 .main {
-    width: calc(100% - 66px - 254px);
+    /*width: calc(100% - 66px - 254px);*/
+    /*width: calc(100% - 66px);*/
+    width: 100%;
 }
 
 .title-slide-bar {
@@ -53,23 +55,103 @@ li {
 table {
     width: 100%;
 }
-.mat-column-ptntOwnerName {
-    flex: 7rem;
-    max-width: 7rem;
-}
-
-.mat-column-ptntPublishedTR {
-    flex: 5rem;
-    max-width: 5rem;
-}
-
-.mat-column-ptntIssueDate {
-    flex: 5rem;
-    max-width: 5rem;
-}
-
-.mat-column-ptntCountry {
+.mat-column-name {
     flex: 6rem;
     max-width: 6rem;
+    margin-right: 1%;
+}
+.mat-column-id {
+    flex: 2rem;
+    max-width: 2rem;
+    margin-right: 1%;
+}
+.mat-column-type {
+    flex: 5rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+.mat-column-priority {
+    flex: 5rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+.mat-column-subPriority {
+    flex: 5rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+.mat-column-subSubPriority {
+    flex: 5rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+.mat-column-executor {
+    flex: 3rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+.mat-column-customer {
+    flex: 3rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+.mat-column-dirFullName {
+    flex: 3rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+.mat-column-dept {
+    flex: 3rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+.mat-column-agrDate {
+    flex: 3rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+.mat-column-registerNumber {
+    flex: 3rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+.mat-column-startDate {
+    flex: 3rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+.mat-column-endDate {
+    flex: 3rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+.mat-column-totalSum {
+    flex: 3rem;
+    max-width: 3rem;
 }
 
+.Razdely {
+    white-space: nowrap;
+    width: 76.5px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.Razdely:hover {
+    overflow: visible !important;
+    white-space: pre-line;
+    background: #FFFFFF;
+    z-index: 5;
+}
+.Razdely:hover p{
+    overflow: visible !important;
+    white-space: pre-line;
+    background: #FFFFFF;
+    z-index: 5;
+    /*box-shadow: 0 0 10px rgba(0,0,0,0.5);;*/
+}
+mat-table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

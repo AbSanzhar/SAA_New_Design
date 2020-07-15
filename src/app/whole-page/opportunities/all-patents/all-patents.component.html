@@ -41,27 +41,27 @@
 
         <ng-container matColumnDef="issueDate">
           <mat-header-cell *matHeaderCellDef> Дата выдачи </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate | date}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="insertedDay">
           <mat-header-cell *matHeaderCellDef> Дата ввода в базу </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>
+          <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate | date}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="kz">
           <mat-header-cell *matHeaderCellDef> kz </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlKz}}" download="">Скачать</a>  </mat-cell>
+          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlKz}}" download=""><mat-icon color="primary">get_app</mat-icon></a>  </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="ru">
           <mat-header-cell *matHeaderCellDef> ru </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlRu}}" download="">Скачать</a> </mat-cell>
+          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlRu}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="en">
           <mat-header-cell *matHeaderCellDef> en </mat-header-cell>
-          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlEn}}" download="">Скачать</a> </mat-cell>
+          <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlEn}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="status">

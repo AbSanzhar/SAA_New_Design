@@ -338,4 +338,13 @@ mat-table {
 .Razdely:hover {
   overflow: visible !important;
   white-space: pre-line;
+  background: #FFFFFF;
+  z-index: 5;
+}
+.Razdely:hover p{
+  overflow: visible !important;
+  white-space: pre-line;
+  background: #FFFFFF;
+  z-index: 5;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);;
 }
