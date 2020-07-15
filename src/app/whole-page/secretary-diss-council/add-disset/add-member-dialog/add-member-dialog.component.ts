@@ -25,8 +25,8 @@ export class AddMemberDialogComponent implements AfterViewInit {
   ];
 
   elements2: Sourse[] = [
-    {value: 'Председатель', viewValue: 'Председатель'},
-    {value: 'Член', viewValue: 'Член'}
+    {value: 'Председатель совета', viewValue: 'Председатель'},
+    {value: 'Член совета', viewValue: 'Член'}
   ];
 
   constructor(private formBuilder: FormBuilder,

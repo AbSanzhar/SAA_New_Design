@@ -15,34 +15,6 @@ export class EditDissetComponent implements OnInit {
   dataSource: any[];
   displayedColumns = ['email', 'fullName', 'role', 'actions'];
 
-  //fake members
-  arrMembers = [
-    {
-      id: 0,
-      email: 'test@email.com',
-      firstName: 'testF',
-      lastName: 'testL',
-      middleName: 'testM',
-      role: 'секретарь'
-    },
-    {
-      id: 2,
-      email: 'test@email.com',
-      firstName: 'testF',
-      lastName: 'testL',
-      middleName: 'testM',
-      role: 'секретарь'
-    },
-    {
-      id: 3,
-      email: 'test@email.com',
-      firstName: 'testF',
-      lastName: 'testL',
-      middleName: 'testM',
-      role: 'секретарь'
-    }
-  ]
-
   constructor(private route: ActivatedRoute, private editRoleDialog: MatDialog, private service: ApiService) {
   }
 
@@ -51,11 +23,15 @@ export class EditDissetComponent implements OnInit {
       this.idDisset = parseInt(param.id);
     });
     this.getOneDisMembers();
+    this.editRoleDialog.afterAllClosed.subscribe(res => {
+      this.getOneDisMembers();
+    });
   }
 
   editRole(member) {
+    console.log(member);
     this.editRoleDialog.open(DialogEditRoleComponent, {
-      data: member
+      data: {member, disId: this.idDisset},
     }).afterClosed().subscribe(result => {
 
     });

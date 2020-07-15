@@ -244,10 +244,10 @@ export class ApiService {
     return this.http.post<any>(this.base + url + id, research).pipe(catchError(this.errorHandler));
   }
 
-  getAllMyDisSovets(): Observable<any> {
+  getAllMyDisSovets(userId): Observable<any> {
     const url = 'dissovet/member/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));
+    return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
   }
   getSecDisSovet(): Observable<any> {
     const url = 'dissovet/secretary/';
@@ -394,6 +394,11 @@ export class ApiService {
   updateDisPosistion(user, disId): Observable<any> {
     const url = 'dissovet/updatePositionByDissovet/';
     return this.http.patch(this.base + url + disId, user);
+  }
+
+  addToExistedDisMem(disMember, disId): Observable <any> {
+    const url = 'dissovet/add/memberUser/';
+    return this.http.post(this.base + url + disId + '?jwt_token=' + window.localStorage.getItem('token'), disMember);
   }
 
 
