@@ -24,11 +24,11 @@ export class AddDissetComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private _api: ApiService) {
     this.form = new FormGroup({
-      disInfo: new FormControl('D', Validators.required),
-      disStartDate: new FormControl('d', Validators.required),
-      disStopDate: new FormControl('d', Validators.required),
-      ministryOrder: new FormControl('2', Validators.required),
-      membersNum: new FormControl('2', Validators.required),
+      disInfo: new FormControl('', Validators.required),
+      disStartDate: new FormControl('', Validators.required),
+      disStopDate: new FormControl('', Validators.required),
+      ministryOrder: new FormControl('', Validators.required),
+      membersNum: new FormControl('', Validators.required),
       secretaryId: new FormControl(this.tokenId)
     });
   }

@@ -1,53 +1,63 @@
 <form [formGroup]="form">
-    <mat-form-field>
+    <p style="color: darkred; font-weight: 500; font-size: 18px" *ngIf="loading">Добавление внешнего представителя в базу GF</p>
+    <mat-form-field *ngIf="!loading">
         <mat-label>ИИН</mat-label>
-        <input matInput formControlName="IIN" type="text" required>
+        <input matInput formControlName="iin" type="number" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="!loading">
         <mat-label>Место работы</mat-label>
         <input matInput formControlName="workPlace" type="text" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="!loading">
         <mat-label>Имя</mat-label>
         <input matInput formControlName="firstName" type="text" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="!loading">
         <mat-label>Фамилия</mat-label>
         <input matInput formControlName="lastName" type="text" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="!loading">
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="email" type="text" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="!loading">
         <mat-label>Описание</mat-label>
         <input matInput formControlName="description" type="text" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="!loading">
         <mat-label>Логин</mat-label>
-        <input matInput formControlName="login" type="text" required>
+        <input matInput formControlName="username" type="text" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="!loading">
         <mat-label>Пароль</mat-label>
         <input matInput formControlName="password" type="text" required>
         <mat-error>The field is required.</mat-error>
     </mat-form-field>
 
-    <button [disabled]="form.invalid" (click)="createNewExUser()" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%" [mat-dialog-close]="form.value">Создать внешнего пользователя</button>
+
+    <mat-progress-spinner
+            class="example-margin"
+            [color]="color"
+            [mode]="mode"
+            [value]="value" *ngIf="loading">
+    </mat-progress-spinner>
+    <button *ngIf="loading" [disabled]="value < 100" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%" [mat-dialog-close]="newUser">Принять</button>
+    <button *ngIf="!loading" [disabled]="form.invalid" (click)="createNewExUser()" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%">Создать внешнего пользователя</button>
     <button mat-raised-button color="primary" style="color: white; margin: 1% 0 1% 1%" mat-dialog-close>Назад</button>
+
 
 </form>

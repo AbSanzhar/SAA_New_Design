@@ -127,7 +127,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getTeacherDisSovet() {
-    this._api.getSecDisSovet().subscribe(
+    this._api.getAllMyDisSovets(this.tokenId).subscribe(
       res => {
         console.log(res);
         this.TeacherDisSovet = res;

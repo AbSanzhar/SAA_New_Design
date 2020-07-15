@@ -1,12 +1,13 @@
 <div class="dialog-div">
   <div class="header">
-    <h1 class="full-name">Admin Adminov</h1>
+    <h1 class="full-name">{{this.data.member.firstname}} {{this.data.member.lastname}}</h1>
   </div>
   <mat-form-field>
-    <mat-select [formControl]="selectValue" va>
-      <mat-option value="1">секретарь</mat-option>
-      <mat-option value="2">Option 2</mat-option>
-      <mat-option value="3">Option 3</mat-option>
+    <mat-select [(ngModel)]="selectValue">
+      <mat-option value="Председатель совета">Председатель совета</mat-option>
+      <mat-option value="Член совета">Член совета</mat-option>
     </mat-select>
   </mat-form-field>
+  <button [disabled]="selectValue == this.data.member.disposition" style="color: white; margin-top: 2%" mat-raised-button color="primary" (click)="changeDisPosition()" mat-dialog-close>Изменить</button>
+  <button style="margin-left: 2%" mat-raised-button mat-dialog-close>Закрыть</button>
 </div>

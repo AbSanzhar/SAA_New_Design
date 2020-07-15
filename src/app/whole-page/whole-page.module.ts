@@ -47,6 +47,7 @@ import {AllScienceProjectsComponent} from './opportunities/all-science-projects/
 import { AddProjectMemberDialogComponent } from './teacher/add-project-member-dialog/add-project-member-dialog.component';
 import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 import { CourseUploadComponent } from './teacher/course-upload/course-upload.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const r: Routes = [
@@ -116,7 +117,8 @@ const r: Routes = [
         MatSnackBarModule,
         MatCardModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatProgressSpinnerModule
     ],
 })
 export class WholePageModule { }
