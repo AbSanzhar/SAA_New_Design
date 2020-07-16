@@ -27,12 +27,6 @@ export class ApiService {
       return null;
     }
   }
-
-  // createAuthorizationHeader(headers: Headers) {
-  //   headers.append('Authorization', 'Basic ' +
-  //     btoa('username:password'));
-  // }
-
   login(user): Observable<any> {
 
     const url = 'auth/login';
@@ -106,21 +100,12 @@ export class ApiService {
     return this.http.get<Blob>(this.base + url + filename, { responseType: 'blob' as 'json' });
   }
 
-  downloadYourPlan(): Observable<any> {
-    const url = 'plans/reportPdf/';
-    const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    let headers = new HttpHeaders();
-    headers = headers.set('Accept', 'application/pdf');
-    // @ts-ignore
-    return this.http.get<any>(this.base + url + id, { headers, responseType: 'blob' });
-  }
-
   updateYourPlan(planId, newPlan): Observable<any> {
     const url = 'plans/update/';
     return this.http.patch<any>(this.base + url + planId, newPlan);
   }
 
-  getActivity(): Observable<any> {
+  getAcadMethod(): Observable<any> {
     const url = 'academic-method/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));

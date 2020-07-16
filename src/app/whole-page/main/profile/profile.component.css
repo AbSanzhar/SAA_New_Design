@@ -273,17 +273,17 @@ input:not(.btn){
 }
 .mat-column-subPriority {
   flex: 2rem;
-  max-width: 3rem;
+  max-width: 4rem;
   margin-right: 1%;
 }
 .mat-column-subSubPriority {
   flex: 2rem;
-  max-width: 3rem;
+  max-width: 4rem;
   margin-right: 1%;
 }
 .mat-column-executor {
   flex: 2rem;
-  max-width: 3rem;
+  max-width: 4rem;
   margin-right: 1%;
 }
 .mat-column-customer {
@@ -298,7 +298,7 @@ input:not(.btn){
 }
 .mat-column-dept {
   flex: 2rem;
-  max-width: 3rem;
+  max-width: 4rem;
   margin-right: 1%;
 }
 .mat-column-agrDate {

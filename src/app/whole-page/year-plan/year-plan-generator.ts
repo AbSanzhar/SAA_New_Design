@@ -1,11 +1,8 @@
-import { AlignmentType, Document, HeadingLevel, Packer, Paragraph, TabStopPosition, TabStopType, TextRun, Table, TableRow, TableCell, VerticalMergeType,Footer } from "docx";
-const PHONE_NUMBER = "07534563401";
-const PROFILE_URL = "https://www.linkedin.com/in/dolan1";
-const EMAIL = "docx@docx.com";
+import { AlignmentType, Document, HeadingLevel, Packer, Paragraph, TabStopPosition, TabStopType, TextRun, Table, TableRow, TableCell, VerticalMergeType,Footer, PageBreakBefore } from "docx";
 
 export class DocumentCreator {
-    // tslint:disable-next-line: typedef
-    public create([experiences, educations, skills, achivements]): Document {
+
+    public static create(): Document {
         const document = new Document();
 
         document.addSection({
@@ -1990,6 +1987,347 @@ export class DocumentCreator {
                     ],
                 }),
 
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'Оқытушының ДЖЖ орындау қорытындысы',
+                        size: 24,
+                        bold: true,
+
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                    pageBreakBefore: true,
+                    alignment: AlignmentType.CENTER
+                }),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'Итоги выполнения ИПП преподавателя',
+                        size: 24,
+                        bold: true,
+
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                    alignment: AlignmentType.CENTER
+                }),
+                new Paragraph({
+                    children: [new TextRun({
+                        text: 'The teacher’s individual plan performance',
+                        size: 24,
+                        bold: true,
+
+                        font: {
+                            name: 'Times New Roman',
+                        },
+                        color: 'black'
+                    }),
+                    ],
+                    alignment: AlignmentType.CENTER
+                }),
+                new Table({
+                    rows: [
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    children: [
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Рет',
+                                                    size: 24,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black',
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'саны',
+                                                    size: 24,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black',
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: '№п.п',
+                                                    size: 24,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black',
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                    ],
+                                }),
+                                new TableCell({
+                                    children: [new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: 'Жұмыс аталуы',
+                                                size: 24,
+                                                font: {
+                                                    name: 'Times New Roman',
+                                                },
+                                                color: 'black'
+                                            }),
+                                        ],
+                                        alignment: AlignmentType.CENTER
+                                    }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Наименование работ',
+                                                    size: 24,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Activities',
+                                                    size: 20,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                    ],
+                                }),
+
+                                new TableCell({
+                                    children: [new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: 'Орындау',
+                                                size: 20,
+                                                font: {
+                                                    name: 'Times New Roman',
+                                                },
+                                                color: 'black'
+                                            }),
+                                        ],
+                                        alignment: AlignmentType.CENTER
+                                    }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Выполение',
+                                                    size: 20,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'Implementation',
+                                                    size: 20,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        }),
+
+
+
+
+
+                                    ],
+                                }),
+                            ],
+                        }),
+
+                    ]}),
+
+                new Paragraph(''),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'Оқу әдістемелік жұмыс және академиялық мәсілелер департаментінің директоры',
+                            size: 24,
+                            bold: true,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: '(Директор департамента по учебно-методической работе и академическим вопросам) ',
+                            size: 24,
+                            bold: true,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'Head of the Department of Academic and Methodological Guidance',
+                            size: 24,
+                            bold: true,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: '__________ Рахимбаева Г.Р./ G.R. Rakhimbayeva ',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph(''),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'Head of the Department of Academic and Methodological Guidance',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph(''),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'Ғылыми әдістемелік кеңесінде қарастырылды (рассмотрено на заседании НМС)',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'Reviewed at the meeting of SMC',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: '№____хаттама (протокол) Minutes №. __  dated «______»___________________20___ж.(г.)',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph(''),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'ҒӘК төрағасы (председатель НМС) ___________________________ Ускенбаева Р.К. /R.K. Uskenbayeva',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'Head of the IITU SMC, Vice-Rector for Academic Affairs and science,',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: 'Dr. of Engineering Sciences, Professor',
+                            size: 24,
+                            font: {
+                                name: 'Times New Roman',
+                            },
+                            color: 'black'
+                        }),
+                    ],
+                    alignment: AlignmentType.LEFT
+                }),
+
+
+
+
+
+
 
 
 
@@ -2000,5 +2338,9 @@ export class DocumentCreator {
         });
 
         return document;
+    }
+
+    public createAcadMetRows() {
+
     }
 }

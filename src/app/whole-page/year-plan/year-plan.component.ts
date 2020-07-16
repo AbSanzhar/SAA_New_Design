@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from '../../api/api.service';
-
+import {DocumentCreator} from './year-plan-generator';
+import {Packer} from 'docx';
+import {saveAs} from 'file-saver';
 @Component({
     selector: 'app-year-plan',
     templateUrl: './year-plan.component.html',
@@ -14,8 +16,9 @@ export class YearPlanComponent implements OnInit {
         page: 0
     };
     data = [];
-    public AcadMetForm: FormGroup;
-    public AcadMetAct: FormArray;
+    AcadMetForm = this.fb.group({
+        AcadMetAct: this.fb.array([])
+    });
 
     public budgetLength;
     public budgets: FormGroup;
@@ -25,55 +28,8 @@ export class YearPlanComponent implements OnInit {
     public planPerfomLength;
     public planPerfom: FormGroup;
     public Research: FormGroup;
-
-    lectures: FormControl;
-    practiceStudies: FormControl;
-    labs: FormControl;
-    practicesMasters: FormControl;
-    supervisDiplomas: FormControl;
-    stateAttestComm: FormControl;
-    tsis: FormControl;
-    midEndTerm: FormControl;
-    writtenPaper: FormControl;
-    umkd: FormControl;
-    translations: FormControl;
-    advisor: FormControl;
-    created: Date;
     updated: Date;
 
-    lectures2: FormControl;
-    practiceStudies2: FormControl;
-    labs2: FormControl;
-    practicesMasters2: FormControl;
-    supervisDiplomas2: FormControl;
-    stateAttestComm2: FormControl;
-    tsis2: FormControl;
-    midEndTerm2: FormControl;
-    writtenPaper2: FormControl;
-    umkd2: FormControl;
-    translations2: FormControl;
-    advisor2: FormControl;
-
-    lectures3: FormControl;
-    practiceStudies3: FormControl;
-    labs3: FormControl;
-    practicesMasters3: FormControl;
-    supervisDiplomas3: FormControl;
-    stateAttestComm3: FormControl;
-    tsis3: FormControl;
-    midEndTerm3: FormControl;
-    writtenPaper3: FormControl;
-    umkd3: FormControl;
-    translations3: FormControl;
-    advisor3: FormControl;
-
-
-    plan1 = {};
-
-    plan2 = {};
-
-    plan3 = {};
-    selectPlan: number = 4;
     private url: string;
 
     // Объект для сообщения пользователя, type error, success
@@ -82,9 +38,6 @@ export class YearPlanComponent implements OnInit {
         text: '',
         hide: false
     };
-    private planId1: number;
-    private planId2: number;
-    private planId3: number;
     gettedResearch = [];
 
     length = 0;
@@ -137,13 +90,15 @@ export class YearPlanComponent implements OnInit {
     }
 
     addAcadMetForm() {
-        this.AcadMetAct = this.AcadMetForm.get('AcadMetAct') as FormArray;
-        this.AcadMetAct.push(this.initAcadMetForm());
+        let control = this.AcadMetForm.get('AcadMetAct') as FormArray;
+        const newAcadMetForm = this.initAcadMetForm();
+        control.push(newAcadMetForm);
     }
 
     addAcadMetFormParam(id, activity, timeFrame, implementation) {
-        this.AcadMetAct = this.AcadMetForm.get('AcadMetAct') as FormArray;
-        this.AcadMetAct.push(this.initAcadMetFormParam(id, activity, timeFrame, implementation));
+        let control= this.AcadMetForm.controls.AcadMetAct as FormArray;
+        const newAcadMet = this.initAcadMetFormParam(id, activity, timeFrame, implementation);
+        control.push(newAcadMet);
     }
 
     get budId() {
@@ -275,57 +230,19 @@ export class YearPlanComponent implements OnInit {
     ngOnInit() {
         this.getEdus();
         this.message.hide = true;
-        this.AcadMetForm = this.fb.group({
-            AcadMetAct: this.fb.array([this.initAcadMetForm()])
-        });
 
-        this.api.getActivity().subscribe(
+        this.api.getAcadMethod().subscribe(
             res => {
-
+                console.log(res);
+                for(let i = 0; i < res.length; i++) {
+                    this.addAcadMetFormParam(res[i].acId, res[i].activities, res[i].timeFrame, res[i].implementation);
+                }
                 this.gettedActs = res;
             },
             err => {
                 console.log(err);
             }
         );
-        this.lectures = new FormControl(Validators.required);
-        this.practiceStudies = new FormControl();
-        this.labs = new FormControl(Validators.required);
-        this.practicesMasters = new FormControl(Validators.required);
-        this.supervisDiplomas = new FormControl(Validators.required);
-        this.stateAttestComm = new FormControl(Validators.required);
-        this.tsis = new FormControl(Validators.required);
-        this.midEndTerm = new FormControl(Validators.required);
-        this.writtenPaper = new FormControl(Validators.required);
-        this.umkd = new FormControl(Validators.required);
-        this.translations = new FormControl(Validators.required);
-        this.advisor = new FormControl(Validators.required);
-
-        this.lectures2 = new FormControl();
-        this.practiceStudies2 = new FormControl();
-        this.labs2 = new FormControl();
-        this.practicesMasters2 = new FormControl();
-        this.supervisDiplomas2 = new FormControl();
-        this.stateAttestComm2 = new FormControl();
-        this.tsis2 = new FormControl();
-        this.midEndTerm2 = new FormControl();
-        this.writtenPaper2 = new FormControl();
-        this.umkd2 = new FormControl();
-        this.translations2 = new FormControl();
-        this.advisor2 = new FormControl();
-
-        this.lectures3 = new FormControl(this.lectures.value + this.lectures2.value);
-        this.practiceStudies3 = new FormControl(this.practiceStudies.value + this.practiceStudies2.value);
-        this.labs3 = new FormControl(this.labs.value + this.labs2.value);
-        this.practicesMasters3 = new FormControl(this.practicesMasters.value + this.practicesMasters2.value);
-        this.supervisDiplomas3 = new FormControl(this.supervisDiplomas.value + this.supervisDiplomas2.value);
-        this.stateAttestComm3 = new FormControl(this.stateAttestComm.value + this.stateAttestComm2.value);
-        this.tsis3 = new FormControl(this.tsis.value + this.tsis2.value);
-        this.midEndTerm3 = new FormControl(this.midEndTerm.value + this.midEndTerm2.value);
-        this.writtenPaper3 = new FormControl(this.writtenPaper.value + this.writtenPaper2.value);
-        this.umkd3 = new FormControl(this.umkd.value + this.umkd2.value);
-        this.translations3 = new FormControl(this.translations.value + this.translations2.value);
-        this.advisor3 = new FormControl(this.advisor.value + this.advisor2.value);
 
         this.budgets = this.fb.group({
             budId: this.fb.array([]),
@@ -357,16 +274,6 @@ export class YearPlanComponent implements OnInit {
             plan: this.fb.array([]),
             implementation: this.fb.array([])
         });
-        this.api.getActivity().subscribe(
-            res => {
-                console.log(res);
-                this.gettedActs = res;
-            },
-            err => {
-                console.log(err);
-            }
-        );
-
         this.api.getReasearch().subscribe(
             res => {
                 this.gettedResearch = res;
@@ -437,76 +344,6 @@ export class YearPlanComponent implements OnInit {
     }
 
     sendPlan() {
-        this.plan1 = {
-            planName: 'План на первое полугодие',
-            lectures: this.lectures.value,
-            practiceStudies: this.practiceStudies.value,
-            labs: this.labs.value,
-            practicesMasters: this.practicesMasters.value,
-            supervisDiplomas: this.supervisDiplomas.value,
-            stateAttestComm: this.stateAttestComm.value,
-            tsis: this.tsis.value,
-            midEndTerm: this.midEndTerm.value,
-            writtenPaper: this.writtenPaper.value,
-            umkd: this.umkd.value,
-            translations: this.translations.value,
-            advisor: this.advisor.value,
-            updated: new Date()
-        };
-
-        this.plan2 = {
-            planName: 'План на второе полугодие',
-            lectures: this.lectures2.value,
-            practiceStudies: this.practiceStudies2.value,
-            labs: this.labs2.value,
-            practicesMasters: this.practicesMasters2.value,
-            supervisDiplomas: this.supervisDiplomas2.value,
-            stateAttestComm: this.stateAttestComm2.value,
-            tsis: this.tsis2.value,
-            midEndTerm: this.midEndTerm2.value,
-            writtenPaper: this.writtenPaper2.value,
-            umkd: this.umkd2.value,
-            translations: this.translations2.value,
-            advisor: this.advisor2.value
-        };
-
-        this.plan3 = {
-            planName: 'План на год',
-            lectures: this.lectures3.value,
-            practiceStudies: this.practiceStudies3.value,
-            labs: this.labs3.value,
-            practicesMasters: this.practicesMasters3.value,
-            supervisDiplomas: this.supervisDiplomas3.value,
-            stateAttestComm: this.stateAttestComm3.value,
-            tsis: this.tsis3.value,
-            midEndTerm: this.midEndTerm3.value,
-            writtenPaper: this.writtenPaper3.value,
-            umkd: this.umkd3.value,
-            translations: this.translations3.value,
-            advisor: this.advisor3.value
-        };
-        if (this.selectPlan === 1) {
-            if (this.plan1 !== undefined && this.planId1 !== undefined) {
-                console.log(this.plan1);
-            } else {
-                this.plan1 = {
-                    planName: 'План на первое полугодие',
-                    lectures: this.lectures.value,
-                    labs: this.labs.value,
-                    practicesMasters: this.practicesMasters.value,
-                    supervisDiplomas: this.supervisDiplomas.value,
-                    stateAttestComm: this.stateAttestComm.value,
-                    tsis: this.tsis.value,
-                    midEndTerm: this.midEndTerm.value,
-                    writtenPaper: this.writtenPaper.value,
-                    umkd: this.umkd.value,
-                    translations: this.translations.value,
-                    advisor: this.advisor.value,
-                    created: new Date(),
-                    updated: new Date()
-                };
-            }
-        }
         setTimeout(() => {
             this.message.type = 'success';
             this.message.text = 'План успешно сохранен';
@@ -628,16 +465,13 @@ export class YearPlanComponent implements OnInit {
     }
 
     downloadPlan() {
-        this.api.downloadYourPlan().subscribe(
-            res => {
-                this.url = window.URL.createObjectURL(res);
-                window.open(this.url);
-            },
-            error1 => {
-                console.log('Error was happend!');
-                console.log(error1);
-            }
-        );
+        const doc = DocumentCreator.create();
+
+        Packer.toBlob(doc).then(blob => {
+            console.log(blob);
+            saveAs(blob, "Индивидуальный план преподавателя.docx");
+            console.log("Document created successfully");
+        });
     }
 
     somethingChanged() {
@@ -663,21 +497,6 @@ export class YearPlanComponent implements OnInit {
                 console.log(err);
             }
             );
-        // this.api.getEdu().subscribe(
-        //     res => {
-        //         let i = 0;
-        //         this.edusLength = res.length;
-        //         for (; i < res.length; i++) {
-        //             this.eduId.push(this.fb.control(res[i].eduId));
-        //             this.eduAct.push(this.fb.control(res[i].activities));
-        //             this.eduImpl.push(this.fb.control(res[i].implementation));
-        //         }
-        //         this.dataSource = res;
-        //     },
-        //     err => {
-        //         console.log(err);
-        //     }
-        // );
     }
 
     onSubmit() {
