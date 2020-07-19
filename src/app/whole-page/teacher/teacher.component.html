@@ -38,10 +38,38 @@
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Cоавтор</mat-label>
-                        <input matInput formControlName="pubCoAuthor" type="text" placeholder="Ex. Will Smith">
+                    <mat-form-field class="example-chip-list">
+                        <mat-chip-list #chipList aria-label="Fruit selection">
+                            <mat-chip
+                                    *ngFor="let fruit of coAuthorsFullNames"
+                                    [selectable]="selectable"
+                                    [removable]="removable"
+                                    (removed)="remove(fruit)">
+                                {{fruit}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input
+                                    placeholder="Соавторы..."
+                                    #fruitInput
+                                    [formControl]="coAuthorsCtrl"
+                                    [matAutocomplete]="auto"
+                                    [matChipInputFor]="chipList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let fruit of filteredCoAuthorsFullNames | async" [value]="fruit">
+                                {{fruit}}
+                            </mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
+
+
+
+<!--                    <mat-form-field class="example-full-width">-->
+<!--                        <mat-label>Cоавтор</mat-label>-->
+<!--                        <input matInput formControlName="pubCoAuthor" type="text" placeholder="Ex. Will Smith">-->
+<!--                    </mat-form-field>-->
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Название</mat-label>
@@ -108,10 +136,10 @@
                         <mat-label>DOI</mat-label>
                         <input matInput formControlName="pubDoi" type="text" placeholder="Ex. https//iitu.kz">
                     </mat-form-field>
+                    <button mat-raised-button (click)="sendCoAuthors()">Соавторы</button>
                     <div>
                         <button mat-raised-button (click)="openUploadPubDialog()">Загрузить файл</button>
                     </div>
-
                     <button mat-raised-button color="primary" [disabled]="publicationForm.invalid" style="margin-top: 3%;">
                         <p style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication('Successfully saved', 'OK')">Сохранить публикацию</p></button>
                 </form>

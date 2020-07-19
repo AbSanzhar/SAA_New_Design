@@ -43,7 +43,7 @@ export class YearPlanComponent implements OnInit {
     length = 0;
     size = 5;
     page = 0;
-    gettedActs = [];
+    gettedActMets = [];
     displayedColumns: string[] = ['acId', 'activities', 'timeFrame', 'implementation'];
     displayedColumns2: string[] = ['eduId', 'eduAct', 'eduImpl'];
     dataSource: any[];
@@ -234,10 +234,11 @@ export class YearPlanComponent implements OnInit {
         this.api.getAcadMethod().subscribe(
             res => {
                 console.log(res);
+                this.gettedActMets = res;
                 for(let i = 0; i < res.length; i++) {
                     this.addAcadMetFormParam(res[i].acId, res[i].activities, res[i].timeFrame, res[i].implementation);
                 }
-                this.gettedActs = res;
+
             },
             err => {
                 console.log(err);
@@ -353,9 +354,9 @@ export class YearPlanComponent implements OnInit {
             }, 2000);
         }, 2000);
 
-        for (var i = 1; i <= this.gettedActs.length; i++) {
-            this.gettedActs[i - 1].updated = new Date();
-            this.api.updateActivity(i, this.gettedActs[i - 1]).subscribe(res => {
+        for (var i = 1; i <= this.gettedActMets.length; i++) {
+            this.gettedActMets[i - 1].updated = new Date();
+            this.api.updateActivity(i, this.gettedActMets[i - 1]).subscribe(res => {
                     console.log(res);
                 },
                 err => {
@@ -465,7 +466,8 @@ export class YearPlanComponent implements OnInit {
     }
 
     downloadPlan() {
-        const doc = DocumentCreator.create();
+        console.log(this.gettedActMets);
+        const doc = DocumentCreator.create(this.gettedActMets);
 
         Packer.toBlob(doc).then(blob => {
             console.log(blob);

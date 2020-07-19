@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -15,8 +15,18 @@ import {EventUploadComponent} from './event-upload/event-upload.component';
 import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddProjectMemberDialogComponent} from './add-project-member-dialog/add-project-member-dialog.component';
-import {MatDatepickerInput} from '@angular/material/datepicker';
 import {CourseUploadComponent} from './course-upload/course-upload.component';
+import {MatAutocomplete} from '@angular/material/autocomplete';
+import {Observable} from 'rxjs';
+import {startWith} from 'rxjs/operators';
+
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+
+import {map} from 'rxjs/operators';
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -70,14 +80,72 @@ export class TeacherComponent implements OnInit {
   private PatentLinkEn: any;
   private selectedCourseFile: File = null;
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  coAuthorsCtrl = new FormControl();
+  filteredCoAuthorsFullNames: Observable<string[]>;
+  coAuthorsFullNames: string[] = [];
+  allCoAuthorsFullNames: string[] = [];
+  allCoAuthors: any[] = [];
+
+  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.coAuthorsFullNames.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  remove(fruit: string): void {
+    const index = this.coAuthorsFullNames.indexOf(fruit);
+
+    if (index >= 0) {
+      this.coAuthorsFullNames.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.coAuthorsFullNames.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(filterValue);
+    console.log(this.coAuthorsFullNames);
+
+    return this.allCoAuthorsFullNames.filter(fruit => fruit.toLowerCase().includes(filterValue));
+  }
+
   constructor(private formBuilder: FormBuilder,
               private _api: ApiService,
               public dialog: MatDialog,
               private _snackBar: MatSnackBar) {
+
+    this.filteredCoAuthorsFullNames = this.coAuthorsCtrl.valueChanges.pipe(
+        startWith(null),
+        map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCoAuthorsFullNames.slice()));
+
+
     this.publicationForm = formBuilder.group({
       pubPublished: new FormControl('', Validators.required),
       pubType: new FormControl('', Validators.required),
-      pubCoAuthor: new FormControl(''),
+      pubCoAuthor: this.coAuthorsCtrl,
       pubName: new FormControl('', Validators.required),
       pubYear: new FormControl('', Validators.required),
       pubPubName: new FormControl('', Validators.required),
@@ -658,6 +726,20 @@ export class TeacherComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this._api.getAllTeachers().subscribe(
+        res => {
+          console.log(res);
+          for(let i = 0; i < res.length; i++) {
+            this.allCoAuthorsFullNames.push(res[i].lastName  + ' ' + res[i].firstName + ' ' + res[i].patronymic);
+            const coAuthor = {
+              fullName: res[i].lastName + ' ' +  res[i].firstName + ' ' + res[i].patronymic,
+              userId: res[i].userId
+            }
+            this.allCoAuthors.push(coAuthor);
+          }
+          console.log(this.allCoAuthors);
+        }
+    );
     this.getYear();
     this._api.getPubTypeCount().subscribe(
         res => {
@@ -809,6 +891,19 @@ export class TeacherComponent implements OnInit {
         }
       }
     };
+  }
+
+  sendCoAuthors() {
+    let coAuthorsIds = [];
+    for (let i = 0; i < this.allCoAuthors.length; i++) {
+      for (let j = 0; j < this.coAuthorsFullNames.length; j++) {
+        if(this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
+          coAuthorsIds.push(this.allCoAuthors[i].userId);
+        }
+      }
+    }
+    coAuthorsIds = Array.from(new Set(coAuthorsIds));
+    console.log(coAuthorsIds);
   }
 
   sendTeacherPublication(message: string, action: string) {
