@@ -28,6 +28,7 @@ export class AddDissetComponent implements OnInit {
       disStartDate: new FormControl('', Validators.required),
       disStopDate: new FormControl('', Validators.required),
       ministryOrder: new FormControl('', Validators.required),
+      ministryDate: new FormControl('', Validators.required),
       membersNum: new FormControl('', Validators.required),
       secretaryId: new FormControl(this.tokenId)
     });

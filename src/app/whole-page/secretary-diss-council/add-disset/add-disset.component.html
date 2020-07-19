@@ -30,7 +30,13 @@
 
         <mat-form-field>
           <mat-label>Основание создания(№ приказа МОНРК)</mat-label>
-          <input matInput formControlName="ministryOrder" type="number" required>
+          <input matInput formControlName="ministryOrder" type="text" required>
+          <mat-error>The field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Дата приказа</mat-label>
+          <input matInput formControlName="ministryDate" type="date" required>
           <mat-error>The field is required.</mat-error>
         </mat-form-field>
 
