@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
 
   getTeacherPublications() {
     const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
-    let coAuthorsPublications = [];
+    const coAuthorsPublications = [];
     this.TeacherPublications = [];
     // this._api.getCoAuthorsPublications(this.tokenId).subscribe(
     //     coauthors => {
@@ -110,13 +110,14 @@ export class ProfileComponent implements OnInit {
       console.log(res);
       this.TeacherPublications = res;
       for (let i = 0; i < res.length; i++) {
-      console.log(this.TeacherPublications);
-      for(let i = 0; i < res.length; i++) {
-        this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
+        console.log(this.TeacherPublications);
+        for (let i = 0; i < res.length; i++) {
+          this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
+        }
+        this._api.getPublications().subscribe(res2 => {
+          this.paginator.length = res2.length;
+        });
       }
-      this._api.getPublications().subscribe(res2 => {
-        this.paginator.length = res2.length;
-      });
     }, err => {
       console.log(err);
     });
