@@ -15,6 +15,7 @@ export class AllPatentsComponent implements OnInit {
   public IdToken = this.DecodedToken.jti;
 
   constructor(private http: DataControlService,
+              // tslint:disable-next-line:variable-name
               private _api: ApiService) { }
 
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class AllPatentsComponent implements OnInit {
     }
   }
   getAllPatents() {
+    // tslint:disable-next-line:variable-name
     const science_id = {
       ptnt_user_id: this.IdToken
     };
@@ -36,15 +38,21 @@ export class AllPatentsComponent implements OnInit {
         res => {
           console.log(res);
           this.dataSource = res;
-          for(let i = 0; i < res.length; i++) {
-            let year = new Date(res[i].ptntInsertedDate).getFullYear();
-            let month = new Date(res[i].ptntInsertedDate).getMonth() < 0 ? '0' + (new Date(res[i].ptntInsertedDate).getMonth() + 1) : (new Date(res[i].ptntInsertedDate).getMonth() + 1);
-            let day = new Date(res[i].ptntInsertedDate).getDate() < 0 ? '0' + new Date(res[i].ptntInsertedDate).getDate() : new Date(res[i].ptntInsertedDate).getDate();
+          for (let i = 0; i < res.length; i++) {
+            const year = new Date(res[i].ptntInsertedDate).getFullYear();
+            const month = new Date(res[i].ptntInsertedDate).getMonth() < 0 ? '0'
+                + (new Date(res[i].ptntInsertedDate).getMonth()
+                    + 1) : (new Date(res[i].ptntInsertedDate).getMonth() + 1);
+            const day = new Date(res[i].ptntInsertedDate).getDate() < 0 ? '0'
+                + new Date(res[i].ptntInsertedDate).getDate() : new Date(res[i].ptntInsertedDate).getDate();
             this.dataSource[i].ptntInsertedDate = day + '/' + month + '/' + year;
 
-            let year2 = new Date(res[i].ptntIssueDate).getFullYear();
-            let month2 = new Date(res[i].ptntIssueDate).getMonth() < 0 ? '0' + (new Date(res[i].ptntIssueDate).getMonth() + 1) : (new Date(res[i].ptntIssueDate).getMonth() + 1);
-            let day2 = new Date(res[i].ptntIssueDate).getDate() < 0 ? '0' + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
+            const year2 = new Date(res[i].ptntIssueDate).getFullYear();
+            const month2 = new Date(res[i].ptntIssueDate).getMonth() < 0 ? '0'
+                + (new Date(res[i].ptntIssueDate).getMonth()
+                    + 1) : (new Date(res[i].ptntIssueDate).getMonth() + 1);
+            const day2 = new Date(res[i].ptntIssueDate).getDate() < 0 ? '0'
+                + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
             this.dataSource[i].ptntIssueDate = day2 + '/' + month2 + '/' + year2;
           }
         }, err => {

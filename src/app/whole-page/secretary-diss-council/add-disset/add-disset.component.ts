@@ -22,13 +22,13 @@ export class AddDissetComponent implements OnInit {
   }
 
   constructor(private dialog: MatDialog,
+              // tslint:disable-next-line:variable-name
               private _api: ApiService) {
     this.form = new FormGroup({
       disInfo: new FormControl('', Validators.required),
       disStartDate: new FormControl('', Validators.required),
       disStopDate: new FormControl('', Validators.required),
       ministryOrder: new FormControl('', Validators.required),
-      ministryDate: new FormControl('', Validators.required),
       membersNum: new FormControl('', Validators.required),
       secretaryId: new FormControl(this.tokenId)
     });
@@ -43,7 +43,7 @@ export class AddDissetComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(
         res => {
-          if (typeof  res != 'undefined' && res != 'false') {
+          if (typeof  res !== 'undefined' && res !== 'false') {
             console.log('eboy');
             const control = res;
             const members = control.value.disMember;
@@ -51,7 +51,8 @@ export class AddDissetComponent implements OnInit {
             this._api.uploadDisSovet(this.form.value).subscribe(
                 disId => {
                   console.log(disId);
-                  for(let i = 0; i < members.length; i++) {
+                  // tslint:disable-next-line:prefer-for-of
+                  for (let i = 0; i < members.length; i++) {
                     this._api.uploadDisMember(disId, members[i]).subscribe(
                         mem => {console.log(mem); },
                         memErr => {console.log(memErr); }

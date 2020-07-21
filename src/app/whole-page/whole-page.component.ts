@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DataControlService} from "../services/data-control.service";
-import {Router} from "@angular/router";
+import {DataControlService} from '../services/data-control.service';
+import {Router} from '@angular/router';
 import {ApiService} from '../api/api.service';
 import * as jwt_decode from 'jwt-decode';
 import {Validators} from '@angular/forms';
@@ -27,6 +27,7 @@ export class WholePageComponent implements OnInit {
 
   constructor(private service: DataControlService,
               private router: Router,
+              // tslint:disable-next-line:variable-name
               private _api: ApiService) {
   }
 
@@ -35,6 +36,7 @@ export class WholePageComponent implements OnInit {
       res => {
         this.currentUser = res;
         this.name = res.username;
+        // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < res.roles.length; i++) {
           this.userRoles.push(res.roles[i].roleName);
         }

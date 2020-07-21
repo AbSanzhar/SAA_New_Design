@@ -28,5 +28,5 @@
     <button (click)="deleteProjectMember()" style="color: white" mat-raised-button color="warn">Убрать из НП</button>
     <br>
 
-    <button [disabled]="newProjMemForm.invalid" style="color: white; margin: 5% 5% 2% 70%" mat-raised-button color="primary" [mat-dialog-close]="newProjMemForm">Создать</button>
+    <button [disabled]="newProjMemForm.invalid" style="color: white; margin: 5% 5% 2% 70%" mat-raised-button color="primary" (click)="succcess('Successfully saved', 'OK')" [mat-dialog-close]="newProjMemForm">Создать</button>
 </form>

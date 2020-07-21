@@ -1,21 +1,10 @@
-import {
-    AlignmentType,
-    Document,
-    Footer,
-    Paragraph,
-    Table,
-    TableCell,
-    TableRow,
-    TextRun,
-    VerticalAlign,
-    VerticalMergeType,
-    WidthType
-} from 'docx';
+import { AlignmentType, Document, HeadingLevel, Packer,
+    Paragraph, TabStopPosition, TabStopType, TextRun, Table, TableRow,
+    TableCell, VerticalMergeType, Footer, PageBreakBefore } from 'docx';
 
 export class DocumentCreator {
-    public AcadMeth;
 
-    public static create(AcadMet): Document {
+    public static create(): Document {
         const document = new Document();
 
         document.addSection({
@@ -57,7 +46,6 @@ export class DocumentCreator {
                             children: [
                                 new TableCell({
                                     verticalMerge: VerticalMergeType.RESTART,
-                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -119,7 +107,6 @@ export class DocumentCreator {
                                 }),
                                 new TableCell({
                                     rowSpan: 2,
-                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -240,6 +227,7 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
+
 
                         new TableRow({
                             children: [
@@ -398,9 +386,7 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
-                        // AcadMet.forEach(this.prototype.createAcadMetRows(AcadMet.acId, AcadMet.activities, AcadMet.timeFrame, AcadMet.implementation))
-                        // ,
-                        this.prototype.createAcadMetTable(AcadMet),
+
 
                         new TableRow({
                             children: [
@@ -451,12 +437,7 @@ export class DocumentCreator {
                             ],
                         }),
 
-                    ],
-                    width: {
-                        size: 100,
-                        type: WidthType.PERCENTAGE,
-                    }
-                }),
+                    ]}),
 
                 new Paragraph({
                     children: [new TextRun({
@@ -538,10 +519,6 @@ export class DocumentCreator {
                 }),
 
                 new Table({
-                    width: {
-                        size: 100,
-                        type: WidthType.PERCENTAGE,
-                    },
                     rows: [
                         new TableRow({
                             children: [
@@ -1025,10 +1002,6 @@ export class DocumentCreator {
 
 
                 new Table({
-                    width: {
-                        size: 100,
-                        type: WidthType.PERCENTAGE,
-                    },
                     rows: [
                         new TableRow({
                             children: [
@@ -1334,10 +1307,6 @@ export class DocumentCreator {
                 }),
 
                 new Table({
-                    width: {
-                        size: 100,
-                        type: WidthType.PERCENTAGE,
-                    },
                     rows: [
                         new TableRow({
                             children: [
@@ -1742,10 +1711,6 @@ export class DocumentCreator {
 
 
                 new Table({
-                    width: {
-                        size: 100,
-                        type: WidthType.PERCENTAGE,
-                    },
                     rows: [
                         new TableRow({
                             children: [
@@ -2068,10 +2033,6 @@ export class DocumentCreator {
                     alignment: AlignmentType.CENTER
                 }),
                 new Table({
-                    width: {
-                        size: 100,
-                        type: WidthType.PERCENTAGE,
-                    },
                     rows: [
                         new TableRow({
                             children: [
@@ -2381,88 +2342,7 @@ export class DocumentCreator {
         return document;
     }
 
-    public createAcadMetTable(AcadMeth) {
-        console.log(typeof AcadMeth);
-        for(let i = 0; i < AcadMeth.length; i++) {
-            return this.createAcadMetRows(AcadMeth[i].acId, AcadMeth[i].activities, AcadMeth[i].timeFrame, AcadMeth[i].implementation);
-        }
+    public createAcadMetRows() {
+
     }
-
-    public createAcadMetRows(acId, activities, timeFrame, implementation): TableRow {
-        return new TableRow({
-            children: [
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${acId}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black',
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        })
-
-                    ],
-                }),
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${activities}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black'
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        }),
-                    ],
-                }),
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${timeFrame}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black'
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        }),
-                    ],
-                }),
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${implementation}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black'
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        }),
-                    ],
-                }),
-            ]
-        });
-    }
-
-
 }

@@ -1,26 +1,35 @@
 <div class="dialog-content">
-  <mat-dialog-content class="mat-typography">
-    <div style="justify-content: center; display:flex;">
-      <img src="./assets/images/login/FingerPrint.png" width="16%" alt="">
-    </div>
-    <form [formGroup]="form">
-      <mat-form-field>
-        <div style="justify-content: center; display:flex;">
-          <img src="./assets/images/login/user.png" width="8%" alt="">
-          <input style="color: #FDFDFD" formControlName="username" class="input-dialog" placeholder="Username" required>
-        </div>
-      </mat-form-field>
-      <mat-form-field>
-        <div style="justify-content: center; display:flex;">
-          <img src="./assets/images/login/passwd.png" width="8%" alt="">
-          <input style="color: #FDFDFD" formControlName="password" class="input-dialog" type="password" placeholder="Password" required>
-        </div>
-      </mat-form-field>
-      <mat-error *ngIf="error2">Login or password are incorrect!</mat-error>
-      <div style="margin: 8rem 4rem 2rem 4rem;">
-          <input (click)="signIn()" id="sign-in-button" type="submit" value="Sign in">
-        </div>
+    <mat-dialog-content style="text-align: center">
+        <!--    <div style="justify-content: center; display:flex;">-->
+        <!--      <img src="./assets/images/login/FingerPrint.png" width="16%" alt="">-->
+        <!--    </div>-->
+        <form [formGroup]="form">
+            <div class="si">
+                <mat-icon style="color: #015349">login</mat-icon>
+                <mat-form-field color="accent">
+                    <!--        <div style="justify-content: center; display:flex;">-->
+                    <!--          <img src="./assets/images/login/user.png" width="8%" alt="">-->
 
-    </form>
-  </mat-dialog-content>
+                    <input matInput formControlName="username" placeholder="Username" required>
+                    <!--        </div>-->
+                </mat-form-field>
+            </div>
+            <div class="si">
+                <mat-icon style="color: #015349">vpn_key</mat-icon>
+                <mat-form-field color="accent">
+                    <!--        <div style="justify-content: center; display:flex;">-->
+                    <!--          <img src="./assets/images/login/passwd.png" width="8%" alt="">-->
+                    <input matInput formControlName="password" type="password" placeholder="Password" required>
+                    <!--        </div>-->
+                </mat-form-field>
+            </div>
+            <mat-error *ngIf="error2">Login or password are incorrect!</mat-error>
+            <!--      <div style="margin: 8rem 4rem 2rem 4rem;">-->
+            <!--          <input (click)="signIn()" id="sign-in-button" type="submit" value="Sign in">-->
+            <!--        </div>-->
+            <button (click)="signIn()" type="submit" class="signInbtn" mat-stroked-button>Sign in
+            </button>
+
+        </form>
+    </mat-dialog-content>
 </div>

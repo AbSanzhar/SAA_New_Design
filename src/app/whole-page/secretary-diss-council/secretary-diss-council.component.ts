@@ -11,6 +11,7 @@ export class SecretaryDissCouncilComponent implements OnInit {
   dataSource: any[];
   displayedColumns = ['index', 'universityName', 'actions'];
 
+  // tslint:disable-next-line:variable-name
   constructor(private _api: ApiService) { }
 
   ngOnInit(): void {

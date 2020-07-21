@@ -10,11 +10,6 @@ import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
   styleUrls: ['./add-new-ex-member-dialog.component.css']
 })
 export class AddNewExMemberDialogComponent implements OnInit {
-    form: FormGroup;
-    loading = false;
-    color: ThemePalette = 'primary';
-    mode: ProgressSpinnerMode = 'determinate';
-    value = 0;
   constructor(private service: ApiService) {
     this.form = new FormGroup({
       iin: new FormControl('', Validators.required),
@@ -27,10 +22,15 @@ export class AddNewExMemberDialogComponent implements OnInit {
       password: new FormControl('', Validators.required)
     });
   }
+    form: FormGroup;
+    loading = false;
+    color: ThemePalette = 'primary';
+    mode: ProgressSpinnerMode = 'determinate';
+    value = 0;
+  newUser;
 
   ngOnInit(): void {
   }
-  newUser;
   createNewExUser() {
       this.loading = true;
       this.service.uploadNewUser(this.form.value).subscribe(
@@ -40,7 +40,7 @@ export class AddNewExMemberDialogComponent implements OnInit {
               userId : res.userId,
               firstName: this.form.value.firstName,
               lastName: this.form.value.lastName
-            }
+            };
             console.log(this.newUser);
           }, error1 => {
             console.log(error1);

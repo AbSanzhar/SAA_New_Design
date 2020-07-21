@@ -43,7 +43,7 @@ export class YearPlanComponent implements OnInit {
     length = 0;
     size = 5;
     page = 0;
-    gettedActMets = [];
+    gettedActs = [];
     displayedColumns: string[] = ['acId', 'activities', 'timeFrame', 'implementation'];
     displayedColumns2: string[] = ['eduId', 'eduAct', 'eduImpl'];
     dataSource: any[];
@@ -90,13 +90,13 @@ export class YearPlanComponent implements OnInit {
     }
 
     addAcadMetForm() {
-        let control = this.AcadMetForm.get('AcadMetAct') as FormArray;
+        const control = this.AcadMetForm.get('AcadMetAct') as FormArray;
         const newAcadMetForm = this.initAcadMetForm();
         control.push(newAcadMetForm);
     }
 
     addAcadMetFormParam(id, activity, timeFrame, implementation) {
-        let control= this.AcadMetForm.controls.AcadMetAct as FormArray;
+        const control = this.AcadMetForm.controls.AcadMetAct as FormArray;
         const newAcadMet = this.initAcadMetFormParam(id, activity, timeFrame, implementation);
         control.push(newAcadMet);
     }
@@ -209,6 +209,7 @@ export class YearPlanComponent implements OnInit {
     }
 
     addNewPPid() {
+        // tslint:disable-next-line:triple-equals
         if (this.planPerfomLength == 0) {
             this.PlanPerId.push(this.fb.control(1));
         } else {
@@ -234,11 +235,11 @@ export class YearPlanComponent implements OnInit {
         this.api.getAcadMethod().subscribe(
             res => {
                 console.log(res);
-                this.gettedActMets = res;
-                for(let i = 0; i < res.length; i++) {
+                // tslint:disable-next-line:prefer-for-of
+                for (let i = 0; i < res.length; i++) {
                     this.addAcadMetFormParam(res[i].acId, res[i].activities, res[i].timeFrame, res[i].implementation);
                 }
-
+                this.gettedActs = res;
             },
             err => {
                 console.log(err);
@@ -285,7 +286,7 @@ export class YearPlanComponent implements OnInit {
         );
         this.api.getBudget().subscribe(
             res => {
-                var i = 0;
+                let i = 0;
                 this.budgetLength = res.length;
                 for (; i < res.length; i++) {
                     this.budId.push(this.fb.control(res[i].budId));
@@ -302,7 +303,7 @@ export class YearPlanComponent implements OnInit {
 
         this.api.getOrg().subscribe(
             res => {
-                var i = 0;
+                let i = 0;
                 for (; i < res.length; i++) {
                     this.orgId.push(this.fb.control(res[i].orgId));
                     this.acts.push(this.fb.control(res[i].activities));
@@ -316,7 +317,7 @@ export class YearPlanComponent implements OnInit {
         );
         this.api.getEdu().subscribe(
             res => {
-                var i = 0;
+                let i = 0;
                 this.edusLength = res.length;
                 for (; i < res.length; i++) {
                     this.eduId.push(this.fb.control(res[i].eduId));
@@ -330,7 +331,7 @@ export class YearPlanComponent implements OnInit {
         );
         this.api.getPlanPerfomance().subscribe(
             res => {
-                var i = 0;
+                let i = 0;
                 this.planPerfomLength = res.length;
                 for (; i < res.length; i++) {
                     this.PlanPerId.push(this.fb.control(res[i].id));
@@ -354,17 +355,19 @@ export class YearPlanComponent implements OnInit {
             }, 2000);
         }, 2000);
 
-        for (var i = 1; i <= this.gettedActMets.length; i++) {
-            this.gettedActMets[i - 1].updated = new Date();
-            this.api.updateActivity(i, this.gettedActMets[i - 1]).subscribe(res => {
+        // tslint:disable-next-line:no-shadowed-variable
+        for (let i = 1; i <= this.gettedActs.length; i++) {
+            this.gettedActs[i - 1].updated = new Date();
+            this.api.updateActivity(i, this.gettedActs[i - 1]).subscribe(res => {
                     console.log(res);
                 },
                 err => {
                     console.log(err);
                 });
         }
-        var i = 0;
-        for (; i < this.budgets.get('budId').value.length; i++) {
+
+        // tslint:disable-next-line:no-shadowed-variable
+        for (let i = 0; i < this.budgets.get('budId').value.length; i++) {
             // tslint:disable-next-line:prefer-const no-shadowed-variable
             let tempBudget = {
                 budId: this.budgets.get('budId').value[i],
@@ -382,8 +385,8 @@ export class YearPlanComponent implements OnInit {
             );
         }
 
-        var i = 0;
-        for (; i < this.orgs.get('orgId').value.length; i++) {
+        // tslint:disable-next-line:no-shadowed-variable
+        for (let i = 0; i < this.orgs.get('orgId').value.length; i++) {
             // tslint:disable-next-line:prefer-const no-shadowed-variable
             let tempBudget = {
                 orgId: this.orgs.get('orgId').value[i],
@@ -404,8 +407,8 @@ export class YearPlanComponent implements OnInit {
         }
         console.log(this.orgs.get('orgId').value.length);
 
-        var i = 0;
-        for (; i < this.edus.get('eduId').value.length; i++) {
+        // tslint:disable-next-line:no-shadowed-variable
+        for (let i = 0; i < this.edus.get('eduId').value.length; i++) {
             // tslint:disable-next-line:prefer-const no-shadowed-variable
             let tempBudget = {
                 eduId: this.edus.get('eduId').value[i],
@@ -423,8 +426,8 @@ export class YearPlanComponent implements OnInit {
             );
         }
 
-        var i = 0;
-        for (; i < this.planPerfom.get('id').value.length; i++) {
+        // tslint:disable-next-line:no-shadowed-variable
+        for (let i = 0; i < this.planPerfom.get('id').value.length; i++) {
             // tslint:disable-next-line:prefer-const no-shadowed-variable
             let tempBudget = {
                 id: this.planPerfom.get('id').value[i],
@@ -442,7 +445,7 @@ export class YearPlanComponent implements OnInit {
             );
         }
 
-        var i = 0;
+        let i = 0;
         for (; i < this.Research.get('comId').value.length; i++) {
             // tslint:disable-next-line:prefer-const no-shadowed-variable
             let tempBudget = {
@@ -466,13 +469,12 @@ export class YearPlanComponent implements OnInit {
     }
 
     downloadPlan() {
-        console.log(this.gettedActMets);
-        const doc = DocumentCreator.create(this.gettedActMets);
+        const doc = DocumentCreator.create();
 
         Packer.toBlob(doc).then(blob => {
             console.log(blob);
-            saveAs(blob, "Индивидуальный план преподавателя.docx");
-            console.log("Document created successfully");
+            saveAs(blob, 'Индивидуальный план преподавателя.docx');
+            console.log('Document created successfully');
         });
     }
 
@@ -483,7 +485,7 @@ export class YearPlanComponent implements OnInit {
     }
 
     getEdus() {
-        let query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
+        const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
         this.api.getAllEduPage(query).subscribe(
             res => {
             let i = 0;

@@ -20,6 +20,7 @@ export class EditDissetComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(param => {
+      // tslint:disable-next-line:radix
       this.idDisset = parseInt(param.id);
     });
     this.getOneDisMembers();

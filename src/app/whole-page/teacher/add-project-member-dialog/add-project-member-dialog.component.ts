@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from '../../../api/api.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-project-member-dialog',
@@ -20,7 +21,9 @@ export class AddProjectMemberDialogComponent implements OnInit {
   ];
 
   constructor(private formBuilder: FormBuilder,
-              private service: ApiService) {
+              private service: ApiService,
+              // tslint:disable-next-line:variable-name
+              private _snackBar: MatSnackBar) {
     this.newProjMemForm = this.formBuilder.group({
       ScienceMember: this.formBuilder.array([])
     });
@@ -68,6 +71,12 @@ export class AddProjectMemberDialogComponent implements OnInit {
       control.removeAt(control.length - 1);
     }
   }
+
+  succcess(message: string, action: string) {
+      this._snackBar.open(message, action, {
+        duration: 2000,
+      });
+    }
 }
 
 interface Sourse {

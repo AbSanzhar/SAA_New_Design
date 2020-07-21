@@ -7,11 +7,11 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  inputLogin: string = '';
+  inputLogin = '';
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    let L = document.getElementsByClassName('text') as HTMLCollectionOf<HTMLElement>;
+    const L = document.getElementsByClassName('text') as HTMLCollectionOf<HTMLElement>;
     L[0].style.opacity = '0';
     const dialogRef = this.dialog.open(SignInDialogComponent, {
       width: '530px',
@@ -20,7 +20,8 @@ export class LoginComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      let L = document.getElementsByClassName('text') as HTMLCollectionOf<HTMLElement>;
+      // tslint:disable-next-line:no-shadowed-variable
+      const L = document.getElementsByClassName('text') as HTMLCollectionOf<HTMLElement>;
       L[0].style.opacity = '1';
       console.log(`Dialog result: ${result}`);
     });

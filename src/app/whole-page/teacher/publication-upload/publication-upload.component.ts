@@ -13,7 +13,7 @@ export class PublicationUploadComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   onPubFileSelected(event) {
     this.selectedPublicationFile = event.target.files[0] as File;
     console.log(this.selectedPublicationFile);

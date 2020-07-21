@@ -17,6 +17,7 @@
 .example-full-width {
     width: 100%;
 }
+
 @media (max-width: 1200px) {
   .wrapper {
         max-width: 970px;
@@ -34,7 +35,4 @@
         max-width: none;
         display: block;
     }
-}
-.example-chip-list {
-    width: 100%;
 }

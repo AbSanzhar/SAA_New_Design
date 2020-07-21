@@ -48,8 +48,7 @@ import { AddProjectMemberDialogComponent } from './teacher/add-project-member-di
 import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 import { CourseUploadComponent } from './teacher/course-upload/course-upload.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFileUploadModule} from 'mat-file-upload';
 
 
 const r: Routes = [
@@ -121,8 +120,7 @@ const r: Routes = [
         MatDatepickerModule,
         MatNativeDateModule,
         MatProgressSpinnerModule,
-        MatChipsModule,
-        MatAutocompleteModule
+        MatFileUploadModule,
     ],
 })
 export class WholePageModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {DataControlService} from "../../services/data-control.service";
-import {EditEmployeeDialogComponent} from "./edit-employee-dialog/edit-employee-dialog.component";
+import {MatDialog} from '@angular/material/dialog';
+import {DataControlService} from '../../services/data-control.service';
+import {EditEmployeeDialogComponent} from './edit-employee-dialog/edit-employee-dialog.component';
 import {ApiService} from '../../api/api.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class OpportunitiesComponent implements OnInit {
   dataSource: any[] = [];
   displayedColumns = ['index', 'lastName', 'firstName', 'middleName', 'e-mail', 'actions'];
 
+  // tslint:disable-next-line:variable-name
   constructor(private http: DataControlService, private editDialog: MatDialog, private _api: ApiService) { }
 
   ngOnInit(): void {
@@ -28,9 +29,10 @@ export class OpportunitiesComponent implements OnInit {
   }
 
   compareEmployees(a, b) {
-    if (a.userId > b.userId) return 1;
-    if (a.userId == b.userId) return 0;
-    if (a.userId < b.userId) return -1;
+    if (a.userId > b.userId) { return 1; }
+    // tslint:disable-next-line:triple-equals
+    if (a.userId == b.userId) { return 0; }
+    if (a.userId < b.userId) { return -1; }
   }
 
   openDialogEdit(employee) {

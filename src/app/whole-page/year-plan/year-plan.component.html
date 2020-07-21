@@ -89,7 +89,7 @@
                   <tr *ngFor="let results of gettedResearch">
                     <td>
                       <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.comId" [ngModelOptions]="{standalone: true}">
+                        <input matInput type="number" [(ngModel)]="results.commId" [ngModelOptions]="{standalone: true}">
                       </mat-form-field>
                     </td>
                     <td>
@@ -183,7 +183,7 @@
                     <td>
                       <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
                         <div formArrayName="budId" *ngFor="let budIds of budId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                          <input type="number" class="form-control my-1" [formControlName]="i">
                         </div>
                       </form>
                     </td>
@@ -244,7 +244,7 @@
                     <td>
                       <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
                         <div formArrayName="orgId" *ngFor="let orgIds of orgId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i" readonly>
+                          <input type="number" class="form-control my-1" [formControlName]="i">
                         </div>
                       </form>
                     </td>
@@ -313,7 +313,7 @@
                       <td>
                         <form [formGroup]="edus" (ngSubmit)="onSubmit()">
                           <div formArrayName="eduId" *ngFor="let eduId of eduId.controls; let i=index">
-                            <input type="number" class="form-control my-1" readonly>
+                            <input type="number" class="form-control my-1" [formControlName]="i">
                           </div>
                         </form>
                       </td>
@@ -403,7 +403,7 @@
                                 <td>
                                   <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
                                     <div formArrayName="id" *ngFor="let orgIds of PlanPerId.controls; let i=index">
-                                      <input type="number" [formControlName]="i" class="form-control my-1" readonly>
+                                      <input type="number" [formControlName]="i" class="form-control my-1">
                                     </div>
                                   </form>
                                 </td>

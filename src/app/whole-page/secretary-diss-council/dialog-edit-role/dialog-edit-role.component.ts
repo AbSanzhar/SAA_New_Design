@@ -23,7 +23,7 @@ export class DialogEditRoleComponent implements OnInit {
     const user = {
       userId: this.data.member.user_id,
       disPosition: this.selectValue
-    }
+    };
     this.service.updateDisPosistion(user, this.data.disId).subscribe(
         res => {
           console.log(res);

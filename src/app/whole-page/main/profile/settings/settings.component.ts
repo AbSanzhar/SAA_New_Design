@@ -12,8 +12,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class SettingsComponent implements OnInit {
 
+    // tslint:disable-next-line:variable-name
     constructor(private _api: ApiService,
                 private fb: FormBuilder,
+                // tslint:disable-next-line:variable-name
                 private _snackBar: MatSnackBar) {
     }
     public updateProfileForm: FormGroup;

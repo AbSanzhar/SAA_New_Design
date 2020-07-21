@@ -1,44 +1,72 @@
-/deep/.mat-dialog-container{
-  width: 100%;
-  height: 500px;
-  background: rgba(248, 96, 96, 0.7);
-  box-shadow: 0 4px 60px rgba(239, 156, 156, 0.9);
-  border-radius: 23px;
-}
-#sign-in-button{
-  width: 100%;
-  font-family: Ubuntu,sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 26px;
-  background: #FFFCFC;
-  border-radius: 40px;
-  color: #8F1812;
-  border: none;
-  padding: 1rem;
-}
-/deep/.mat-form-field-wrapper{
-  padding: 0;
-}
-mat-form-field{
-  display: block;
-  margin: 1rem 4rem;
-  border-bottom: 1px solid white;
-  transform: rotate(0.25deg);
-}
-mat-form-field img{
-  margin-left: 3rem;
-}
-.input-dialog{
-  margin-left: 1.5rem;
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 22px;
-}
+/*/deep/.mat-dialog-container{*/
+/*  width: 100%;*/
+/*  height: 500px;*/
+/*  background: rgba(248, 96, 96, 0.7);*/
+/*  box-shadow: 0 4px 60px rgba(239, 156, 156, 0.9);*/
+/*  border-radius: 23px;*/
+/*}*/
+/*.dialog-content{*/
+/*  width: 100%;*/
+/*  height: 500px;*/
+/*  background: rgba(248, 96, 96, 0.7);*/
+/*  box-shadow: 0 4px 60px rgba(239, 156, 156, 0.9);*/
+/*  border-radius: 23px;*/
+/*}*/
+/*#sign-in-button{*/
+/*  width: 100%;*/
+/*  font-family: Ubuntu,sans-serif;*/
+/*  font-style: normal;*/
+/*  font-weight: normal;*/
+/*  font-size: 22px;*/
+/*  line-height: 26px;*/
+/*  background: #FFFCFC;*/
+/*  border-radius: 40px;*/
+/*  color: #8F1812;*/
+/*  border: none;*/
+/*  padding: 1rem;*/
+/*}*/
+/*/deep/.mat-form-field-wrapper{*/
+/*  padding: 0;*/
+/*}*/
+/*mat-form-field{*/
+/*  display: block;*/
+/*  margin: 1rem 4rem;*/
+/*  border-bottom: 1px solid white;*/
+/*  transform: rotate(0.25deg);*/
+/*}*/
+/*mat-form-field img{*/
+/*  margin-left: 3rem;*/
+/*}*/
+/*.input-dialog{*/
+/*  margin-left: 1.5rem;*/
+/*  background: none;*/
+/*  border: none;*/
+/*  outline: none;*/
+/*  font-size: 22px;*/
+/*}*/
 mat-error{
   text-align: center;
   font-size: large;
   font-weight: bold;
+}
+mat-form-field {
+width: 80%;
+  margin-left: 5%;
+}
+.signInbtn {
+  padding: 0 15%;
+  width: 70%;
+  color: #015349;
+  font-weight: bold;
+  font-size: large;
+  font-family: 'Roboto', sans-serif;
+}
+mat-dialog-content {
+  padding: 5% 0;
+}
+.si {
+  display: flex;
+  width: 70%;
+  margin: 5% 15%;
+  align-items: center;
 }

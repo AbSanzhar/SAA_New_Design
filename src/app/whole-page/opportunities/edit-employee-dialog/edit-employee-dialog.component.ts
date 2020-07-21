@@ -14,12 +14,14 @@ export class EditEmployeeDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialogRef<EditEmployeeDialogComponent>,
     private http: DataControlService,
+    // tslint:disable-next-line:variable-name
     private _api: ApiService
   ) {}
   userRoles: any[] = [];
   formOptions: FormGroup;
   public newForm: FormGroup;
   ngOnInit(): void {
+      // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.data.roles.length; i++) {
       this.userRoles.push(this.data.roles[i].roleName);
     }
@@ -45,30 +47,32 @@ export class EditEmployeeDialogComponent implements OnInit {
     });
      console.log(this.newForm.get('role'));
      console.log(this.newForm.get('role')['controls'][0].value);
-     let isTeacher = (this.newForm.get('role') as FormArray).controls[0].value;
-     let isSciencePM = (this.newForm.get('role') as FormArray).controls[1].value;
-     let isDisSec = (this.newForm.get('role') as FormArray).controls[2].value;
+     const isTeacher = (this.newForm.get('role') as FormArray).controls[0].value;
+     const isSciencePM = (this.newForm.get('role') as FormArray).controls[1].value;
+     const isDisSec = (this.newForm.get('role') as FormArray).controls[2].value;
      console.log(isTeacher);
-      let teacherRole = {
+     const teacherRole = {
           userId: this.data.userId,
           roleName: 'Teacher'
       };
-      let scincePmRole = {
+     const scincePmRole = {
           userId: this.data.userId,
           roleName: 'Science_Project_Manager'
       };
-      let disSecRole = {
+     const disSecRole = {
           userId: this.data.userId,
           roleName: 'Science_Secretary_Dissovet'
-      }
-     if(this.userRoles.indexOf('Teacher') != - 1 && !isTeacher) {
+      };
+      // tslint:disable-next-line:triple-equals
+     if (this.userRoles.indexOf('Teacher') != - 1 && !isTeacher) {
         this._api.deleteRole(teacherRole).subscribe(
             res => {
                 console.log(res);
             }, err => {
                 console.log(err);
             });
-     } else if(this.userRoles.indexOf('Teacher') == -1 && isTeacher) {
+         // tslint:disable-next-line:triple-equals
+     } else if (this.userRoles.indexOf('Teacher') == -1 && isTeacher) {
          this._api.addRole(teacherRole).subscribe(
              res => {console.log(res);
              },
@@ -76,14 +80,16 @@ export class EditEmployeeDialogComponent implements OnInit {
                console.log(err);
              }
          );
-     } else if(this.userRoles.indexOf('Science_Project_Manager') != - 1 && !isSciencePM) {
+         // tslint:disable-next-line:triple-equals
+     } else if (this.userRoles.indexOf('Science_Project_Manager') != - 1 && !isSciencePM) {
          this._api.deleteRole(scincePmRole).subscribe(
              res => {
                console.log(res);
              }, err => {
                console.log(err);
              });
-     } else if(this.userRoles.indexOf('Science_Project_Manager') == -1 && isSciencePM) {
+         // tslint:disable-next-line:triple-equals
+     } else if (this.userRoles.indexOf('Science_Project_Manager') == -1 && isSciencePM) {
          this._api.addRole(scincePmRole).subscribe(
              res => {console.log(res);
              },
@@ -91,14 +97,16 @@ export class EditEmployeeDialogComponent implements OnInit {
                console.log(err);
              }
          );
-     } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') != - 1 && !isDisSec) {
+         // tslint:disable-next-line:triple-equals
+     } else if (this.userRoles.indexOf('Science_Secretary_Dissovet') != - 1 && !isDisSec) {
          this._api.deleteRole(disSecRole).subscribe(
              res => {
                  console.log(res);
              }, err => {
                  console.log(err);
              });
-     } else if(this.userRoles.indexOf('Science_Secretary_Dissovet') == -1 && isDisSec) {
+         // tslint:disable-next-line:triple-equals
+     } else if (this.userRoles.indexOf('Science_Secretary_Dissovet') == -1 && isDisSec) {
        this._api.addRole(disSecRole).subscribe(
            res => {console.log(res);
            },

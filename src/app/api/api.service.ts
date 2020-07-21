@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders,} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
@@ -15,8 +15,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  private base =  window["cfgApiBaseUrl"];
-  //private base = 'http://localhost:8077/';
+  private base =  window['cfgApiBaseUrl'];
+  // private base = 'http://localhost:8077/';
 
   table: number;
 
@@ -126,7 +126,9 @@ export class ApiService {
   getBudget(): Observable<any> {
     const url = 'budget-research/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
+    return this.http.get<any>(
+        this.base + url + id + '?jwt_token='
+        + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
   }
   uploadBudget(budget): Observable<any> {
     const url = 'budget-research/add/';
@@ -148,24 +150,32 @@ export class ApiService {
   getPublications(): Observable<any> {
     const url = 'publication/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
+    return this.http.get<any>(
+        this.base + url + id + '?jwt_token='
+        + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
   }
 
   getPublicationsPage(query): Observable<any> {
     const url = 'publication/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token') + query).pipe(catchError(this.errorHandler));
+    return this.http.get<any>(
+        this.base + url + id + '?jwt_token='
+        + window.localStorage.getItem('token') + query).pipe(catchError(this.errorHandler));
   }
 
   uploadPub(pub): Observable<any> {
     const url = 'publication/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.post<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'), pub).pipe(catchError(this.errorHandler));
+    return this.http.post<any>(
+        this.base + url + id + '?jwt_token='
+        + window.localStorage.getItem('token'), pub).pipe(catchError(this.errorHandler));
   }
 
   updatePub(id, pub): Observable<any> {
     const url = 'publication/update/';
-    return this.http.patch<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'), pub);
+    return this.http.patch<any>(
+        this.base + url + id + '?jwt_token='
+        + window.localStorage.getItem('token'), pub);
   }
 
   getEvent(): Observable<any> {
@@ -177,7 +187,9 @@ export class ApiService {
   }
   uploadEvent(Event1): Observable<any> {
     const url = 'event/add';
-    return this.http.post<any>(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), Event1).pipe(catchError(this.errorHandler));
+    return this.http.post<any>(
+        this.base + url + '?jwt_token='
+        + window.localStorage.getItem('token'), Event1).pipe(catchError(this.errorHandler));
   }
   updateEvent(id, event): Observable<any> {
     const url = 'event/update/';

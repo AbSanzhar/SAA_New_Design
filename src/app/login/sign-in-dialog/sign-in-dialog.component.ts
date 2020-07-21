@@ -20,6 +20,7 @@ export class SignInDialogComponent implements OnInit {
                 private service: DataControlService,
                 private dialog: MatDialogRef<SignInDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data,
+                // tslint:disable-next-line:variable-name
                 private _api: ApiService) {
         this.form = new FormGroup({
             username: new FormControl(this.data, Validators.required),
