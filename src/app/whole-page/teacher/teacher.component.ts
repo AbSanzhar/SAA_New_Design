@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -16,10 +16,16 @@ import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddProjectMemberDialogComponent} from './add-project-member-dialog/add-project-member-dialog.component';
 import {CourseUploadComponent} from './course-upload/course-upload.component';
+import {MatAutocomplete} from '@angular/material/autocomplete';
+import {Observable} from 'rxjs';
+import {startWith} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {CountriesService} from '../../services/countries.service';
 import {ScienceListGenerator} from './ScienceListGenerator';
-
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {map} from 'rxjs/operators';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -28,34 +34,134 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     styleUrls: ['./teacher.component.css']
 })
 export class TeacherComponent implements OnInit {
-    fileToUpload: File = null;
-    allCountries: any;
-    private name: any;
+
+  fileToUpload: File = null;
+  allCountries: any;
+  private name: any;
+  publicationForm: FormGroup;
+  eventForm: FormGroup;
+  newProjForm: FormGroup;
+  teacherCourseForm: FormGroup;
+  patentForm: FormGroup;
+  PubTypeCounts;
+  UserDegreeCounts;
+  publishCount;
+  courceCount;
+  disMembersCount;
+  selectedPublicationFile: File = null;
+  selectedEventFile: File = null;
+  selectedValue: string;
+  selectedValue1: string;
+  selectedValue2: string;
+  selectedValue3: string;
+  selectedValue4: string;
+  selectedValue5: string;
+  selectedValue6: string;
+  selectedValue7: string;
+  selectedValue8: string;
+  selectedValue9: string;
+  selectedValue10: string;
+  selectedValue11: string;
+  selectedValue12: string;
+  selectedValue13: string;
+  selectedValue14: string;
+  selectedValue15: string;
+  selectedValue16: string;
+  selectedValue17: string;
+  selectedValue18: string;
+  selectedValue19: string;
+  public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
+  public IdToken = this.DecodedToken.jti;
+  public publications = [];
+  private PatentFileRu: any;
+  private PatentFileKz: any;
+  private PatentFileEn: any;
+  private PatentLinkRu: any;
+  private PatentLinkKz: any;
+  private PatentLinkEn: any;
+  private selectedCourseFile: File = null;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  coAuthorsCtrl = new FormControl();
+  filteredCoAuthorsFullNames: Observable<string[]>;
+  coAuthorsFullNames: string[] = [];
+  allCoAuthorsFullNames: string[] = [];
+  allCoAuthors: any[] = [];
+
+  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.coAuthorsFullNames.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  remove(fruit: string): void {
+    const index = this.coAuthorsFullNames.indexOf(fruit);
+
+    if (index >= 0) {
+      this.coAuthorsFullNames.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.coAuthorsFullNames.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(filterValue);
+    console.log(this.coAuthorsFullNames);
+
+    return this.allCoAuthorsFullNames.filter(fruit => fruit.toLowerCase().includes(filterValue));
+  }
+
+  constructor(private formBuilder: FormBuilder,
+              // tslint:disable-next-line:variable-name
+              private _api: ApiService,
+              public dialog: MatDialog,
+              // tslint:disable-next-line:variable-name
+              private _snackBar: MatSnackBar,
+              private http: HttpClient,
+              private service: CountriesService) {
+
+    this.filteredCoAuthorsFullNames = this.coAuthorsCtrl.valueChanges.pipe(
+        startWith(null),
+        map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCoAuthorsFullNames.slice()));
 
 
-    constructor(private formBuilder: FormBuilder,
-                // tslint:disable-next-line:variable-name
-                private _api: ApiService,
-                public dialog: MatDialog,
-                // tslint:disable-next-line:variable-name
-                private _snackBar: MatSnackBar,
-                private http: HttpClient,
-                private service: CountriesService) {
-        this.publicationForm = formBuilder.group({
-            pubPublished: new FormControl('', Validators.required),
-            pubType: new FormControl('', Validators.required),
-            pubCoAuthor: new FormControl(''),
-            pubName: new FormControl('', Validators.required),
-            pubYear: new FormControl('', Validators.required),
-            pubPubName: new FormControl('', Validators.required),
-            pubCity: new FormControl('', Validators.required),
-            pubPage: new FormControl(''),
-            pubEndPage: new FormControl(''),
-            pubUrl: new FormControl(''),
-            pubDoi: new FormControl(''),
-            pubFile: new FormControl('', Validators.required),
-            pubScopusUrl: ''
-        });
+    this.publicationForm = formBuilder.group({
+      pubPublished: new FormControl('', Validators.required),
+      pubType: new FormControl('', Validators.required),
+      pubCoAuthor: [],
+      pubName: new FormControl('', Validators.required),
+      pubYear: new FormControl('', Validators.required),
+      pubPubName: new FormControl('', Validators.required),
+      pubCity: new FormControl('', Validators.required),
+      pubPage: new FormControl(''),
+      pubEndPage: new FormControl(''),
+      pubUrl: new FormControl(''),
+      pubDoi: new FormControl(''),
+      pubFile: new FormControl('', Validators.required),
+      pubScopusUrl: ''
+    });
 
         this.eventForm = formBuilder.group({
             event_type: new FormControl(''),
@@ -68,7 +174,7 @@ export class TeacherComponent implements OnInit {
             event_user_id: this.IdToken
         });
 
-        this.newProjForm = formBuilder.group({
+            this.newProjForm = formBuilder.group({
             scId: new FormControl('', Validators.required),
             scName: new FormControl('', Validators.required),
             scType: new FormControl('', Validators.required),
@@ -118,49 +224,12 @@ export class TeacherComponent implements OnInit {
 
     }
 
-    publicationForm: FormGroup;
-    eventForm: FormGroup;
-    newProjForm: FormGroup;
-    teacherCourseForm: FormGroup;
-    patentForm: FormGroup;
-    PubTypeCounts;
-    UserDegreeCounts;
-    publishCount;
-    courceCount;
-    disMembersCount;
-    selectedPublicationFile: File = null;
-    selectedEventFile: File = null;
-    selectedValue: string;
-    selectedValue1: string;
-    selectedValue2: string;
-    selectedValue3: string;
-    selectedValue4: string;
-    selectedValue5: string;
-    selectedValue6: string;
-    selectedValue7: string;
-    selectedValue8: string;
-    selectedValue9: string;
-    selectedValue10: string;
-    selectedValue11: string;
-    selectedValue12: string;
-    selectedValue13: string;
-    selectedValue14: string;
-    selectedValue15: string;
-    selectedValue16: string;
-    selectedValue17: string;
-    selectedValue18: string;
-    selectedValue19: string;
-    public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
-    public IdToken = this.DecodedToken.jti;
-    public publications = [];
-    private PatentFileRu: any;
-    private PatentFileKz: any;
-    private PatentFileEn: any;
-    private PatentLinkRu: any;
-    private PatentLinkKz: any;
-    private PatentLinkEn: any;
-    private selectedCourseFile: File = null;
-
+  getYear() {
+    var today = new Date();
+    this.yy = today.getFullYear();
+    for(var i = (this.yy-100); i <= this.yy; i++){
+      this.years.push(i);}
+  }
 
     div: Sourse[] = [
         {value: '1', viewValue: 'Information systems'},
@@ -780,15 +849,6 @@ export class TeacherComponent implements OnInit {
     ];
     courseDegree = new FormControl(this.level[1].value);
 
-    getYear() {
-        // tslint:disable-next-line:prefer-const
-        let today = new Date();
-        this.yy = today.getFullYear();
-        for (let i = (this.yy - 100); i <= this.yy; i++) {
-            this.years.push(i);
-        }
-    }
-
 
     getDecodedAccessToken(token: string): any {
         try {
@@ -799,18 +859,32 @@ export class TeacherComponent implements OnInit {
     }
 
 
-    ngOnInit(): void {
-        this.getAllCountries();
-        this.getYear();
-        this._api.getPubTypeCount().subscribe(
-            res => {
-                console.log(res);
-                this.PubTypeCounts = res;
-            },
-            err => {
-                console.log(err);
+  ngOnInit(): void {
+    this.getAllCountries();
+    this._api.getAllTeachers().subscribe(
+        res => {
+          console.log(res);
+          for(let i = 0; i < res.length; i++) {
+            this.allCoAuthorsFullNames.push(res[i].lastName  + ' ' + res[i].firstName + ' ' + res[i].patronymic);
+            const coAuthor = {
+              fullName: res[i].lastName + ' ' +  res[i].firstName + ' ' + res[i].patronymic,
+              userId: res[i].userId
             }
-        );
+            this.allCoAuthors.push(coAuthor);
+          }
+          console.log(this.allCoAuthors);
+        }
+    );
+    this.getYear();
+    this._api.getPubTypeCount().subscribe(
+        res => {
+          console.log(res);
+          this.PubTypeCounts = res;
+        },
+        err => {
+          console.log(err);
+        }
+    );
 
         this._api.getUserDegreeCount().subscribe(
             res => {
@@ -964,21 +1038,47 @@ export class TeacherComponent implements OnInit {
         };
     }
 
-    sendTeacherPublication(message: string, action: string) {
-        if (this.publicationForm.valid) {
-            this._api.uploadPub(this.publicationForm.value).subscribe(
-                res => {
-                    console.log(res);
-                }, err => {
-                    console.log(err);
-                }
-            );
-            this.publicationForm.reset();
-            this._snackBar.open(message, action, {
-                duration: 2000,
-            });
+  // sendCoAuthors() {
+  //   let coAuthorsIds = [];
+  //   for (let i = 0; i < this.allCoAuthors.length; i++) {
+  //     for (let j = 0; j < this.coAuthorsFullNames.length; j++) {
+  //       if(this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
+  //         coAuthorsIds.push(this.allCoAuthors[i].userId);
+  //       }
+  //     }
+  //   }
+  //   coAuthorsIds = Array.from(new Set(coAuthorsIds));
+  //   console.log(coAuthorsIds);
+  // }
+
+  sendTeacherPublication(message: string, action: string) {
+      let coAuthorsIds = [];
+      for (let i = 0; i < this.allCoAuthors.length; i++) {
+          for (let j = 0; j < this.coAuthorsFullNames.length; j++) {
+              if(this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
+                  coAuthorsIds.push(this.allCoAuthors[i].userId);
+              }
+          }
+      }
+      coAuthorsIds = Array.from(new Set(coAuthorsIds));
+      console.log(coAuthorsIds);
+      this.publicationForm.patchValue({
+          pubCoAuthor: coAuthorsIds
+      });
+    this._api.uploadPub(this.publicationForm.value).subscribe(
+        res => {
+          console.log(res);
+        }, err => {
+          console.log(err);
         }
+    );
+    if (this.publicationForm.valid) {
+      this.publicationForm.reset();
+      this._snackBar.open(message, action, {
+        duration: 2000,
+      });
     }
+  }
 
     sendTeacherEvent(message: string, action: string) {
         if (this.eventForm.valid) {

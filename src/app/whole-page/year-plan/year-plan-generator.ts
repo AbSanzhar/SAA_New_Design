@@ -1,10 +1,21 @@
-import { AlignmentType, Document, HeadingLevel, Packer,
-    Paragraph, TabStopPosition, TabStopType, TextRun, Table, TableRow,
-    TableCell, VerticalMergeType, Footer, PageBreakBefore } from 'docx';
+import {
+    AlignmentType,
+    Document,
+    Footer,
+    Paragraph,
+    Table,
+    TableCell,
+    TableRow,
+    TextRun,
+    VerticalAlign,
+    VerticalMergeType,
+    WidthType
+} from 'docx';
 
 export class DocumentCreator {
+    public AcadMeth;
 
-    public static create(): Document {
+    public create(AcadMet): Document {
         const document = new Document();
 
         document.addSection({
@@ -46,6 +57,7 @@ export class DocumentCreator {
                             children: [
                                 new TableCell({
                                     verticalMerge: VerticalMergeType.RESTART,
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -107,6 +119,7 @@ export class DocumentCreator {
                                 }),
                                 new TableCell({
                                     rowSpan: 2,
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -227,7 +240,6 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
-
 
                         new TableRow({
                             children: [
@@ -386,7 +398,12 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
+                        // AcadMet.forEach((item) => {
+                        //     this.prototype.createAcadMetRows(item.acId, item.activities, item.timeFrame, item.implementation)
+                        // })
 
+                        // this.prototype.createAcadMetTable(AcadMet, AcadMet.length),
+                        this.createAcadMetRows(AcadMet),
 
                         new TableRow({
                             children: [
@@ -437,7 +454,12 @@ export class DocumentCreator {
                             ],
                         }),
 
-                    ]}),
+                    ],
+                    width: {
+                        size: 100,
+                        type: WidthType.PERCENTAGE,
+                    }
+                }),
 
                 new Paragraph({
                     children: [new TextRun({
@@ -519,10 +541,15 @@ export class DocumentCreator {
                 }),
 
                 new Table({
+                    width: {
+                        size: 100,
+                        type: WidthType.PERCENTAGE,
+                    },
                     rows: [
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     verticalMerge: VerticalMergeType.RESTART,
                                     children: [new Paragraph({
                                         children: [
@@ -584,6 +611,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     rowSpan: 2,
                                     children: [new Paragraph({
                                         children: [
@@ -803,6 +831,7 @@ export class DocumentCreator {
                                     verticalMerge: VerticalMergeType.CONTINUE
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -850,6 +879,7 @@ export class DocumentCreator {
                                 }),
 
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -1002,10 +1032,15 @@ export class DocumentCreator {
 
 
                 new Table({
+                    width: {
+                        size: 100,
+                        type: WidthType.PERCENTAGE,
+                    },
                     rows: [
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     verticalMerge: VerticalMergeType.RESTART,
                                     children: [
                                         new Paragraph({
@@ -1026,6 +1061,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     rowSpan: 2,
                                     children: [new Paragraph({
                                         children: [
@@ -1307,10 +1343,15 @@ export class DocumentCreator {
                 }),
 
                 new Table({
+                    width: {
+                        size: 100,
+                        type: WidthType.PERCENTAGE,
+                    },
                     rows: [
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     verticalMerge: VerticalMergeType.RESTART,
                                     children: [
                                         new Paragraph({
@@ -1373,6 +1414,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     rowSpan: 2,
                                     children: [new Paragraph({
                                         children: [
@@ -1711,10 +1753,15 @@ export class DocumentCreator {
 
 
                 new Table({
+                    width: {
+                        size: 100,
+                        type: WidthType.PERCENTAGE,
+                    },
                     rows: [
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [
                                         new Paragraph({
                                             children: [
@@ -1776,6 +1823,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -2033,6 +2081,10 @@ export class DocumentCreator {
                     alignment: AlignmentType.CENTER
                 }),
                 new Table({
+                    width: {
+                        size: 100,
+                        type: WidthType.PERCENTAGE,
+                    },
                     rows: [
                         new TableRow({
                             children: [
@@ -2342,7 +2394,99 @@ export class DocumentCreator {
         return document;
     }
 
-    public createAcadMetRows() {
+    // public createAcadMetTable(AcadMeth, n) {
+    //     console.log(n);
+    //     console.log(AcadMeth[n]);
+    //     if(n == 0) {
+    //         return this.createAcadMetRows(AcadMeth[n].acId, AcadMeth[n].activities, AcadMeth[n].timeFrame, AcadMeth[n].implementation);
+    //     } else {
+    //         this.createAcadMetTable(AcadMeth, n - 1);
+    //     }
+    //     // for(let i = 0; i < 2; i++) {
+    //     //     console.log(AcadMeth.length);
+    //     //     return this.createAcadMetRows(AcadMeth[i].acId, AcadMeth[i].activities, AcadMeth[i].timeFrame, AcadMeth[i].implementation);
+    //     // }
+    // }
 
+    public createAcadMetRows(AcadMeth): TableRow {
+        console.log(AcadMeth);
+        return AcadMeth.map((acad) => {
+            // tslint:disable-next-line:no-unused-expression
+            new TableRow({
+                children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.acId}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black',
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            })
+
+                        ],
+                    }),
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.activities}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black'
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            }),
+                        ],
+                    }),
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.timeFrame}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black'
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            }),
+                        ],
+                    }),
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.implementation}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black'
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            }),
+                        ],
+                    }),
+                ]
+            });
+        });
     }
+
+
 }

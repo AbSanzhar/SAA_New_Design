@@ -99,7 +99,7 @@
 
               <ng-container matColumnDef="Collaborators">
                 <mat-header-cell *matHeaderCellDef> Соавторы </mat-header-cell>
-                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCoAuthor}} </div> </mat-cell>
+                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <div *ngFor="let coAuthors of publication.pubCoAuthor"> {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}</div> </div> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Title">

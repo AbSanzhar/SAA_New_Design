@@ -398,6 +398,11 @@ export class ApiService {
     return this.http.post(this.base + url + disId + '?jwt_token=' + window.localStorage.getItem('token'), disMember);
   }
 
+  getCoAuthorsPublications(userId): Observable<any> {
+    const url = 'publication/coAuthor/';
+    return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
 
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
