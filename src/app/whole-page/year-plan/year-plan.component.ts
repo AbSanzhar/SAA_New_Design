@@ -467,7 +467,8 @@ export class YearPlanComponent implements OnInit {
 
     downloadPlan() {
         console.log(this.gettedActMets);
-        const doc = DocumentCreator.create(this.gettedActMets);
+        const documentCreator = new DocumentCreator();
+        const doc = documentCreator.create(this.gettedActMets);
 
         Packer.toBlob(doc).then(blob => {
             console.log(blob);

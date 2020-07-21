@@ -145,7 +145,7 @@ export class TeacherComponent implements OnInit {
     this.publicationForm = formBuilder.group({
       pubPublished: new FormControl('', Validators.required),
       pubType: new FormControl('', Validators.required),
-      pubCoAuthor: this.coAuthorsCtrl,
+      pubCoAuthor: [],
       pubName: new FormControl('', Validators.required),
       pubYear: new FormControl('', Validators.required),
       pubPubName: new FormControl('', Validators.required),
@@ -893,20 +893,33 @@ export class TeacherComponent implements OnInit {
     };
   }
 
-  sendCoAuthors() {
-    let coAuthorsIds = [];
-    for (let i = 0; i < this.allCoAuthors.length; i++) {
-      for (let j = 0; j < this.coAuthorsFullNames.length; j++) {
-        if(this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
-          coAuthorsIds.push(this.allCoAuthors[i].userId);
-        }
-      }
-    }
-    coAuthorsIds = Array.from(new Set(coAuthorsIds));
-    console.log(coAuthorsIds);
-  }
+  // sendCoAuthors() {
+  //   let coAuthorsIds = [];
+  //   for (let i = 0; i < this.allCoAuthors.length; i++) {
+  //     for (let j = 0; j < this.coAuthorsFullNames.length; j++) {
+  //       if(this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
+  //         coAuthorsIds.push(this.allCoAuthors[i].userId);
+  //       }
+  //     }
+  //   }
+  //   coAuthorsIds = Array.from(new Set(coAuthorsIds));
+  //   console.log(coAuthorsIds);
+  // }
 
   sendTeacherPublication(message: string, action: string) {
+      let coAuthorsIds = [];
+      for (let i = 0; i < this.allCoAuthors.length; i++) {
+          for (let j = 0; j < this.coAuthorsFullNames.length; j++) {
+              if(this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
+                  coAuthorsIds.push(this.allCoAuthors[i].userId);
+              }
+          }
+      }
+      coAuthorsIds = Array.from(new Set(coAuthorsIds));
+      console.log(coAuthorsIds);
+      this.publicationForm.patchValue({
+          pubCoAuthor: coAuthorsIds
+      });
     this._api.uploadPub(this.publicationForm.value).subscribe(
         res => {
           console.log(res);

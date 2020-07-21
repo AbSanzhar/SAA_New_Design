@@ -82,10 +82,32 @@ export class ProfileComponent implements OnInit {
 
   getTeacherPublications() {
     const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
-
+    let coAuthorsPublications = [];
+    this.TeacherPublications = [];
+    // this._api.getCoAuthorsPublications(this.tokenId).subscribe(
+    //     coauthors => {
+    //       console.log(coauthors);
+    //       coAuthorsPublications = coauthors;
+    //       this.TeacherPublications = this.TeacherPublications.concat(coAuthorsPublications);
+    //     }, err => {
+    //       console.log(err);
+    //     }
+    // );
     this._api.getPublicationsPage(query).subscribe(res => {
+      // this._api.getCoAuthorsPublications(this.tokenId).subscribe(
+      //     coauthors => {
+      //       console.log(coauthors);
+      //       coAuthorsPublications = coauthors;
+      //       for(let i = 0; i < res.length; i++) {
+      //         this.TeacherPublications.push(coauthors[i]);
+      //       }
+      //     }, error => {
+      //       console.log(error);
+      //     }
+      // );
       console.log(res);
       this.TeacherPublications = res;
+      console.log(this.TeacherPublications);
       for(let i = 0; i < res.length; i++) {
         this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
       }

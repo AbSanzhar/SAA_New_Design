@@ -15,7 +15,7 @@ import {
 export class DocumentCreator {
     public AcadMeth;
 
-    public static create(AcadMet): Document {
+    public create(AcadMet): Document {
         const document = new Document();
 
         document.addSection({
@@ -398,9 +398,12 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
-                        // AcadMet.forEach(this.prototype.createAcadMetRows(AcadMet.acId, AcadMet.activities, AcadMet.timeFrame, AcadMet.implementation))
-                        // ,
-                        this.prototype.createAcadMetTable(AcadMet),
+                        // AcadMet.forEach((item) => {
+                        //     this.prototype.createAcadMetRows(item.acId, item.activities, item.timeFrame, item.implementation)
+                        // })
+
+                        // this.prototype.createAcadMetTable(AcadMet, AcadMet.length),
+                        this.createAcadMetRows(AcadMet),
 
                         new TableRow({
                             children: [
@@ -546,6 +549,7 @@ export class DocumentCreator {
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     verticalMerge: VerticalMergeType.RESTART,
                                     children: [new Paragraph({
                                         children: [
@@ -607,6 +611,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     rowSpan: 2,
                                     children: [new Paragraph({
                                         children: [
@@ -826,6 +831,7 @@ export class DocumentCreator {
                                     verticalMerge: VerticalMergeType.CONTINUE
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -873,6 +879,7 @@ export class DocumentCreator {
                                 }),
 
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -1033,6 +1040,7 @@ export class DocumentCreator {
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     verticalMerge: VerticalMergeType.RESTART,
                                     children: [
                                         new Paragraph({
@@ -1053,6 +1061,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     rowSpan: 2,
                                     children: [new Paragraph({
                                         children: [
@@ -1342,6 +1351,7 @@ export class DocumentCreator {
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     verticalMerge: VerticalMergeType.RESTART,
                                     children: [
                                         new Paragraph({
@@ -1404,6 +1414,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     rowSpan: 2,
                                     children: [new Paragraph({
                                         children: [
@@ -1750,6 +1761,7 @@ export class DocumentCreator {
                         new TableRow({
                             children: [
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [
                                         new Paragraph({
                                             children: [
@@ -1811,6 +1823,7 @@ export class DocumentCreator {
                                     ],
                                 }),
                                 new TableCell({
+                                    verticalAlign: VerticalAlign.CENTER,
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
@@ -2381,86 +2394,97 @@ export class DocumentCreator {
         return document;
     }
 
-    public createAcadMetTable(AcadMeth) {
-        console.log(typeof AcadMeth);
-        for(let i = 0; i < AcadMeth.length; i++) {
-            return this.createAcadMetRows(AcadMeth[i].acId, AcadMeth[i].activities, AcadMeth[i].timeFrame, AcadMeth[i].implementation);
-        }
-    }
+    // public createAcadMetTable(AcadMeth, n) {
+    //     console.log(n);
+    //     console.log(AcadMeth[n]);
+    //     if(n == 0) {
+    //         return this.createAcadMetRows(AcadMeth[n].acId, AcadMeth[n].activities, AcadMeth[n].timeFrame, AcadMeth[n].implementation);
+    //     } else {
+    //         this.createAcadMetTable(AcadMeth, n - 1);
+    //     }
+    //     // for(let i = 0; i < 2; i++) {
+    //     //     console.log(AcadMeth.length);
+    //     //     return this.createAcadMetRows(AcadMeth[i].acId, AcadMeth[i].activities, AcadMeth[i].timeFrame, AcadMeth[i].implementation);
+    //     // }
+    // }
 
-    public createAcadMetRows(acId, activities, timeFrame, implementation): TableRow {
-        return new TableRow({
-            children: [
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${acId}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black',
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        })
+    public createAcadMetRows(AcadMeth): TableRow {
+        console.log(AcadMeth);
+        return AcadMeth.map((acad) => {
+            // tslint:disable-next-line:no-unused-expression
+            new TableRow({
+                children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.acId}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black',
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            })
 
-                    ],
-                }),
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${activities}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black'
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        }),
-                    ],
-                }),
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${timeFrame}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black'
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        }),
-                    ],
-                }),
-                new TableCell({
-                    children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${implementation}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black'
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
-                        }),
-                    ],
-                }),
-            ]
+                        ],
+                    }),
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.activities}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black'
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            }),
+                        ],
+                    }),
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.timeFrame}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black'
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            }),
+                        ],
+                    }),
+                    new TableCell({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${acad.implementation}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black'
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            }),
+                        ],
+                    }),
+                ]
+            });
         });
     }
 
