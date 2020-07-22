@@ -33,10 +33,11 @@ export class ApiService {
     return this.http.post<any>(this.base + url, user)
       .pipe(catchError(this.errorHandler));
   }
-  getAllUsers(): Observable<any> {
-    const url = 'users/dis';
-    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
-  }
+  //не рабочий метод
+  // getAllUsers(): Observable<any> {
+  //   const url = 'users/dis';
+  //   return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  // }
   getUserById(id: number): Observable<any> {
     const url = 'users/';
     return this.http.get<any>(this.base + url + id  + '?jwt_token=' + window.localStorage.getItem('token'))

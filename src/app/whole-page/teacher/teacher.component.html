@@ -239,8 +239,8 @@
 
                     <mat-form-field>
                         <mat-label>Страна</mat-label>
-                        <mat-select formControlName="ptnt_country_id" required>
-                            <mat-option *ngFor="let i of allCountries" [value]="i.code">
+                        <mat-select formControlName="ptnt_country" required>
+                            <mat-option *ngFor="let i of allCountries" [value]="i.name">
                                 {{i.name}}
                             </mat-option>
                         </mat-select>
@@ -547,7 +547,11 @@
 
                         <mat-form-field class="example-full-width">
                             <mat-label>Научный руководитель</mat-label>
-                            <input matInput formControlName="scFirstName" type="text" required>
+                            <mat-select formControlName="scDirector">
+                                <mat-option *ngFor="let i of allUsers" [value]="i.userId">
+                                    {{i.name}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
 
                         <mat-form-field class="example-full-width">
