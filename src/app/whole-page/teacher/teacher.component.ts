@@ -216,10 +216,8 @@ export class TeacherComponent implements OnInit {
             ptnt_status_id: new FormControl('1'),
             ptnt_issue_date: new FormControl('', Validators.required),
             ptnt_inserted_date: [new Date()],
-            ptnt_file_en: new FormControl('', Validators.required),
-            ptnt_file_name_ru: new FormControl(''),
-            ptnt_file_name_kz: new FormControl(''),
-            ptnt_file_name_en: new FormControl('', Validators.required),
+            ptnt_file: new FormControl('', Validators.required),
+            ptnt_file_name: new FormControl('', Validators.required),
         });
 
     }
@@ -1063,8 +1061,9 @@ export class TeacherComponent implements OnInit {
       coAuthorsIds = Array.from(new Set(coAuthorsIds));
       console.log(coAuthorsIds);
       this.publicationForm.patchValue({
-          pubCoAuthor: coAuthorsIds
+          pubCoAuthor: coAuthorsIds,
       });
+      console.log(this.publicationForm.value);
     this._api.uploadPub(this.publicationForm.value).subscribe(
         res => {
           console.log(res);
@@ -1247,7 +1246,6 @@ export class TeacherComponent implements OnInit {
     }
 
     uploadPatentFiles() {
-        console.log('12345');
         console.log(this.PatentFileEn);
         const formData = new FormData();
         // let linkRu;
@@ -1305,11 +1303,11 @@ export class TeacherComponent implements OnInit {
 
         this.patentForm.patchValue({
             // ptnt_file_kz: this.PatentLinkKz,
-            ptnt_file_en: this.PatentLinkEn,
+            ptnt_file: this.PatentLinkEn,
             // ptnt_file_ru: this.PatentLinkRu,
             // ptnt_file_name_ru: this.PatentFileRu.name,
             // ptnt_file_name_kz: this.PatentFileKz.name,
-            ptnt_file_name_en: this.PatentFileEn.name,
+            ptnt_file_name: this.PatentFileEn.name,
         });
     }
 
@@ -1513,7 +1511,6 @@ export class TeacherComponent implements OnInit {
         // for (const country of this.allCountries) {
         //     this.elements5.push(country.name, country.code);
         // }
-        console.log(this.allCountries);
     }
 
 }

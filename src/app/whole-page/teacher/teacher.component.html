@@ -82,7 +82,7 @@
                         <mat-label>Год</mat-label>
 <!--                        <input matInput formControlName="pubYear" type="date" required>-->
                         <mat-select  required formControlName="pubYear">
-                            <mat-option *ngFor="let i of years" [value]="i">
+                            <mat-option *ngFor="let i of years" [value]="i + '-01-01'">
                                 {{i}}
                             </mat-option>
 <!--                            <option *ngFor="let i of years" [selected]="yy === i">{{i}}</option>-->

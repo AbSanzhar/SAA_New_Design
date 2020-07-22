@@ -291,7 +291,7 @@
 
               <ng-container matColumnDef="File">
                 <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrlEn}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
+                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrl}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>
