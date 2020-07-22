@@ -125,6 +125,8 @@ const r: Routes = [
         MatFileUploadModule,
         MatAutocompleteModule,
         MatChipsModule,
+        MatTableModule,
+        MatTableModule,
     ],
 })
 export class WholePageModule { }
