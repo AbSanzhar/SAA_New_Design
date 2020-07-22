@@ -16,16 +16,15 @@ import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddProjectMemberDialogComponent} from './add-project-member-dialog/add-project-member-dialog.component';
 import {CourseUploadComponent} from './course-upload/course-upload.component';
-import {MatAutocomplete} from '@angular/material/autocomplete';
+import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
-import {startWith} from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {CountriesService} from '../../services/countries.service';
 import {ScienceListGenerator} from './ScienceListGenerator';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {map} from 'rxjs/operators';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -34,6 +33,10 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     styleUrls: ['./teacher.component.css']
 })
 export class TeacherComponent implements OnInit {
+
+    get f() {
+        return this.eventForm.controls;
+    }
 
   fileToUpload: File = null;
   allCountries: any;
@@ -228,6 +231,7 @@ export class TeacherComponent implements OnInit {
     for(var i = (this.yy-100); i <= this.yy; i++){
       this.years.push(i);}
   }
+
 
     div: Sourse[] = [
         {value: '1', viewValue: 'Information systems'},
@@ -847,6 +851,53 @@ export class TeacherComponent implements OnInit {
     ];
     courseDegree = new FormControl(this.level[1].value);
 
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.coAuthorsFullNames.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  remove(fruit: string): void {
+    const index = this.coAuthorsFullNames.indexOf(fruit);
+
+    if (index >= 0) {
+      this.coAuthorsFullNames.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.coAuthorsFullNames.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(filterValue);
+    console.log(this.coAuthorsFullNames);
+
+    return this.allCoAuthorsFullNames.filter(fruit => fruit.toLowerCase().includes(filterValue));
+  }
+
+  getYear() {
+    const today = new Date();
+    this.yy = today.getFullYear();
+    for (let i = (this.yy - 100); i <= this.yy; i++){
+      this.years.push(i);
+    }
+  }
+
 
     getDecodedAccessToken(token: string): any {
         try {
@@ -862,12 +913,13 @@ export class TeacherComponent implements OnInit {
     this._api.getAllTeachers().subscribe(
         res => {
           console.log(res);
-          for(let i = 0; i < res.length; i++) {
+            // tslint:disable-next-line:prefer-for-of
+          for (let i = 0; i < res.length; i++) {
             this.allCoAuthorsFullNames.push(res[i].lastName  + ' ' + res[i].firstName + ' ' + res[i].patronymic);
             const coAuthor = {
               fullName: res[i].lastName + ' ' +  res[i].firstName + ' ' + res[i].patronymic,
               userId: res[i].userId
-            }
+            };
             this.allCoAuthors.push(coAuthor);
           }
           console.log(this.allCoAuthors);
@@ -884,7 +936,7 @@ export class TeacherComponent implements OnInit {
         }
     );
 
-        this._api.getUserDegreeCount().subscribe(
+    this._api.getUserDegreeCount().subscribe(
             res => {
                 console.log(res);
                 this.UserDegreeCounts = res;
@@ -893,7 +945,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-        this._api.getPublishCount().subscribe(
+    this._api.getPublishCount().subscribe(
             res => {
                 console.log(res);
                 this.publishCount = res;
@@ -902,7 +954,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-        this._api.getCourseCount().subscribe(
+    this._api.getCourseCount().subscribe(
             res => {
                 console.log(res);
                 this.courceCount = res;
@@ -910,7 +962,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-        this._api.getDisMembersCount().subscribe(
+    this._api.getDisMembersCount().subscribe(
             res => {
                 console.log(res);
                 this.disMembersCount = res;
@@ -918,7 +970,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-        this._api.getUserById(this.IdToken).subscribe(
+    this._api.getUserById(this.IdToken).subscribe(
             res => {
                 this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
                 // tslint:disable-next-line:prefer-for-of
@@ -1051,9 +1103,12 @@ export class TeacherComponent implements OnInit {
 
   sendTeacherPublication(message: string, action: string) {
       let coAuthorsIds = [];
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.allCoAuthors.length; i++) {
+          // tslint:disable-next-line:prefer-for-of
           for (let j = 0; j < this.coAuthorsFullNames.length; j++) {
-              if(this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
+              // tslint:disable-next-line:triple-equals
+              if (this.coAuthorsFullNames[j] == this.allCoAuthors[i].fullName) {
                   coAuthorsIds.push(this.allCoAuthors[i].userId);
               }
           }
@@ -1063,15 +1118,16 @@ export class TeacherComponent implements OnInit {
       this.publicationForm.patchValue({
           pubCoAuthor: coAuthorsIds,
       });
-      console.log(this.publicationForm.value);
-    this._api.uploadPub(this.publicationForm.value).subscribe(
+
+
+      this._api.uploadPub(this.publicationForm.value).subscribe(
         res => {
           console.log(res);
         }, err => {
           console.log(err);
         }
     );
-    if (this.publicationForm.valid) {
+      if (this.publicationForm.valid) {
       this.publicationForm.reset();
       this._snackBar.open(message, action, {
         duration: 2000,
@@ -1438,10 +1494,6 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-    }
-
-    get f() {
-        return this.eventForm.controls;
     }
 
 
