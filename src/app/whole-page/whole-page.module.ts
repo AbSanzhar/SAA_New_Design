@@ -49,6 +49,8 @@ import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
 import { CourseUploadComponent } from './teacher/course-upload/course-upload.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFileUploadModule} from 'mat-file-upload';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 const r: Routes = [
@@ -121,6 +123,8 @@ const r: Routes = [
         MatNativeDateModule,
         MatProgressSpinnerModule,
         MatFileUploadModule,
+        MatAutocompleteModule,
+        MatChipsModule,
     ],
 })
 export class WholePageModule { }

@@ -23,13 +23,13 @@ export class ProfileComponent implements OnInit {
   TeacherScienceProjects: any[] = [];
   TeacherCourses: any[] = [];
 
-  displayedColumnsPublication = ['pubId', 'File', 'pubType', 'Collaborators', 'Title', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi'];
-  displayedColumnsEvent = ['eventId', 'File', 'eventType', 'eventRole', 'eventTitle', 'eventDate', 'eventCity', 'Url'];
+  displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'File'];
+  displayedColumnsEvent = ['eventId', 'eventTitle', 'eventType', 'eventRole', 'eventDate', 'eventCity', 'Url', 'File'];
   displayedColumnsDisSovet = ['disId', 'university', 'disRole', 'specialty', 'stopDate', 'numberAndDate'];
-  displayedColumnsPatent = ['ptntId', 'ptntNumber', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'kz', 'ru', 'en'];
+  displayedColumnsPatent = ['ptntNumber', 'ptntId', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'File'];
   displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
-  displayedColumns6 = ['courseId', 'File', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level'];
+  displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
 
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;
@@ -84,40 +84,25 @@ export class ProfileComponent implements OnInit {
 
   getTeacherPublications() {
     const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
-    const coAuthorsPublications = [];
-    this.TeacherPublications = [];
-    // this._api.getCoAuthorsPublications(this.tokenId).subscribe(
-    //     coauthors => {
-    //       console.log(coauthors);
-    //       coAuthorsPublications = coauthors;
-    //       this.TeacherPublications = this.TeacherPublications.concat(coAuthorsPublications);
-    //     }, err => {
-    //       console.log(err);
-    //     }
-    // );
     this._api.getPublicationsPage(query).subscribe(res => {
-      // this._api.getCoAuthorsPublications(this.tokenId).subscribe(
-      //     coauthors => {
-      //       console.log(coauthors);
-      //       coAuthorsPublications = coauthors;
-      //       for(let i = 0; i < res.length; i++) {
-      //         this.TeacherPublications.push(coauthors[i]);
-      //       }
-      //     }, error => {
-      //       console.log(error);
-      //     }
-      // );
       console.log(res);
       this.TeacherPublications = res;
+      console.log(this.TeacherPublications);
       for (let i = 0; i < res.length; i++) {
-        console.log(this.TeacherPublications);
-        for (let i = 0; i < res.length; i++) {
           this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
         }
-        this._api.getPublications().subscribe(res2 => {
-          this.paginator.length = res2.length;
-        });
-      }
+        // this._api.getPublications().subscribe(res2 => {
+        //   this.paginator.length = res2.length;
+        // });
+      this.TeacherPublications.sort(function(a,b) {
+        if(a.pubId > b.pubId) {
+          return -1;
+        }
+        if(b.pubId > a.pubId) {
+          return 1;
+        }
+        return 0;
+      });
     }, err => {
       console.log(err);
     });
@@ -143,13 +128,19 @@ export class ProfileComponent implements OnInit {
       this.TeacherEvents = res;
       for (let i = 0; i < res.length; i++) {
         const year = new Date(res[i].eventDate).getFullYear();
-        const month = new Date(res[i].eventDate).getMonth() < 0 ? '0'
-            + (new Date(res[i].eventDate).getMonth() + 1) : (new Date(res[i].eventDate).getMonth()
-            + 1);
-        const day = new Date(res[i].eventDate).getDate() < 0 ? '0'
-            + new Date(res[i].eventDate).getDate() : new Date(res[i].eventDate).getDate();
+        const month = (new Date(res[i].eventDate).getMonth() + 1) < 10 ? '0' + (new Date(res[i].eventDate).getMonth() + 1) : (new Date(res[i].eventDate).getMonth() + 1);
+        const day = new Date(res[i].eventDate).getDate() < 10 ? '0' + new Date(res[i].eventDate).getDate() : new Date(res[i].eventDate).getDate();
         this.TeacherEvents[i].eventDate = day + '/' + month + '/' + year;
       }
+      this.TeacherEvents.sort(function(a,b) {
+        if (a.eventId > b.eventId){
+          return -1;
+        }
+        if (b.eventId > a.eventId){
+          return 1;
+        }
+        return 0;
+      });
     }, err => {
       console.log(err);
     });
@@ -173,19 +164,13 @@ export class ProfileComponent implements OnInit {
         this.TeacherPatents = res;
         for (let i = 0; i < res.length; i++) {
           const year = new Date(res[i].ptntInsertedDate).getFullYear();
-          const month = new Date(res[i].ptntInsertedDate).getMonth() < 0 ? '0'
-              + (new Date(res[i].ptntInsertedDate).getMonth() +
-                  1) : (new Date(res[i].ptntInsertedDate).getMonth() + 1);
-          const day = new Date(res[i].ptntInsertedDate).getDate() < 0 ? '0'
-              + new Date(res[i].ptntInsertedDate).getDate() : new Date(res[i].ptntInsertedDate).getDate();
+          const month = (new Date(res[i].ptntInsertedDate).getMonth() + 1) < 10 ? '0' + (new Date(res[i].ptntInsertedDate).getMonth() + 1) : (new Date(res[i].ptntInsertedDate).getMonth() + 1);
+          const day = new Date(res[i].ptntInsertedDate).getDate() < 10 ? '0' + new Date(res[i].ptntInsertedDate).getDate() : new Date(res[i].ptntInsertedDate).getDate();
           this.TeacherPatents[i].ptntInsertedDate = day + '/' + month + '/' + year;
 
           const year2 = new Date(res[i].ptntIssueDate).getFullYear();
-          const month2 = new Date(res[i].ptntIssueDate).getMonth() < 0 ? '0'
-              + (new Date(res[i].ptntIssueDate).getMonth()
-                  + 1) : (new Date(res[i].ptntIssueDate).getMonth() + 1);
-          const day2 = new Date(res[i].ptntIssueDate).getDate() < 0 ? '0'
-              + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
+          const month2 = (new Date(res[i].ptntIssueDate).getMonth() + 1) < 10 ? '0' + (new Date(res[i].ptntIssueDate).getMonth() + 1) : (new Date(res[i].ptntIssueDate).getMonth() + 1);
+          const day2 = new Date(res[i].ptntIssueDate).getDate() < 10 ? '0' + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
           this.TeacherPatents[i].ptntIssueDate = day2 + '/' + month2 + '/' + year2;
         }
       }, err => {

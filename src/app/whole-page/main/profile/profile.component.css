@@ -144,7 +144,7 @@ input:not(.btn){
 
 .mat-column-File {
   flex: 5rem;
-  max-width: 5rem;
+  max-width: 1rem;
 }
 
 .mat-column-Year {
@@ -169,7 +169,7 @@ input:not(.btn){
 
 .mat-column-eventCity {
   flex: 5rem;
-  max-width: 5rem;
+  max-width: 7rem;
 }
 
 .mat-column-eventType {
@@ -184,12 +184,12 @@ input:not(.btn){
 
 .mat-column-eventRole {
   flex: 8rem;
-  max-width: 8rem;
+  max-width: 10rem;
 }
 
 .mat-column-eventTitle {
   flex: 7rem;
-  max-width: 7rem;
+  max-width: 13rem;
 }
 
 .mat-column-disRole {

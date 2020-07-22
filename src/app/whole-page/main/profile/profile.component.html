@@ -87,10 +87,10 @@
                     <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubId}} </div></mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="File">
-                  <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
-                  <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download=""><mat-icon color="primary">get_app</mat-icon></a></div> </mat-cell>
-              </ng-container>
+                <ng-container matColumnDef="Title">
+                  <mat-header-cell *matHeaderCellDef> Название публикации </mat-header-cell>
+                  <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div> </mat-cell>
+                </ng-container>
 
               <ng-container matColumnDef="pubType">
                 <mat-header-cell *matHeaderCellDef> Тип публикации </mat-header-cell>
@@ -99,12 +99,13 @@
 
               <ng-container matColumnDef="Collaborators">
                 <mat-header-cell *matHeaderCellDef> Соавторы </mat-header-cell>
-                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <div *ngFor="let coAuthors of publication.pubCoAuthor"> {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}</div> </div> </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="Title">
-                <mat-header-cell *matHeaderCellDef> Название публикации </mat-header-cell>
-                <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div> </mat-cell>
+                <mat-cell *matCellDef="let publication">
+                  <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                    <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">
+                      {{i + 1}}) {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}
+                    </div>
+                  </div>
+                </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="Year">
@@ -137,6 +138,11 @@
                 <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubDoi}}</div> </mat-cell>
               </ng-container>
 
+                <ng-container matColumnDef="File">
+                  <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                  <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <a href="https://nir.iitu.kz/{{publication.pubFile}}" download=""><mat-icon color="primary">get_app</mat-icon></a></div> </mat-cell>
+                </ng-container>
+
               <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>
               <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
             </mat-table>
@@ -157,11 +163,6 @@
               <ng-container matColumnDef="eventId">
                 <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="File">
-                <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-                <mat-cell *matCellDef="let activity"> <a href="https://nir.iitu.kz/{{activity.eventFile}}" download="">{{activity.eventName}}</a> </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="eventType">
@@ -193,6 +194,11 @@
                 <mat-header-cell *matHeaderCellDef> URL </mat-header-cell>
                 <mat-cell *matCellDef="let activity"> {{activity.eventUrl}} </mat-cell>
               </ng-container>
+
+                <ng-container matColumnDef="File">
+                  <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> <a href="https://nir.iitu.kz/{{activity.eventFile}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
+                </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumnsEvent"></mat-header-row>
               <mat-row *matRowDef="let activity; columns: displayedColumnsEvent;"></mat-row>
@@ -238,15 +244,15 @@
 
             <div *ngIf="whichTable === 3 ? true : false">
               <mat-table [dataSource]="TeacherPatents" class="">
-              <ng-container matColumnDef="ptntId">
-                <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
-              </ng-container>
-
               <ng-container matColumnDef="ptntNumber">
                 <mat-header-cell *matHeaderCellDef> Номер патента </mat-header-cell>
                 <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>
               </ng-container>
+
+                <ng-container matColumnDef="ptntId">
+                  <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
+                  <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
+                </ng-container>
 
               <ng-container matColumnDef="ptntCountry">
                 <mat-header-cell *matHeaderCellDef> Страна </mat-header-cell>
@@ -283,18 +289,8 @@
                 <mat-cell *matCellDef="let patent"><p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p></mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="kz">
-                <mat-header-cell *matHeaderCellDef> KZ </mat-header-cell>
-                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrlKz}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="ru">
-                <mat-header-cell *matHeaderCellDef> RU </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> <a href="https://nir.iitu.kz/{{patent.ptntFileUrlRu}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="en">
-                <mat-header-cell *matHeaderCellDef> EN </mat-header-cell>
+              <ng-container matColumnDef="File">
+                <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
                 <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrlEn}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
               </ng-container>
 
@@ -439,11 +435,6 @@
                 <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
               </ng-container>
 
-              <ng-container matColumnDef="File">
-              <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
-              <mat-cell *matCellDef="let course"> <a href="https://nir.iitu.kz/{{course.courseFile}}" download="">Cкачать</a> </mat-cell>
-              </ng-container>
-
               <ng-container matColumnDef="FL">
                 <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
                 <mat-cell style="color: darkred!important;"  *matCellDef="let course">{{course.courseUser.firstName}} {{course.courseUser.lastName}} {{course.courseUser.patronymic}}</mat-cell>
@@ -484,7 +475,13 @@
                 <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.courseDegree}}</mat-cell>
               </ng-container>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
+                <ng-container matColumnDef="File">
+                  <mat-header-cell *matHeaderCellDef> Файл </mat-header-cell>
+                  <mat-cell *matCellDef="let course"> <a href="https://nir.iitu.kz/{{course.courseFile}}" download=""><mat-icon color="primary">get_app</mat-icon></a> </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
               <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>
 
             </mat-table>
