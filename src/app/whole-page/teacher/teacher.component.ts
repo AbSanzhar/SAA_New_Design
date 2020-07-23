@@ -179,7 +179,7 @@ export class TeacherComponent implements OnInit {
     });
 
     this.newProjForm = formBuilder.group({
-        scId: new FormControl('', Validators.required),
+        scIrn: new FormControl('', Validators.required),
         scName: new FormControl('', Validators.required),
         scType: new FormControl('', Validators.required),
         scPriority: new FormControl('', Validators.required),
