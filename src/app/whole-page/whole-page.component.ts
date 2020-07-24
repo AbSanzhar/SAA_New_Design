@@ -35,7 +35,7 @@ export class WholePageComponent implements OnInit {
     this._api.getUserById(this.tokenId).subscribe(
       res => {
         this.currentUser = res;
-        this.name =  res.lastName + ' ' + res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.';
+        this.name =  res.lastName + ' ' + res.firstName; //.charAt(0) + '.' +  res.patronymic.charAt(0) + '.'
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < res.roles.length; i++) {
           this.userRoles.push(res.roles[i].roleName);
