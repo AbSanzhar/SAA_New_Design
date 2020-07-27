@@ -2,7 +2,7 @@ import {
     AlignmentType,
     Document,
     Footer,
-    Paragraph,
+    Paragraph, Tab,
     Table,
     TableCell,
     TableRow,
@@ -13,9 +13,8 @@ import {
 } from 'docx';
 
 export class DocumentCreator {
-    public AcadMeth;
 
-    public create(AcadMet): Document {
+    public create(AcadMet, ComWorkResearch, BudgetResearch, OrgMetAct, EduSocials, PlamPerfomances): Document {
         const document = new Document();
 
         document.addSection({
@@ -398,13 +397,7 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
-                        // AcadMet.forEach((item) => {
-                        //     this.prototype.createAcadMetRows(item.acId, item.activities, item.timeFrame, item.implementation)
-                        // })
-
-                        // this.prototype.createAcadMetTable(AcadMet, AcadMet.length),
-                        this.createAcadMetRows(AcadMet),
-
+                        ...this.createAcadMetRows(AcadMet),
                         new TableRow({
                             children: [
                                 new TableCell({
@@ -928,6 +921,8 @@ export class DocumentCreator {
                             ],
                         }),
 
+                        ...this.createComWorkResearchRows(ComWorkResearch),
+
 
                         new TableRow({
                             children: [
@@ -1259,7 +1254,7 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
-
+                        ...this.createBudgetReasearch(BudgetResearch),
 
                         new TableRow({
                             children: [
@@ -1613,6 +1608,7 @@ export class DocumentCreator {
                             ],
                         }),
 
+                        ...this.createOrgMetAct(OrgMetAct),
 
                         new TableRow({
                             children: [
@@ -1961,6 +1957,7 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
+                        ...this.createEduSocialRows(EduSocials)
 
                     ]}),
 
@@ -2223,7 +2220,55 @@ export class DocumentCreator {
                                 }),
                             ],
                         }),
+                        ...this.createPlanPerfomanceRows(PlamPerfomances),
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    columnSpan: 2,
+                                    children: [new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: 'Барлығы             Всего Total ',
+                                                size: 20,
+                                                font: {
+                                                    name: 'Times New Roman',
+                                                },
+                                                color: 'black',
+                                                bold: true
+                                            }),
+                                        ],
+                                        alignment: AlignmentType.CENTER
+                                    }),
 
+                                    ],
+                                }),
+                                new TableCell({
+                                    children: [new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: '',
+                                            }),
+                                        ],
+                                        alignment: AlignmentType.CENTER
+                                    }),
+
+                                    ],
+                                }),
+                                new TableCell({
+                                    children: [new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: '',
+                                            }),
+                                        ],
+                                        alignment: AlignmentType.CENTER
+                                    }),
+
+                                    ],
+                                }),
+
+                            ],
+                        }),
                     ]}),
 
                 new Paragraph(''),
@@ -2394,32 +2439,15 @@ export class DocumentCreator {
         return document;
     }
 
-    // public createAcadMetTable(AcadMeth, n) {
-    //     console.log(n);
-    //     console.log(AcadMeth[n]);
-    //     if(n == 0) {
-    //         return this.createAcadMetRows(AcadMeth[n].acId, AcadMeth[n].activities, AcadMeth[n].timeFrame, AcadMeth[n].implementation);
-    //     } else {
-    //         this.createAcadMetTable(AcadMeth, n - 1);
-    //     }
-    //     // for(let i = 0; i < 2; i++) {
-    //     //     console.log(AcadMeth.length);
-    //     //     return this.createAcadMetRows(AcadMeth[i].acId, AcadMeth[i].activities, AcadMeth[i].timeFrame, AcadMeth[i].implementation);
-    //     // }
-    // }
-
-    public createAcadMetRows(AcadMeth): TableRow {
-        console.log(AcadMeth);
-        return AcadMeth.map((acad) => {
-            // tslint:disable-next-line:no-unused-expression
-            new TableRow({
+    public createAcadMetRows(AcadMet): TableRow[] {
+        return AcadMet.map((AcadMeth) => new TableRow({
                 children: [
                     new TableCell({
                         children: [
                             new Paragraph({
                                 children: [
                                     new TextRun({
-                                        text: `${acad.acId}`,
+                                        text: `${AcadMeth.acId}`,
                                         size: 24,
                                         font: {
                                             name: 'Times New Roman',
@@ -2437,7 +2465,7 @@ export class DocumentCreator {
                             new Paragraph({
                                 children: [
                                     new TextRun({
-                                        text: `${acad.activities}`,
+                                        text: `${AcadMeth.activities}`,
                                         size: 24,
                                         font: {
                                             name: 'Times New Roman',
@@ -2454,7 +2482,7 @@ export class DocumentCreator {
                             new Paragraph({
                                 children: [
                                     new TextRun({
-                                        text: `${acad.timeFrame}`,
+                                        text: `${AcadMeth.timeFrame}`,
                                         size: 24,
                                         font: {
                                             name: 'Times New Roman',
@@ -2471,7 +2499,7 @@ export class DocumentCreator {
                             new Paragraph({
                                 children: [
                                     new TextRun({
-                                        text: `${acad.implementation}`,
+                                        text: `${AcadMeth.implementation}`,
                                         size: 24,
                                         font: {
                                             name: 'Times New Roman',
@@ -2484,9 +2512,370 @@ export class DocumentCreator {
                         ],
                     }),
                 ]
-            });
-        });
+        }));
     }
 
+    public createComWorkResearchRows(Research): TableRow[] {
+        return Research.map((comWorkResearch) => new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${comWorkResearch.commId}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black',
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        })
+
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${comWorkResearch.activities}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${comWorkResearch.output}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${comWorkResearch.plan}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${comWorkResearch.implementation}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+            ]
+        }));
+    }
+
+    public createBudgetReasearch(BudgetResearch): TableRow[] {
+        return BudgetResearch.map((budget) => new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${budget.budId}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black',
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        })
+
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${budget.activities}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${budget.plan}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${budget.implementation}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+            ]
+        }));
+    }
+
+    public createOrgMetAct(orgMetAct): TableRow[] {
+        return orgMetAct.map((orgMetActivity) => new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${orgMetActivity.orgId}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black',
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        })
+
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${orgMetActivity.activities}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${orgMetActivity.plan}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${orgMetActivity.implementation}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+            ]
+        }));
+    }
+
+    public createEduSocialRows(eduSocial): TableRow[] {
+        return eduSocial.map((eduSocialActivity) => new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${eduSocialActivity.eduId}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black',
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        })
+
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${eduSocialActivity.activities}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${eduSocialActivity.implementation}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+            ]
+        }));
+    }
+
+    public createPlanPerfomanceRows(planPerfomance): TableRow[] {
+        return planPerfomance.map((ppElement) => new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${ppElement.ppId}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black',
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        })
+
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${ppElement.activities}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${ppElement.implementation}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                    ],
+                }),
+            ]
+        }));
+    }
 
 }

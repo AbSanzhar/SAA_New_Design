@@ -4,6 +4,7 @@ import {ApiService} from '../../api/api.service';
 import {DocumentCreator} from './year-plan-generator';
 import {Packer} from 'docx';
 import {saveAs} from 'file-saver';
+import * as officegen from 'officegen';
 @Component({
     selector: 'app-year-plan',
     templateUrl: './year-plan.component.html',
@@ -19,7 +20,6 @@ export class YearPlanComponent implements OnInit {
     AcadMetForm = this.fb.group({
         AcadMetAct: this.fb.array([])
     });
-
     public budgetLength;
     public budgets: FormGroup;
     public orgs: FormGroup;
@@ -38,12 +38,17 @@ export class YearPlanComponent implements OnInit {
         text: '',
         hide: false
     };
+    gettedActs = [];
     gettedResearch = [];
+    gettedBudgets = [];
+    gettedOrgMetActs = [];
+    gettedEduSocials = [];
+    gettedPlamPerfomances = [];
+
 
     length = 0;
     size = 5;
     page = 0;
-    gettedActs = [];
     displayedColumns: string[] = ['acId', 'activities', 'timeFrame', 'implementation'];
     displayedColumns2: string[] = ['eduId', 'eduAct', 'eduImpl'];
     dataSource: any[];
@@ -279,6 +284,7 @@ export class YearPlanComponent implements OnInit {
         this.api.getReasearch().subscribe(
             res => {
                 this.gettedResearch = res;
+                console.log(this.gettedResearch);
             },
             error1 => {
                 console.log(error1);
@@ -287,6 +293,7 @@ export class YearPlanComponent implements OnInit {
         this.api.getBudget().subscribe(
             res => {
                 let i = 0;
+                this.gettedBudgets = res;
                 this.budgetLength = res.length;
                 for (; i < res.length; i++) {
                     this.budId.push(this.fb.control(res[i].budId));
@@ -304,6 +311,8 @@ export class YearPlanComponent implements OnInit {
         this.api.getOrg().subscribe(
             res => {
                 let i = 0;
+                console.log(res);
+                this.gettedOrgMetActs = res;
                 for (; i < res.length; i++) {
                     this.orgId.push(this.fb.control(res[i].orgId));
                     this.acts.push(this.fb.control(res[i].activities));
@@ -319,6 +328,8 @@ export class YearPlanComponent implements OnInit {
             res => {
                 let i = 0;
                 this.edusLength = res.length;
+                this.gettedEduSocials = res;
+                console.log(res);
                 for (; i < res.length; i++) {
                     this.eduId.push(this.fb.control(res[i].eduId));
                     this.eduAct.push(this.fb.control(res[i].activities));
@@ -332,6 +343,8 @@ export class YearPlanComponent implements OnInit {
         this.api.getPlanPerfomance().subscribe(
             res => {
                 let i = 0;
+                this.gettedPlamPerfomances = res;
+                console.log(res);
                 this.planPerfomLength = res.length;
                 for (; i < res.length; i++) {
                     this.PlanPerId.push(this.fb.control(res[i].id));
@@ -469,9 +482,9 @@ export class YearPlanComponent implements OnInit {
     }
 
     downloadPlan() {
-        console.log(this.gettedActs);
+
         const documentCreator = new DocumentCreator();
-        const doc = documentCreator.create(this.gettedActs);
+        const doc = documentCreator.create(this.gettedActs, this.gettedResearch, this.gettedBudgets, this.gettedOrgMetActs, this.gettedEduSocials, this.gettedPlamPerfomances);
 
         Packer.toBlob(doc).then(blob => {
             console.log(blob);
