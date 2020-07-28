@@ -455,19 +455,34 @@ export class ScienceListGenerator {
                 }),
                 new TableCell({
                     children: [
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `${AcadMeth.pubCoAuthor}`,
-                                    size: 24,
-                                    font: {
-                                        name: 'Times New Roman',
-                                    },
-                                    color: 'black'
-                                }),
-                            ],
-                            alignment: AlignmentType.LEFT
+                        ...AcadMeth.pubCoAuthor.map((coauthor) => {
+                            return new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: `${coauthor.coAuthorUser.lastName} ${coauthor.coAuthorUser.firstName} ${coauthor.coAuthorUser.patronymic}`,
+                                        size: 24,
+                                        font: {
+                                            name: 'Times New Roman',
+                                        },
+                                        color: 'black'
+                                    }),
+                                ],
+                                alignment: AlignmentType.LEFT
+                            })
                         }),
+                        // new Paragraph({
+                        //     children: [
+                        //         new TextRun({
+                        //             text: `${AcadMeth.pubCoAuthor}`,
+                        //             size: 24,
+                        //             font: {
+                        //                 name: 'Times New Roman',
+                        //             },
+                        //             color: 'black'
+                        //         }),
+                        //     ],
+                        //     alignment: AlignmentType.LEFT
+                        // }),
                         // new Paragraph({
                         //     children: [
                         //         new TextRun({
