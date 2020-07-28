@@ -94,11 +94,11 @@ export class ProfileComponent implements OnInit {
         // this._api.getPublications().subscribe(res2 => {
         //   this.paginator.length = res2.length;
         // });
-      this.TeacherPublications.sort(function(a,b) {
-        if(a.pubId > b.pubId) {
+      this.TeacherPublications.sort(function(a, b) {
+        if (a.pubId > b.pubId) {
           return -1;
         }
-        if(b.pubId > a.pubId) {
+        if ( b.pubId > a.pubId) {
           return 1;
         }
         return 0;
@@ -114,7 +114,6 @@ export class ProfileComponent implements OnInit {
     // });
   }
 
-
   changeTableList(event) {
     console.log('asda');
     this.paginator.page = event.pageIndex;
@@ -128,11 +127,13 @@ export class ProfileComponent implements OnInit {
       this.TeacherEvents = res;
       for (let i = 0; i < res.length; i++) {
         const year = new Date(res[i].eventDate).getFullYear();
+        // tslint:disable-next-line:max-line-length
         const month = (new Date(res[i].eventDate).getMonth() + 1) < 10 ? '0' + (new Date(res[i].eventDate).getMonth() + 1) : (new Date(res[i].eventDate).getMonth() + 1);
+        // tslint:disable-next-line:max-line-length
         const day = new Date(res[i].eventDate).getDate() < 10 ? '0' + new Date(res[i].eventDate).getDate() : new Date(res[i].eventDate).getDate();
         this.TeacherEvents[i].eventDate = day + '/' + month + '/' + year;
       }
-      this.TeacherEvents.sort(function(a,b) {
+      this.TeacherEvents.sort(function(a, b) {
         if (a.eventId > b.eventId){
           return -1;
         }
@@ -164,12 +165,16 @@ export class ProfileComponent implements OnInit {
         this.TeacherPatents = res;
         for (let i = 0; i < res.length; i++) {
           const year = new Date(res[i].ptntInsertedDate).getFullYear();
+          // tslint:disable-next-line:max-line-length
           const month = (new Date(res[i].ptntInsertedDate).getMonth() + 1) < 10 ? '0' + (new Date(res[i].ptntInsertedDate).getMonth() + 1) : (new Date(res[i].ptntInsertedDate).getMonth() + 1);
+          // tslint:disable-next-line:max-line-length
           const day = new Date(res[i].ptntInsertedDate).getDate() < 10 ? '0' + new Date(res[i].ptntInsertedDate).getDate() : new Date(res[i].ptntInsertedDate).getDate();
           this.TeacherPatents[i].ptntInsertedDate = day + '/' + month + '/' + year;
 
           const year2 = new Date(res[i].ptntIssueDate).getFullYear();
+          // tslint:disable-next-line:max-line-length
           const month2 = (new Date(res[i].ptntIssueDate).getMonth() + 1) < 10 ? '0' + (new Date(res[i].ptntIssueDate).getMonth() + 1) : (new Date(res[i].ptntIssueDate).getMonth() + 1);
+          // tslint:disable-next-line:max-line-length
           const day2 = new Date(res[i].ptntIssueDate).getDate() < 10 ? '0' + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
           this.TeacherPatents[i].ptntIssueDate = day2 + '/' + month2 + '/' + year2;
         }

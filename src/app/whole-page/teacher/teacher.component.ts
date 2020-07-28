@@ -34,108 +34,11 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class TeacherComponent implements OnInit {
 
+    TeacherPublications: any[] = [];
+
     get f() {
         return this.eventForm.controls;
     }
-
-  fileToUpload: File = null;
-  allUsers: any[] = [];
-  allCountries: any;
-  private name: any;
-  publicationForm: FormGroup;
-  eventForm: FormGroup;
-  newProjForm: FormGroup;
-  teacherCourseForm: FormGroup;
-  patentForm: FormGroup;
-  PubTypeCounts;
-  UserDegreeCounts;
-  publishCount;
-  courceCount;
-  disMembersCount;
-  selectedPublicationFile: File = null;
-  selectedEventFile: File = null;
-  selectedValue: string;
-  selectedValue1: string;
-  selectedValue2: string;
-  selectedValue3: string;
-  selectedValue4: string;
-  selectedValue5: string;
-  selectedValue6: string;
-  selectedValue7: string;
-  selectedValue8: string;
-  selectedValue9: string;
-  selectedValue10: string;
-  selectedValue11: string;
-  selectedValue12: string;
-  selectedValue13: string;
-  selectedValue14: string;
-  selectedValue15: string;
-  selectedValue16: string;
-  selectedValue17: string;
-  selectedValue18: string;
-  selectedValue19: string;
-  public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
-  public IdToken = this.DecodedToken.jti;
-  public publications = [];
-  private PatentFileRu: any;
-  private PatentFileKz: any;
-  private PatentFileEn: any;
-  private PatentLinkRu: any;
-  private PatentLinkKz: any;
-  private PatentLinkEn: any;
-  private selectedCourseFile: File = null;
-
-  visible = true;
-  selectable = true;
-  removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  coAuthorsCtrl = new FormControl();
-  filteredCoAuthorsFullNames: Observable<string[]>;
-  coAuthorsFullNames: string[] = [];
-  allCoAuthorsFullNames: string[] = [];
-  allCoAuthors: any[] = [];
-
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.coAuthorsFullNames.push(value.trim());
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.coAuthorsCtrl.setValue(null);
-  }
-
-  remove(fruit: string): void {
-    const index = this.coAuthorsFullNames.indexOf(fruit);
-
-    if (index >= 0) {
-      this.coAuthorsFullNames.splice(index, 1);
-    }
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.coAuthorsFullNames.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.coAuthorsCtrl.setValue(null);
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    console.log(filterValue);
-    console.log(this.coAuthorsFullNames);
-
-    return this.allCoAuthorsFullNames.filter(fruit => fruit.toLowerCase().includes(filterValue));
-  }
 
   constructor(private formBuilder: FormBuilder,
               // tslint:disable-next-line:variable-name
@@ -224,6 +127,66 @@ export class TeacherComponent implements OnInit {
     });
 
     }
+
+  fileToUpload: File = null;
+  allUsers: any[] = [];
+  allCountries: any;
+  private name: any;
+  publicationForm: FormGroup;
+  eventForm: FormGroup;
+  newProjForm: FormGroup;
+  teacherCourseForm: FormGroup;
+  patentForm: FormGroup;
+  PubTypeCounts;
+  UserDegreeCounts;
+  publishCount;
+  courceCount;
+  disMembersCount;
+  selectedPublicationFile: File = null;
+  selectedEventFile: File = null;
+  selectedValue: string;
+  selectedValue1: string;
+  selectedValue2: string;
+  selectedValue3: string;
+  selectedValue4: string;
+  selectedValue5: string;
+  selectedValue6: string;
+  selectedValue7: string;
+  selectedValue8: string;
+  selectedValue9: string;
+  selectedValue10: string;
+  selectedValue11: string;
+  selectedValue12: string;
+  selectedValue13: string;
+  selectedValue14: string;
+  selectedValue15: string;
+  selectedValue16: string;
+  selectedValue17: string;
+  selectedValue18: string;
+  selectedValue19: string;
+  public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
+  public IdToken = this.DecodedToken.jti;
+  public publications = [];
+  private PatentFileRu: any;
+  private PatentFileKz: any;
+  private PatentFileEn: any;
+  private PatentLinkRu: any;
+  private PatentLinkKz: any;
+  private PatentLinkEn: any;
+  private selectedCourseFile: File = null;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  coAuthorsCtrl = new FormControl();
+  filteredCoAuthorsFullNames: Observable<string[]>;
+  coAuthorsFullNames: string[] = [];
+  allCoAuthorsFullNames: string[] = [];
+  allCoAuthors: any[] = [];
+
+  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
     div: Sourse[] = [
         {value: '1', viewValue: 'Information systems'},
@@ -843,6 +806,45 @@ export class TeacherComponent implements OnInit {
     ];
     courseDegree = new FormControl(this.level[1].value);
 
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.coAuthorsFullNames.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  remove(fruit: string): void {
+    const index = this.coAuthorsFullNames.indexOf(fruit);
+
+    if (index >= 0) {
+      this.coAuthorsFullNames.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.coAuthorsFullNames.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.coAuthorsCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(filterValue);
+    console.log(this.coAuthorsFullNames);
+
+    return this.allCoAuthorsFullNames.filter(fruit => fruit.toLowerCase().includes(filterValue));
+  }
+
   getYear() {
     const today = new Date();
     this.yy = today.getFullYear();
@@ -862,9 +864,10 @@ export class TeacherComponent implements OnInit {
 
 
   ngOnInit(): void {
+      this.getTeacherPublications();
       this.getAllUsers();
-    this.getAllCountries();
-    this._api.getAllTeachers().subscribe(
+      this.getAllCountries();
+      this._api.getAllTeachers().subscribe(
         res => {
           console.log(res);
             // tslint:disable-next-line:prefer-for-of
@@ -879,8 +882,8 @@ export class TeacherComponent implements OnInit {
           console.log(this.allCoAuthors);
         }
     );
-    this.getYear();
-    this._api.getPubTypeCount().subscribe(
+      this.getYear();
+      this._api.getPubTypeCount().subscribe(
         res => {
           console.log(res);
           this.PubTypeCounts = res;
@@ -890,7 +893,7 @@ export class TeacherComponent implements OnInit {
         }
     );
 
-    this._api.getUserDegreeCount().subscribe(
+      this._api.getUserDegreeCount().subscribe(
             res => {
                 console.log(res);
                 this.UserDegreeCounts = res;
@@ -899,7 +902,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-    this._api.getPublishCount().subscribe(
+      this._api.getPublishCount().subscribe(
             res => {
                 console.log(res);
                 this.publishCount = res;
@@ -908,7 +911,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-    this._api.getCourseCount().subscribe(
+      this._api.getCourseCount().subscribe(
             res => {
                 console.log(res);
                 this.courceCount = res;
@@ -916,7 +919,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-    this._api.getDisMembersCount().subscribe(
+      this._api.getDisMembersCount().subscribe(
             res => {
                 console.log(res);
                 this.disMembersCount = res;
@@ -924,7 +927,7 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
-    this._api.getUserById(this.IdToken).subscribe(
+      this._api.getUserById(this.IdToken).subscribe(
             res => {
                 this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
                 // tslint:disable-next-line:prefer-for-of
@@ -939,8 +942,9 @@ export class TeacherComponent implements OnInit {
       this._api.getOwnUsers().subscribe(
           res => {
               console.log(res);
-              for(let i = 0; i < res.length; i++) {
-                  let tempUser = {
+              // tslint:disable-next-line:prefer-for-of
+              for (let i = 0; i < res.length; i++) {
+                  const tempUser = {
                       name: res[i].firstName + ' ' + res[i].lastName,
                       userId: res[i].userId
                   };
@@ -1176,9 +1180,10 @@ export class TeacherComponent implements OnInit {
     }
 
     public download2(): void {
-        const  documentCreator = new ScienceListGenerator();
-        const doc = documentCreator.create(this.name);
-        Packer.toBlob(doc).then(blob => {
+      console.log(this.TeacherPublications);
+      const  documentCreator = new ScienceListGenerator();
+      const doc = documentCreator.create(this.name, this.TeacherPublications);
+      Packer.toBlob(doc).then(blob => {
             console.log(blob);
             saveAs(blob, 'Список научных трудов.docx');
             console.log('Document created successfully');
@@ -1534,6 +1539,18 @@ export class TeacherComponent implements OnInit {
         // for (const country of this.allCountries) {
         //     this.elements5.push(country.name, country.code);
         // }
+    }
+
+    getTeacherPublications() {
+        this._api.getPublications().subscribe(res => {
+            this.TeacherPublications = res;
+            console.log(this.TeacherPublications);
+            for (let i = 0; i < res.length; i++) {
+                this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
+            }
+        }, err => {
+            console.log(err);
+        });
     }
 
 }

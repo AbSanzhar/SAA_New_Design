@@ -481,7 +481,7 @@ export class YearPlanComponent implements OnInit {
 
     }
 
-    downloadPlan() {
+        downloadPlan() {
 
         const documentCreator = new DocumentCreator();
         const doc = documentCreator.create(this.gettedActs, this.gettedResearch, this.gettedBudgets, this.gettedOrgMetActs, this.gettedEduSocials, this.gettedPlamPerfomances);

@@ -1,7 +1,12 @@
 import {AlignmentType, Document, Paragraph, Table, TableCell, TableRow, TabStopPosition, TabStopType, TextRun} from 'docx';
 
 export class ScienceListGenerator {
-    public create(name): Document {
+    counter = 1;
+    // pubCoAuthors = [];
+    public create(name, publications): Document {
+        // for ( const coAuthors of publications.pubCoAuthor) {
+        //     this.pubCoAuthors.push(coAuthors);
+        // }
         const document = new Document();
         document.addSection({
             children: [
@@ -104,12 +109,19 @@ export class ScienceListGenerator {
                                         ],
                                         alignment: AlignmentType.CENTER
                                     })],
+                                    margins: {
+                                        top: 0,
+                                        bottom: 0,
+                                        left: 150,
+                                        right: 150,
+                                    },
                                 }),
                                 new TableCell({
-                                    children: [new Paragraph({
+                                    children: [
+                                        new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: 'Характер работы',
+                                                text: 'Характер',
                                                 size: 24,
                                                 font: {
                                                     name: 'Times New Roman',
@@ -118,7 +130,26 @@ export class ScienceListGenerator {
                                             }),
                                         ],
                                         alignment: AlignmentType.CENTER
-                                    })],
+                                    }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: 'работы',
+                                                    size: 24,
+                                                    font: {
+                                                        name: 'Times New Roman',
+                                                    },
+                                                    color: 'black'
+                                                }),
+                                            ],
+                                            alignment: AlignmentType.CENTER
+                                        })],
+                                    margins: {
+                                        top: 0,
+                                        bottom: 0,
+                                        left: 150,
+                                        right: 150,
+                                    },
                                 }),
                                 new TableCell({
                                     children: [new Paragraph({
@@ -134,104 +165,6 @@ export class ScienceListGenerator {
                                         ],
                                         alignment: AlignmentType.CENTER
                                     })],
-                                }),
-                            ],
-                        }),
-                        new TableRow({
-                            children: [
-                                new TableCell({
-                                    children: [
-                                        new Paragraph({
-                                            children: [
-                                                new TextRun({
-                                                    text: '1.',
-                                                    size: 24,
-                                                    font: {
-                                                        name: 'Times New Roman',
-                                                    },
-                                                    color: 'black'
-                                                }),
-                                            ],
-                                            alignment: AlignmentType.CENTER
-                                        })],
-                                    margins: {
-                                        top: 0,
-                                        bottom: 0,
-                                        left: 150,
-                                        right: 150,
-                                    },
-                                }),
-                                new TableCell({
-                                    children: [
-                                        new Paragraph({
-                                            children: [
-                                                new TextRun({
-                                                    text: 'Название публикации, статьи или работы// ',
-                                                    size: 24,
-                                                    font: {
-                                                        name: 'Times New Roman',
-                                                    },
-                                                    color: 'black'
-                                                }),
-                                            ],
-                                            alignment: AlignmentType.LEFT
-                                        }),
-                                        new Paragraph({
-                                            children: [
-                                                new TextRun({
-                                                    text: 'Название издания. – город: издательство, год – стр.',
-                                                    size: 24,
-                                                    font: {
-                                                        name: 'Times New Roman',
-                                                    },
-                                                    color: 'black'
-                                                }),
-                                            ],
-                                            alignment: AlignmentType.LEFT
-                                        })],
-                                    margins: {
-                                        top: 0,
-                                        bottom: 0,
-                                        left: 150,
-                                        right: 150,
-                                    },
-                                }),
-                                new TableCell({
-                                    children: [new Paragraph({
-                                        children: [
-                                            new TextRun({
-                                                text: 'печатная',
-                                                size: 24,
-                                                font: {
-                                                    name: 'Times New Roman',
-                                                },
-                                                color: 'black'
-                                            }),
-                                        ],
-                                        alignment: AlignmentType.CENTER
-                                    })],
-                                    margins: {
-                                        top: 0,
-                                        bottom: 0,
-                                        left: 0,
-                                        right: 0,
-                                    },
-                                }),
-                                new TableCell({
-                                    children: [
-                                        new Paragraph({
-                                            children: [
-                                                new TextRun({
-                                                    text: 'ФИО соавтора',
-                                                    size: 24,
-                                                    font: {
-                                                        name: 'Times New Roman',
-                                                    },
-                                                    color: 'black'
-                                                }),
-                                            ],
-                                            alignment: AlignmentType.LEFT
-                                        })],
                                     margins: {
                                         top: 0,
                                         bottom: 0,
@@ -241,71 +174,176 @@ export class ScienceListGenerator {
                                 }),
                             ],
                         }),
-                        new TableRow({
-                            children: [
-                                new TableCell({
-                                    children: [
-                                        new Paragraph({
-                                            children: [
-                                                new TextRun({
-                                                    text: '2.',
-                                                    size: 24,
-                                                    font: {
-                                                        name: 'Times New Roman',
-                                                    },
-                                                    color: 'black'
-                                                }),
-                                            ],
-                                            alignment: AlignmentType.CENTER
-                                        })],
-                                }),
-                                new TableCell({
-                                    children: [new Paragraph({
-                                        children: [
-                                            new TextRun({
-                                                text: '',
-                                                size: 24,
-                                                font: {
-                                                    name: 'Times New Roman',
-                                                },
-                                                color: 'black'
-                                            }),
-                                        ],
-                                        alignment: AlignmentType.LEFT
-                                    })],
-                                }),
-                                new TableCell({
-                                    children: [new Paragraph({
-                                        children: [
-                                            new TextRun({
-                                                text: 'печатная',
-                                                size: 24,
-                                                font: {
-                                                    name: 'Times New Roman',
-                                                },
-                                                color: 'black'
-                                            }),
-                                        ],
-                                        alignment: AlignmentType.CENTER
-                                    })],
-                                }),
-                                new TableCell({
-                                    children: [new Paragraph({
-                                        children: [
-                                            new TextRun({
-                                                text: '',
-                                                size: 24,
-                                                font: {
-                                                    name: 'Times New Roman',
-                                                },
-                                                color: 'black'
-                                            }),
-                                        ],
-                                        alignment: AlignmentType.LEFT
-                                    })],
-                                }),
-                            ],
-                        }),
+                        ...this.createPubRows(publications),
+                        // new TableRow({
+                        //     children: [
+                        //         new TableCell({
+                        //             children: [
+                        //                 new Paragraph({
+                        //                     children: [
+                        //                         new TextRun({
+                        //                             text: '1.',
+                        //                             size: 24,
+                        //                             font: {
+                        //                                 name: 'Times New Roman',
+                        //                             },
+                        //                             color: 'black'
+                        //                         }),
+                        //                     ],
+                        //                     alignment: AlignmentType.CENTER
+                        //                 })],
+                        //             margins: {
+                        //                 top: 0,
+                        //                 bottom: 0,
+                        //                 left: 150,
+                        //                 right: 150,
+                        //             },
+                        //         }),
+                        //         new TableCell({
+                        //             children: [
+                        //                 new Paragraph({
+                        //                     children: [
+                        //                         new TextRun({
+                        //                             text: 'Название публикации, статьи или работы// ',
+                        //                             size: 24,
+                        //                             font: {
+                        //                                 name: 'Times New Roman',
+                        //                             },
+                        //                             color: 'black'
+                        //                         }),
+                        //                     ],
+                        //                     alignment: AlignmentType.LEFT
+                        //                 }),
+                        //                 new Paragraph({
+                        //                     children: [
+                        //                         new TextRun({
+                        //                             text: 'Название издания. – город: издательство, год – стр.',
+                        //                             size: 24,
+                        //                             font: {
+                        //                                 name: 'Times New Roman',
+                        //                             },
+                        //                             color: 'black'
+                        //                         }),
+                        //                     ],
+                        //                     alignment: AlignmentType.LEFT
+                        //                 })],
+                        //             margins: {
+                        //                 top: 0,
+                        //                 bottom: 0,
+                        //                 left: 150,
+                        //                 right: 150,
+                        //             },
+                        //         }),
+                        //         new TableCell({
+                        //             children: [new Paragraph({
+                        //                 children: [
+                        //                     new TextRun({
+                        //                         text: 'печатная',
+                        //                         size: 24,
+                        //                         font: {
+                        //                             name: 'Times New Roman',
+                        //                         },
+                        //                         color: 'black'
+                        //                     }),
+                        //                 ],
+                        //                 alignment: AlignmentType.CENTER
+                        //             })],
+                        //             margins: {
+                        //                 top: 0,
+                        //                 bottom: 0,
+                        //                 left: 0,
+                        //                 right: 0,
+                        //             },
+                        //         }),
+                        //         new TableCell({
+                        //             children: [
+                        //                 new Paragraph({
+                        //                     children: [
+                        //                         new TextRun({
+                        //                             text: 'ФИО соавтора',
+                        //                             size: 24,
+                        //                             font: {
+                        //                                 name: 'Times New Roman',
+                        //                             },
+                        //                             color: 'black'
+                        //                         }),
+                        //                     ],
+                        //                     alignment: AlignmentType.LEFT
+                        //                 })],
+                        //             margins: {
+                        //                 top: 0,
+                        //                 bottom: 0,
+                        //                 left: 150,
+                        //                 right: 150,
+                        //             },
+                        //         }),
+                        //     ],
+                        // }),
+                        // new TableRow({
+                        //     children: [
+                        //         new TableCell({
+                        //             children: [
+                        //                 new Paragraph({
+                        //                     children: [
+                        //                         new TextRun({
+                        //                             text: '2.',
+                        //                             size: 24,
+                        //                             font: {
+                        //                                 name: 'Times New Roman',
+                        //                             },
+                        //                             color: 'black'
+                        //                         }),
+                        //                     ],
+                        //                     alignment: AlignmentType.CENTER
+                        //                 })],
+                        //         }),
+                        //         new TableCell({
+                        //             children: [new Paragraph({
+                        //                 children: [
+                        //                     new TextRun({
+                        //                         text: '',
+                        //                         size: 24,
+                        //                         font: {
+                        //                             name: 'Times New Roman',
+                        //                         },
+                        //                         color: 'black'
+                        //                     }),
+                        //                 ],
+                        //                 alignment: AlignmentType.LEFT
+                        //             })],
+                        //         }),
+                        //         new TableCell({
+                        //             children: [new Paragraph({
+                        //                 children: [
+                        //                     new TextRun({
+                        //                         text: 'печатная',
+                        //                         size: 24,
+                        //                         font: {
+                        //                             name: 'Times New Roman',
+                        //                         },
+                        //                         color: 'black'
+                        //                     }),
+                        //                 ],
+                        //                 alignment: AlignmentType.CENTER
+                        //             })],
+                        //         }),
+                        //         new TableCell({
+                        //             children: [new Paragraph({
+                        //                 children: [
+                        //                     new TextRun({
+                        //                         text: '',
+                        //                         size: 24,
+                        //                         font: {
+                        //                             name: 'Times New Roman',
+                        //                         },
+                        //                         color: 'black'
+                        //                     }),
+                        //                 ],
+                        //                 alignment: AlignmentType.LEFT
+                        //             })],
+                        //         }),
+                        //     ],
+                        // }),
                     ],
                 }),
                 new Paragraph({
@@ -343,5 +381,115 @@ export class ScienceListGenerator {
             ],
         });
         return document;
+    }
+
+    public createPubRows(publications): TableRow[] {
+        return publications.map((AcadMeth) => new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: ` ${this.counter++}. `,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black',
+                                }),
+                            ],
+                            alignment: AlignmentType.CENTER
+                        })],
+                    margins: {
+                        top: 0,
+                        bottom: 0,
+                        left: 150,
+                        right: 150,
+                    },
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${AcadMeth.pubName}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        })],
+                    margins: {
+                        top: 0,
+                        bottom: 0,
+                        left: 150,
+                        right: 150,
+                    },
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `печатная`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.CENTER
+                        }),
+                    ],
+                    margins: {
+                        top: 0,
+                        bottom: 0,
+                        left: 150,
+                        right: 150,
+                    },
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${AcadMeth.pubCoAuthor}`,
+                                    size: 24,
+                                    font: {
+                                        name: 'Times New Roman',
+                                    },
+                                    color: 'black'
+                                }),
+                            ],
+                            alignment: AlignmentType.LEFT
+                        }),
+                        // new Paragraph({
+                        //     children: [
+                        //         new TextRun({
+                        //             text: `${AcadMeth.pubCoAuthor.coAuthorUser.lastName}`,
+                        //             size: 24,
+                        //             font: {
+                        //                 name: 'Times New Roman',
+                        //             },
+                        //             color: 'black'
+                        //         }),
+                        //     ],
+                        //     alignment: AlignmentType.LEFT
+                        // }),
+                    ],
+                    margins: {
+                        top: 0,
+                        bottom: 0,
+                        left: 150,
+                        right: 150,
+                    },
+                }),
+            ]
+        }));
     }
 }

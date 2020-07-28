@@ -2421,18 +2421,6 @@ export class DocumentCreator {
                     ],
                     alignment: AlignmentType.LEFT
                 }),
-
-
-
-
-
-
-
-
-
-
-
-
             ]
         });
 
