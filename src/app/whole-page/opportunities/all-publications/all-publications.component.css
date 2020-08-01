@@ -14,7 +14,7 @@
 }
 
 .main {
-  width: calc(100% - 66px - 254px);
+  width: calc(100% - 66px - 80px);
 }
 
 .title-slide-bar {
@@ -54,4 +54,77 @@ table {
   width: 100%;
 }
 
+.btn-style {
+  color: #fff;
+  border-radius: 16px;
+}
 
+.mat-column-index {
+  flex: 2rem;
+  max-width: 2rem;
+}
+
+.mat-column-jointAuthors {
+  flex: 6rem;
+  max-width: 11rem;
+}
+
+.mat-column-fileName {
+  flex: 5rem;
+  max-width: 2rem;
+}
+
+.mat-column-year {
+  flex: 3rem;
+  max-width: 3rem;
+}
+
+.mat-column-titlePublication {
+  flex: 6rem;
+  max-width: 6rem;
+}
+
+.mat-column-type {
+  flex: 9rem;
+  max-width: 9rem;
+}
+
+.mat-column-city {
+  flex: 6rem;
+  max-width: 4rem;
+}
+
+.mat-column-publisher {
+  flex: 6rem;
+  max-width: 5rem;
+}
+
+.mat-column-Page {
+  flex: 6rem;
+  max-width: 4rem;
+}
+
+.mat-column-Url {
+  flex: 6rem;
+  max-width: 2rem;
+}
+
+.mat-column-Doi {
+  flex: 6rem;
+  max-width: 2rem;
+}
+
+.mat-column-actions {
+  flex: 6rem;
+  max-width: 6rem;
+}
+
+.mat-column-author {
+  flex: 6rem;
+  max-width: 4rem;
+}
+
+.mat-column-checkedUser {
+  flex: 6rem;
+  max-width: 5rem;
+}

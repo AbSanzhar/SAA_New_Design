@@ -404,6 +404,16 @@ export class ApiService {
     return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
+  updatePublicationStatus(publicationStatus): Observable<any> {
+    const url = 'publication/updateStatus';
+    return this.http.patch(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), publicationStatus);
+  }
+
+  getAllPublications(): Observable<any> {
+    const url = 'publication/showAll';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
 
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
