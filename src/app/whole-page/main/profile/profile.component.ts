@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   TeacherScienceProjects: any[] = [];
   TeacherCourses: any[] = [];
 
-  displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'File'];
+  displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File'];
   displayedColumnsEvent = ['eventId', 'eventTitle', 'eventType', 'eventRole', 'eventDate', 'eventCity', 'Url', 'File'];
   displayedColumnsDisSovet = ['disId', 'university', 'disRole', 'specialty', 'stopDate', 'numberAndDate'];
   displayedColumnsPatent = ['ptntNumber', 'ptntId', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'File'];
@@ -121,7 +121,12 @@ export class ProfileComponent implements OnInit {
     );
     this._api.getUserById(this.IdToken).subscribe(
         res => {
-          this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
+          console.log(res);
+          if(res.patronymic != null) {
+            this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
+          } else {
+            this.name = res.firstName.charAt(0) + '.' + res.lastName;
+          }
           // tslint:disable-next-line:prefer-for-of
         },
         err => {
@@ -165,6 +170,7 @@ export class ProfileComponent implements OnInit {
     this._api.getPublicationsPage(query).subscribe(res => {
       // console.log(res);
       this.TeacherPublications = res;
+      console.log(res);
       // console.log(this.TeacherPublications);
       for (let i = 0; i < res.length; i++) {
           this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
@@ -260,6 +266,16 @@ export class ProfileComponent implements OnInit {
           const day2 = new Date(res[i].ptntIssueDate).getDate() < 10 ? '0' + new Date(res[i].ptntIssueDate).getDate() : new Date(res[i].ptntIssueDate).getDate();
           this.TeacherPatents[i].ptntIssueDate = day2 + '/' + month2 + '/' + year2;
         }
+
+        this.TeacherPatents.sort(function(a, b) {
+          if (a.ptntId > b.ptntId){
+            return -1;
+          }
+          if (b.ptntId > a.ptntId){
+            return 1;
+          }
+          return 0;
+        });
       }, err => {
         console.log(err);
       }
@@ -293,6 +309,15 @@ export class ProfileComponent implements OnInit {
         res => {
           console.log(res);
           this.TeacherScienceProjects = res;
+          this.TeacherScienceProjects.sort(function(a, b) {
+            if (a.scId > b.scId){
+              return -1;
+            }
+            if (b.scId > a.scId){
+              return 1;
+            }
+            return 0;
+          });
         },
         error1 => {
           console.log(error1);
@@ -322,6 +347,15 @@ export class ProfileComponent implements OnInit {
                 + new Date(res[i].enddate).getDate() : new Date(res[i].enddate).getDate();
             this.TeacherCourses[i].enddate = endDay + '/' + endMonth + '/' + endYear;
           }
+          this.TeacherCourses.sort(function(a, b) {
+            if (a.courseId > b.courseId){
+              return -1;
+            }
+            if (b.courseId > a.courseId){
+              return 1;
+            }
+            return 0;
+          });
         }, err => {
           console.log(err);
         }
@@ -340,31 +374,55 @@ export class ProfileComponent implements OnInit {
       width: '50%',
       data: tab
     }).afterClosed().subscribe(res => {
-      if (tab === 'pub') {
-        this._api.uploadPub(res).subscribe(result => {
-          this.getTeacherPublications();
-          this.getTeacherCourses();
-          this.getTeacherDisSovet();
-          this.getTeacherPatents();
-          this.getTeacherScienceProjects();
-        });
-      }
-      if (tab === 'event') {
-        this._api.uploadEvent(res).subscribe(result => {
-          this.getTeacherEvents();
-        });
-      }
-      if (tab === 'patent') {
-        this._api.addPatent(res).subscribe(result => {
-          this.getTeacherPatents();
-        });
-      }
-      if (tab === 'science') {
-        this._api.addProject(res).subscribe(
-            result => {
-              this.getTeacherScienceProjects();
-            }
-        );
+      if(typeof res !== 'undefined' && res !== 'false') {
+        if (tab === 'pub') {
+          this._api.uploadPub(res).subscribe(result => {
+            console.log(result);
+            this.getTeacherPublications();
+          }, err => {
+            console.log(err);
+            this.getTeacherPublications();
+          });
+        }
+        if (tab === 'event') {
+          this._api.uploadEvent(res).subscribe(result => {
+            this.getTeacherEvents();
+          }, err => {
+            console.log(err);
+            this.getTeacherEvents();
+          });
+        }
+        if (tab === 'patent') {
+          this._api.addPatent(res).subscribe(result => {
+            console.log(result);
+            this.getTeacherPatents();
+          }, error1 => {
+            console.log(error1);
+            this.getTeacherPatents();
+          });
+        }
+        if (tab === 'science') {
+          this._api.addProject(res).subscribe(
+              result => {
+                console.log(result);
+                this.getTeacherScienceProjects();
+              }, err => {
+                console.log(err);
+                this.getTeacherScienceProjects();
+              }
+          );
+        }
+        if (tab === 'course') {
+          this._api.uploadCourse(res).subscribe(
+              result => {
+                console.log(result);
+                this.getTeacherCourses();
+              }, err => {
+                console.log(err);
+                this.getTeacherCourses();
+              }
+          );
+        }
       }
     });
   }

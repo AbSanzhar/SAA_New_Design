@@ -344,3 +344,8 @@ mat-table {
   z-index: 5;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);;
 }
+
+/*.mat-column-Doi {*/
+/*  flex: 6rem;*/
+/*  max-width: 3rem;*/
+/*}*/

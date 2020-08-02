@@ -6,6 +6,7 @@
 <!--            <div style="margin: 1.5rem 0rem; display: block" class="nav-head"> &lt;!&ndash;(click)="generatePdf()"&ndash;&gt;-->
 <!--                <button  style="margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>-->
 <!--            </div>-->
+
             <div class="Inner" *ngIf="_data === 'pub'">
                 <form [formGroup]="publicationForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои публикации: </p>
@@ -147,8 +148,10 @@
 
                     <button mat-raised-button color="primary" [disabled]="publicationForm.invalid" style="margin-top: 3%;">
                         <p style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication('Successfully saved', 'OK')">Сохранить публикацию</p></button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
                 </form>
             </div>
+
 <!--            </div>-->
 <!--        </mat-tab>-->
 
@@ -216,6 +219,7 @@
 
                     <button mat-raised-button color="primary" [disabled]="eventForm.invalid" style="margin-top: 3%" (click)="sendTeacherEvent('Successfully saved', 'OK')">
                         <p style="color: white; margin: 0; padding: 0">Добавить мероприятие</p></button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
                 </form>
             </div>
 <!--        </mat-tab>-->
@@ -285,11 +289,12 @@
 
                     <button mat-raised-button color="primary" [disabled]="patentForm.invalid" style="margin-top: 3%" (click)="sendTeacherPatent('Successfully saved', 'OK')">
                         <p style="color: white; margin: 0; padding: 0">Сохранить</p></button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
                 </form>
             </div>
 <!--        </mat-tab>-->
 
-
+<mat-dialog-content>
 <!--        <mat-tab label="Создать научный проект">-->
             <div class="Inner" *ngIf="_data === 'science'" style="display: flex">
                 <div>
@@ -617,12 +622,12 @@
                         </mat-error>
 
                         <button (click)="openAddMemberDialog()" mat-raised-button [disabled]="newProjForm.invalid">Создать научный проект</button>
-
+                        <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
                     </form>
                 </div>
             </div>
 <!--        </mat-tab>-->
-
+</mat-dialog-content>
 <!--        <mat-tab label="Создать курсы повышения квалификации">-->
             <div class="Inner" *ngIf="_data === 'course'">
                 <form [formGroup]="teacherCourseForm" class="example-form">
@@ -720,6 +725,7 @@
 <!--                        <button mat-raised-button (click)="openUploadCourseDialog()">Загрузить сертификат</button>-->
 <!--                    </div>-->
                     <button mat-raised-button [disabled]="teacherCourseForm.invalid" style="margin-top: 3%" (click)="sendTeacherCourse('Successfully saved', 'OK')">Создать курс</button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
                 </form>
             </div>
 <!--        </mat-tab>-->

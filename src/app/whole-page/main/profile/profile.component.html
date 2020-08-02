@@ -57,8 +57,8 @@
             <span style="display: flex; align-items: center;"><a [ngClass]="{'is-active': whichTable === 5 ? true : false}" (click)="setWhichTable(5)">Мои научные проекты</a><mat-icon (click)="create('science')" style="color: gray; cursor: pointer;">add_circle</mat-icon></span>
             <span style="display: flex; align-items: center;"><a [ngClass]="{'is-active': whichTable === 6 ? true : false}" (click)="setWhichTable(6)">Мои курсы</a><mat-icon (click)="create('course')" style="color: gray; cursor: pointer;">add_circle</mat-icon></span>
           </div>
-          <button (click)="download2()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>
-          <button (click)="download()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать рейтинг лист</button>
+          <button (click)="download2()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cкачать cписок научных трудов</button>
+          <button (click)="download()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Скачать рейтинг лист</button>
         </div>
         <div class="table">
           <div class="sort-div" *ngIf="whichTable === 0 ? true : false">
@@ -139,6 +139,17 @@
                 <mat-header-cell *matHeaderCellDef> DOI </mat-header-cell>
                 <mat-cell *matCellDef="let publication"><div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubDoi}}</div> </mat-cell>
               </ng-container>
+
+                <ng-container matColumnDef="pubStatus">
+                  <mat-header-cell *matHeaderCellDef> Статус модерации </mat-header-cell>
+                  <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                        <mat-icon style="color: green;" *ngIf="publication.pubStatus == 'Confirmed'">done</mat-icon>
+                        <mat-icon style="color: red" *ngIf="publication.pubStatus == 'Returned for revision'">clear</mat-icon>
+                        <p *ngIf="publication.pubStatus == 'Under review'">На рас<wbr>смо<wbr>трен<wbr>нии</p>
+                    </div>
+                  </mat-cell>
+                </ng-container>
 
                 <ng-container matColumnDef="File">
                   <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
@@ -278,7 +289,11 @@
 
               <ng-container matColumnDef="status">
                 <mat-header-cell *matHeaderCellDef> Статус модерации </mat-header-cell>
-                <mat-cell *matCellDef="let patent"> {{patent.ptntStatus}} </mat-cell>
+                <mat-cell *matCellDef="let patent">
+                  <mat-icon style="color: green;" *ngIf="patent.ptntStatus == 'Confirmed'">done</mat-icon>
+                  <mat-icon style="color: red" *ngIf="patent.ptntStatus == 'Returned for revision'">clear</mat-icon>
+                  <p *ngIf="patent.ptntStatus == 'Under review'">На рас<wbr>смо<wbr>трен<wbr>нии</p>
+                </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="insertDate">

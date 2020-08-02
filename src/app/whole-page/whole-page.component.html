@@ -20,9 +20,9 @@
       <div class="navButton" *ngIf="this.userRoles.indexOf('Teacher') != -1">
         <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./yearPlan" > Годовой план </a>
       </div>
-      <div class="navButton"> <!--dropdown-menu-->
-        <a *ngIf="this.userRoles.indexOf('Science_Secretary_Dissovet') != -1" routerLinkActive="active-link"
-           class="navTool" mat-button routerLink="./secretary-of-the-diss-council"> Секретаря диссовета </a>
+      <div class="navButton" *ngIf="this.userRoles.indexOf('Science_Secretary_Dissovet') != -1"> <!--dropdown-menu-->
+        <a routerLinkActive="active-link"
+           class="navTool" mat-button routerLink="./secretary-of-the-diss-council"> Диссертационный совет </a>
         <!--        <a id="dropDownMenu" routerLinkActive="active-link" class="navTool" mat-button> Дополнительные возможности </a>-->
         <!--          <div class="options">-->
         <!--            <a *ngIf="this.userRoles.indexOf('Teacher') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./teacher"> Преподавателя </a>-->
@@ -32,9 +32,10 @@
         <!--            <a *ngIf="this.userRoles.indexOf('Science_Secretary_Dissovet') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./secretary-of-the-diss-council"> Секретаря диссовета </a>-->
         <!--          </div>-->
       </div>
-        <div> <!--dropdown-menu-->
+
+        <div class="navButton"> <!--dropdown-menu-->
         <a *ngIf="this.userRoles.indexOf('Science_Dept') != -1" routerLinkActive="active-link"
-           class="navTool" mat-button routerLink="./opportunities"> СОпН </a>
+           class="navTool" mat-button routerLink="./opportunities"> Отдел по науке </a>
       </div>
         </span>
 

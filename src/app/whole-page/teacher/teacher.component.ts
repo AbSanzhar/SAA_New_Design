@@ -1142,17 +1142,18 @@ export class TeacherComponent implements OnInit {
     sendTeacherCourse(message: string, action: string) {
         if (this.teacherCourseForm.valid) {
             console.log(this.teacherCourseForm.value);
-            this._api.uploadCourse(this.teacherCourseForm.value).subscribe(
-                res => {
-                    console.log(res);
-                }, err => {
-                    console.log(err);
-                }
-            );
-            this.teacherCourseForm.reset();
+            // this._api.uploadCourse(this.teacherCourseForm.value).subscribe(
+            //     res => {
+            //         console.log(res);
+            //     }, err => {
+            //         console.log(err);
+            //     }
+            // );
+            // this.teacherCourseForm.reset();
             this._snackBar.open(message, action, {
                 duration: 2000,
             });
+            this._dialog.close(this.teacherCourseForm.value);
         }
     }
 
