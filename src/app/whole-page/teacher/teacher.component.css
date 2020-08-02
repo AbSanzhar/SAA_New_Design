@@ -1,16 +1,16 @@
-.content{
-    margin: 6rem;
-}
+/*.content{*/
+    /*margin: 6rem;*/
+/*}*/
 .Inner{
-    margin: 5rem 2rem;
+    /*margin: 5rem 2rem;*/
     display: flex;
-    margin-bottom: 2rem!important;
-    padding-left: 1%;
+    /*margin-bottom: 2rem!important;*/
+    /*padding-left: 1%;*/
 }
 
 .example-form {
-    min-width: 250px;
-    max-width: 700px;
+    /*min-width: 250px;*/
+    /*max-width: 700px;*/
     width: 100%;
 }
 

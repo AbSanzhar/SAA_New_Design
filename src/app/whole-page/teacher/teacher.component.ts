@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -9,7 +9,7 @@ import {Packer} from 'docx';
 import {saveAs} from 'file-saver';
 import {DocumentCreator} from './rate-list-generator';
 import * as $ from 'jquery';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {PublicationUploadComponent} from './publication-upload/publication-upload.component';
 import {EventUploadComponent} from './event-upload/event-upload.component';
 import {PatentUploadComponent} from './patent-upload/patent-upload.component';
@@ -40,91 +40,98 @@ export class TeacherComponent implements OnInit {
         return this.eventForm.controls;
     }
 
-  constructor(private formBuilder: FormBuilder,
-              // tslint:disable-next-line:variable-name
-              private _api: ApiService,
-              public dialog: MatDialog,
-              // tslint:disable-next-line:variable-name
-              private _snackBar: MatSnackBar,
-              private http: HttpClient,
-              private service: CountriesService) {
+    data: string;
 
-    this.filteredCoAuthorsFullNames = this.coAuthorsCtrl.valueChanges.pipe(
-        startWith(null),
-        map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCoAuthorsFullNames.slice()));
+    constructor(private formBuilder: FormBuilder,
+                // tslint:disable-next-line:variable-name
+                private _api: ApiService,
+                public dialog: MatDialog,
+                // tslint:disable-next-line:variable-name
+                private _snackBar: MatSnackBar,
+                private http: HttpClient,
+                private service: CountriesService,
+                // tslint:disable-next-line:variable-name
+                @Inject(MAT_DIALOG_DATA) public _data: any,
+                // tslint:disable-next-line:variable-name
+                private _dialog: MatDialogRef<TeacherComponent>) {
+        this.data = _data;
+
+        this.filteredCoAuthorsFullNames = this.coAuthorsCtrl.valueChanges.pipe(
+            startWith(null),
+            map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCoAuthorsFullNames.slice()));
 
 
-    this.publicationForm = formBuilder.group({
-      pubPublished: new FormControl('', Validators.required),
-      pubType: new FormControl('', Validators.required),
-      pubCoAuthor: [],
-      pubName: new FormControl('', Validators.required),
-      pubYear: new FormControl('', Validators.required),
-      pubPubName: new FormControl('', Validators.required),
-      pubCity: new FormControl('', Validators.required),
-      pubPage: new FormControl(''),
-      pubEndPage: new FormControl(''),
-      pubUrl: new FormControl(''),
-      pubDoi: new FormControl(''),
-      pubFile: new FormControl('', Validators.required),
-      pubScopusUrl: ''
-    });
+        this.publicationForm = formBuilder.group({
+            pubPublished: new FormControl('', Validators.required),
+            pubType: new FormControl('', Validators.required),
+            pubCoAuthor: [],
+            pubName: new FormControl('', Validators.required),
+            pubYear: new FormControl('', Validators.required),
+            pubPubName: new FormControl('', Validators.required),
+            pubCity: new FormControl('', Validators.required),
+            pubPage: new FormControl(''),
+            pubEndPage: new FormControl(''),
+            pubUrl: new FormControl(''),
+            pubDoi: new FormControl(''),
+            pubFile: new FormControl('', Validators.required),
+            pubScopusUrl: ''
+        });
 
-    this.eventForm = formBuilder.group({
-        event_type: new FormControl(''),
-        event_role: new FormControl(''),
-        event_name: new FormControl('', Validators.required),
-        event_city: new FormControl('', Validators.required),
-        event_url: new FormControl(''),
-        event_date: new FormControl('', Validators.required),
-        event_file: new FormControl('', Validators.required),
-        event_user_id: this.IdToken
-    });
+        this.eventForm = formBuilder.group({
+            event_type: new FormControl(''),
+            event_role: new FormControl(''),
+            event_name: new FormControl('', Validators.required),
+            event_city: new FormControl('', Validators.required),
+            event_url: new FormControl(''),
+            event_date: new FormControl('', Validators.required),
+            event_file: new FormControl('', Validators.required),
+            event_user_id: this.IdToken
+        });
 
-    this.newProjForm = formBuilder.group({
-        scIrn: new FormControl('', Validators.required),
-        scName: new FormControl('', Validators.required),
-        scType: new FormControl('', Validators.required),
-        scPriority: new FormControl('', Validators.required),
-        scSubPriority: new FormControl('', Validators.required),
-        scSubSubPriority: new FormControl(''),
-        scExecutor: new FormControl('', Validators.required),
-        scCustomer: new FormControl('', Validators.required),
-        scAgrDate: new FormControl('', Validators.required),
-        scNum: new FormControl('', Validators.required),
-        scStDate: new FormControl('', Validators.required),
-        scEndDate: new FormControl('', Validators.required),
-        scTotalSum: new FormControl('', Validators.required),
-        scDept: new FormControl('', Validators.required),
-        scDirector: new FormControl('', Validators.required)
-    }, {validators: StartEndDateValidator});
+        this.newProjForm = formBuilder.group({
+            scIrn: new FormControl('', Validators.required),
+            scName: new FormControl('', Validators.required),
+            scType: new FormControl('', Validators.required),
+            scPriority: new FormControl('', Validators.required),
+            scSubPriority: new FormControl('', Validators.required),
+            scSubSubPriority: new FormControl(''),
+            scExecutor: new FormControl('', Validators.required),
+            scCustomer: new FormControl('', Validators.required),
+            scAgrDate: new FormControl('', Validators.required),
+            scNum: new FormControl('', Validators.required),
+            scStDate: new FormControl('', Validators.required),
+            scEndDate: new FormControl('', Validators.required),
+            scTotalSum: new FormControl('', Validators.required),
+            scDept: new FormControl('', Validators.required),
+            scDirector: new FormControl('', Validators.required)
+        }, {validators: StartEndDateValidator});
 
-    this.teacherCourseForm = formBuilder.group({
-        userId: new FormControl(this.IdToken, Validators.required),
-        courseForm: new FormControl('', Validators.required),
-        courseCenter: new FormControl('', Validators.required),
-        courseHours: new FormControl('', Validators.required),
-        coursePrice: new FormControl('', Validators.required),
-        startdate: new FormControl('', Validators.required),
-        enddate: new FormControl('', Validators.required),
-        certificateNumber: new FormControl('', Validators.required),
-        certificateDate: new FormControl('', Validators.required),
-        courseDegree: this.courseDegree,
-        courseFile: new FormControl('', Validators.required)
-    });
+        this.teacherCourseForm = formBuilder.group({
+            userId: new FormControl(this.IdToken, Validators.required),
+            courseForm: new FormControl('', Validators.required),
+            courseCenter: new FormControl('', Validators.required),
+            courseHours: new FormControl('', Validators.required),
+            coursePrice: new FormControl('', Validators.required),
+            startdate: new FormControl('', Validators.required),
+            enddate: new FormControl('', Validators.required),
+            certificateNumber: new FormControl('', Validators.required),
+            certificateDate: new FormControl('', Validators.required),
+            courseDegree: this.courseDegree,
+            courseFile: new FormControl('', Validators.required)
+        });
 
-    this.patentForm = formBuilder.group({
-        ptnt_number: new FormControl('', Validators.required),
-        ptnt_country: new FormControl('', Validators.required),
-        ptnt_type_id: new FormControl('', Validators.required),
-        ptnt_published_TR: new FormControl('', Validators.required),
-        ptnt_user_id: [this.IdToken],
-        ptnt_status_id: new FormControl('1'),
-        ptnt_issue_date: new FormControl('', Validators.required),
-        ptnt_inserted_date: [new Date()],
-        ptnt_file: new FormControl('', Validators.required),
-        ptnt_file_name: new FormControl('', Validators.required),
-    });
+        this.patentForm = formBuilder.group({
+            ptnt_number: new FormControl('', Validators.required),
+            ptnt_country: new FormControl('', Validators.required),
+            ptnt_type_id: new FormControl('', Validators.required),
+            ptnt_published_TR: new FormControl('', Validators.required),
+            ptnt_user_id: [this.IdToken],
+            ptnt_status_id: new FormControl('1'),
+            ptnt_issue_date: new FormControl('', Validators.required),
+            ptnt_inserted_date: [new Date()],
+            ptnt_file: new FormControl('', Validators.required),
+            ptnt_file_name: new FormControl('', Validators.required),
+        });
 
     }
 
@@ -956,26 +963,6 @@ export class TeacherComponent implements OnInit {
       );
     }
 
-    generatePdf(action = 'open') {
-        const documentDefinition = this.getDocumentDefinition();
-
-        switch (action) {
-            case 'open':
-                pdfMake.createPdf(documentDefinition).open();
-                break;
-            case 'print':
-                pdfMake.createPdf(documentDefinition).print();
-                break;
-            case 'download':
-                pdfMake.createPdf(documentDefinition).download();
-                break;
-
-            default:
-                pdfMake.createPdf(documentDefinition).open();
-                break;
-        }
-    }
-
     getDocumentDefinition() {
         return {
             content: [
@@ -1094,35 +1081,37 @@ export class TeacherComponent implements OnInit {
           pubCoAuthor: coAuthorsIds,
       });
 
-
-      this._api.uploadPub(this.publicationForm.value).subscribe(
-        res => {
-          console.log(res);
-        }, err => {
-          console.log(err);
-        }
-    );
+      //   this._api.uploadPub(this.publicationForm.value).subscribe(
+      //     res => {
+      //       console.log(res);
+      //     }, err => {
+      //       console.log(err);
+      //     }
+      // );
       if (this.publicationForm.valid) {
-      this.publicationForm.reset();
-      this._snackBar.open(message, action, {
-        duration: 2000,
-      });
-    }
+          // this.publicationForm.reset();
+          this._snackBar.open(message, action, {
+              duration: 2000,
+          });
+          this._dialog.close(this.publicationForm.value);
+      }
+
   }
 
     sendTeacherEvent(message: string, action: string) {
         if (this.eventForm.valid) {
-            this._api.uploadEvent(this.eventForm.value).subscribe(
-                res => {
-                    console.log(res);
-                }, err => {
-                    console.log(err);
-                }
-            );
-            this.eventForm.reset();
+            // this._api.uploadEvent(this.eventForm.value).subscribe(
+            //     res => {
+            //         console.log(res);
+            //     }, err => {
+            //         console.log(err);
+            //     }
+            // );
+            // this.eventForm.reset();
             this._snackBar.open(message, action, {
                 duration: 2000,
             });
+            this._dialog.close(this.eventForm.value);
         }
     }
 
@@ -1136,16 +1125,17 @@ export class TeacherComponent implements OnInit {
                 // ptnt_file_name_kz: this.PatentFileKz.name,
                 ptnt_file_name_en: this.PatentFileEn.name,
             });
-            console.log(this.patentForm.value);
-            this._api.addPatent(this.patentForm.value).subscribe(res => {
-                console.log(res);
-            }, error1 => {
-                console.log(error1);
-            });
-            this.patentForm.reset();
+            // console.log(this.patentForm.value);
+            // this._api.addPatent(this.patentForm.value).subscribe(res => {
+            //     console.log(res);
+            // }, error1 => {
+            //     console.log(error1);
+            // });
+            // this.patentForm.reset();
             this._snackBar.open(message, action, {
                 duration: 2000,
             });
+            this._dialog.close(this.patentForm.value);
         }
     }
 
@@ -1278,7 +1268,7 @@ export class TeacherComponent implements OnInit {
     }
 
     uploadPatentFiles() {
-        console.log(this.PatentFileEn);
+        // console.log(this.PatentFileEn);
         const formData = new FormData();
         // let linkRu;
         // formData.append('file', this.PatentFileEn);
@@ -1349,6 +1339,7 @@ export class TeacherComponent implements OnInit {
             res => {
                 if (typeof res !== 'undefined' && res !== 'false') {
                     this.sendProject(res);
+                    this._dialog.close(this.newProjForm.value);
                 }
                 // console.log(res);
             }
@@ -1393,10 +1384,10 @@ export class TeacherComponent implements OnInit {
     }
 
     sendProject(newProjMemForm) {
-        console.log(this.newProjForm.value);
+        // console.log(this.newProjForm.value);
         this._api.addProject(this.newProjForm.value).subscribe(
             res => {
-                console.log(res);
+                // console.log(res);
                 const control = newProjMemForm.controls.ScienceMember as FormArray;
                 const members = control.value;
                 const mainMember = {

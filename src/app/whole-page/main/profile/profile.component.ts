@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
+import {MatDialog} from '@angular/material/dialog';
+import {TeacherComponent} from '../../teacher/teacher.component';
+import {FormArray} from '@angular/forms';
+import {DocumentCreator} from '../../teacher/rate-list-generator';
+import {Packer} from 'docx';
+import {ScienceListGenerator} from '../../teacher/ScienceListGenerator';
+import {saveAs} from 'file-saver';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -15,6 +23,14 @@ export class ProfileComponent implements OnInit {
     size: 1,
     page: 0,
   };
+  public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
+  public IdToken = this.DecodedToken.jti;
+  private name: any;
+  PubTypeCounts;
+  UserDegreeCounts;
+  publishCount;
+  courceCount;
+  disMembersCount;
   TeacherPublications: any[] = [];
   TeacherEvents: any[] = [];
   TeacherDisSovet: any[] = [];
@@ -31,8 +47,8 @@ export class ProfileComponent implements OnInit {
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
   displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
 
-  public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
-  public tokenId = this.DecodedToken.jti;
+  public s = this.getDecodedAccessToken(localStorage.getItem('token'));
+  public tokenId = this.s.jti;
   public currentUser;
   public userDepts = [ ];
   public roles = [];
@@ -50,12 +66,74 @@ export class ProfileComponent implements OnInit {
 
   constructor(private http: DataControlService,
               // tslint:disable-next-line:variable-name
-              private _api: ApiService) { }
+              private _api: ApiService,
+              // tslint:disable-next-line:variable-name
+              private _dialog: MatDialog) {
+  }
+
   onChangePage(pageOfItems: Array<any>) {
     this.pageOfItems = pageOfItems;
   }
   ngOnInit(): void {
+    this._api.getPubTypeCount().subscribe(
+        res => {
+          console.log(res);
+          this.PubTypeCounts = res;
+        },
+        err => {
+          console.log(err);
+        }
+    );
+
+    this._api.getUserDegreeCount().subscribe(
+        res => {
+          console.log(res);
+          this.UserDegreeCounts = res;
+        },
+        err => {
+          console.log(err);
+        }
+    );
+    this._api.getPublishCount().subscribe(
+        res => {
+          console.log(res);
+          this.publishCount = res;
+        },
+        err => {
+          console.log(err);
+        }
+    );
+    this._api.getCourseCount().subscribe(
+        res => {
+          console.log(res);
+          this.courceCount = res;
+        }, err => {
+          console.log(err);
+        }
+    );
+    this._api.getDisMembersCount().subscribe(
+        res => {
+          console.log(res);
+          this.disMembersCount = res;
+        }, err => {
+          console.log(err);
+        }
+    );
+    this._api.getUserById(this.IdToken).subscribe(
+        res => {
+          this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
+          // tslint:disable-next-line:prefer-for-of
+        },
+        err => {
+          console.log(err);
+        }
+    );
     this.getTeacherPublications();
+    this.getTeacherEvents();
+    this.getTeacherDisSovet();
+    this.getTeacherPatents();
+    this.getTeacherScienceProjects();
+    this.getTeacherCourses();
     this._api.getUserById(this.tokenId).subscribe(
         res => {
           this.currentUser = res;
@@ -85,27 +163,30 @@ export class ProfileComponent implements OnInit {
   getTeacherPublications() {
     const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
     this._api.getPublicationsPage(query).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.TeacherPublications = res;
-      console.log(this.TeacherPublications);
+      // console.log(this.TeacherPublications);
       for (let i = 0; i < res.length; i++) {
           this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
         }
         // this._api.getPublications().subscribe(res2 => {
         //   this.paginator.length = res2.length;
         // });
+      // tslint:disable-next-line:only-arrow-functions
       this.TeacherPublications.sort(function(a, b) {
         if (a.pubId > b.pubId) {
           return -1;
         }
-        if ( b.pubId > a.pubId) {
+        if (b.pubId > a.pubId) {
           return 1;
         }
         return 0;
       });
+      this.TeacherPublications = res;
     }, err => {
       console.log(err);
     });
+
     // this._api.getPublications().subscribe(res => {
     //   console.log(res);
     //   this.TeacherPublications = res;
@@ -133,6 +214,7 @@ export class ProfileComponent implements OnInit {
         const day = new Date(res[i].eventDate).getDate() < 10 ? '0' + new Date(res[i].eventDate).getDate() : new Date(res[i].eventDate).getDate();
         this.TeacherEvents[i].eventDate = day + '/' + month + '/' + year;
       }
+      // tslint:disable-next-line:only-arrow-functions
       this.TeacherEvents.sort(function(a, b) {
         if (a.eventId > b.eventId){
           return -1;
@@ -252,6 +334,64 @@ export class ProfileComponent implements OnInit {
       this.whichTable = number;
     }
   }
+
+  create(tab: string) {
+    this._dialog.open(TeacherComponent, {
+      width: '50%',
+      data: tab
+    }).afterClosed().subscribe(res => {
+      if (tab === 'pub') {
+        this._api.uploadPub(res).subscribe(result => {
+          this.getTeacherPublications();
+          this.getTeacherCourses();
+          this.getTeacherDisSovet();
+          this.getTeacherPatents();
+          this.getTeacherScienceProjects();
+        });
+      }
+      if (tab === 'event') {
+        this._api.uploadEvent(res).subscribe(result => {
+          this.getTeacherEvents();
+        });
+      }
+      if (tab === 'patent') {
+        this._api.addPatent(res).subscribe(result => {
+          this.getTeacherPatents();
+        });
+      }
+      if (tab === 'science') {
+        this._api.addProject(res).subscribe(
+            result => {
+              this.getTeacherScienceProjects();
+            }
+        );
+      }
+    });
+  }
+
+  public download(): void {
+    const documentCreator = new DocumentCreator();
+    // tslint:disable-next-line:max-line-length
+    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount);
+
+    Packer.toBlob(doc).then(blob => {
+      console.log(blob);
+      saveAs(blob, 'Рейтинг лист.docx');
+      console.log('Document created successfully');
+    });
+  }
+
+  public download2(): void {
+    console.log(this.TeacherPublications);
+    const  documentCreator = new ScienceListGenerator();
+    const doc = documentCreator.create(this.name, this.TeacherPublications);
+    Packer.toBlob(doc).then(blob => {
+      console.log(blob);
+      saveAs(blob, 'Список научных трудов.docx');
+      console.log('Document created successfully');
+    });
+  }
+
 }
 
 

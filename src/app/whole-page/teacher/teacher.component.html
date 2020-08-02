@@ -1,12 +1,12 @@
 <div class="content">
-    <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="Создать публикацию">
+<!--    <mat-tab-group mat-align-tabs="center">-->
+<!--        <mat-tab label="Создать публикацию">-->
 <!--            <div style="display: flex; justify-content: center;">-->
 <!--                TODO: do the following ref-->
 <!--            <div style="margin: 1.5rem 0rem; display: block" class="nav-head"> &lt;!&ndash;(click)="generatePdf()"&ndash;&gt;-->
 <!--                <button  style="margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>-->
 <!--            </div>-->
-            <div class="Inner">
+            <div class="Inner" *ngIf="_data === 'pub'">
                 <form [formGroup]="publicationForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои публикации: </p>
                     <mat-form-field>
@@ -150,10 +150,10 @@
                 </form>
             </div>
 <!--            </div>-->
-        </mat-tab>
+<!--        </mat-tab>-->
 
-        <mat-tab label="Создать мероприятие">
-            <div class="Inner">
+<!--        <mat-tab label="Создать мероприятие">-->
+            <div class="Inner" *ngIf="_data === 'event'">
                 <form [formGroup]="eventForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои мероприятия: </p>
 
@@ -218,11 +218,11 @@
                         <p style="color: white; margin: 0; padding: 0">Добавить мероприятие</p></button>
                 </form>
             </div>
-        </mat-tab>
+<!--        </mat-tab>-->
 
 
-        <mat-tab label="Добавить патент">
-            <div class="Inner">
+<!--        <mat-tab label="Добавить патент">-->
+            <div class="Inner" *ngIf="_data === 'patent'">
                 <form [formGroup]="patentForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в патенты: </p>
 
@@ -287,15 +287,13 @@
                         <p style="color: white; margin: 0; padding: 0">Сохранить</p></button>
                 </form>
             </div>
-        </mat-tab>
+<!--        </mat-tab>-->
 
 
-        <mat-tab label="Создать научный проект">
-            <div class="Inner" style="display: flex">
+<!--        <mat-tab label="Создать научный проект">-->
+            <div class="Inner" *ngIf="_data === 'science'" style="display: flex">
                 <div>
 <!--                <button (click)="generatePdf()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>-->
-                <button (click)="download2()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>
-                <button (click)="download()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать рейтинг лист</button>
                 </div>
                 <div style="margin-left: 5%">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои проекты: </p>
@@ -623,10 +621,10 @@
                     </form>
                 </div>
             </div>
-        </mat-tab>
+<!--        </mat-tab>-->
 
-        <mat-tab label="Создать курсы повышения квалификации">
-            <div class="Inner">
+<!--        <mat-tab label="Создать курсы повышения квалификации">-->
+            <div class="Inner" *ngIf="_data === 'course'">
                 <form [formGroup]="teacherCourseForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои курсы: </p>
 
@@ -724,7 +722,7 @@
                     <button mat-raised-button [disabled]="teacherCourseForm.invalid" style="margin-top: 3%" (click)="sendTeacherCourse('Successfully saved', 'OK')">Создать курс</button>
                 </form>
             </div>
-        </mat-tab>
+<!--        </mat-tab>-->
 
-    </mat-tab-group>
+<!--    </mat-tab-group>-->
 </div>

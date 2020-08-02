@@ -49,14 +49,16 @@
             <h2>Мои таблицы</h2>
           </div>
           <div class="nav-link">
-            <a [ngClass]="{'is-active': whichTable === 0 ? true : false}" (click)="setWhichTable(0)">Мои публикации</a>
-            <a [ngClass]="{'is-active': whichTable === 1 ? true : false}" (click)="setWhichTable(1)">Мои мероприятия</a>
+            <span style="display: flex; align-items: center;"><a [ngClass]="{'is-active': whichTable === 0 ? true : false}" (click)="setWhichTable(0)">Мои публикации</a><mat-icon (click)="create('pub')" style="color: gray; cursor: pointer;">add_circle</mat-icon></span>
+            <span style="display: flex; align-items: center;"><a [ngClass]="{'is-active': whichTable === 1 ? true : false}" (click)="setWhichTable(1)">Мои мероприятия</a><mat-icon (click)="create('event')" style="color: gray; cursor: pointer;">add_circle</mat-icon></span>
             <a [ngClass]="{'is-active': whichTable === 2 ? true : false}" (click)="setWhichTable(2)">Мои диссоветы</a>
-            <a [ngClass]="{'is-active': whichTable === 3 ? true : false}" (click)="setWhichTable(3)">Мои патенты</a>
+            <span style="display: flex; align-items: center;"><a [ngClass]="{'is-active': whichTable === 3 ? true : false}" (click)="setWhichTable(3)">Мои патенты</a><mat-icon (click)="create('patent')" style="color: gray; cursor: pointer;">add_circle</mat-icon></span>
             <a *ngIf="this.roles.indexOf('Head_Of_Dept') != - 1" [ngClass]="{'is-active': whichTable === 4 ? true : false}" (click)="setWhichTable(4)">Мои сотрудники</a>
-            <a [ngClass]="{'is-active': whichTable === 5 ? true : false}" (click)="setWhichTable(5)">Мои научные проекты</a>
-            <a [ngClass]="{'is-active': whichTable === 6 ? true : false}" (click)="setWhichTable(6)">Мои курсы</a>
+            <span style="display: flex; align-items: center;"><a [ngClass]="{'is-active': whichTable === 5 ? true : false}" (click)="setWhichTable(5)">Мои научные проекты</a><mat-icon (click)="create('science')" style="color: gray; cursor: pointer;">add_circle</mat-icon></span>
+            <span style="display: flex; align-items: center;"><a [ngClass]="{'is-active': whichTable === 6 ? true : false}" (click)="setWhichTable(6)">Мои курсы</a><mat-icon (click)="create('course')" style="color: gray; cursor: pointer;">add_circle</mat-icon></span>
           </div>
+          <button (click)="download2()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать cписок научных трудов</button>
+          <button (click)="download()" style="border-color: white; margin-top: 5%;" mat-stroked-button color="primary">Cоздать рейтинг лист</button>
         </div>
         <div class="table">
           <div class="sort-div" *ngIf="whichTable === 0 ? true : false">
