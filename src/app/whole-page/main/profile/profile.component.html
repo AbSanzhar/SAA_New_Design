@@ -12,8 +12,12 @@
               <mat-icon routerLink="./settings" style="cursor: pointer;">create</mat-icon>
             </div>
             <div style="width: 100%;" *ngIf="this.currentUser">
-              <h3>{{this.currentUser.email}}</h3>
+              <h3>E-mail: {{this.currentUser.email}}</h3>
+              <h3 *ngIf="this.currentUser.gender == 'male'">Пол: Мужской</h3>
+              <h3 *ngIf="this.currentUser.gender == 'female'">Пол: Женский</h3>
+              <h3>Контактный номер: {{this.currentUser.phoneNumber}}</h3>
             </div>
+
           </div>
         </div>
       </div>

@@ -36,7 +36,9 @@ export class SettingsComponent implements OnInit {
             firstName: new FormControl('', Validators.required),
             lastName: new FormControl('', Validators.required),
             patronymic: new FormControl('', Validators.required),
-            email: new FormControl('', Validators.required)
+            email: new FormControl('', Validators.required),
+            // gender: new FormControl('', Validators.required),
+            phoneNumber: new FormControl('', Validators.required)
         });
         this._api.getUserById(this.tokenId).subscribe(res => {
             console.log(res);
@@ -44,7 +46,9 @@ export class SettingsComponent implements OnInit {
                 firstName: new FormControl(res.firstName, Validators.required),
                 lastName: new FormControl(res.lastName, Validators.required),
                 patronymic: new FormControl(res.patronymic, Validators.required),
-                email: new FormControl(res.email, Validators.required)
+                email: new FormControl(res.email, Validators.required),
+                // gender: new FormControl(res.gender, Validators.required),
+                phoneNumber: new FormControl(res.phoneNumber, Validators.required)
             });
         }, err => {
             console.log(err);
