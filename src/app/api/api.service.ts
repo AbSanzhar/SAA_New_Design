@@ -190,7 +190,7 @@ export class ApiService {
     const url = 'publication/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(
-        this.base + url + id + '?jwt_token='
+        this.base + url + id + /ru/ + '?jwt_token='
         + window.localStorage.getItem('token') + query).pipe(catchError(this.errorHandler));
   }
 

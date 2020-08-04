@@ -21,10 +21,10 @@
                 <span style="display: flex; align-items: center;"><a
                         [ngClass]="{'is-active': whichTable === 6}"
                         (click)="setWhichTable(6)">Мои курсы</a></span>
-                <button (click)="download2()" style="border-color: white; margin-top: 5%;" mat-stroked-button
+                <button (click)="download2()" style="border-color: white; margin-left: -3%; margin-top: 5%;" mat-stroked-button
                         color="primary">Cкачать cписок научных трудов
                 </button>
-                <button (click)="download()" style="border-color: white; margin-top: 5%;" mat-stroked-button
+                <button (click)="download()" style="border-color: white; margin-top: 5%; margin-left: -3%;" mat-stroked-button
                         color="primary">Скачать рейтинг лист
                 </button>
             </div>
@@ -118,7 +118,7 @@
                         <ng-container matColumnDef="Url">
                             <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
-                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubUrl}}</div>
+                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <a href="{{publication.pubUrl}}"><mat-icon color="primary">public</mat-icon></a></div>
                             </mat-cell>
                         </ng-container>
                         >
