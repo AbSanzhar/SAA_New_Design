@@ -1,0 +1,386 @@
+.content {
+    margin: 6rem;
+}
+
+.managing {
+    display: flex;
+    justify-content: center;
+}
+
+.my-tables {
+    width: 25%;
+}
+
+.nav-head {
+    margin: 1.5rem 1rem;
+}
+
+.nav-head h2 {
+    margin: .5rem;
+    font-weight: 600;
+    color: #827878;
+}
+
+.nav-link {
+    margin: 1.5rem 1rem;
+}
+
+.nav-link a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: .5rem;
+    cursor: pointer
+}
+
+.is-active {
+    color: #DC5441 !important;
+}
+
+.table {
+    width: 100%;
+}
+
+.sort-div {
+    display: flex;
+}
+
+.form-div {
+    width: 50%;
+    margin: 2rem;
+    display: flex;
+}
+
+label {
+    font-family: Muli, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    color: #A8A4A4;
+}
+
+input:not(.btn) {
+    background: #FDFDFD;
+    border: 1px solid #0CB5A0;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: .7rem 1rem;
+    font-family: Ubuntu, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.label-div {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+.input-div {
+    margin-left: 2rem;
+    width: 70%;
+}
+
+.Razdely {
+    white-space: nowrap;
+    width: 76.5px !important;
+    height: 200px;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.Razdely:hover {
+    overflow: visible !important;
+    white-space: pre-line;
+    background: #FFFFFF;
+    z-index: 5;
+}
+
+.Razdely:hover p {
+    overflow: visible !important;
+    white-space: pre-line;
+    background: #FFFFFF;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);;
+}
+
+mat-table {
+    width: 100%;
+}
+
+/deep/ .mat-tab-label, /deep/ .mat-tab-label-active {
+    font-weight: bolder;
+    width: 90%;
+}
+
+.Inner {
+    margin: 5rem 2rem;
+    display: flex;
+    margin-bottom: 2rem !important;
+
+}
+
+.Img {
+    /*background: url('https://media.istockphoto.com/photos/neon-heart-on-brick-wall-picture-id848235926?k=6&m=848235926&s=612x612&w=0&h=resOh2Qt0_wYIOoLGcbnGtu_rXw5Dkp_IsqrerWzWCQ=') no-repeat center;*/
+    /*background: url('./src/assets/images/unnamed.jpg') no-repeat center;*/
+    /*background-image: url("../../../../assets/images/camera_200.png");*/
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 249px;
+    height: 214px;
+    background-size: cover;
+    clip-path: ellipse();
+}
+
+.AddInf {
+    margin: 2rem;
+    display: flex;
+}
+
+.left-side div {
+    margin: 2rem;
+}
+
+.passwd-btn {
+    font-weight: bolder;
+    cursor: pointer;
+    display: inline;
+}
+
+.passwd-btn mat-icon {
+    position: absolute;
+    margin: 2px 8px;
+}
+
+.right-side {
+    margin: 7.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.mat-column-pubId {
+    flex: 2rem;
+    max-width: 3rem;
+}
+
+.mat-column-eventId {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-disId {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-courseId {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-Collaborators {
+    flex: 6rem;
+    max-width: 7rem;
+}
+
+.mat-column-university {
+    flex: 9rem;
+    max-width: 9rem;
+}
+
+.mat-column-File {
+    flex: 5rem;
+    max-width: 1rem;
+}
+
+.mat-column-Year {
+    flex: 3rem;
+    max-width: 4rem;
+}
+
+.mat-column-Role {
+    flex: 6rem;
+    max-width: 6.5rem;
+}
+
+.mat-column-Title {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-eventDate {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-eventCity {
+    flex: 5rem;
+    max-width: 7rem;
+}
+
+.mat-column-eventType {
+    flex: 10rem;
+    max-width: 10rem;
+}
+
+.mat-column-pubType {
+    flex: 9rem;
+    max-width: 9rem;
+}
+
+.mat-column-eventRole {
+    flex: 8rem;
+    max-width: 10rem;
+}
+
+.mat-column-eventTitle {
+    flex: 7rem;
+    max-width: 13rem;
+}
+
+.mat-column-disRole {
+    flex: 8rem;
+    max-width: 8rem;
+}
+
+.mat-column-whoCheck {
+    flex: 8rem;
+    max-width: 8rem;
+}
+
+.mat-column-insertDate {
+    flex: 7rem;
+    max-width: 7rem;
+}
+
+.mat-column-status {
+    flex: 7rem;
+    max-width: 7rem;
+}
+
+.mat-column-ptntOwnerName {
+    flex: 7rem;
+    max-width: 7rem;
+}
+
+.mat-column-ptntPublishedTR {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-ptntIssueDate {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-ptntCountry {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-center {
+    flex: 11rem;
+    max-width: 11rem;
+}
+
+.mat-column-hours {
+    flex: 3rem;
+    max-width: 3rem;
+}
+
+.mat-column-price {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-certificates {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-id {
+    flex: 5rem;
+    max-width: 2rem;
+}
+
+.mat-column-name {
+    flex: 5rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-type {
+    flex: 2rem;
+    max-width: 2rem;
+    margin-right: 1%;
+}
+
+.mat-column-priority {
+    flex: 2rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+
+.mat-column-subPriority {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-subSubPriority {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-executor {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-customer {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-dirFullName {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-dept {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-agrDate {
+    flex: 2rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+
+.mat-column-registerNumber {
+    flex: 2rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+
+
+#projectName {
+    width: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#projectName:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    position: absolute;
+    background-color: #FFF;
+}

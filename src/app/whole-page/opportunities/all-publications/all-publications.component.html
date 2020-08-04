@@ -67,9 +67,9 @@
 
         <ng-container matColumnDef="Url">
           <mat-header-cell *matHeaderCellDef> URL </mat-header-cell>
-          <mat-cell *matCellDef="let publication">{{publication.pubUrl}}</mat-cell>
+          <mat-cell *matCellDef="let publication"><a href="{{publication.pubUrl}}"><mat-icon color="primary">public</mat-icon></a></mat-cell>
         </ng-container>
-        >
+
         <ng-container matColumnDef="Doi">
           <mat-header-cell *matHeaderCellDef> DOI </mat-header-cell>
           <mat-cell *matCellDef="let publication">{{publication.pubDoi}} </mat-cell>
@@ -92,9 +92,9 @@
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef> Действие </mat-header-cell>
           <mat-cell *matCellDef="let publication">
-            <div>
-              <button *ngIf="publication.pubStatus == 'Under review' || publication.pubStatus == 'Returned for revision'" mat-flat-button color="accent" class="btn-style" (click)="updatePublicationStatus(publication.pubId, 2)">Принять</button>
-              <button *ngIf="publication.pubStatus == 'Under review' || publication.pubStatus == 'Confirmed'" mat-raised-button color="warn" class="btn-style" style="margin-top: 2%; line-height: 17px; width: 92%;" (click)="updatePublicationStatus(publication.pubId, 3)">Отправить <br>на доработку</button>
+            <div style="display: flex">
+              <button *ngIf="publication.pubStatus == 'Under review' || publication.pubStatus == 'Returned for revision'" mat-stroked-button color="primary" (click)="updatePublicationStatus(publication.pubId, 2)">Принять</button>
+              <button *ngIf="publication.pubStatus == 'Under review' || publication.pubStatus == 'Confirmed'" mat-stroked-button style="margin-left: 3% ;color: #DC5441" (click)="updatePublicationStatus(publication.pubId, 3)">Вернуть</button>
             </div>
           </mat-cell>
         </ng-container>

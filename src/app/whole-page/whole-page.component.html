@@ -7,15 +7,24 @@
       <img style="margin-top: 2%" src="./assets/images/header/accountLabel.png" width="10%" height="10%" alt="Account label">
       <button mat-button [matMenuTriggerFor]="menu"><p style="margin-top: 7%" class="text">{{name}}</p></button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logOut()">Log out</button>
+          <button style="padding: 0; margin: 0" mat-menu-item><a style="height: 100%" routerLink="./profile" mat-button>Моя страница</a></button>
+          <button style="padding: 0; margin: 0" mat-menu-item><a style="height: 100%" routerLink="./password" mat-button>Сменить пароль</a></button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logOut()">Log out</button>
       </mat-menu>
     </div>
   </div>
   <mat-toolbar>
     <mat-toolbar-row>
-      <span style="width: 50%; display: flex; height: 100%; margin-left: 30%">
-      <div class="navButton">
+      <span style="width: 50%; display: flex; height: 100%; margin-left: 20%; margin-right: 9%">
+<!--      <div class="navButton">-->
+<!--        <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./" [routerLinkActiveOptions]="{ exact: true }">Главная </a>-->
+<!--      </div>-->
+        <div class="navButton">
         <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./" [routerLinkActiveOptions]="{ exact: true }">Главная </a>
+      </div>
+        <div class="navButton" *ngIf="this.userRoles.indexOf('Teacher') != -1">
+        <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./activities" > Моя деятельность </a>
       </div>
       <div class="navButton" *ngIf="this.userRoles.indexOf('Teacher') != -1">
         <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./yearPlan" > Годовой план </a>
@@ -37,7 +46,6 @@
         <a  routerLinkActive="active-link" class="navTool" mat-button routerLink="./opportunities"> Отдел по науке </a>
       </div>
         </span>
-
       <div style="width: 5%;" id="headerSettings">
         <div class="jai">
            <div class="notifications">

@@ -1,5 +1,5 @@
 .container {
-  padding: 10% 10%;
+  padding: 10% 5%;
 }
 
 .content {
@@ -71,7 +71,7 @@ table {
 
 .mat-column-fileName {
   flex: 5rem;
-  max-width: 2rem;
+  max-width: 3rem;
 }
 
 .mat-column-year {
@@ -116,7 +116,8 @@ table {
 
 .mat-column-actions {
   flex: 6rem;
-  max-width: 6rem;
+  /*max-width: 6rem;*/
+  width: 100%;
 }
 
 .mat-column-author {
@@ -126,5 +127,5 @@ table {
 
 .mat-column-checkedUser {
   flex: 6rem;
-  max-width: 5rem;
+  max-width: 6rem;
 }

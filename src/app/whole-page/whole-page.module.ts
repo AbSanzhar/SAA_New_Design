@@ -54,6 +54,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import { EditYearPlanOneTableComponent } from './year-plan/edit-year-plan-one-table/edit-year-plan-one-table.component';
 import { DeleteYearPlanOneTableComponent } from './year-plan/delete-year-plan-one-table/delete-year-plan-one-table.component';
 import { AddYearPlanOneTableComponent } from './year-plan/add-year-plan-one-table/add-year-plan-one-table.component';
+import { MyActivitiesComponent } from './my-activities/my-activities.component';
+import { NewsComponent } from './news/news.component';
 
 
 
@@ -62,7 +64,9 @@ const r: Routes = [
         path: '',
         component: WholePageComponent,
     children: [
-      {path: '', component: ProfileComponent},
+      {path: '', component: NewsComponent},
+        {path: 'profile', component: ProfileComponent},
+        {path: 'activities', component: MyActivitiesComponent},
         {path: 'opportunities', component: OpportunitiesComponent},
         {path: 'yearPlan', component: YearPlanComponent},
         {path: 'password', component: PasswordComponent},
@@ -103,6 +107,8 @@ const r: Routes = [
       EditYearPlanOneTableComponent,
       DeleteYearPlanOneTableComponent,
       AddYearPlanOneTableComponent,
+      MyActivitiesComponent,
+      NewsComponent,
   ],
     imports: [
         CommonModule,

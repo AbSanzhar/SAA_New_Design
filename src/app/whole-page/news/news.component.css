@@ -1,0 +1,18 @@
+.container {
+    position: relative;
+    width: 100%;
+    flex: 1 0 auto;
+    margin: 0 auto;
+    text-align: left;
+    height: 100%;
+    padding: 9% 0;
+}
+
+#content {
+//box-sizing: content-box;
+    margin: 0 auto;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+}

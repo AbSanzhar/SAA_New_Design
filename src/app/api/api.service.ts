@@ -468,7 +468,7 @@ export class ApiService {
   }
 
   getAllPublications(): Observable<any> {
-    const url = 'publication/showAll';
+    const url = 'publication/showAll/ru';
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 

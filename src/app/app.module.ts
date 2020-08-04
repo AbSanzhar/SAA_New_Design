@@ -30,6 +30,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {PatentUploadComponent} from './whole-page/teacher/patent-upload/patent-upload.component';
 import {EventUploadComponent} from './whole-page/teacher/event-upload/event-upload.component';
 import {PublicationUploadComponent} from './whole-page/teacher/publication-upload/publication-upload.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -44,30 +45,31 @@ import {PublicationUploadComponent} from './whole-page/teacher/publication-uploa
     EventUploadComponent,
     PublicationUploadComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    HttpClientModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatBadgeModule,
-    MatSidenavModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule,
-    FormsModule,
-    MatPaginatorModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatBadgeModule,
+        MatSidenavModule,
+        MatTableModule,
+        MatButtonToggleModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule,
+        FormsModule,
+        MatPaginatorModule,
+        MatDividerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
