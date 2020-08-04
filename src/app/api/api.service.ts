@@ -118,10 +118,16 @@ export class ApiService {
     return this.http.post<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'), activity).
     pipe(catchError(this.errorHandler));
   }
+
   updateActivity(acId, activity): Observable<any> {
     const url = 'academic-method/';
     return this.http.patch<any>(this.base + url + acId + '?jwt_token=' + window.localStorage.getItem('token'), activity).
     pipe(catchError(this.errorHandler));
+  }
+
+  deleteActivity(acId): Observable<any> {
+    const url = 'academic-method/';
+    return this.http.delete(this.base + url + acId + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
   getBudget(): Observable<any> {
@@ -131,21 +137,45 @@ export class ApiService {
         this.base + url + id + '?jwt_token='
         + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
   }
+
   uploadBudget(budget): Observable<any> {
     const url = 'budget-research/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id, budget).
     pipe(catchError(this.errorHandler));
   }
+
+  updateBudget(budId, budget): Observable<any> {
+    const url = 'budget-research/';
+    return this.http.patch<any>(this.base + url + budId, budget);
+  }
+
+  deleteBudget(budId): Observable<any> {
+    const url = 'budget-research/';
+    return this.http.delete(this.base + url + budId);
+  }
+
   getOrg(): Observable<any> {
     const url = 'org-acts/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(this.base + url + id).pipe(catchError(this.errorHandler));
   }
+
   uploadOrg(org): Observable<any> {
     const url = 'org-acts/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id, org).pipe(catchError(this.errorHandler));
+  }
+
+  updateOrg(orgId, org): Observable<any> {
+    const url = 'org-acts/';
+    console.log(org);
+    return this.http.patch<any>(this.base + url + orgId + '?jwt_token=' + window.localStorage.getItem('token'), org);
+  }
+
+  deleteOrg(orgId): Observable<any> {
+    const url = 'org-acts/';
+    return this.http.delete(this.base + url + orgId);
   }
 
   getPublications(): Observable<any> {
@@ -215,20 +245,36 @@ export class ApiService {
     return this.http.post<any>(this.base + url + id, Edu).pipe(catchError(this.errorHandler));
   }
 
+  updateEdu(eduId, edu): Observable<any> {
+    const url = 'edu-social/';
+    return this.http.patch<any>(this.base + url + eduId, edu);
+  }
+
+  deleteEdu(eduId): Observable<any> {
+    const url = 'edu-social/';
+    return this.http.delete<any>(this.base + url + eduId);
+  }
+
   getPlanPerfomance(): Observable<any> {
     const url = 'plan-perform/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(this.base + url + id).pipe(catchError(this.errorHandler));
   }
+
   uploadPlanPerfomace(planPer): Observable<any> {
     const url = 'plan-perform/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id, planPer).pipe(catchError(this.errorHandler));
   }
-  updatePlanPerfomance(planPer): Observable<any> {
+
+  updatePlanPerfomance(ppId, planPer): Observable<any> {
     const url = 'plan-perform/';
-    const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.patch<any>(this.base + url + id, planPer);
+    return this.http.patch<any>(this.base + url + ppId, planPer);
+  }
+
+  deletePlanPerfomance(ppId): Observable<any> {
+    const url = 'plan-perform/';
+    return this.http.delete<any>(this.base + url + ppId);
   }
 
   getReasearch(): Observable<any> {
@@ -236,11 +282,23 @@ export class ApiService {
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(this.base + url + id).pipe(catchError(this.errorHandler));
   }
+
   uploadResearch(research): Observable<any> {
     const url = 'comm-work/add/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.post<any>(this.base + url + id, research).pipe(catchError(this.errorHandler));
   }
+
+  updateResearch(commId, research): Observable<any> {
+    const url = 'comm-work/';
+    return this.http.patch<any>(this.base + url + commId, research);
+  }
+
+  deleteResearch(commId): Observable<any> {
+    const url = 'comm-work/';
+    return this.http.delete<any>(this.base + url + commId);
+  }
+
 
   getAllMyDisSovets(userId): Observable<any> {
     const url = 'dissovet/member/';

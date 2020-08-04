@@ -1,0 +1,199 @@
+<div class="content">
+    <div class="Inner" *ngIf="tableData.table == 'Acad-Meth'">
+        <p style="color: darkred; font-weight: 500; font-size: 18px">Учебно-методическая работа: </p>
+        <form [formGroup]="updateAcadMethForm" class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование работ</mat-label>
+                <input matInput formControlName="activities" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Activity is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Срок выполнения плана</mat-label>
+                <input matInput formControlName="timeFrame" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Time frame is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Фактическое выполнение плана</mat-label>
+                <input matInput formControlName="implementation" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Implementation is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="updateAcadMethForm.invalid" style="margin-top: 3%;">
+                <p style="color: white; margin: 0; padding: 0" (click)="updateAcadMeth('Успешно изменено', 'OK')">Сохранить</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="tableData.table == 'Research'">
+        <p style="color: darkred; font-weight: 500; font-size: 18px">Научная работа: </p>
+        <form [formGroup]="updateResearchForm" class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование работ</mat-label>
+                <input matInput formControlName="activities" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Activity is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Объем работы(тыс. тенге)</mat-label>
+                <input matInput formControlName="output" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Output is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>План</mat-label>
+                <input matInput formControlName="plan" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Plan is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Фактическое выполнение плана</mat-label>
+                <input matInput formControlName="implementation" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Implementation is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="updateResearchForm.invalid" style="margin-top: 3%;">
+                <p style="color: white; margin: 0; padding: 0" (click)="updateResearch('Успешно изменено', 'OK')">Сохранить</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="tableData.table == 'Budget'">
+        <p style="color: darkred; font-weight: 500; font-size: 18px">НИР/НИРС: </p>
+        <form [formGroup]="updateBudgetForm" class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование работ</mat-label>
+                <input matInput formControlName="activities" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Activity is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Плана</mat-label>
+                <input matInput formControlName="plan" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Plan is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Фактическое выполнение плана</mat-label>
+                <input matInput formControlName="implementation" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Implementation is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="updateBudgetForm.invalid" style="margin-top: 3%;">
+                <p style="color: white; margin: 0; padding: 0" (click)="updateBudget('Успешно изменено', 'OK')">Сохранить</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="tableData.table == 'OrgMetAct'">
+        <p style="color: darkred; font-weight: 500; font-size: 18px">Организационно-методическая работа: </p>
+        <form [formGroup]="updateOrgForm" class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование работ</mat-label>
+                <input matInput formControlName="activities" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Activity is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Плана</mat-label>
+                <input matInput formControlName="plan" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Plan is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Фактическое выполнение плана</mat-label>
+                <input matInput formControlName="implementation" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Implementation is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="updateOrgForm.invalid" style="margin-top: 3%;">
+                <p style="color: white; margin: 0; padding: 0" (click)="updateOrg('Успешно изменено', 'OK')">Сохранить</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="tableData.table == 'EduSocial'">
+        <p style="color: darkred; font-weight: 500; font-size: 18px">Воспитательная, профориентационная, общественная работа, работа по оказанию платных услуг, оборудованию кабинетов, повышению квалификации: </p>
+        <form [formGroup]="updateEduSocialForm" class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование работ</mat-label>
+                <input matInput formControlName="activities" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Activity is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Фактическое выполнение плана</mat-label>
+                <input matInput formControlName="implementation" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Implementation is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="updateEduSocialForm.invalid" style="margin-top: 3%;">
+                <p style="color: white; margin: 0; padding: 0" (click)="updateEduSocial('Успешно изменено', 'OK')">Сохранить</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="tableData.table == 'PP'">
+        <p style="color: darkred; font-weight: 500; font-size: 18px">Итоги выполнения ИПП преподавателя: </p>
+        <form [formGroup]="updatePPForm" class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование работ</mat-label>
+                <input matInput formControlName="activities" type="text" placeholder="Ex. name" required>
+                <mat-error>
+                    Activity is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Фактическое выполнение плана</mat-label>
+                <input matInput formControlName="implementation" type="number" placeholder="Ex. name" required>
+                <mat-error>
+                    Implementation is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="updatePPForm.invalid" style="margin-top: 3%;">
+                <p style="color: white; margin: 0; padding: 0" (click)="updatePP('Успешно изменено', 'OK')">Сохранить</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+
+        </form>
+    </div>
+
+
+</div>

@@ -1,0 +1,81 @@
+<div style="width: 100%;" *ngIf="tableData.table == 'Acad-Meth'">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Вы действительно хотите удалить? </p>
+    <p style="font-weight: 500; font-size: 18px">Наименование работ, срок выполнения: </p>
+    <h3>{{this.tableData.data.activities}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Срок выполения плана: </p>
+    <h3>{{this.tableData.data.timeFrame}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Фактическое выполнение плана: </p>
+    <h3>{{this.tableData.data.implementation}}</h3>
+
+    <button mat-raised-button color="primary" style="margin-top: 3%;">
+        <p style="color: white; margin: 0; padding: 0" (click)="deleteOneTableRow('Успешно удалено', 'OK')">Удалить</p></button>
+    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+</div>
+
+<div style="width: 100%;" *ngIf="tableData.table == 'Research'">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Вы действительно хотите удалить? </p>
+    <p style="font-weight: 500; font-size: 18px">Наименование работ: </p>
+    <h3>{{this.tableData.data.activities}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Объем работы: </p>
+    <h3>{{this.tableData.data.output}}</h3>
+    <p style="font-weight: 500; font-size: 18px">План: </p>
+    <h3>{{this.tableData.data.plan}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Фактическое выполнение плана: </p>
+    <h3>{{this.tableData.data.implementation}}</h3>
+
+    <button mat-raised-button color="primary" style="margin-top: 3%;">
+        <p style="color: white; margin: 0; padding: 0" (click)="deleteOneTableRow('Успешно удалено', 'OK')">Удалить</p></button>
+    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+</div>
+
+<div style="width: 100%;" *ngIf="tableData.table == 'Budget'">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Вы действительно хотите удалить? </p>
+    <p style="font-weight: 500; font-size: 18px">Наименование работ: </p>
+    <h3>{{this.tableData.data.activities}}</h3>
+    <p style="font-weight: 500; font-size: 18px">План: </p>
+    <h3>{{this.tableData.data.plan}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Фактическое выполнение плана: </p>
+    <h3>{{this.tableData.data.implementation}}</h3>
+
+    <button mat-raised-button color="primary" style="margin-top: 3%;">
+        <p style="color: white; margin: 0; padding: 0" (click)="deleteOneTableRow('Успешно удалено', 'OK')">Удалить</p></button>
+    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+</div>
+
+<div style="width: 100%;" *ngIf="tableData.table == 'OrgMetAct'">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Вы действительно хотите удалить? </p>
+    <p style="font-weight: 500; font-size: 18px">Наименование работ: </p>
+    <h3>{{this.tableData.data.activities}}</h3>
+    <p style="font-weight: 500; font-size: 18px">План: </p>
+    <h3>{{this.tableData.data.plan}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Фактическое выполнение плана: </p>
+    <h3>{{this.tableData.data.implementation}}</h3>
+
+    <button mat-raised-button color="primary" style="margin-top: 3%;">
+        <p style="color: white; margin: 0; padding: 0" (click)="deleteOneTableRow('Успешно удалено', 'OK')">Удалить</p></button>
+    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+</div>
+
+<div style="width: 100%;" *ngIf="tableData.table == 'EduSocial'">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Вы действительно хотите удалить? </p>
+    <p style="font-weight: 500; font-size: 18px">Наименование работ: </p>
+    <h3>{{this.tableData.data.activities}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Фактическое выполнение плана: </p>
+    <h3>{{this.tableData.data.implementation}}</h3>
+
+    <button mat-raised-button color="primary" style="margin-top: 3%;">
+        <p style="color: white; margin: 0; padding: 0" (click)="deleteOneTableRow('Успешно удалено', 'OK')">Удалить</p></button>
+    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+</div>
+
+<div style="width: 100%;" *ngIf="tableData.table == 'PP'">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Вы действительно хотите удалить? </p>
+    <p style="font-weight: 500; font-size: 18px">Наименование работ: </p>
+    <h3>{{this.tableData.data.activities}}</h3>
+    <p style="font-weight: 500; font-size: 18px">Фактическое выполнение плана: </p>
+    <h3>{{this.tableData.data.implementation}}</h3>
+
+    <button mat-raised-button color="primary" style="margin-top: 3%;">
+        <p style="color: white; margin: 0; padding: 0" (click)="deleteOneTableRow('Успешно удалено', 'OK')">Удалить</p></button>
+    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+</div>

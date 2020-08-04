@@ -3,166 +3,117 @@
     <div id="main-content">
       <mat-tab-group style="    height: 100vh;">
         <mat-tab label="Учебно-методическая работа">
-          <div *ngIf="!message.hide" [ngClass]="message.type">
-            <div class="alert alert-danger" role="alert" [ngClass]="message.type" *ngIf="!message.hide">
-              {{message.text}}
-            </div>
-          </div>
+
           <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
             <div class="row">
               <p class="nameHeader">
                 1.Учебно-методическая работа
               </p>
-              <form [formGroup]="AcadMetForm" *ngIf="AcadMetForm" style="overflow-x:auto;">
-                <table>
 
-                  <thead>
-                  <tr>
-                    <th scope="col" colspan="1" rowspan="2">Порядковый номер №</th>
-                    <th scope="col" colspan="1" rowspan="2">Наименование работы, срок</th>
-                    <th scope="col">Время выполнения плана</th>
-                    <th scope="col">Фактическое выполнение плана</th>
-                  </tr>
-                  </thead>
+              <mat-table [dataSource]="gettedActs" class="">
+                <ng-container matColumnDef="acId">
+                  <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
+                  <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                </ng-container>
 
-                  <tbody formArrayName="AcadMetAct">
-                  <tr *ngFor="let item of AcadMetForm.controls.key; let i = index" [formGroupName]="i"> <!--AcadMetAct.controls-->
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="ID" formControlName="acId">
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input  matInput placeholder="Name, dd-mm-yy" formControlName="activities">
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input  matInput placeholder="dd-mm-yy" formControlName="timeFrame">
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput formControlName="implementation">
-                        <mat-icon matSuffix>mode_edit</mat-icon>
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </form>
-              <mat-icon (click)="addAcadMetForm()" class="add" style="cursor: pointer" color="accent">add_circle
-              </mat-icon>
+                <ng-container matColumnDef="activities">
+                  <mat-header-cell *matHeaderCellDef> Наименование работы, срок </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="timeFrame">
+                  <mat-header-cell *matHeaderCellDef> Время выполнения плана </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.timeFrame}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="implementation">
+                  <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+                  <mat-cell *matCellDef="let activity">
+                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Acad-Meth'})">
+                        Изменить
+                    </button>
+                    <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'Acad-Meth'})">
+                      Удалить
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let activity; columns: displayedColumns;"></mat-row>
+
+              </mat-table>
             </div>
           </div>
 
           <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Сгенерировать ИПП(.docx)</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('Acad-Meth')">Добавить запись</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
           </div>
         </mat-tab>
 
         <mat-tab label="Научная работа">
-          <div *ngIf="!message.hide" [ngClass]="message.type">
-            <div class="alert alert-danger" role="alert" [ngClass]="message.type" *ngIf="!message.hide">
-              {{message.text}}
-            </div>
-          </div>
+
           <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
             <div class="row">
               <p class="nameHeader">
                 2.Научная работа
               </p>
-              <form *ngIf="AcadMetForm" style="overflow-x:auto;">
-                <table>
-                  <thead>
-                  <tr>
-                    <th scope="col" colspan="1" rowspan="2">Порядковый номер №</th>
-                    <th scope="col" colspan="1" rowspan="2">Наименование работы, срок</th>
-                    <th scope="col">Объем работы (тыс. тенге)</th>
-                    <th scope="col">Выполнение плана</th>
-                    <th scope="col">Фактическое выполнение</th>
-                  </tr>
-                  </thead>
 
-                  <tbody>
-                  <tr *ngFor="let results of gettedResearch">
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.commId" [ngModelOptions]="{standalone: true}">
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput type="text" [(ngModel)]="results.activities" [ngModelOptions]="{standalone: true}">
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.output" [ngModelOptions]="{standalone: true}">
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.plan" [ngModelOptions]="{standalone: true}">
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput type="number" [(ngModel)]="results.implementation" [ngModelOptions]="{standalone: true}">
-                      </mat-form-field>
-                    </td>
-                  </tr>
+              <mat-table [dataSource]="gettedResearch" class="">
+                <ng-container matColumnDef="commId">
+                  <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
+                  <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                </ng-container>
 
-                  <tr>
-                    <td >
-                      <form [formGroup]="Research" (ngSubmit)="onSubmit()">
-                        <div formArrayName="comId" *ngFor="let actId of comId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
-                    <td>
-                      <form [formGroup]="Research" (ngSubmit)="onSubmit()">
-                        <div formArrayName="activities" *ngFor="let acts of resAct.controls; let i=index">
-                          <input type="text" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
-                    <td > <form [formGroup]="Research" (ngSubmit)="onSubmit()">
-                      <div formArrayName="output" *ngFor="let tf of output.controls; let i=index">
-                        <input type="text" class="form-control my-1" [formControlName]="i">
-                      </div>
-                    </form></td>
+                <ng-container matColumnDef="activities">
+                  <mat-header-cell *matHeaderCellDef> Наименование работы, срок </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                </ng-container>
 
-                    <td> <form [formGroup]="Research" (ngSubmit)="onSubmit()">
-                      <div formArrayName="plan" *ngFor="let tf of resPlan.controls; let i=index">
-                        <input type="number" class="form-control my-1" [formControlName]="i">
-                      </div>
-                    </form></td>
+                <ng-container matColumnDef="output">
+                  <mat-header-cell *matHeaderCellDef> Объем работы (тыс. тенге) </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.output}} </mat-cell>
+                </ng-container>
 
-                    <td> <form [formGroup]="Research" (ngSubmit)="onSubmit()">
-                      <div formArrayName="implementation" *ngFor="let tf of resImpl.controls; let i=index">
-                        <input type="number" class="form-control my-1" [formControlName]="i">
-                      </div>
-                    </form>
-                    </td>
-                  </tr>
+                <ng-container matColumnDef="plan">
+                  <mat-header-cell *matHeaderCellDef> Выполнение плана </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+                </ng-container>
 
-                  </tbody>
+                <ng-container matColumnDef="implementation">
+                  <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана </mat-header-cell>
+                  <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                </ng-container>
 
-                </table>
-              </form>
-              <mat-icon (click)="addResId()" class="add" style="cursor: pointer" color="accent">add_circle</mat-icon>
-              <!--Что это?)--> <!-- || addResAct()|| addResOutput() || addResPlan() || addResImpl()-->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+                  <mat-cell *matCellDef="let activity">
+                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Research'})">
+                      Изменить
+                    </button>
+                    <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'Research'})">
+                      Удалить
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+                <mat-row *matRowDef="let activity; columns: displayedColumns1;"></mat-row>
+
+              </mat-table>
             </div>
           </div>
 
           <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Сгенерировать ИПП(.docx)</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('Research')">Добавить запись</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
           </div>
+
         </mat-tab>
 
         <mat-tab label="НИР/НИРС">
@@ -170,60 +121,53 @@
             <div class="row">
               <div class="col-12 text-center table-responsive">
                 <p class="nameHeader">2.2 Бюджетные НИР и руководство НИРС</p>
-                <table>
-                  <thead>
-                  <tr>
-                    <th scope="col" colspan="1" rowspan="2">№</th>
-                    <th scope="col" colspan="1" rowspan="2">Наименование работ</th>
-                    <th scope="col">План</th>
-                    <th scope="col">Фактическое выполнение плана</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>
-                      <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
-                        <div formArrayName="budId" *ngFor="let budIds of budId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
-                    <td>
-                      <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
-                        <div formArrayName="activitiess" *ngFor="let acts of activitiess.controls; let i=index">
-                          <input type="text" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
 
-                    <td>
-                      <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
-                        <div formArrayName="plan" *ngFor="let plans of plan.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
+                <mat-table [dataSource]="gettedBudgets" class="">
+                  <ng-container matColumnDef="budId">
+                    <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
+                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                  </ng-container>
 
-                    <td>
-                      <form [formGroup]="budgets" (ngSubmit)="onSubmit()">
-                        <div formArrayName="implementation" *ngFor="let impls of implmentation.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-                <mat-icon (click)="addNewBudId()" class="add" style="cursor: pointer" color="accent">add_circle
-                </mat-icon> <!-- || addNewActivitiess() || addNewPlan() || addNewImplementation()-->
+                  <ng-container matColumnDef="activities">
+                    <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                  </ng-container>
 
+                  <ng-container matColumnDef="plan">
+                    <mat-header-cell *matHeaderCellDef> План </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="implementation">
+                    <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+                    <mat-cell *matCellDef="let activity">
+                      <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Budget'})">
+                        Изменить
+                      </button>
+                      <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'Budget'})">
+                        Удалить
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                  <mat-row *matRowDef="let activity; columns: displayedColumns2;"></mat-row>
+
+                </mat-table>
               </div>
             </div>
           </div>
+
           <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить план</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Сгенерировать ИПП(.docx)</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('Budget')">Добавить запись</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
           </div>
+
         </mat-tab>
 
         <mat-tab label="Организационно-методическая работа">
@@ -231,62 +175,53 @@
             <div class="row">
               <div class="col-12 text-center table-responsive">
                 <p class="nameHeader"> 3. Организационно-методическая работа</p>
-                <table (change)="somethingChanged()">
-                  <thead>
-                  <tr>
-                    <th scope="col" colspan="1" rowspan="2">п.п №</th>
-                    <th scope="col" colspan="1" rowspan="2">Наименование работ</th>
-                    <th scope="col">План</th>
-                    <th scope="col">Фактическое выполнение плана</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>
-                      <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
-                        <div formArrayName="orgId" *ngFor="let orgIds of orgId.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
-                    <td>
-                      <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
-                        <div formArrayName="acts" *ngFor="let acts of acts.controls; let i=index">
-                          <input type="text" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
 
-                    <td>
-                      <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
-                        <div formArrayName="plan" *ngFor="let plans of orgPlan.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
+                <mat-table [dataSource]="gettedOrgMetActs" class="">
+                  <ng-container matColumnDef="orgId">
+                    <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
+                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                  </ng-container>
 
-                    <td>
-                      <form [formGroup]="orgs" (ngSubmit)="onSubmit()">
-                        <div formArrayName="implementation" *ngFor="let impls of orgImpl.controls; let i=index">
-                          <input type="number" class="form-control my-1" [formControlName]="i">
-                        </div>
-                      </form>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-                <mat-icon (click)="addNewOrgId()" class="add" style="cursor: pointer" color="accent">add_circle
-                </mat-icon> <!-- || addNewOrgAct() || addNewOrgPlan()  || addNewOrgImpl()-->
+                  <ng-container matColumnDef="activities">
+                    <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                  </ng-container>
 
+                  <ng-container matColumnDef="plan">
+                    <mat-header-cell *matHeaderCellDef> План </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="implementation">
+                    <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+                    <mat-cell *matCellDef="let activity">
+                      <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'OrgMetAct'})">
+                        Изменить
+                      </button>
+                      <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'OrgMetAct'})">
+                        Удалить
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+                  <mat-row *matRowDef="let activity; columns: displayedColumns3;"></mat-row>
+
+                </mat-table>
               </div>
             </div>
           </div>
+
           <div style="margin-left: 37%">
-            <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить
-              план
-            </button>
-            <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Сгенерировать ИПП(.docx)</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('OrgMetAct')">Добавить запись</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
           </div>
+
         </mat-tab>
 
         <mat-tab label="Услуги">
@@ -297,89 +232,50 @@
                   платных услуг,
                   оборудованию кабинетов, повышению квалификации </p>
 
+                <mat-table [dataSource]="gettedEduSocials" class="">
+                  <ng-container matColumnDef="eduId">
+                    <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
+                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                  </ng-container>
 
-                <div class="example-container">
-                  <table (change)="somethingChanged()">
-                    <thead>
-                    <tr>
-                      <th scope="col" colspan="1" rowspan="2">п.п №</th>
-                      <th scope="col" colspan="1" rowspan="2">Activities</th>
-                      <th scope="col">Implementation</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>
-                        <form [formGroup]="edus" (ngSubmit)="onSubmit()">
-                          <div formArrayName="eduId" *ngFor="let eduId of eduId.controls; let i=index">
-                            <input type="number" class="form-control my-1" [formControlName]="i">
-                          </div>
-                        </form>
-                      </td>
-                      <td>
-                        <form [formGroup]="edus" (ngSubmit)="onSubmit()">
-                          <div formArrayName="activities" *ngFor="let activities of eduAct.controls; let i=index">
-                            <input type="text" class="form-control my-1" [formControlName]="i">
-                          </div>
-                        </form>
-                      </td>
-
-                      <td>
-                        <form [formGroup]="edus" (ngSubmit)="onSubmit()">
-                          <div formArrayName="implementation"
-                               *ngFor="let implementation of eduImpl.controls; let i=index">
-                            <input type="number" class="form-control my-1" [formControlName]="i">
-                          </div>
-                        </form>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
+                  <ng-container matColumnDef="activities">
+                    <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                  </ng-container>
 
 
-                  <!--                <table mat-table class="mat-elevation-z8">-->
+                  <ng-container matColumnDef="implementation">
+                    <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
+                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                  </ng-container>
 
-                  <!--                  <ng-container matColumnDef="eduId">-->
-                  <!--                    <th mat-header-cell *matHeaderCellDef> No. </th>-->
-                  <!--                    <td mat-cell *matCellDef="let element">-->
-                  <!--                      <input matInput type="number"  readonly>-->
-                  <!--                    </td>-->
-                  <!--                  </ng-container>-->
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+                    <mat-cell *matCellDef="let activity">
+                      <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'EduSocial'})">
+                        Изменить
+                      </button>
+                      <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'EduSocial'})">
+                        Удалить
+                      </button>
+                    </mat-cell>
+                  </ng-container>
 
-                  <!--                  <ng-container matColumnDef="eduAct">-->
-                  <!--                    <th mat-header-cell *matHeaderCellDef> Activities </th>-->
-                  <!--                    <td mat-cell *matCellDef="let element">-->
-                  <!--                      <input matInput type="text" [(ngModel)]="element.activities" [ngModelOptions]="{standalone: true}">-->
-                  <!--                    </td>-->
-                  <!--                  </ng-container>-->
+                  <mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
+                  <mat-row *matRowDef="let activity; columns: displayedColumns4;"></mat-row>
 
-                  <!--                  <ng-container matColumnDef="eduImpl">-->
-                  <!--                    <th mat-header-cell *matHeaderCellDef> Implementation </th>-->
-                  <!--                    <td mat-cell *matCellDef="let element">-->
-                  <!--                      <input matInput type="text" [(ngModel)]="element.implementation" [ngModelOptions]="{standalone: true}">-->
-                  <!--                    </td>-->
-                  <!--                  </ng-container>-->
+                </mat-table>
 
-
-                  <!--                  <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>-->
-                  <!--                  <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>-->
-
-                  <!--                </table>-->
-                  <mat-icon (click)="addNewEduId()" class="add" style="cursor: pointer" color="accent">add_circle
-                  </mat-icon> <!--|| addNewEduAct() || addNewEduImpl()-->
-
-
-                </div>
               </div>
             </div>
 
           </div>
+
           <div style="margin-left: 37%">
-            <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить
-              план
-            </button>
-            <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Сгенерировать ИПП(.docx)</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('EduSocial')">Добавить запись</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
           </div>
+
         </mat-tab>
 
         <mat-tab label="Итоги ИПП">
@@ -387,50 +283,50 @@
                         <div class="row">
                           <div class="col-12 text-center table-responsive">
                             <p class="nameHeader"> Итоги выполнения ИПП преподавателя</p>
-                            <table (change)="somethingChanged()">
-                              <thead>
-                              <tr>
-                                <th scope="col" colspan="1" rowspan="2">п.п №</th>
-                                <th scope="col" colspan="1" rowspan="2">Наименование работ</th>
-                                <th scope="col" colspan="2">Выполнение</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <tr>
-                                <td>
-                                  <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
-                                    <div formArrayName="id" *ngFor="let orgIds of PlanPerId.controls; let i=index">
-                                      <input type="number" [formControlName]="i" class="form-control my-1">
-                                    </div>
-                                  </form>
-                                </td>
-                                <td > <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
-                                  <div formArrayName="activities" *ngFor="let acts of PlanPerAct.controls; let i=index">
-                                    <input type="text" class="form-control my-1" >
-                                  </div>
-                                </form></td>
 
-                                <td > <form [formGroup]="planPerfom" (ngSubmit)="onSubmit()">
-                                  <div formArrayName="implementation" *ngFor="let impls of PlanPerImpl.controls; let i=index">
-                                    <input type="number" class="form-control my-1">
-                                  </div>
-                                </form></td>
-                              </tr>
-                              </tbody>
-            <!--                  &lt;!&ndash;                  <button style="margin-top: 5%;" mat-stroked-button color="primary" (click)="addNewPPid() || addNewPPAct() || addNewPPImpl()">Добавить новую запись <mat-icon color="primary">add</mat-icon></button><br>&ndash;&gt;-->
-            <!--                  &lt;!&ndash;        <button type="button" class="btn btn-danger btn-sm m-3" (click)="deleteNewPPId() || deleteNewPPAct() || deleteNewPPImpl()">Удалить новую запись</button>&ndash;&gt;-->
-                            </table>
-                            <mat-icon (click)="addNewPPid()" class="add" style="cursor: pointer" color="accent">add_circle</mat-icon> <!-- || addNewPPAct() || addNewPPImpl()-->
+                            <mat-table [dataSource]="gettedPlamPerfomances" class="">
+                              <ng-container matColumnDef="ppId">
+                                <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
+                                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="activities">
+                                <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                              </ng-container>
+
+
+                              <ng-container matColumnDef="implementation">
+                                <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
+                                <mat-cell *matCellDef="let activity">
+                                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'PP'})">
+                                    Изменить
+                                  </button>
+                                  <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'PP'})">
+                                    Удалить
+                                  </button>
+                                </mat-cell>
+                              </ng-container>
+
+                              <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+                              <mat-row *matRowDef="let activity; columns: displayedColumns5;"></mat-row>
+
+                            </mat-table>
 
                           </div>
                         </div>
                       </div>
-            <div style="margin-left: 37%">
-              <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="sendPlan()">Отправить
-                план
-              </button>
-              <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Сгенерировать ИПП(.docx)</button>
-            </div>
+
+          <div style="margin-left: 37%">
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('PP')">Добавить запись</button>
+            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
+          </div>
+
         </mat-tab>
 
       </mat-tab-group>

@@ -51,6 +51,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFileUploadModule} from 'mat-file-upload';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
+import { EditYearPlanOneTableComponent } from './year-plan/edit-year-plan-one-table/edit-year-plan-one-table.component';
+import { DeleteYearPlanOneTableComponent } from './year-plan/delete-year-plan-one-table/delete-year-plan-one-table.component';
+import { AddYearPlanOneTableComponent } from './year-plan/add-year-plan-one-table/add-year-plan-one-table.component';
+
 
 
 const r: Routes = [
@@ -95,7 +99,10 @@ const r: Routes = [
       AddNewExMemberDialogComponent,
       AllScienceProjectsComponent,
       AddProjectMemberDialogComponent,
-      CourseUploadComponent
+      CourseUploadComponent,
+      EditYearPlanOneTableComponent,
+      DeleteYearPlanOneTableComponent,
+      AddYearPlanOneTableComponent,
   ],
     imports: [
         CommonModule,
