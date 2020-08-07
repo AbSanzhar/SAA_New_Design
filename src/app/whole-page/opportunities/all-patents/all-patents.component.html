@@ -1,19 +1,18 @@
-<div class="container">
-  <div class="content">
-    <div class="slide-bar">
-      <h2 class="title-slide-bar">Сведения по университету</h2>
-      <nav>
-        <ul>
-          <li><a routerLink="../" class="link">Преподаватели</a></li>
-          <li><a routerLink="./" routerLinkActive="active" class="link">Патенты</a></li>
-          <li><a routerLink="../all-publications" routerLinkActive="active" class="link">Публикации</a></li>
-          <li><a routerLink="../all-dissets" class="link">Дис. советы</a></li>
-          <li><a routerLink="../all-science-projects" class="link">Научные проекты</a></li>
-        </ul>
-      </nav>
+<div fxLayout="row">
+  <div fxFlex="10"></div>
+  <div fxFlex="80" fxLayout="row">
+    <div fxLayout="column" fxFlex="25">
+      <h2 style="color: #827878;">Сведения по университету</h2>
+      <div fxLayout="column">
+        <a routerLink="../" style="text-decoration: none;" class="linkTable">Преподаватели</a>
+        <a routerLink="../all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Патенты</a>
+        <a routerLink="../all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Публикации</a>
+        <a routerLink="../all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Дис. советы</a>
+        <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Научные проекты</a>
+      </div>
     </div>
-    <div class="main">
-      <mat-table [dataSource]="dataSource" class="">
+    <div fxLayout="column" fxFlex="75">
+      <mat-table [dataSource]="dataSource2" class="">
         <ng-container matColumnDef="index">
           <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
           <mat-cell *matCellDef="let patent, let i = index"> {{i + 1}} </mat-cell>
@@ -86,9 +85,10 @@
           <mat-cell *matCellDef="let patent"> <p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p> </mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let employee; columns: displayedColumns;"></mat-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+        <mat-row *matRowDef="let employee; columns: displayedColumns2;"></mat-row>
       </mat-table>
     </div>
   </div>
+  <div fxFlex="10"></div>
 </div>

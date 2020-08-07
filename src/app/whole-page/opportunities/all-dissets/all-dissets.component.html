@@ -1,18 +1,17 @@
-<div class="container">
-  <div class="content">
-    <div class="slide-bar">
-      <h2 class="title-slide-bar">Сведения по университету</h2>
-      <nav>
-        <ul>
-          <li><a routerLink="../" class="link">Преподаватели</a></li>
-          <li><a routerLink="../all-patents" class="link">Патенты</a></li>
-          <li><a routerLink="../all-publications" class="link">Публикации</a></li>
-          <li><a routerLink="./" routerLinkActive="active" class="link">Дис. советы</a></li>
-          <li><a routerLink="../all-science-projects" class="link">Научные проекты</a></li>
-        </ul>
-      </nav>
+<div fxLayout="row">
+  <div fxFlex="10"></div>
+  <div fxFlex="80" fxLayout="row">
+    <div fxLayout="column" fxFlex="25">
+      <h2 style="color: #827878;">Сведения по университету</h2>
+      <div fxLayout="column">
+        <a routerLink="../" style="text-decoration: none;" class="linkTable">Преподаватели</a>
+        <a routerLink="../all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Патенты</a>
+        <a routerLink="../all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Публикации</a>
+        <a routerLink="../all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Дис. советы</a>
+        <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Научные проекты</a>
+      </div>
     </div>
-    <div class="main">
+    <div fxLayout="column" fxFlex="75">
       <mat-table [dataSource]="dataSource" class="">
         <ng-container matColumnDef="index">
           <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
@@ -56,4 +55,5 @@
       </mat-table>
     </div>
   </div>
+  <div fxFlex="10"></div>
 </div>

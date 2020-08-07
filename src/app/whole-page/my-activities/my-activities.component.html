@@ -1,54 +1,46 @@
-<div class="content">
-    <div class="managing">
-        <div class="my-tables">
-            <div class="nav-head">
-                <h2>Мои таблицы</h2>
+<div fxFlexAlign="row">
+    <div fxFlex="10"></div>
+    <div fxFlex="80" fxFlexAlign="row">
+        <div fxFlex="27" fxFlexAlign="column">
+            <h2 class="textM">Мои таблицы</h2>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 0}" (click)="setWhichTable(0)">Мои
+                публикации</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 1}" (click)="setWhichTable(1)">Мои
+                мероприятия</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 2}" (click)="setWhichTable(2)">Мои
+                диссоветы</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 3}" (click)="setWhichTable(3)">Мои
+                патенты</a>
             </div>
-            <div class="nav-link">
-                <span style="display: flex; align-items: center;"><a
-                        [ngClass]="{'is-active': whichTable === 0}" (click)="setWhichTable(0)">Мои публикации</a></span>
-                <span style="display: flex; align-items: center;"><a
-                        [ngClass]="{'is-active': whichTable === 1}" (click)="setWhichTable(1)">Мои мероприятия</a></span>
-                <a [ngClass]="{'is-active': whichTable === 2}" (click)="setWhichTable(2)">Мои
-                    диссоветы</a>
-                <span style="display: flex; align-items: center;"><a
-                        [ngClass]="{'is-active': whichTable === 3}" (click)="setWhichTable(3)">Мои патенты</a></span>
-                <a *ngIf="this.roles.indexOf('Head_Of_Dept') != - 1"
-                   [ngClass]="{'is-active': whichTable === 4}" (click)="setWhichTable(4)">Мои
-                    сотрудники</a>
-                <span style="display: flex; align-items: center;"><a
-                        [ngClass]="{'is-active': whichTable === 5}" (click)="setWhichTable(5)">Мои научные проекты</a></span>
-                <span style="display: flex; align-items: center;"><a
-                        [ngClass]="{'is-active': whichTable === 6}"
-                        (click)="setWhichTable(6)">Мои курсы</a></span>
-                <button (click)="download2()" style="border-color: white; margin-left: -3%; margin-top: 5%;" mat-stroked-button
-                        color="primary">Cкачать cписок научных трудов
-                </button>
-                <button (click)="download()" style="border-color: white; margin-top: 5%; margin-left: -3%;" mat-stroked-button
-                        color="primary">Скачать рейтинг лист
-                </button>
+            <div class="linkTable"><a *ngIf="this.roles.indexOf('Head_Of_Dept') != - 1"
+                                      [ngClass]="{'is-active': whichTable === 4}" (click)="setWhichTable(4)">Мои
+                сотрудники</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 5}" (click)="setWhichTable(5)">Мои научные
+                проекты</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 6}" (click)="setWhichTable(6)">Мои
+                курсы</a>
             </div>
+            <button (click)="download2()" style="border-color: white; margin-left: -3%; margin-top: 5%;"
+                    mat-stroked-button
+                    color="primary">Cкачать cписок научных трудов
+            </button>
+            <button (click)="download()" style="border-color: white; margin-top: 5%; margin-left: -3%;"
+                    mat-stroked-button
+                    color="primary">Скачать рейтинг лист
+            </button>
         </div>
-        <div class="table">
-            <div class="sort-div" *ngIf="whichTable === 0">
-                <div class="form-div">
-                    <div class="label-div">
-                        <label>От </label>
-                    </div>
-                    <div class="input-div">
-                        <input [(ngModel)]="from" type="number">
-                    </div>
+        <div fxFlex="73" fxFlexAlign="column">
+            <div fxFlexAlign="row" *ngIf="whichTable === 0">
+                <div fxFlex="50">
+                    <label>От </label>
+                    <input [(ngModel)]="from" type="number">
                 </div>
-                <div class="form-div">
-                    <div class="label-div">
-                        <label>До </label>
-                    </div>
-                    <div class="input-div">
-                        <input [(ngModel)]="to" type="number">
-                    </div>
+                <div fxFlex="50">
+                    <label>До </label>
+                    <input [(ngModel)]="to" type="number">
                 </div>
             </div>
-            <div class="main">
+            <div>
                 <div *ngIf="whichTable === 0">
 
                     <mat-table [dataSource]="TeacherPublications">
@@ -118,7 +110,10 @@
                         <ng-container matColumnDef="Url">
                             <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
-                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <a href="{{publication.pubUrl}}"><mat-icon color="primary">public</mat-icon></a></div>
+                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a
+                                        href="{{publication.pubUrl}}">
+                                    <mat-icon color="primary">public</mat-icon>
+                                </a></div>
                             </mat-cell>
                         </ng-container>
                         >
@@ -165,7 +160,10 @@
                     </mat-table>
 
                     <div style="align-items: center; display: flex;">
-                        <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>
+                        <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>
+                            Добавить
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
                                        [pageSize]="paginator.size"
                                        [pageIndex]="paginator.page"
@@ -227,7 +225,10 @@
                     </mat-table>
 
                     <div style="align-items: center; display: flex;">
-                        <button style="margin: 0 10% 0 35%" (click)="create('event')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>
+                        <button style="margin: 0 10% 0 35%" (click)="create('event')" color="primary"
+                                mat-stroked-button>Добавить
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
                                        [pageSize]="paginator.size"
                                        [pageIndex]="paginator.page"
@@ -276,7 +277,10 @@
                     </mat-table>
 
                     <div style="align-items: center; display: flex;">
-                        <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>
+                        <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary"
+                                mat-stroked-button>Добавить
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
                                        [pageSize]="paginator.size"
                                        [pageIndex]="paginator.page"
@@ -361,7 +365,10 @@
                         <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>
                     </mat-table>
                     <div style="align-items: center; display: flex;">
-                        <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>
+                        <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary"
+                                mat-stroked-button>Добавить
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
                                        [pageSize]="paginator.size"
                                        [pageIndex]="paginator.page"
@@ -503,7 +510,10 @@
                         <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
                     </mat-table>
                     <div style="align-items: center; display: flex;">
-                        <button style="margin: 0 10% 0 35%" (click)="create('science')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>
+                        <button style="margin: 0 10% 0 35%" (click)="create('science')" color="primary"
+                                mat-stroked-button>Добавить
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
                                        [pageSize]="paginator.size"
                                        [pageIndex]="paginator.page"
@@ -582,7 +592,10 @@
                     </mat-table>
 
                     <div style="align-items: center; display: flex;">
-                        <button style="margin: 0 10% 0 35%" (click)="create('course')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>
+                        <button style="margin: 0 10% 0 35%" (click)="create('course')" color="primary"
+                                mat-stroked-button>Добавить
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
                                        [pageSize]="paginator.size"
                                        [pageIndex]="paginator.page"
@@ -592,11 +605,609 @@
                     </div>
 
                 </div>
-
-            </div>
-            <div>
-
             </div>
         </div>
     </div>
+    <div fxFlex="10"></div>
 </div>
+
+
+<!--<div class="content">-->
+<!--    <div class="managing">-->
+<!--        <div class="my-tables">-->
+<!--            <div class="nav-head">-->
+<!--                <h2>Мои таблицы</h2>-->
+<!--            </div>-->
+<!--            <div class="nav-link">-->
+<!--                <span style="display: flex; align-items: center;"><a-->
+<!--                        [ngClass]="{'is-active': whichTable === 0}" (click)="setWhichTable(0)">Мои публикации</a></span>-->
+<!--                <span style="display: flex; align-items: center;"><a-->
+<!--                        [ngClass]="{'is-active': whichTable === 1}" (click)="setWhichTable(1)">Мои мероприятия</a></span>-->
+<!--                <a [ngClass]="{'is-active': whichTable === 2}" (click)="setWhichTable(2)">Мои-->
+<!--                    диссоветы</a>-->
+<!--                <span style="display: flex; align-items: center;"><a-->
+<!--                        [ngClass]="{'is-active': whichTable === 3}" (click)="setWhichTable(3)">Мои патенты</a></span>-->
+<!--                <a *ngIf="this.roles.indexOf('Head_Of_Dept') != - 1"-->
+<!--                   [ngClass]="{'is-active': whichTable === 4}" (click)="setWhichTable(4)">Мои-->
+<!--                    сотрудники</a>-->
+<!--                <span style="display: flex; align-items: center;"><a-->
+<!--                        [ngClass]="{'is-active': whichTable === 5}" (click)="setWhichTable(5)">Мои научные проекты</a></span>-->
+<!--                <span style="display: flex; align-items: center;"><a-->
+<!--                        [ngClass]="{'is-active': whichTable === 6}"-->
+<!--                        (click)="setWhichTable(6)">Мои курсы</a></span>-->
+<!--                <button (click)="download2()" style="border-color: white; margin-left: -3%; margin-top: 5%;" mat-stroked-button-->
+<!--                        color="primary">Cкачать cписок научных трудов-->
+<!--                </button>-->
+<!--                <button (click)="download()" style="border-color: white; margin-top: 5%; margin-left: -3%;" mat-stroked-button-->
+<!--                        color="primary">Скачать рейтинг лист-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="table">-->
+<!--            <div class="sort-div" *ngIf="whichTable === 0">-->
+<!--                <div class="form-div">-->
+<!--                    <div class="label-div">-->
+<!--                        <label>От </label>-->
+<!--                    </div>-->
+<!--                    <div class="input-div">-->
+<!--                        <input [(ngModel)]="from" type="number">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-div">-->
+<!--                    <div class="label-div">-->
+<!--                        <label>До </label>-->
+<!--                    </div>-->
+<!--                    <div class="input-div">-->
+<!--                        <input [(ngModel)]="to" type="number">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="main">-->
+<!--                <div *ngIf="whichTable === 0">-->
+
+<!--                    <mat-table [dataSource]="TeacherPublications">-->
+<!--                        <ng-container matColumnDef="pubId">-->
+<!--                            <mat-header-cell *matHeaderCellDef> №</mat-header-cell>-->
+
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubId}} </div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="Title">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Название публикации</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="pubType">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Тип публикации</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubType}}</div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="Collaborators">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Соавторы</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">-->
+<!--                                    <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">-->
+<!--                                        {{i + 1}}-->
+<!--                                        ) {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="Year">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Год</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubYear}}</div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="City">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCity}}</div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="Publisher">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Издатель</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPubName}} </div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="Page">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Страницы</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPage}}-->
+<!--                                    - {{publication.pubEndPage}}</div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="Url">-->
+<!--                            <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> <a href="{{publication.pubUrl}}"><mat-icon color="primary">public</mat-icon></a></div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+<!--                        >-->
+<!--                        <ng-container matColumnDef="Doi">-->
+<!--                            <mat-header-cell *matHeaderCellDef> DOI</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubDoi}}</div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="pubStatus">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Статус модерации</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">-->
+<!--                                    <mat-icon style="color: green;" *ngIf="publication.pubStatus == 'Confirmed'">done-->
+<!--                                    </mat-icon>-->
+<!--                                    <mat-icon style="color: red"-->
+<!--                                              *ngIf="publication.pubStatus == 'Returned for revision'">clear-->
+<!--                                    </mat-icon>-->
+<!--                                    <p *ngIf="publication.pubStatus == 'Under review'">На рас-->
+<!--                                        <wbr>-->
+<!--                                        смо-->
+<!--                                        <wbr>-->
+<!--                                        трен-->
+<!--                                        <wbr>-->
+<!--                                        нии-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="File">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let publication">-->
+<!--                                <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a-->
+<!--                                        href="https://nir.iitu.kz/{{publication.pubFile}}" download="">-->
+<!--                                    <mat-icon color="primary">get_app</mat-icon>-->
+<!--                                </a></div>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>-->
+<!--                        <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>-->
+<!--                    </mat-table>-->
+
+<!--                    <div style="align-items: center; display: flex;">-->
+<!--                        <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>-->
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
+<!--                    </div>-->
+
+
+<!--                </div>-->
+
+<!--                <div *ngIf="whichTable === 1">-->
+<!--                    <mat-table [dataSource]="TeacherEvents" class="">-->
+<!--                        <ng-container matColumnDef="eventId">-->
+<!--                            <mat-header-cell *matHeaderCellDef> №</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="eventType">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Тип мероприятия</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> {{activity.eventType}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="eventRole">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> {{activity.eventRole}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="eventDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Дата</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> {{activity.eventDate}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="eventTitle">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Название</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> {{activity.eventName}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="eventCity">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> {{activity.eventCity}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="Url">-->
+<!--                            <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> {{activity.eventUrl}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="File">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"><a href="https://nir.iitu.kz/{{activity.eventFile}}"-->
+<!--                                                                    download="">-->
+<!--                                <mat-icon color="primary">get_app</mat-icon>-->
+<!--                            </a></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <mat-header-row *matHeaderRowDef="displayedColumnsEvent"></mat-header-row>-->
+<!--                        <mat-row *matRowDef="let activity; columns: displayedColumnsEvent;"></mat-row>-->
+<!--                    </mat-table>-->
+
+<!--                    <div style="align-items: center; display: flex;">-->
+<!--                        <button style="margin: 0 10% 0 35%" (click)="create('event')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>-->
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--                <div *ngIf="whichTable === 2">-->
+<!--                    <mat-table [dataSource]="TeacherDisSovet" class="">-->
+<!--                        <ng-container matColumnDef="disId">-->
+<!--                            <mat-header-cell *matHeaderCellDef> №</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="university">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Высшее учебное заведение</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="disRole">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Роль в диссовете</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let disset"> {{disset.disRole}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="specialty">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Специальность докторантуры/ направление подготовки-->
+<!--                            </mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="stopDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Период деятельности</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let disset"> {{disset.disStopDate | date}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="numberAndDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Номер и дата приказа</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let disset"> {{disset.ministryOrder}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <mat-header-row *matHeaderRowDef="displayedColumnsDisSovet"></mat-header-row>-->
+<!--                        <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>-->
+<!--                    </mat-table>-->
+
+<!--                    <div style="align-items: center; display: flex;">-->
+<!--                        <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>-->
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div *ngIf="whichTable === 3">-->
+<!--                    <mat-table [dataSource]="TeacherPatents" class="">-->
+<!--                        <ng-container matColumnDef="ptntNumber">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Номер патента</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="ptntId">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Тип патента</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="ptntCountry">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Страна</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="ptntIssueDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Дата выдачи</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="ptntPublishedTR">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Опубликован в TR</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"> {{patent.ptntPublishedTR}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="ptntOwnerName">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Автор</mat-header-cell>-->
+<!--                            <mat-cell-->
+<!--                                    *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="status">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Статус модерации</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent">-->
+<!--                                <mat-icon style="color: green;" *ngIf="patent.ptntStatus == 'Confirmed'">done</mat-icon>-->
+<!--                                <mat-icon style="color: red" *ngIf="patent.ptntStatus == 'Returned for revision'">-->
+<!--                                    clear-->
+<!--                                </mat-icon>-->
+<!--                                <p *ngIf="patent.ptntStatus == 'Under review'">На рас-->
+<!--                                    <wbr>-->
+<!--                                    смо-->
+<!--                                    <wbr>-->
+<!--                                    трен-->
+<!--                                    <wbr>-->
+<!--                                    нии-->
+<!--                                </p>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="insertDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Дата ввода в базу</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="whoCheck">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Кем проверено</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"><p-->
+<!--                                    *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="File">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrl}}"-->
+<!--                                                                  download="">-->
+<!--                                <mat-icon color="primary">get_app</mat-icon>-->
+<!--                            </a></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>-->
+<!--                        <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>-->
+<!--                    </mat-table>-->
+<!--                    <div style="align-items: center; display: flex;">-->
+<!--                        <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>-->
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div *ngIf="whichTable === 4">-->
+<!--                    <mat-table [dataSource]="DepUsers" class="">-->
+<!--                        <ng-container matColumnDef="userId">-->
+<!--                            <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let employee"> {{employee.userId}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="lastName">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Фамилия</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="firstName">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Имя</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="email">-->
+<!--                            <mat-header-cell *matHeaderCellDef> E-mail</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let employee"> {{employee.email}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="description">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Описание</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let employee"> {{employee.description}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="userType">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Тип работника</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let employee"> {{employee.userType}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <mat-header-row *matHeaderRowDef="displayedColumnsDepUsers"></mat-header-row>-->
+<!--                        <mat-row *matRowDef="let employee; columns: displayedColumnsDepUsers;"></mat-row>-->
+<!--                    </mat-table>-->
+<!--                </div>-->
+
+<!--                <div *ngIf="whichTable === 5">-->
+<!--                    <mat-table [dataSource]="TeacherScienceProjects" class="">-->
+<!--                        <ng-container matColumnDef="id">-->
+<!--                            <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"> {{project.scId}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="name">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Наименование</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"> {{project.scName}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="type">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"> {{project.scType}} </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        &lt;!&ndash;              <ng-container matColumnDef="priority">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                <mat-header-cell *matHeaderCellDef> Раздел </mat-header-cell>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                <mat-cell *matCellDef="let project"> {{project.scPriority}} </mat-cell>&ndash;&gt;-->
+<!--                        &lt;!&ndash;              </ng-container>&ndash;&gt;-->
+
+<!--                        &lt;!&ndash;              <ng-container matColumnDef="subPriority">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                <mat-cell *matCellDef="let project"> {{project.scSubPriority}} </mat-cell>&ndash;&gt;-->
+<!--                        &lt;!&ndash;              </ng-container>&ndash;&gt;-->
+
+<!--                        <ng-container matColumnDef="priority">-->
+<!--                            <mat-header-cell class="Razdel" *matHeaderCellDef> Раздел</mat-header-cell>-->
+<!--                            <mat-cell class="Razdel Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="subPriority">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="subSubPriority">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="executor">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Исполнитель</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="customer">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scCustomer}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="dirFullName">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Научный руководитель</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDirFullName}}</p>-->
+<!--                            </mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="dept">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Подразделение</mat-header-cell>-->
+<!--                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="agrDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Дата договора</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let project"><p>{{project.scAgrDate | date}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="registerNumber">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Регистрационный номер</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let project"><p>{{project.scNum}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="startDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Дата начала проекта</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let project"><p>{{project.scStDate | date}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="endDate">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Дата сдачи проекта</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let project"><p>{{project.scEndDate | date}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="totalSum">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Общая сумма гранта</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let project"><p>{{project.scTotalSum}}</p></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>-->
+<!--                        <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>-->
+<!--                    </mat-table>-->
+<!--                    <div style="align-items: center; display: flex;">-->
+<!--                        <button style="margin: 0 10% 0 35%" (click)="create('science')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>-->
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div *ngIf="whichTable === 6">-->
+<!--                    <mat-table [dataSource]="TeacherCourses" class="">-->
+<!--                        <ng-container matColumnDef="courseId">-->
+<!--                            <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="FL">-->
+<!--                            <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;"-->
+<!--                                      *matCellDef="let course">{{course.courseUser.firstName}} {{course.courseUser.lastName}} {{course.courseUser.patronymic}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="form">-->
+<!--                            <mat-header-cell *matHeaderCellDef>Форма обучения и тема</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;"-->
+<!--                                      *matCellDef="let course">{{course.courseForm}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="center">-->
+<!--                            <mat-header-cell *matHeaderCellDef>Базовый центр повышения квалификации</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;"-->
+<!--                                      *matCellDef="let course">{{course.courseCenter}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="hours">-->
+<!--                            <mat-header-cell *matHeaderCellDef>Объем часов</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;"-->
+<!--                                      *matCellDef="let course">{{course.courseHours}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="price">-->
+<!--                            <mat-header-cell *matHeaderCellDef>Стоимость курсов</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;"-->
+<!--                                      *matCellDef="let course">{{course.coursePrice}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="deadlines">-->
+<!--                            <mat-header-cell *matHeaderCellDef>Сроки прохождения</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.startdate}}-->
+<!--                                - {{course.enddate}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="certificates">-->
+<!--                            <mat-header-cell *matHeaderCellDef>№ Сертификата и дата</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;"-->
+<!--                                      *matCellDef="let course">{{course.courseCertificateNumber}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="level">-->
+<!--                            <mat-header-cell *matHeaderCellDef>Уровень</mat-header-cell>-->
+<!--                            <mat-cell style="color: darkred!important;"-->
+<!--                                      *matCellDef="let course">{{course.courseDegree}}</mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <ng-container matColumnDef="File">-->
+<!--                            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let course"><a href="https://nir.iitu.kz/{{course.courseFile}}"-->
+<!--                                                                  download="">-->
+<!--                                <mat-icon color="primary">get_app</mat-icon>-->
+<!--                            </a></mat-cell>-->
+<!--                        </ng-container>-->
+
+<!--                        <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>-->
+<!--                        <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>-->
+
+<!--                    </mat-table>-->
+
+<!--                    <div style="align-items: center; display: flex;">-->
+<!--                        <button style="margin: 0 10% 0 35%" (click)="create('course')" color="primary" mat-stroked-button>Добавить <mat-icon color="primary">add_task</mat-icon></button>-->
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

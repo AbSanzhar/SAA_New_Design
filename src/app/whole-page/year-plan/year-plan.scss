@@ -8,6 +8,9 @@
     background: none;
   }
   ::ng-deep {
+    .mat-tab-body-wrapper {
+      width: 100%;
+    }
     .mat-tab-group {
       flex-direction: row;
     }
@@ -29,94 +32,6 @@
     }
   }
 }
-
-.container {
-  position: relative;
-  width: 100%;
-  flex: 1 0 auto;
-  margin: 0 auto;
-  text-align: left;
-  height: 100%;
-  padding: 9% 0;
-}
-
-#content {
-  //box-sizing: content-box;
-  margin: 0 auto;
-  background-color: #ffffff;
-  width: 100%;
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-#content,
-#main-content {
-  &::before,
-  &::after {
-    content: "";
-    display: table;
-  }
-  &::after {
-    clear: both;
-  }
-}
-mat-tab{
-  height: 100%;
-  z-index: 5;
-}
-
-.example-container {
-  width: 50%;
-  margin: 10px;
-  height: 100%;
-  //display: ;
-}
-mat-drawer{
-  width: 20%;
-}
-.error{
-  background: #e74c3c!important;
-}
-.success{
-  background: #2ecc71!important;
-}
-.message{
-  position: absolute;
-  top: -25px;
-  left: 0;
-  height: 25px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff
-}
-.alert-danger {
-
-}
-.container-fluid {
-  width: 100%;
-  margin: 0;
-}
-table{
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-}
-th{
-  font-family: "Essays 1743", "Linux Libertine", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
-  font-size: smaller;
-  color: gray;
-}
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
 .nameHeader{
   color: #8F1812;
   font-size: 150%;
@@ -124,42 +39,6 @@ th{
   margin: 1% 5% 3%;
   font-weight: 500;
 }
-.add{
- margin: 5% 10% 5% 80%;
-  cursor: pointer;
+mat-table {
+  width: 100%;
 }
-
-
-
-.box {
-  padding-top: 100px;
-  width: 75%;
-  color: #fff;
-  margin: auto;
-  padding-bottom: 50px;
-}
-
-.title {
-  line-height: 26px;
-  font-weight: 400;
-  font-size: 23px;
-}
-
-.item {
-  width: 29%;
-  margin-bottom: 15px;
-}
-
-.box-films-2020-flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 50px;
-}
-
-.text {
-  text-align: justify;
-}
-
-
-

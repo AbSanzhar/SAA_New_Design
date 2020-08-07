@@ -9,3 +9,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.navigation {
+    color: #8F1812;
+    font-size: 18px;
+}
+.navigation2 {
+    color: #FFFFFF;
+    font-size: 18px;
+}
+.textM {
+    font-weight: 600;
+    color: #827878;
+}
+.linkTable {
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+.active {
+    color: #8F1812;
+}

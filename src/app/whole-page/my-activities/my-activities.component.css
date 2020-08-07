@@ -1,60 +1,8 @@
-.content {
-    margin: 6rem;
-}
-
-.managing {
-    display: flex;
-    justify-content: center;
-}
-
-.my-tables {
-    width: 25%;
-}
-
-.nav-head {
-    margin: 1.5rem 1rem;
-}
-
-.nav-head h2 {
-    margin: .5rem;
-    font-weight: 600;
-    color: #827878;
-}
-
-.nav-link {
-    margin: 1.5rem 1rem;
-}
-
-.nav-link a {
-    display: block;
-    text-decoration: none;
-    color: black;
-    margin: .5rem;
-    cursor: pointer
-}
-
 .is-active {
     color: #DC5441 !important;
 }
 
-.table {
-    width: 100%;
-}
-
-.sort-div {
-    display: flex;
-}
-
-.form-div {
-    width: 50%;
-    margin: 2rem;
-    display: flex;
-}
-
 label {
-    font-family: Muli, sans-serif;
-    font-style: normal;
-    font-weight: normal;
     color: #A8A4A4;
 }
 
@@ -111,51 +59,6 @@ mat-table {
 /deep/ .mat-tab-label, /deep/ .mat-tab-label-active {
     font-weight: bolder;
     width: 90%;
-}
-
-.Inner {
-    margin: 5rem 2rem;
-    display: flex;
-    margin-bottom: 2rem !important;
-
-}
-
-.Img {
-    /*background: url('https://media.istockphoto.com/photos/neon-heart-on-brick-wall-picture-id848235926?k=6&m=848235926&s=612x612&w=0&h=resOh2Qt0_wYIOoLGcbnGtu_rXw5Dkp_IsqrerWzWCQ=') no-repeat center;*/
-    /*background: url('./src/assets/images/unnamed.jpg') no-repeat center;*/
-    /*background-image: url("../../../../assets/images/camera_200.png");*/
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 249px;
-    height: 214px;
-    background-size: cover;
-    clip-path: ellipse();
-}
-
-.AddInf {
-    margin: 2rem;
-    display: flex;
-}
-
-.left-side div {
-    margin: 2rem;
-}
-
-.passwd-btn {
-    font-weight: bolder;
-    cursor: pointer;
-    display: inline;
-}
-
-.passwd-btn mat-icon {
-    position: absolute;
-    margin: 2px 8px;
-}
-
-.right-side {
-    margin: 7.4rem;
-    display: flex;
-    align-items: center;
 }
 
 .mat-column-pubId {

@@ -31,6 +31,7 @@ import {PatentUploadComponent} from './whole-page/teacher/patent-upload/patent-u
 import {EventUploadComponent} from './whole-page/teacher/event-upload/event-upload.component';
 import {PublicationUploadComponent} from './whole-page/teacher/publication-upload/publication-upload.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {MatDividerModule} from '@angular/material/divider';
         MatMenuModule,
         FormsModule,
         MatPaginatorModule,
-        MatDividerModule
+        MatDividerModule,
+        FlexLayoutModule
     ],
   providers: [],
   bootstrap: [AppComponent]

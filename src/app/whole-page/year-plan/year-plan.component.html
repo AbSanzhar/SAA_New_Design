@@ -1,49 +1,105 @@
-<div class="container">
-  <div id="content">
-    <div id="main-content">
-      <mat-tab-group style="    height: 100vh;">
-        <mat-tab label="Учебно-методическая работа">
+<div fxFlexAlign="row">
+  <div fxFlex="10"></div>
+  <div fxFlex="80"><mat-tab-group>
+    <mat-tab label="УЧЕБНАЯ РАБОТА">
+      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+          <div class="col-12 text-center table-responsive">
+            <p class="nameHeader"> Выполнение учебной нагрузки</p>
 
-          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-            <div class="row">
-              <p class="nameHeader">
-                1.Учебно-методическая работа
-              </p>
+            <mat-table [dataSource]="gettedPlamPerfomances" class="">
+              <ng-container matColumnDef="ppId">
+                <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+              </ng-container>
 
-              <mat-table [dataSource]="gettedActs" class="">
-                <ng-container matColumnDef="acId">
-                  <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
-                  <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-                </ng-container>
+              <ng-container matColumnDef="activities">
+                <mat-header-cell *matHeaderCellDef> Наименование работы</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+              </ng-container>
 
-                <ng-container matColumnDef="activities">
-                  <mat-header-cell *matHeaderCellDef> Наименование работы, срок </mat-header-cell>
-                  <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-                </ng-container>
 
-                <ng-container matColumnDef="timeFrame">
-                  <mat-header-cell *matHeaderCellDef> Время выполнения плана </mat-header-cell>
-                  <mat-cell *matCellDef="let activity"> {{activity.timeFrame}} </mat-cell>
-                </ng-container>
+              <ng-container matColumnDef="implementation">
+                <mat-header-cell *matHeaderCellDef>Выполнение</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+              </ng-container>
 
-                <ng-container matColumnDef="implementation">
-                  <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана </mat-header-cell>
-                  <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-                </ng-container>
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+                <mat-cell *matCellDef="let activity">
+                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'PP'})">
+                    Изменить
+                  </button>
+                  <button style="margin-left: 5%" mat-stroked-button color="warn"
+                          (click)="deleteTableRow({data: activity, table: 'PP'})">
+                    Удалить
+                  </button>
+                </mat-cell>
+              </ng-container>
 
-                <ng-container matColumnDef="actions">
-                  <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
-                  <mat-cell *matCellDef="let activity">
-                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Acad-Meth'})">
-                        Изменить
-                    </button>
-                    <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'Acad-Meth'})">
-                      Удалить
-                    </button>
-                  </mat-cell>
-                </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+              <mat-row *matRowDef="let activity; columns: displayedColumns5;"></mat-row>
 
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            </mat-table>
+
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-left: 37%">
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('PP')">
+          Добавить запись
+        </button>
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать
+          ИПП(.docx)
+        </button>
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="УЧЕБНО-МЕТОДИЧЕСКАЯ РАБОТА">
+
+      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+          <p class="nameHeader">
+            1.Учебно-методическая работа
+          </p>
+
+          <mat-table [dataSource]="gettedActs" class="">
+            <ng-container matColumnDef="acId">
+              <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+              <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="activities">
+              <mat-header-cell *matHeaderCellDef> Наименование работы, срок</mat-header-cell>
+              <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="timeFrame">
+              <mat-header-cell *matHeaderCellDef> Время выполнения плана</mat-header-cell>
+              <mat-cell *matCellDef="let activity"> {{activity.timeFrame}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="implementation">
+              <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана</mat-header-cell>
+              <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+              <mat-cell *matCellDef="let activity">
+                <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Acad-Meth'})">
+                  Изменить
+                </button>
+                <button style="margin-left: 5%" mat-stroked-button color="warn"
+                        (click)="deleteTableRow({data: activity, table: 'Acad-Meth'})">
+                  Удалить
+                </button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let activity; columns: displayedColumns;"></mat-row>
 
               </mat-table>
@@ -56,284 +112,249 @@
           </div>
         </mat-tab>
 
-        <mat-tab label="Научная работа">
+    <mat-tab label="НАУЧНО-ИССЛЕДОВАТЕЛЬСКАЯ РАБОТА">
 
-          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-            <div class="row">
-              <p class="nameHeader">
-                2.Научная работа
-              </p>
+      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+          <p class="nameHeader">
+            2.Научная работа
+          </p>
 
-              <mat-table [dataSource]="gettedResearch" class="">
-                <ng-container matColumnDef="commId">
-                  <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
-                  <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-                </ng-container>
+          <mat-table [dataSource]="gettedResearch" class="">
+            <ng-container matColumnDef="commId">
+              <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+              <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+            </ng-container>
 
-                <ng-container matColumnDef="activities">
-                  <mat-header-cell *matHeaderCellDef> Наименование работы, срок </mat-header-cell>
-                  <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-                </ng-container>
+            <ng-container matColumnDef="activities">
+              <mat-header-cell *matHeaderCellDef> Наименование работы, срок</mat-header-cell>
+              <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+            </ng-container>
 
-                <ng-container matColumnDef="output">
-                  <mat-header-cell *matHeaderCellDef> Объем работы (тыс. тенге) </mat-header-cell>
-                  <mat-cell *matCellDef="let activity"> {{activity.output}} </mat-cell>
-                </ng-container>
+            <ng-container matColumnDef="output">
+              <mat-header-cell *matHeaderCellDef> Объем работы (тыс. тенге)</mat-header-cell>
+              <mat-cell *matCellDef="let activity"> {{activity.output}} </mat-cell>
+            </ng-container>
 
-                <ng-container matColumnDef="plan">
-                  <mat-header-cell *matHeaderCellDef> Выполнение плана </mat-header-cell>
-                  <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
-                </ng-container>
+            <ng-container matColumnDef="plan">
+              <mat-header-cell *matHeaderCellDef> Выполнение плана</mat-header-cell>
+              <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+            </ng-container>
 
-                <ng-container matColumnDef="implementation">
-                  <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана </mat-header-cell>
-                  <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-                </ng-container>
+            <ng-container matColumnDef="implementation">
+              <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана</mat-header-cell>
+              <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+            </ng-container>
 
-                <ng-container matColumnDef="actions">
-                  <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
-                  <mat-cell *matCellDef="let activity">
-                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Research'})">
-                      Изменить
-                    </button>
-                    <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'Research'})">
-                      Удалить
-                    </button>
-                  </mat-cell>
-                </ng-container>
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+              <mat-cell *matCellDef="let activity">
+                <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Research'})">
+                  Изменить
+                </button>
+                <button style="margin-left: 5%" mat-stroked-button color="warn"
+                        (click)="deleteTableRow({data: activity, table: 'Research'})">
+                  Удалить
+                </button>
+              </mat-cell>
+            </ng-container>
 
-                <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
-                <mat-row *matRowDef="let activity; columns: displayedColumns1;"></mat-row>
+            <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+            <mat-row *matRowDef="let activity; columns: displayedColumns1;"></mat-row>
 
-              </mat-table>
-            </div>
+          </mat-table>
+        </div>
+      </div>
+
+      <div style="margin-left: 37%">
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('Research')">
+          Добавить запись
+        </button>
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать
+          ИПП(.docx)
+        </button>
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="БЮДЖЕТНЫЕ НИР И РУКОВОДСТВО НИРС">
+      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+          <div class="col-12 text-center table-responsive">
+            <p class="nameHeader">2.2 Бюджетные НИР и руководство НИРС</p>
+
+            <mat-table [dataSource]="gettedBudgets" class="">
+              <ng-container matColumnDef="budId">
+                <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="activities">
+                <mat-header-cell *matHeaderCellDef> Наименование работы</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="plan">
+                <mat-header-cell *matHeaderCellDef> План</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="implementation">
+                <mat-header-cell *matHeaderCellDef>Выполнение</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+                <mat-cell *matCellDef="let activity">
+                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Budget'})">
+                    Изменить
+                  </button>
+                  <button style="margin-left: 5%" mat-stroked-button color="warn"
+                          (click)="deleteTableRow({data: activity, table: 'Budget'})">
+                    Удалить
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+              <mat-row *matRowDef="let activity; columns: displayedColumns2;"></mat-row>
+
+            </mat-table>
           </div>
+        </div>
+      </div>
 
-          <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('Research')">Добавить запись</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
+      <div style="margin-left: 37%">
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('Budget')">
+          Добавить
+          запись
+        </button>
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать
+          ИПП(.docx)
+        </button>
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="ОРГАНИЗАЦИОННО-МЕТОДИЧЕСКАЯ РАБОТА">
+      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+          <div class="col-12 text-center table-responsive">
+            <p class="nameHeader"> 3. Организационно-методическая работа</p>
+
+            <mat-table [dataSource]="gettedOrgMetActs" class="">
+              <ng-container matColumnDef="orgId">
+                <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="activities">
+                <mat-header-cell *matHeaderCellDef> Наименование работы</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="plan">
+                <mat-header-cell *matHeaderCellDef> План</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="implementation">
+                <mat-header-cell *matHeaderCellDef>Выполнение</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+                <mat-cell *matCellDef="let activity">
+                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'OrgMetAct'})">
+                    Изменить
+                  </button>
+                  <button style="margin-left: 5%" mat-stroked-button color="warn"
+                          (click)="deleteTableRow({data: activity, table: 'OrgMetAct'})">
+                    Удалить
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+              <mat-row *matRowDef="let activity; columns: displayedColumns3;"></mat-row>
+
+            </mat-table>
           </div>
+        </div>
+      </div>
 
-        </mat-tab>
+      <div style="margin-left: 37%">
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('OrgMetAct')">
+          Добавить запись
+        </button>
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать
+          ИПП(.docx)
+        </button>
+      </div>
 
-        <mat-tab label="НИР/НИРС">
-          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-            <div class="row">
-              <div class="col-12 text-center table-responsive">
-                <p class="nameHeader">2.2 Бюджетные НИР и руководство НИРС</p>
+    </mat-tab>
 
-                <mat-table [dataSource]="gettedBudgets" class="">
-                  <ng-container matColumnDef="budId">
-                    <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
-                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-                  </ng-container>
+    <mat-tab label="ПРОЧАЯ ДЕЯТЕЛЬНОСТЬ">
+      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+          <div class="col-12 text-center table-responsive">
+            <p class="nameHeader">4. Воспитательная, профориентационная, общественная работа, работа по оказанию
+              платных услуг,
+              оборудованию кабинетов, повышению квалификации </p>
 
-                  <ng-container matColumnDef="activities">
-                    <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-                  </ng-container>
+            <mat-table [dataSource]="gettedEduSocials" class="">
+              <ng-container matColumnDef="eduId">
+                <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+              </ng-container>
 
-                  <ng-container matColumnDef="plan">
-                    <mat-header-cell *matHeaderCellDef> План </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="implementation">
-                    <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
-                    <mat-cell *matCellDef="let activity">
-                      <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Budget'})">
-                        Изменить
-                      </button>
-                      <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'Budget'})">
-                        Удалить
-                      </button>
-                    </mat-cell>
-                  </ng-container>
-
-                  <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
-                  <mat-row *matRowDef="let activity; columns: displayedColumns2;"></mat-row>
-
-                </mat-table>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('Budget')">Добавить запись</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
-          </div>
-
-        </mat-tab>
-
-        <mat-tab label="Организационно-методическая работа">
-          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-            <div class="row">
-              <div class="col-12 text-center table-responsive">
-                <p class="nameHeader"> 3. Организационно-методическая работа</p>
-
-                <mat-table [dataSource]="gettedOrgMetActs" class="">
-                  <ng-container matColumnDef="orgId">
-                    <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
-                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="activities">
-                    <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="plan">
-                    <mat-header-cell *matHeaderCellDef> План </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="implementation">
-                    <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
-                    <mat-cell *matCellDef="let activity">
-                      <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'OrgMetAct'})">
-                        Изменить
-                      </button>
-                      <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'OrgMetAct'})">
-                        Удалить
-                      </button>
-                    </mat-cell>
-                  </ng-container>
-
-                  <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
-                  <mat-row *matRowDef="let activity; columns: displayedColumns3;"></mat-row>
-
-                </mat-table>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('OrgMetAct')">Добавить запись</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
-          </div>
-
-        </mat-tab>
-
-        <mat-tab label="Услуги">
-          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-            <div class="row">
-              <div class="col-12 text-center table-responsive">
-                <p class="nameHeader">4. Воспитательная, профориентационная, общественная работа, работа по оказанию
-                  платных услуг,
-                  оборудованию кабинетов, повышению квалификации </p>
-
-                <mat-table [dataSource]="gettedEduSocials" class="">
-                  <ng-container matColumnDef="eduId">
-                    <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
-                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="activities">
-                    <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-                  </ng-container>
+              <ng-container matColumnDef="activities">
+                <mat-header-cell *matHeaderCellDef> Наименование работы</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+              </ng-container>
 
 
-                  <ng-container matColumnDef="implementation">
-                    <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
-                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-                  </ng-container>
+              <ng-container matColumnDef="implementation">
+                <mat-header-cell *matHeaderCellDef>Выполнение</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+              </ng-container>
 
-                  <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
-                    <mat-cell *matCellDef="let activity">
-                      <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'EduSocial'})">
-                        Изменить
-                      </button>
-                      <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'EduSocial'})">
-                        Удалить
-                      </button>
-                    </mat-cell>
-                  </ng-container>
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+                <mat-cell *matCellDef="let activity">
+                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'EduSocial'})">
+                    Изменить
+                  </button>
+                  <button style="margin-left: 5%" mat-stroked-button color="warn"
+                          (click)="deleteTableRow({data: activity, table: 'EduSocial'})">
+                    Удалить
+                  </button>
+                </mat-cell>
+              </ng-container>
 
-                  <mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
-                  <mat-row *matRowDef="let activity; columns: displayedColumns4;"></mat-row>
+              <mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
+              <mat-row *matRowDef="let activity; columns: displayedColumns4;"></mat-row>
 
-                </mat-table>
-
-              </div>
-            </div>
+            </mat-table>
 
           </div>
+        </div>
 
-          <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('EduSocial')">Добавить запись</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
-          </div>
+      </div>
 
-        </mat-tab>
+      <div style="margin-left: 37%">
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('EduSocial')">
+          Добавить запись
+        </button>
+        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать
+          ИПП(.docx)
+        </button>
+      </div>
 
-        <mat-tab label="Итоги ИПП">
-          <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-                        <div class="row">
-                          <div class="col-12 text-center table-responsive">
-                            <p class="nameHeader"> Итоги выполнения ИПП преподавателя</p>
+    </mat-tab>
 
-                            <mat-table [dataSource]="gettedPlamPerfomances" class="">
-                              <ng-container matColumnDef="ppId">
-                                <mat-header-cell *matHeaderCellDef> Порядковый номер № </mat-header-cell>
-                                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-                              </ng-container>
-
-                              <ng-container matColumnDef="activities">
-                                <mat-header-cell *matHeaderCellDef> Наименование работы </mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-                              </ng-container>
-
-
-                              <ng-container matColumnDef="implementation">
-                                <mat-header-cell *matHeaderCellDef>Выполнение </mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-                              </ng-container>
-
-                              <ng-container matColumnDef="actions">
-                                <mat-header-cell *matHeaderCellDef> Дейтсвие </mat-header-cell>
-                                <mat-cell *matCellDef="let activity">
-                                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'PP'})">
-                                    Изменить
-                                  </button>
-                                  <button style="margin-left: 5%" mat-stroked-button color="warn" (click)="deleteTableRow({data: activity, table: 'PP'})">
-                                    Удалить
-                                  </button>
-                                </mat-cell>
-                              </ng-container>
-
-                              <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
-                              <mat-row *matRowDef="let activity; columns: displayedColumns5;"></mat-row>
-
-                            </mat-table>
-
-                          </div>
-                        </div>
-                      </div>
-
-          <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('PP')">Добавить запись</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">Скачать ИПП(.docx)</button>
-          </div>
-
-        </mat-tab>
-
-      </mat-tab-group>
-    </div>
-  </div>
+  </mat-tab-group></div>
+  <div fxFlex="10"></div>
 </div>
-
-
-
-

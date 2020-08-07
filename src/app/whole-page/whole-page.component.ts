@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataControlService} from '../services/data-control.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../api/api.service';
 import * as jwt_decode from 'jwt-decode';
-import {Validators} from '@angular/forms';
+
 @Component({
   selector: 'app-whole-page',
   templateUrl: './whole-page.component.html',
@@ -15,6 +15,7 @@ export class WholePageComponent implements OnInit {
   userRoles = [];
   currentUser;
   name;
+  language = 'РУС';
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;
   getDecodedAccessToken(token: string): any {
@@ -51,4 +52,9 @@ export class WholePageComponent implements OnInit {
     localStorage.removeItem('userId');
     this.router.navigate(['/login']);
   }
+
+  changeLang(language: string) {
+    this.language = language;
+  }
+
 }

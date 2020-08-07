@@ -56,7 +56,7 @@ import { DeleteYearPlanOneTableComponent } from './year-plan/delete-year-plan-on
 import { AddYearPlanOneTableComponent } from './year-plan/add-year-plan-one-table/add-year-plan-one-table.component';
 import { MyActivitiesComponent } from './my-activities/my-activities.component';
 import { NewsComponent } from './news/news.component';
-
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 const r: Routes = [
@@ -139,7 +139,7 @@ const r: Routes = [
         MatAutocompleteModule,
         MatChipsModule,
         MatTableModule,
-        MatTableModule,
+        FlexLayoutModule
     ],
 })
 export class WholePageModule { }

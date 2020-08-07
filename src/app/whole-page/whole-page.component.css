@@ -1,75 +1,8 @@
-.container{
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-#logo{
-  width: 30%;
-  height: 100%;
-}
-.beforeHeader{
-  width: 90%;
-  margin: 1% 5%;
-  display: flex;
-  padding: 0;
-}
-#accountName{
-  width: 30%;
-  height: 100%;
-  display: flex;
-  margin-left: 55%;
-}
-.text{
-  margin-left: 2%;
-  font-size: 120%;
+.active p{
+  border-bottom: #8F1812 3px solid;
 }
 mat-toolbar{
-  background: #212121;
-  margin-top: 1%;
-}
-.navTool{
-  line-height: 24px !important;
-  white-space: pre-line;
-  text-align: center;
-  color: #FFFFFF;
-  max-width: 200px;
-}
-.active-link{
-  background-color: #0CB5A0;
-  height: 100%;
-  width: 100%;
-  /*padding: 2%;*/
-}
-.navButton{
-  height: 100%;
-  width: 23%;
-  margin: 0;
-  text-align: center;
-  border: 0.1px solid gray;
-  box-sizing: border-box;
-}
-mat-toolbar-row{
-  width: 100%;
-  /*padding: 0 30%;*/
-  text-align: center;
-}
-
-.navButton a {
-  padding-top: 10%;
-}
-
-#headerSettings{
-  display: flex;
-  /*margin-left: 50%;*/
-}
-
-.jai{
-  display: flex;
-  margin-right: 80%;
-}
-
-.notifications{
-  color: white;
+  background: white;
 }
 .notifications .material-icons-outlined{
   margin-top: 5px;
