@@ -35,8 +35,8 @@ mat-toolbar{
   background: #393939;
 }
 
-@media (max-width: 767px) {
-  .footer {
-    display: none;
-  }
-}
+/*@media (max-width: 767px) {*/
+/*  .footer {*/
+/*    display: none;*/
+/*  }*/
+/*}*/
