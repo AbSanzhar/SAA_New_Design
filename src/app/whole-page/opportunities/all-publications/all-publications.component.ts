@@ -30,7 +30,7 @@ export class AllPublicationsComponent implements OnInit {
 
   getAllPublications() {
     this.service.getAllPublications().subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.dataSource = res;
       for (let i = 0; i < res.length; i++) {
         this.dataSource[i].pubYear = new Date(res[i].pubYear).getFullYear();

@@ -36,7 +36,7 @@ export class AllPatentsComponent implements OnInit {
     };
     this._api.getAllPatents(science_id).subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.dataSource2 = res;
           for (let i = 0; i < res.length; i++) {
             const year = new Date(res[i].ptntInsertedDate).getFullYear();

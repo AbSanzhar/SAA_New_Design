@@ -12,6 +12,7 @@ export class AllScienceProjectsComponent implements OnInit {
     constructor(private _api: ApiService) {
     }
 
+    dataSource: any[];
     allScienceProjecrs: any[] = [];
     displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
 
@@ -34,7 +35,8 @@ export class AllScienceProjectsComponent implements OnInit {
     getAllScienceProjects() {
         this._api.getAllScienceProjects().subscribe(
             res => {
-                console.log(res);
+                this.dataSource = res;
+                // console.log(res);
                 this.allScienceProjecrs = res;
                 for (let i = 0; i < res.length; i++) {
                     const agrDay = new Date(res[i].scAgrDate).getDate() < 10 ? '0'

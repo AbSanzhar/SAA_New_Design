@@ -1,84 +1,4 @@
-<!--<div class="wrapper">-->
-<!--  <div class="beforeHeader">-->
-<!--    <div id="logo">-->
-<!--      <img src="./assets/images/header/logoIITU.png" width="40%"  alt="IITU logo">-->
-<!--    </div>-->
-<!--    <div id="accountName">-->
-<!--      <img style="margin-top: 2%" src="./assets/images/header/accountLabel.png" width="10%" height="10%" alt="Account label">-->
-<!--      <button mat-button [matMenuTriggerFor]="menu"><p style="margin-top: 7%" class="text">{{name}}</p></button>-->
-<!--      <mat-menu #menu="matMenu">-->
-<!--          <button style="padding: 0; margin: 0" mat-menu-item><a style="height: 100%" routerLink="./profile" mat-button>Моя страница</a></button>-->
-<!--          <button style="padding: 0; margin: 0" mat-menu-item><a style="height: 100%" routerLink="./password" mat-button>Сменить пароль</a></button>-->
-<!--          <mat-divider></mat-divider>-->
-<!--          <button mat-menu-item (click)="logOut()">Log out</button>-->
-<!--      </mat-menu>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <mat-toolbar>-->
-<!--    <mat-toolbar-row>-->
-<!--      <span style="width: 50%; display: flex; height: 100%; margin-left: 20%; margin-right: 9%">-->
-<!--&lt;!&ndash;      <div class="navButton">&ndash;&gt;-->
-<!--&lt;!&ndash;        <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./" [routerLinkActiveOptions]="{ exact: true }">Главная </a>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--        <div class="navButton">-->
-<!--        <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./" [routerLinkActiveOptions]="{ exact: true }">Главная </a>-->
-<!--      </div>-->
-<!--        <div class="navButton" *ngIf="this.userRoles.indexOf('Teacher') != -1">-->
-<!--        <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./activities" > Моя деятельность </a>-->
-<!--      </div>-->
-<!--      <div class="navButton" *ngIf="this.userRoles.indexOf('Teacher') != -1">-->
-<!--        <a routerLinkActive="active-link" class="navTool" mat-button routerLink="./yearPlan" > Годовой план </a>-->
-<!--      </div>-->
-<!--      <div class="navButton" *ngIf="this.userRoles.indexOf('Science_Secretary_Dissovet') != -1"> &lt;!&ndash;dropdown-menu&ndash;&gt;-->
-<!--        <a routerLinkActive="active-link"-->
-<!--           class="navTool" mat-button routerLink="./secretary-of-the-diss-council"> Диссертационный совет </a>-->
-<!--        &lt;!&ndash;        <a id="dropDownMenu" routerLinkActive="active-link" class="navTool" mat-button> Дополнительные возможности </a>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div class="options">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <a *ngIf="this.userRoles.indexOf('Teacher') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./teacher"> Преподавателя </a>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <hr *ngIf="this.userRoles.indexOf('Teacher') != -1">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <a *ngIf="this.userRoles.indexOf('Science_Dept') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./opportunities"> СОпН </a>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <hr *ngIf="this.userRoles.indexOf('Science_Dept') != -1">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <a *ngIf="this.userRoles.indexOf('Science_Secretary_Dissovet') != -1" routerLinkActive="active-link" class="navTool" mat-button routerLink="./secretary-of-the-diss-council"> Секретаря диссовета </a>&ndash;&gt;-->
-<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
-<!--      </div>-->
-
-<!--        <div class="navButton" *ngIf="this.userRoles.indexOf('Science_Dept') != -1"> &lt;!&ndash;dropdown-menu&ndash;&gt;-->
-<!--        <a  routerLinkActive="active-link" class="navTool" mat-button routerLink="./opportunities"> Отдел по науке </a>-->
-<!--      </div>-->
-<!--        </span>-->
-<!--      <div style="width: 5%;" id="headerSettings">-->
-<!--        <div class="jai">-->
-<!--           <div class="notifications">-->
-<!--              <i style="color: #015349" class="material-icons-outlined" (click)="drawer.toggle()" matBadge="1" matBadgeColor="warn" matBadgePosition="below after">-->
-<!--                notifications-->
-<!--              </i>-->
-<!--             <mat-drawer #drawer class="notifications-drawer">-->
-<!--               <div class="polygon"></div>-->
-<!--               <div class="notifications-list">-->
-<!--                 <div>-->
-<!--                   <div class="notif-inner">-->
-<!--                     <div style="width: 25%;">-->
-<!--                       <div class="notif-img"></div>-->
-<!--                     </div>-->
-<!--                     <div class="notif-message">-->
-<!--                       <a href="#">Jennifer:</a>-->
-<!--                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, perferendis?-->
-<!--                     </div>-->
-<!--                   </div>-->
-<!--                 </div>-->
-<!--               </div>-->
-<!--             </mat-drawer>-->
-<!--           </div>-->
-<!--        </div>-->
-<!--        <div class="jai">-->
-<!--        <p style="color: #FFFFFF;">рус</p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </mat-toolbar-row>-->
-<!--  </mat-toolbar>-->
-<!--</div>-->
-<!--<router-outlet></router-outlet>-->
-<div fxFlexAlign="column">
+<div fxLayout="column">
     <div fxLayout="row" style="padding: 1%">
         <div fxFlex="10"></div>
         <div fxFlex="20" fxLayoutAlign="end center" fxLayout="row">
@@ -170,4 +90,7 @@
         </mat-toolbar>
     </div>
     <router-outlet></router-outlet>
+    <div class="footer" fxLayoutAlign="center center">
+        <p style="color: white; font-size: 15px; padding: 0; margin: 0">&copy; Copyright 2000-2020.</p>
+    </div>
 </div>

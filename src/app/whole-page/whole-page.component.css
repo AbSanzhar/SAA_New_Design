@@ -4,96 +4,16 @@
 mat-toolbar{
   background: white;
 }
-.notifications .material-icons-outlined{
-  margin-top: 5px;
-  font-size: 36px;
-}
-.material-icons-outlined{
-  cursor: pointer;
-}
-.polygon{
-  z-index: 10;
+.footer{
+  background: #212121;
+  left: 0;
+  bottom: 0;
   position: absolute;
-  left: 1180px;
-  top: 150px;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 20px solid #fff;
-}
-.notifications-list{
-  z-index: 9;
-  position: absolute;
-  width: 500px;
-  height: 560px;
-  left: 880px;
-  top: 165px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.9);
-}
-.notif-img{
-  background: url('https://media.istockphoto.com/photos/neon-heart-on-brick-wall-picture-id848235926?k=6&m=848235926&s=612x612&w=0&h=resOh2Qt0_wYIOoLGcbnGtu_rXw5Dkp_IsqrerWzWCQ=') no-repeat center;
-  width: 68px;
-  height: 56px;
-  background-size: cover;
-  clip-path: ellipse();
-}
-.notif-inner{
-  display: flex;
-  margin: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(9, 9, 9, 0.2);
-}
-.notif-message{
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-size: 14px;
-  width: 66%;
-  white-space: pre-line;
-  line-height: 17px;
-}
-.notif-message a{
-  font-size: 14px;
-  text-decoration: none;
-  line-height: 15px;
-}
-.options a{
   width: 100%;
-  border-radius: 0;
-  padding: 0.4rem;
-  z-index: 5;
+  height: 7vh;
 }
-.options{
-  display: none;
-  background-color: #0CB5A0;
-}
-.options hr{
-  margin: 0 .6rem;
-}
-.dropdown-menu:hover .options{
-  display: block;
-  z-index: 15;
-}
-#dropDownMenu:hover{
-  background-color: #0CB5A0;
-  z-index: 15;
-}
-@media (max-width: 1200px) {
-  .wrapper {
-    max-width: 970px;
-  }
-}
-
-@media (max-width: 970px) {
-  .wrapper {
-    max-width: 750px;
-  }
-}
-
 @media (max-width: 767px) {
-  .wrapper {
-    max-width: none;
-    display: block;
+  .footer {
+    display: none;
   }
 }

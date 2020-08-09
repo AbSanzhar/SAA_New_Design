@@ -45,12 +45,12 @@ export class EditEmployeeDialogComponent implements OnInit {
         new FormControl(this.formOptions.getRawValue().option3 ? true : false)
       ])
     });
-     console.log(this.newForm.get('role'));
-     console.log(this.newForm.get('role')['controls'][0].value);
+     // console.log(this.newForm.get('role'));
+     // console.log(this.newForm.get('role')['controls'][0].value);
      const isTeacher = (this.newForm.get('role') as FormArray).controls[0].value;
      const isSciencePM = (this.newForm.get('role') as FormArray).controls[1].value;
      const isDisSec = (this.newForm.get('role') as FormArray).controls[2].value;
-     console.log(isTeacher);
+     // console.log(isTeacher);
      const teacherRole = {
           userId: this.data.userId,
           roleName: 'Teacher'
@@ -67,51 +67,54 @@ export class EditEmployeeDialogComponent implements OnInit {
      if (this.userRoles.indexOf('Teacher') != - 1 && !isTeacher) {
         this._api.deleteRole(teacherRole).subscribe(
             res => {
-                console.log(res);
+                // console.log(res);
             }, err => {
-                console.log(err);
+                // console.log(err);
             });
          // tslint:disable-next-line:triple-equals
      } else if (this.userRoles.indexOf('Teacher') == -1 && isTeacher) {
          this._api.addRole(teacherRole).subscribe(
-             res => {console.log(res);
+             res => {
+                 // console.log(res);
              },
              err => {
-               console.log(err);
+               // console.log(err);
              }
          );
          // tslint:disable-next-line:triple-equals
      } else if (this.userRoles.indexOf('Science_Project_Manager') != - 1 && !isSciencePM) {
          this._api.deleteRole(scincePmRole).subscribe(
              res => {
-               console.log(res);
+               // console.log(res);
              }, err => {
-               console.log(err);
+               // console.log(err);
              });
          // tslint:disable-next-line:triple-equals
      } else if (this.userRoles.indexOf('Science_Project_Manager') == -1 && isSciencePM) {
          this._api.addRole(scincePmRole).subscribe(
-             res => {console.log(res);
+             res => {
+                 // console.log(res);
              },
              err => {
-               console.log(err);
+               // console.log(err);
              }
          );
          // tslint:disable-next-line:triple-equals
      } else if (this.userRoles.indexOf('Science_Secretary_Dissovet') != - 1 && !isDisSec) {
          this._api.deleteRole(disSecRole).subscribe(
              res => {
-                 console.log(res);
+                 // console.log(res);
              }, err => {
-                 console.log(err);
+                 // console.log(err);
              });
          // tslint:disable-next-line:triple-equals
      } else if (this.userRoles.indexOf('Science_Secretary_Dissovet') == -1 && isDisSec) {
        this._api.addRole(disSecRole).subscribe(
-           res => {console.log(res);
+           res => {
+               // console.log(res);
            },
            err => {
-             console.log(err);
+             // console.log(err);
            }
        );
      }
