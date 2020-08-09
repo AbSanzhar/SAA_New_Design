@@ -57,6 +57,13 @@ import { AddYearPlanOneTableComponent } from './year-plan/add-year-plan-one-tabl
 import { MyActivitiesComponent } from './my-activities/my-activities.component';
 import { NewsComponent } from './news/news.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {DeviceDetectorModule} from 'ngx-device-detector';
+import { Yp1Component } from './year-plan/yp1/yp1.component';
+import { Yp2Component } from './year-plan/yp2/yp2.component';
+import { Yp3Component } from './year-plan/yp3/yp3.component';
+import { Yp4Component } from './year-plan/yp4/yp4.component';
+import { Yp5Component } from './year-plan/yp5/yp5.component';
+import { Yp6Component } from './year-plan/yp6/yp6.component';
 
 
 const r: Routes = [
@@ -69,6 +76,12 @@ const r: Routes = [
         {path: 'activities', component: MyActivitiesComponent},
         {path: 'opportunities', component: OpportunitiesComponent},
         {path: 'yearPlan', component: YearPlanComponent},
+        {path: 'yp1', component: Yp1Component},
+        {path: 'yp2', component: Yp2Component},
+        {path: 'yp3', component: Yp3Component},
+        {path: 'yp4', component: Yp4Component},
+        {path: 'yp5', component: Yp5Component},
+        {path: 'yp6', component: Yp6Component},
         {path: 'password', component: PasswordComponent},
         {path: 'settings', component: SettingsComponent},
         {path: 'opportunities/all-patents', component: AllPatentsComponent},
@@ -109,6 +122,12 @@ const r: Routes = [
       AddYearPlanOneTableComponent,
       MyActivitiesComponent,
       NewsComponent,
+      Yp1Component,
+      Yp2Component,
+      Yp3Component,
+      Yp4Component,
+      Yp5Component,
+      Yp6Component,
   ],
     imports: [
         CommonModule,
@@ -139,7 +158,8 @@ const r: Routes = [
         MatAutocompleteModule,
         MatChipsModule,
         MatTableModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        DeviceDetectorModule
     ],
 })
 export class WholePageModule { }

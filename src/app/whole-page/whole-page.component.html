@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<div *ngIf="!isMobile" fxLayout="column">
     <div fxLayout="row" style="padding: 1%">
         <div fxFlex="10"></div>
         <div fxFlex="20" fxLayoutAlign="end center" fxLayout="row">
@@ -83,9 +83,13 @@
     <div>
         <mat-toolbar>
             <mat-toolbar-row fxFlexAlign="row" fxLayoutAlign="center center" style="height: 100%; background: #212121;">
-                <a fxLayoutAlign="center center" mat-button routerLink="./yearPlan"><p style="color: white; margin: 0;" class="navigation2">Преподаватели</p></a>
-                <a fxLayoutAlign="center center" mat-button routerLink="./secretary-of-the-diss-council"><p style="margin: 0; color: white;" class="navigation2">Секретарь диссертационного совета</p></a>
-                <a fxLayoutAlign="center center" mat-button routerLink="./opportunities"><p style="color: white; margin: 0;" class="navigation2">Сотрудник отдела по науке</p></a>
+                <a fxLayoutAlign="center center" mat-button routerLink="./yearPlan"><p style="color: white; margin: 0;"
+                                                                                       class="navigation2">
+                    Преподаватели</p></a>
+                <a fxLayoutAlign="center center" mat-button routerLink="./secretary-of-the-diss-council"><p
+                        style="margin: 0; color: white;" class="navigation2">Секретарь диссертационного совета</p></a>
+                <a fxLayoutAlign="center center" mat-button routerLink="./opportunities"><p
+                        style="color: white; margin: 0;" class="navigation2">Сотрудник отдела по науке</p></a>
             </mat-toolbar-row>
         </mat-toolbar>
     </div>
@@ -93,4 +97,112 @@
     <div class="footer" fxLayoutAlign="center center">
         <p style="color: white; font-size: 15px; padding: 0; margin: 0">&copy; Copyright 2000-2020.</p>
     </div>
+</div>
+
+<div *ngIf="isMobile" fxLayout="column">
+    <mat-drawer-container class="example-container" autosize>
+        <mat-drawer style="background: #393939" #drawer mode="side">
+            <div fxLayout="column" style="padding: 20px 0 20px 10px">
+                <div fxLayoutAlign="center center" fxLayoutGap="0" fxLayout="row">
+                    <div fxLayoutAlign="center center" fxFlex="20">
+                        <img src="assets/images/camera_200.png" width="100%" style="border-radius: 50%">
+                    </div>
+                    <div fxLayoutAlign="center center" fxFlex="50" fxLayoutGap="0" fxLayout="column">
+                        <p style="color: white">{{name}} Test Name</p>
+                        <p style="color: #909090">Настройки</p>
+                    </div>
+                    <div fxLayoutAlign="center center" fxFlex="20">
+                        <mat-icon style="color: white">keyboard_arrow_right</mat-icon>
+                    </div>
+                </div>
+                <mat-divider style="border-top-color: grey; margin: 10px"></mat-divider>
+                <div fxLayout="column" fxLayoutGap="0" fxLayoutAlign="center start">
+                    <a mat-button routerLink="./"><p class="navigation2">Главная</p></a>
+                    <a mat-button routerLink="./activities"><p class="navigation2"
+                                                               *ngIf="this.userRoles.indexOf('Teacher') != -1">
+                        Публикации</p></a>
+                    <a mat-button><p class="navigation2">Статистика</p></a>
+                    <a mat-button><p class="navigation2">О проекте</p></a>
+                    <a mat-button><p class="navigation2">О сервисе</p></a>
+                    <a mat-button routerLink="./secretary-of-the-diss-council"><p class="navigation2">Секретарь
+                        дис.совета</p></a>
+                    <mat-accordion>
+                        <mat-expansion-panel style="background: #393939; box-shadow: 0 0 0 0; width: 250px;"
+                                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p style="margin: 0;" class="navigation2">Преподаватели</p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <a routerLink="./yp1" mat-button><p style="margin: 0; text-align: left" class="navigation2">Учебная работа</p>
+                            </a>
+                            <a routerLink="./yp2" mat-button><p style="margin: 0; text-align: left" class="navigation2">Учебно-методическая
+                                <br> работа</p></a>
+                            <a routerLink="./yp3" mat-button><p style="margin: 0; text-align: left" class="navigation2">
+                                Научно-исследовательская <br> работа</p></a>
+                            <a routerLink="./yp4" mat-button><p style="margin: 0; text-align: left" class="navigation2">Бюджетные НИР/ <br>
+                                Руководство НИРС</p></a>
+                            <a routerLink="./yp5" mat-button><p style="margin: 0; text-align: left" class="navigation2">
+                                Организационно-методическая <br> работа</p></a>
+                            <a routerLink="./yp6" mat-button><p style="margin: 0; text-align: left" class="navigation2">Прочая
+                                деятельность</p></a>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-accordion>
+                        <mat-expansion-panel style="background: #393939; box-shadow: 0 0 0 0"
+                                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p style="margin-bottom: 0;" class="navigation2">Сотрудник отдела по науке</p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div fxLayout="column" fxLayoutGap="0" style="margin: 0; padding: 0;">
+                                <a routerLink="./opportunities/all-patents" mat-button><p style="margin: 0; text-align: left" class="navigation2">Патенты</p></a>
+                                <a routerLink="./opportunities/all-publications" mat-button><p style="margin: 0; text-align: left" class="navigation2">Публикации</p>
+                                </a>
+                                <a routerLink="./opportunities/all-dissets" mat-button><p style="margin: 0; text-align: left" class="navigation2">Диссертационные
+                                    советы</p></a>
+                                <a mat-button><p style="margin: 0; text-align: left" class="navigation2">Научные
+                                    проекты</p></a>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <a mat-button><p class="navigation2">Помощь<span style="color: #FF0000; font-weight: bold">?</span>
+                    </p></a>
+                </div>
+            </div>
+        </mat-drawer>
+        <div fxLayout="row">
+            <div (click)="drawer.close()" fxFlex="5"></div>
+            <div fxFlex="10" fxLayoutAlign="start center" (click)="drawer.toggle()">
+                <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px">
+                    <path d="M 3 7 A 1.0001 1.0001 0 1 0 3 9 L 27 9 A 1.0001 1.0001 0 1 0 27 7 L 3 7 z M 3 14 A 1.0001 1.0001 0 1 0 3 16 L 27 16 A 1.0001 1.0001 0 1 0 27 14 L 3 14 z M 3 21 A 1.0001 1.0001 0 1 0 3 23 L 27 23 A 1.0001 1.0001 0 1 0 27 21 L 3 21 z"/>
+                </svg>
+            </div>
+            <div (click)="drawer.close()" fxFlex="80" fxLayout="row" fxLayoutAlign="center center">
+                <div>
+                    <img src="./assets/images/header/logoIITU.png" width="70px" alt="IITU logo">
+                </div>
+                <div fxLayout="column" fxLayoutGap="0">
+                    <p style="font-size: 10px">INTERNATIONAL</p>
+                    <p style="font-size: 10px">UNIVERSITY</p>
+                </div>
+            </div>
+            <div (click)="drawer.close()" fxFlex="5"></div>
+        </div>
+        <div (click)="drawer.close()" fxLayout="row">
+            <div fxFlex="5"></div>
+            <div fxLayoutAlign="row" fxFlex="90">
+                <input style="border: 1px solid #C5BFBF; border-radius: 5px; margin-right: -1%;; width: 80%;"
+                       type="text" matInput>
+                <button mat-button style="background: #0CB5A0; width: 20%;">
+                    <mat-icon style="color: white">search</mat-icon>
+                </button>
+            </div>
+            <div fxFlex="5"></div>
+        </div>
+        <div (click)="drawer.close()">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-container>
 </div>

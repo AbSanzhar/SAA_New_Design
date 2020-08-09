@@ -1,0 +1,49 @@
+<div style="width: 600px" fxLayoutAlign="center start" fxLayout="column">
+    <h2 style="color: #8F1812; margin: 10px;"> 2.Научно-исследовательская работа</h2>
+
+    <div>
+        <mat-table [dataSource]="gettedResearch" style="width: 100%">
+            <ng-container matColumnDef="commId">
+                <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="activities">
+                <mat-header-cell *matHeaderCellDef> Наименование работы, срок</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="output">
+                <mat-header-cell *matHeaderCellDef> Объем работы (тыс. тенге)</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.output}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="plan">
+                <mat-header-cell *matHeaderCellDef> Выполнение плана</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="implementation">
+                <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+                <mat-cell *matCellDef="let activity">
+                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Research'})">
+                        Изменить
+                    </button>
+                    <button style="margin-left: 5%" mat-stroked-button color="warn"
+                            (click)="deleteTableRow({data: activity, table: 'Research'})">
+                        Удалить
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+            <mat-row *matRowDef="let activity; columns: displayedColumns1;"></mat-row>
+
+        </mat-table>
+    </div>
+</div>

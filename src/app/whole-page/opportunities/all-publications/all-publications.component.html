@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div *ngIf="!isMobile" fxLayout="row">
   <div fxFlex="10"></div>
   <div fxFlex="80" fxLayout="row">
     <div fxLayout="column" fxFlex="25">
@@ -106,5 +106,107 @@
   <div fxFlex="10"></div>
 </div>
 
+<div style="width: 1000px" fxLayoutAlign="center start" *ngIf="isMobile" fxLayout="column">
+  <h2 style="color: #827878; margin: 15px;">Сведения по университету</h2>
+  <div style="width: 1000px">
+    <mat-table style="width: 100%" [dataSource]="dataSource">
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+        <mat-cell *matCellDef="let publication, let i = index"> {{i + 1}} </mat-cell>
+      </ng-container>
 
+      <ng-container matColumnDef="author">
+        <mat-header-cell *matHeaderCellDef> Автор</mat-header-cell>
+        <mat-cell
+                *matCellDef="let publication"> {{publication.userId.firstName}} {{publication.userId.lastName}}</mat-cell>
+      </ng-container>
 
+      <ng-container matColumnDef="titlePublication">
+        <mat-header-cell *matHeaderCellDef> Название публикации</mat-header-cell>
+        <mat-cell *matCellDef="let publication"> {{publication.pubName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Тип публикации</mat-header-cell>
+        <mat-cell *matCellDef="let publication"> {{publication.pubType}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="jointAuthors">
+        <mat-header-cell *matHeaderCellDef> Соавторы</mat-header-cell>
+        <mat-cell *matCellDef="let publication">
+          <div>
+            <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">
+              {{i + 1}}) {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef> Год</mat-header-cell>
+        <mat-cell *matCellDef="let publication"> {{publication.pubYear}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>
+        <mat-cell *matCellDef="let publication"> {{publication.pubCity}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="publisher">
+        <mat-header-cell *matHeaderCellDef> Издатель</mat-header-cell>
+        <mat-cell *matCellDef="let publication"> {{publication.pubPubName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Page">
+        <mat-header-cell *matHeaderCellDef> Страницы</mat-header-cell>
+        <mat-cell *matCellDef="let publication"> {{publication.pubPage}} - {{publication.pubEndPage}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Url">
+        <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>
+        <mat-cell *matCellDef="let publication"><a href="{{publication.pubUrl}}">
+          <mat-icon color="primary">public</mat-icon>
+        </a></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Doi">
+        <mat-header-cell *matHeaderCellDef> DOI</mat-header-cell>
+        <mat-cell *matCellDef="let publication">{{publication.pubDoi}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fileName">
+        <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+        <mat-cell *matCellDef="let publication"><a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">
+          <mat-icon color="primary">get_app</mat-icon>
+        </a></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="checkedUser">
+        <mat-header-cell *matHeaderCellDef> Кем проверено</mat-header-cell>
+        <mat-cell *matCellDef="let publication">
+          <p *ngIf="publication.checkedUser">
+            {{publication.checkedUser.firstName}} {{publication.checkedUser.lastName}}
+          </p>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Действие</mat-header-cell>
+        <mat-cell *matCellDef="let publication">
+          <div style="display: flex">
+            <button *ngIf="publication.pubStatus == 'Under review' || publication.pubStatus == 'Returned for revision'"
+                    mat-stroked-button color="primary" (click)="updatePublicationStatus(publication.pubId, 2)">Принять
+            </button>
+            <button *ngIf="publication.pubStatus == 'Under review' || publication.pubStatus == 'Confirmed'"
+                    mat-stroked-button style="margin-left: 3% ;color: #DC5441"
+                    (click)="updatePublicationStatus(publication.pubId, 3)">Вернуть
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let publication; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import {DataControlService} from '../services/data-control.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../api/api.service';
 import * as jwt_decode from 'jwt-decode';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-whole-page',
@@ -10,6 +11,10 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./whole-page.component.css']
 })
 export class WholePageComponent implements OnInit {
+  panelOpenState = false;
+  isMobile;
+  isDesktop;
+  isTablet;
   showFiller = false;
   currentUserId: string;
   userRoles = [];
@@ -29,10 +34,13 @@ export class WholePageComponent implements OnInit {
   constructor(private service: DataControlService,
               private router: Router,
               // tslint:disable-next-line:variable-name
-              private _api: ApiService) {
+              private _api: ApiService,
+              private deviceDetectorService: DeviceDetectorService) {
+    this.detectDevice();
   }
 
   ngOnInit(): void {
+    this.detectDevice();
     this._api.getUserById(this.tokenId).subscribe(
       res => {
         this.currentUser = res;
@@ -55,6 +63,12 @@ export class WholePageComponent implements OnInit {
 
   changeLang(language: string) {
     this.language = language;
+  }
+
+  detectDevice() {
+    this.isMobile = this.deviceDetectorService.isMobile();
+    this.isTablet = this.deviceDetectorService.isTablet();
+    this.isDesktop = this.deviceDetectorService.isDesktop();
   }
 
 }

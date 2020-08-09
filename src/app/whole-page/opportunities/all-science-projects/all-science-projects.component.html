@@ -1,121 +1,227 @@
-<mat-table [dataSource]="dataSource" class="">
-    <ng-container matColumnDef="index">
-        <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-        <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>
-    </ng-container>
+<!--<mat-table [dataSource]="dataSource" class="">-->
+<!--    <ng-container matColumnDef="index">-->
+<!--        <mat-header-cell *matHeaderCellDef> №</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>-->
+<!--    </ng-container>-->
 
-    <ng-container matColumnDef="universityName">
-        <mat-header-cell *matHeaderCellDef> ВУЗ</mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.universityName}} </mat-cell>
-    </ng-container>
+<!--    <ng-container matColumnDef="universityName">-->
+<!--        <mat-header-cell *matHeaderCellDef> ВУЗ</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let disset"> {{disset.universityName}} </mat-cell>-->
+<!--    </ng-container>-->
 
-    <ng-container matColumnDef="role">
-        <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>
-    </ng-container>
+<!--    <ng-container matColumnDef="role">-->
+<!--        <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>-->
+<!--    </ng-container>-->
 
-    <ng-container matColumnDef="specialty">
-        <mat-header-cell *matHeaderCellDef> Специальность</mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
-    </ng-container>
+<!--    <ng-container matColumnDef="specialty">-->
+<!--        <mat-header-cell *matHeaderCellDef> Специальность</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>-->
+<!--    </ng-container>-->
 
-    <ng-container matColumnDef="activityPeriod">
-        <mat-header-cell *matHeaderCellDef> Период деятельности</mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.activityPeriod}} </mat-cell>
-    </ng-container>
+<!--    <ng-container matColumnDef="activityPeriod">-->
+<!--        <mat-header-cell *matHeaderCellDef> Период деятельности</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let disset"> {{disset.activityPeriod}} </mat-cell>-->
+<!--    </ng-container>-->
 
-    <ng-container matColumnDef="orderNumberAndOrder">
-        <mat-header-cell *matHeaderCellDef> Номер и дата приказа</mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.orderNumber + ' ' + disset.date}} </mat-cell>
-    </ng-container>
+<!--    <ng-container matColumnDef="orderNumberAndOrder">-->
+<!--        <mat-header-cell *matHeaderCellDef> Номер и дата приказа</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let disset"> {{disset.orderNumber + ' ' + disset.date}} </mat-cell>-->
+<!--    </ng-container>-->
 
-    <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> действие</mat-header-cell>
-        <mat-cell *matCellDef="let disset">
-            <button mat-flat-button color="accent" class="btn-style">Принять</button>
-        </mat-cell>
-    </ng-container>
+<!--    <ng-container matColumnDef="actions">-->
+<!--        <mat-header-cell *matHeaderCellDef> действие</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let disset">-->
+<!--            <button mat-flat-button color="accent" class="btn-style">Принять</button>-->
+<!--        </mat-cell>-->
+<!--    </ng-container>-->
 
-    <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
-    <mat-row *matRowDef="let disset; columns: displayedColumns5;"></mat-row>
-</mat-table>
+<!--    <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>-->
+<!--    <mat-row *matRowDef="let disset; columns: displayedColumns5;"></mat-row>-->
+<!--</mat-table>-->
 
-<mat-table [dataSource]="allScienceProjecrs" class="">
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>
-        <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
-    </ng-container>
+<div *ngIf="!isMobile" fxLayout="row">
+    <div fxFlex="10"></div>
+    <div fxFlex="80" fxLayout="row">
+        <div fxLayout="column" fxFlex="25">
+            <h2 style="color: #827878;">Сведения по университету</h2>
+            <div fxLayout="column">
+                <a routerLink="../" style="text-decoration: none;" class="linkTable">Преподаватели</a>
+                <a routerLink="../all-patents" style="text-decoration: none;" routerLinkActive="active"
+                   class="linkTable">Патенты</a>
+                <a routerLink="../all-publications" style="text-decoration: none;" routerLinkActive="active"
+                   class="linkTable">Публикации</a>
+                <a routerLink="../all-dissets" style="text-decoration: none;" routerLinkActive="active"
+                   class="linkTable">Дис. советы</a>
+                <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active"
+                   class="linkTable">Научные проекты</a>
+            </div>
+        </div>
+        <div fxLayout="column" fxFlex="75">
+            <mat-table [dataSource]="allScienceProjecrs" class="">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>
+                    <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
+                </ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Наименование</mat-header-cell>
-        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scName}}</p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Наименование</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scName}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="type">
-                        <mat-header-cell *matHeaderCellDef> Тип </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"> <p>{{project.scType}}</p> </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scType}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="priority">
-                        <mat-header-cell *matHeaderCellDef> Раздел </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="priority">
+                    <mat-header-cell *matHeaderCellDef> Раздел</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="subPriority">
-                        <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="subPriority">
+                    <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="subSubPriority">
-                        <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p> </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="subSubPriority">
+                    <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="executor">
-                        <mat-header-cell *matHeaderCellDef> Исполнитель </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="executor">
+                    <mat-header-cell *matHeaderCellDef> Исполнитель</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="customer">
-                        <mat-header-cell *matHeaderCellDef> Заказчик </mat-header-cell>
-                        <mat-cell *matCellDef="let project"> {{project.scCustomer}} </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="customer">
+                    <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
+                    <mat-cell *matCellDef="let project"> {{project.scCustomer}} </mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="dirFullName">
-                        <mat-header-cell *matHeaderCellDef> Научный руководитель </mat-header-cell>
-                        <mat-cell *matCellDef="let project"> {{project.scDirFullName}} </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="dirFullName">
+                    <mat-header-cell *matHeaderCellDef> Научный руководитель</mat-header-cell>
+                    <mat-cell *matCellDef="let project"> {{project.scDirFullName}} </mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="dept">
-                        <mat-header-cell *matHeaderCellDef> Подразделение </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="dept">
+                    <mat-header-cell *matHeaderCellDef> Подразделение</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="agrDate">
-                        <mat-header-cell *matHeaderCellDef> Дата договора </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scAgrDate}} </p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="agrDate">
+                    <mat-header-cell *matHeaderCellDef> Дата договора</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scAgrDate}} </p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="registerNumber">
-                        <mat-header-cell *matHeaderCellDef> Регистр. номер </mat-header-cell>
-                        <mat-cell *matCellDef="let project"> {{project.scNum}} </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="registerNumber">
+                    <mat-header-cell *matHeaderCellDef> Регистр. номер</mat-header-cell>
+                    <mat-cell *matCellDef="let project"> {{project.scNum}} </mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="startDate">
-                        <mat-header-cell *matHeaderCellDef> Начало </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scStDate}}</p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="startDate">
+                    <mat-header-cell *matHeaderCellDef> Начало</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scStDate}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="endDate">
-                        <mat-header-cell *matHeaderCellDef> Сдача </mat-header-cell>
-                        <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scEndDate}}</p></mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="endDate">
+                    <mat-header-cell *matHeaderCellDef> Сдача</mat-header-cell>
+                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scEndDate}}</p></mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="totalSum">
-                        <mat-header-cell *matHeaderCellDef> Общая сумма гранта </mat-header-cell>
-                        <mat-cell *matCellDef="let project"> {{project.scTotalSum}} </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="totalSum">
+                    <mat-header-cell *matHeaderCellDef> Общая сумма гранта</mat-header-cell>
+                    <mat-cell *matCellDef="let project"> {{project.scTotalSum}} </mat-cell>
+                </ng-container>
 
-                    <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
-                    <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
-                </mat-table>
+                <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+                <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
+            </mat-table>
+        </div>
+    </div>
+    <div fxFlex="10"></div>
+</div>
+<div style="width: 1000px" fxLayoutAlign="center start" *ngIf="isMobile" fxLayout="column">
+    <h2 style="color: #827878; margin: 15px;">Сведения по университету</h2>
+    <div style="width: 100%">
+        <mat-table [dataSource]="allScienceProjecrs" class="">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>
+                <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Наименование</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scName}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+                <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scType}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="priority">
+                <mat-header-cell *matHeaderCellDef> Раздел</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subPriority">
+                <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subSubPriority">
+                <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="executor">
+                <mat-header-cell *matHeaderCellDef> Исполнитель</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="customer">
+                <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
+                <mat-cell *matCellDef="let project"> {{project.scCustomer}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dirFullName">
+                <mat-header-cell *matHeaderCellDef> Научный руководитель</mat-header-cell>
+                <mat-cell *matCellDef="let project"> {{project.scDirFullName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dept">
+                <mat-header-cell *matHeaderCellDef> Подразделение</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="agrDate">
+                <mat-header-cell *matHeaderCellDef> Дата договора</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scAgrDate}} </p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="registerNumber">
+                <mat-header-cell *matHeaderCellDef> Регистр. номер</mat-header-cell>
+                <mat-cell *matCellDef="let project"> {{project.scNum}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="startDate">
+                <mat-header-cell *matHeaderCellDef> Начало</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scStDate}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="endDate">
+                <mat-header-cell *matHeaderCellDef> Сдача</mat-header-cell>
+                <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scEndDate}}</p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="totalSum">
+                <mat-header-cell *matHeaderCellDef> Общая сумма гранта</mat-header-cell>
+                <mat-cell *matCellDef="let project"> {{project.scTotalSum}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+            <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
+        </mat-table>
+    </div>
+</div>

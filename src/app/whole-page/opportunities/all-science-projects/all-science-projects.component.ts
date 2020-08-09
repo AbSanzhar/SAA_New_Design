@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../../api/api.service';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
     selector: 'app-all-science-projects',
@@ -7,9 +8,15 @@ import {ApiService} from '../../../api/api.service';
     styleUrls: ['./all-science-projects.component.css']
 })
 export class AllScienceProjectsComponent implements OnInit {
+    isMobile;
+    isDesktop;
+    isTablet;
 
     // tslint:disable-next-line:variable-name
-    constructor(private _api: ApiService) {
+    constructor(
+        private _api: ApiService,
+        private deviceDetectorService: DeviceDetectorService) {
+        this.detectDevice();
     }
 
     dataSource: any[];
@@ -17,6 +24,7 @@ export class AllScienceProjectsComponent implements OnInit {
     displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
 
     ngOnInit(): void {
+        this.detectDevice();
         this.getAllScienceProjects();
     }
 
@@ -68,6 +76,12 @@ export class AllScienceProjectsComponent implements OnInit {
                 console.log(err);
             }
         );
+    }
+
+    detectDevice() {
+        this.isMobile = this.deviceDetectorService.isMobile();
+        this.isTablet = this.deviceDetectorService.isTablet();
+        this.isDesktop = this.deviceDetectorService.isDesktop();
     }
 
 }

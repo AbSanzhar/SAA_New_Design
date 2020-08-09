@@ -32,6 +32,8 @@ import {EventUploadComponent} from './whole-page/teacher/event-upload/event-uplo
 import {PublicationUploadComponent} from './whole-page/teacher/publication-upload/publication-upload.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         FormsModule,
         MatPaginatorModule,
         MatDividerModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        MatListModule,
+        MatExpansionModule
     ],
   providers: [],
   bootstrap: [AppComponent]

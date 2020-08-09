@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-all-patents',
@@ -9,6 +10,9 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./all-patents.component.css']
 })
 export class AllPatentsComponent implements OnInit {
+  isMobile;
+  isDesktop;
+  isTablet;
   displayedColumns2 = ['index', 'patentNumber', 'country', 'inventionPatent', 'author', 'insertedDay', 'issueDate', 'kz', 'ru', 'en', 'actions', 'checkedUser', 'status'];
   dataSource2: any[];
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
@@ -16,9 +20,13 @@ export class AllPatentsComponent implements OnInit {
 
   constructor(private http: DataControlService,
               // tslint:disable-next-line:variable-name
-              private _api: ApiService) { }
+              private _api: ApiService,
+              private deviceDetectorService: DeviceDetectorService) {
+    this.detectDevice();
+  }
 
   ngOnInit(): void {
+    this.detectDevice();
     this.getAllPatents();
   }
 
@@ -80,5 +88,10 @@ export class AllPatentsComponent implements OnInit {
     );
   }
 
+  detectDevice() {
+    this.isMobile = this.deviceDetectorService.isMobile();
+    this.isTablet = this.deviceDetectorService.isTablet();
+    this.isDesktop = this.deviceDetectorService.isDesktop();
+  }
 
 }

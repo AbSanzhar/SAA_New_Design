@@ -34,6 +34,7 @@
     "jwt-decode": "^2.2.0",
     "mat-file-upload": "^1.5.0",
     "ngx-country-picker": "^2.2.0",
+    "ngx-device-detector": "^1.4.6",
     "ngx-pagination": "^5.0.0",
     "officegen": "^0.6.4",
     "pdfmake": "^0.1.65",

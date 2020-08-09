@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div *ngIf="!isMobile" fxLayout="row">
   <div fxFlex="10"></div>
   <div fxFlex="80" fxLayout="row">
     <div fxLayout="column" fxFlex="25">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div fxLayout="column" fxFlex="75">
-      <mat-table [dataSource]="dataSource" class="">
+      <mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="index">
           <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
           <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>
@@ -56,4 +56,51 @@
     </div>
   </div>
   <div fxFlex="10"></div>
+</div>
+
+<div style="width: 1000px" fxLayoutAlign="center start" *ngIf="isMobile" fxLayout="column">
+  <h2 style="color: #827878; margin: 15px;">Сведения по университету</h2>
+  <div style="width: 1000px">
+    <mat-table style="width: 100%;" [dataSource]="dataSource">
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+        <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="universityName">
+        <mat-header-cell *matHeaderCellDef> ВУЗ </mat-header-cell>
+        <mat-cell *matCellDef="let disset"> {{disset.universityName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
+        <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="specialty">
+        <mat-header-cell *matHeaderCellDef> Специальность </mat-header-cell>
+        <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="activityPeriod">
+        <mat-header-cell *matHeaderCellDef> Период деятельности </mat-header-cell>
+        <mat-cell *matCellDef="let disset"> {{disset.activityPeriod}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="orderNumberAndOrder">
+        <mat-header-cell *matHeaderCellDef> Номер и дата приказа </mat-header-cell>
+        <mat-cell *matCellDef="let disset"> {{disset.orderNumber + ' ' + disset.date}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
+        <mat-cell *matCellDef="let disset">
+          <button mat-flat-button color="accent" class="btn-style">Принять</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let disset; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 </div>

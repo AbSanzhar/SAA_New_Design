@@ -1,0 +1,44 @@
+<div style="width: 600px" fxLayoutAlign="center start" fxLayout="column">
+    <h2 style="color: #8F1812; margin: 10px;"> 1.Учебно-методическая работа</h2>
+
+    <div>
+        <mat-table [dataSource]="gettedActs" style="width: 100%">
+            <ng-container matColumnDef="acId">
+                <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
+                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="activities">
+                <mat-header-cell *matHeaderCellDef> Наименование работы, срок</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="timeFrame">
+                <mat-header-cell *matHeaderCellDef> Время выполнения плана</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.timeFrame}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="implementation">
+                <mat-header-cell *matHeaderCellDef> Фактическое выполнение плана</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
+                <mat-cell *matCellDef="let activity">
+                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Acad-Meth'})">
+                        Изменить
+                    </button>
+                    <button style="margin-left: 5%" mat-stroked-button color="warn"
+                            (click)="deleteTableRow({data: activity, table: 'Acad-Meth'})">
+                        Удалить
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let activity; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+    </div>
+</div>
