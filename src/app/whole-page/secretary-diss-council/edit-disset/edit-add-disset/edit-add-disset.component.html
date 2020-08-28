@@ -19,7 +19,7 @@
       <div class="form-box">
         <form [formGroup]="form">
           <div class="div-label">
-          <mat-form-field *ngIf="this.selectedValue == 'Внутренний сотрудник'">
+          <mat-form-field *ngIf="this.selectedValue == this.elements[0].value">
             <mat-label>Фамилия и Имя</mat-label>
             <mat-select formControlName="userId" required>
               <mat-option *ngFor="let i of members" [value]="i.userId">
@@ -30,7 +30,7 @@
           </mat-form-field>
           </div>
 
-          <mat-form-field *ngIf="this.selectedValue == 'Внешний сотрудник'">
+          <mat-form-field *ngIf="this.selectedValue == this.elements[1].value">
             <mat-label>Фамилия и Имя</mat-label>
             <mat-select formControlName="userId" required>
               <mat-option *ngFor="let i of exUsers" [value]="i.userId">
@@ -43,7 +43,7 @@
 
           <mat-form-field>
             <mat-label>Тип сотрудника</mat-label>
-            <mat-select [(ngModel)]="selectedValue" formControlName="memberType" required>
+            <mat-select [(ngModel)]="selectedValue" formControlName="disMemberTypeId" required>
               <mat-option *ngFor="let i of elements" [value]="i.value">
                 {{i.viewValue}}
               </mat-option>
@@ -54,7 +54,7 @@
           <mat-form-field>
             <mat-label>Позиция в дис. совете
             </mat-label>
-            <mat-select formControlName="disPosition" required>
+            <mat-select formControlName="disPositionId" required>
               <mat-option *ngFor="let i of elements2" [value]="i.value">
                 {{i.viewValue}}
               </mat-option>

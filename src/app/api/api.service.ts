@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
+import {CookieService} from '../services/cookie.service';
 // import {Http, Headers} from '@angular/http';
 // import ResponseContentType;
 
@@ -13,7 +14,8 @@ import * as jwt_decode from 'jwt-decode';
 
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private cookieService: CookieService) { }
 
   private base =  window['cfgApiBaseUrl'];
   // private base = 'http://localhost:8077/';
@@ -181,16 +183,14 @@ export class ApiService {
   getPublications(): Observable<any> {
     const url = 'publication/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get<any>(
-        this.base + url + id + '?jwt_token='
-        + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
+    return this.http.get<any>(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token')).pipe(catchError(this.errorHandler));
   }
 
-  getPublicationsPage(query): Observable<any> {
+  getPublicationsPage(query, lang): Observable<any> {
     const url = 'publication/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(
-        this.base + url + id + /ru/ + '?jwt_token='
+        this.base + url + id + '/' + lang + '/' + '?jwt_token='
         + window.localStorage.getItem('token') + query).pipe(catchError(this.errorHandler));
   }
 
@@ -209,12 +209,12 @@ export class ApiService {
         + window.localStorage.getItem('token'), pub);
   }
 
-  getEvent(): Observable<any> {
-    const url = 'event/getAllByUserId';
+  getEvent(lang): Observable<any> {
+    const url = 'event/getAllByUserId/';
     const user = {
       event_user_id : this.getDecodedAccessToken(localStorage.getItem('token')).jti
     };
-    return this.http.post<any>(this.base + url, user).pipe(catchError(this.errorHandler));
+    return this.http.post<any>(this.base + url + lang, user).pipe(catchError(this.errorHandler));
   }
   uploadEvent(Event1): Observable<any> {
     const url = 'event/add';
@@ -300,15 +300,16 @@ export class ApiService {
   }
 
 
-  getAllMyDisSovets(userId): Observable<any> {
+  getAllMyDisSovets(userId, lang): Observable<any> {
     const url = 'dissovet/member/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
+    return this.http.get(this.base + url + userId + '/' + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
-  getSecDisSovet(): Observable<any> {
+
+  getSecDisSovet(lang): Observable<any> {
     const url = 'dissovet/secretary/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));
+    return this.http.get(this.base + url + id + '/' + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
   uploadDisSovet(disSovet): Observable<any> {
     const url = 'dissovet/add';
@@ -376,17 +377,17 @@ export class ApiService {
     return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), patent);
   }
 
-  getPatent(): Observable<any> {
-    const url = 'patent/getByUserId';
+  getPatent(lang): Observable<any> {
+    const url = 'patent/getByUserId/';
     const userId = {
       ptnt_user_id: this.getDecodedAccessToken(localStorage.getItem('token')).jti
     };
-    return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), userId);
+    return this.http.post(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'), userId);
   }
 
-  getAllPatents(scienceId): Observable<any> {
-    const url = 'patent/getAll';
-    return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), scienceId);
+  getAllPatents(scienceId, lang): Observable<any> {
+    const url = 'patent/getAll/';
+    return this.http.post(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'), scienceId);
   }
 
   setPatentStatus(status): Observable<any> {
@@ -421,10 +422,10 @@ export class ApiService {
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
-  getCourses(): Observable<any> {
+  getCourses(lang): Observable<any> {
     const url = 'courses/getByUserId/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
-    return this.http.get(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));
+    return this.http.get(this.base + url + id + '/' + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
   uploadCourse(course): Observable<any> {
@@ -442,9 +443,9 @@ export class ApiService {
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
-  getOneDisMembers(disId): Observable<any> {
-    const url = 'dissovet/getMembers/';
-    return this.http.get(this.base + url + disId + '?jwt_token=' + window.localStorage.getItem('token'));
+  getOneDisMembers(disId, lang): Observable<any> {
+    const url = 'dissovet/';
+    return this.http.get(this.base + url + disId + '/' + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
   updateDisPosistion(user, disId): Observable<any> {
@@ -457,9 +458,9 @@ export class ApiService {
     return this.http.post(this.base + url + disId + '?jwt_token=' + window.localStorage.getItem('token'), disMember);
   }
 
-  getCoAuthorsPublications(userId): Observable<any> {
+  getCoAuthorsPublications(userId, lang): Observable<any> {
     const url = 'publication/coAuthor/';
-    return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
+    return this.http.get(this.base + url + userId + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
   updatePublicationStatus(publicationStatus): Observable<any> {
@@ -467,10 +468,62 @@ export class ApiService {
     return this.http.patch(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), publicationStatus);
   }
 
-  getAllPublications(): Observable<any> {
-    const url = 'publication/showAll/ru';
-    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  getAllPublications(lang): Observable<any> {
+    const url = 'publication/showAll/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
+
+  getPublicationType(lang): Observable<any> {
+    const url = 'publication/type/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getPublicationPublished(lang): Observable<any> {
+    const url = 'publication/published/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getEventTypes(lang): Observable<any> {
+    const url = 'event/getTypes/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getEventRoles(lang): Observable<any> {
+    const url = 'event/getRoles/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getPatentTypes(lang): Observable<any> {
+    const url = 'patent/getTypes/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getCourseDegree(lang): Observable<any> {
+    const url = 'courses/getDegrees/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getCourseForm(lang): Observable<any> {
+    const url = 'courses/getForms/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getAllUniversites(lang): Observable<any> {
+    const url = 'dissovet/getUniversities/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getDisPositions(lang): Observable<any> {
+    const url = 'dissovet/getMemberPositions/';
+    return this.http.get<any>(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getDisMemberType(lang): Observable<any> {
+    const url = 'dissovet/getMemberType/';
+    return this.http.get<any>(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+
 
 
   errorHandler(error: HttpErrorResponse) {

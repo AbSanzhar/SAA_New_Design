@@ -7,6 +7,7 @@
 
     <div class="title-div">
       <h1 class="title-text">Диссоветы №{{idDisset}}</h1>
+      <h2 class="title-text">ВУЗ - {{disInfo}}</h2>
       <small class="small-title-text">Участники</small>
       <div class="box">
         <mat-table [dataSource]="dataSource" class="">
@@ -14,19 +15,18 @@
           <ng-container matColumnDef="email">
             <mat-header-cell *matHeaderCellDef> Тип сотрудника </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <p *ngIf="!member.own">Внешний представитель</p>
-              <p *ngIf="member.own">Внутренний сотрудник</p>
+              <p>{{member.memberType}}</p>
             </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="fullName">
             <mat-header-cell *matHeaderCellDef> ФИО </mat-header-cell>
-            <mat-cell *matCellDef="let member"> {{member.lastname + ' ' + member.firstname + ' ' + member.patronymic}} </mat-cell>
+            <mat-cell *matCellDef="let member"> {{member.lastName + ' ' + member.firstName}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="role">
             <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
-            <mat-cell *matCellDef="let member"> {{member.disposition}} </mat-cell>
+            <mat-cell *matCellDef="let member"> {{member.disPosition}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">

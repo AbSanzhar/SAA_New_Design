@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataControlService} from '../../services/data-control.service';
 import {ApiService} from '../../api/api.service';
+import {LanguageService} from '../../services/language.service';
 
 @Component({
   selector: 'app-secretary-diss-council',
@@ -12,14 +13,17 @@ export class SecretaryDissCouncilComponent implements OnInit {
   displayedColumns = ['index', 'universityName', 'actions'];
 
   // tslint:disable-next-line:variable-name
-  constructor(private _api: ApiService) { }
+  constructor(private _api: ApiService,
+              private langService: LanguageService) { }
 
   ngOnInit(): void {
-    this.getAllDissets();
+    this.langService.currentLanguage.subscribe(lang => {
+      this.getAllDissets(lang);
+    });
   }
 
-  getAllDissets() {
-    this._api.getSecDisSovet().subscribe(res => {
+  getAllDissets(lang) {
+    this._api.getSecDisSovet(lang).subscribe(res => {
       this.dataSource = res;
       console.log(res);
     });

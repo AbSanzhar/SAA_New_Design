@@ -10,10 +10,14 @@
       <form [formGroup]="form">
         <p style="color: darkred; font-weight: 500; font-size: 18px">Новый диссовет: </p>
 
-        <mat-form-field>
-          <mat-label>Название</mat-label>
-          <input matInput formControlName="disInfo" type="text" required>
-          <mat-error>The field is required.</mat-error>
+        <mat-form-field class="example-full-width">
+          <mat-label>ВУЗ</mat-label>
+          <select matNativeControl formControlName="disInfo" name="car">
+            <option *ngFor="let i of universities" [value]="i.value">
+              {{i.viewValue}}
+            </option>
+          </select>
+          <mat-error>This is the required field!</mat-error>
         </mat-form-field>
 
         <mat-form-field>

@@ -3,6 +3,7 @@ import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {LanguageService} from '../../../services/language.service';
 
 @Component({
   selector: 'app-all-patents',
@@ -17,17 +18,23 @@ export class AllPatentsComponent implements OnInit {
   dataSource2: any[];
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
+  language;
 
   constructor(private http: DataControlService,
               // tslint:disable-next-line:variable-name
               private _api: ApiService,
-              private deviceDetectorService: DeviceDetectorService) {
+              private deviceDetectorService: DeviceDetectorService,
+              private langService: LanguageService) {
     this.detectDevice();
   }
 
   ngOnInit(): void {
     this.detectDevice();
-    this.getAllPatents();
+    this.langService.currentLanguage.subscribe(lang => {
+      console.log(lang);
+      this.getAllPatents(lang);
+      this.language = lang;
+    });
   }
 
   getDecodedAccessToken(token: string): any {
@@ -37,14 +44,14 @@ export class AllPatentsComponent implements OnInit {
       return null;
     }
   }
-  getAllPatents() {
+  getAllPatents(lang) {
     // tslint:disable-next-line:variable-name
     const science_id = {
       ptnt_user_id: this.IdToken
     };
-    this._api.getAllPatents(science_id).subscribe(
+    this._api.getAllPatents(science_id, lang).subscribe(
         res => {
-          // console.log(res);
+          console.log(res);
           this.dataSource2 = res;
           for (let i = 0; i < res.length; i++) {
             const year = new Date(res[i].ptntInsertedDate).getFullYear();
@@ -79,10 +86,10 @@ export class AllPatentsComponent implements OnInit {
     this._api.setPatentStatus(status).subscribe(
         res => {
           console.log(res);
-          this.getAllPatents();
+          this.getAllPatents(this.language);
         },
         err => {
-          this.getAllPatents();
+          this.getAllPatents(this.language);
           console.log(err);
         }
     );

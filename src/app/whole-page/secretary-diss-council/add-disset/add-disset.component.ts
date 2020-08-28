@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {AddMemberDialogComponent} from './add-member-dialog/add-member-dialog.component';
 import * as jwt_decode from 'jwt-decode';
 import {ApiService} from '../../../api/api.service';
+import {LanguageService} from '../../../services/language.service';
 @Component({
   selector: 'app-add-disset',
   templateUrl: './add-disset.component.html',
@@ -20,10 +21,13 @@ export class AddDissetComponent implements OnInit {
       return null;
     }
   }
+  universities = [];
 
   constructor(private dialog: MatDialog,
               // tslint:disable-next-line:variable-name
-              private _api: ApiService) {
+              private _api: ApiService,
+              private langService: LanguageService,
+              private cd: ChangeDetectorRef) {
     this.form = new FormGroup({
       disInfo: new FormControl('', Validators.required),
       disStartDate: new FormControl('', Validators.required),
@@ -35,6 +39,30 @@ export class AddDissetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.langService.currentLanguage.subscribe(
+        lang => {
+          this.getAllUniversities(lang);
+          this.cd.detectChanges();
+        }
+    );
+  }
+
+  getAllUniversities(lang) {
+    this._api.getAllUniversites(lang).subscribe(
+        res => {
+          console.log(res);
+          for(let i = 0; i < res.length; i++) {
+            let tmp = {
+              value: res[i].univer_id,
+              viewValue: res[i].univer_name
+            }
+            this.universities[i] = tmp;
+          }
+        }, err => {
+          console.log(err);
+        }
+    );
+    this.cd.detectChanges();
   }
 
   add(): void {
@@ -44,7 +72,6 @@ export class AddDissetComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
         res => {
           if (typeof  res !== 'undefined' && res !== 'false') {
-            console.log('eboy');
             const control = res;
             const members = control.value.disMember;
             console.log(members);

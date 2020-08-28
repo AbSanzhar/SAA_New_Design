@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogEditRoleComponent} from '../dialog-edit-role/dialog-edit-role.component';
 import {ApiService} from '../../../api/api.service';
+import {LanguageService} from '../../../services/language.service';
 
 @Component({
   selector: 'app-edit-disset',
@@ -12,10 +13,12 @@ import {ApiService} from '../../../api/api.service';
 export class EditDissetComponent implements OnInit {
 
   idDisset: number;
+  disInfo: string;
   dataSource: any[];
   displayedColumns = ['email', 'fullName', 'role', 'actions'];
-
-  constructor(private route: ActivatedRoute, private editRoleDialog: MatDialog, private service: ApiService) {
+  language;
+  constructor(private route: ActivatedRoute, private editRoleDialog: MatDialog, private service: ApiService,
+               private langService: LanguageService) {
   }
 
   ngOnInit(): void {
@@ -23,9 +26,12 @@ export class EditDissetComponent implements OnInit {
       // tslint:disable-next-line:radix
       this.idDisset = parseInt(param.id);
     });
-    this.getOneDisMembers();
+    this.langService.currentLanguage.subscribe(lang => {
+      this.getOneDisMembers(lang);
+      this.language = lang;
+    });
     this.editRoleDialog.afterAllClosed.subscribe(res => {
-      this.getOneDisMembers();
+      this.getOneDisMembers(this.language);
     });
   }
 
@@ -34,15 +40,16 @@ export class EditDissetComponent implements OnInit {
     this.editRoleDialog.open(DialogEditRoleComponent, {
       data: {member, disId: this.idDisset},
     }).afterClosed().subscribe(result => {
-
+      this.getOneDisMembers(this.language);
     });
   }
 
-  getOneDisMembers() {
-    this.service.getOneDisMembers(this.idDisset).subscribe(
+  getOneDisMembers(lang) {
+    this.service.getOneDisMembers(this.idDisset, lang).subscribe(
         res => {
           console.log(res);
-          this.dataSource = res;
+          this.dataSource = res.dissovetMembers;
+          this.disInfo = res.disInfo;
         }, err => {
           console.log(err);
         }

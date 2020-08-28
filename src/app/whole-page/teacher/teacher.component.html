@@ -12,16 +12,17 @@
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои публикации: </p>
                     <mat-form-field>
                         <mat-label>Тип источника</mat-label>
-                        <mat-select [(ngModel)]="selectedValue" formControlName="pubType" required>
+                        <mat-select [(ngModel)]="selectedValue" formControlName="pubTypeId" required>
                             <mat-option *ngFor="let i of elements" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
-                    <mat-form-field *ngIf="publicationForm.get('pubType').value != 'Учебник'">
+
+                    <mat-form-field *ngIf="publicationForm.get('pubTypeId').value != 3">
                         <mat-label>Где опубликовано</mat-label>
-                        <mat-select formControlName="pubPublished" required>
+                        <mat-select formControlName="pubPublishedId" required>
                             <mat-option *ngFor="let i of elements1;" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
@@ -29,9 +30,9 @@
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field *ngIf="publicationForm.get('pubType').value == 'Учебник'">
+                    <mat-form-field *ngIf="publicationForm.get('pubTypeId').value == 3">
                         <mat-label>Где опубликовано</mat-label>
-                        <mat-select formControlName="pubPublished" required>
+                        <mat-select formControlName="pubPublishedId" required>
                             <mat-option *ngFor="let i of elements0" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
@@ -162,7 +163,7 @@
 
                     <mat-form-field>
                         <mat-label>Тип мероприятия</mat-label>
-                        <mat-select [(ngModel)]="selectedValue3" required formControlName="event_type">
+                        <mat-select [(ngModel)]="selectedValue3" required formControlName="event_type_id">
                             <mat-option *ngFor="let i of elements2" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
@@ -172,7 +173,7 @@
 
                     <mat-form-field>
                         <mat-label>Роль</mat-label>
-                        <mat-select [(ngModel)]="selectedValue" required formControlName="event_role">
+                        <mat-select [(ngModel)]="selectedValue" required formControlName="event_role_id">
                             <mat-option *ngFor="let i of elements3" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
@@ -632,9 +633,25 @@
                 <form [formGroup]="teacherCourseForm" class="example-form">
                     <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои курсы: </p>
 
+<!--                    <mat-form-field class="example-full-width">-->
+<!--                        <mat-label>Форма обучения и тема</mat-label>-->
+<!--                        <input type="text" matInput formControlName="courseForm">-->
+<!--                        <mat-error>This is the required field!</mat-error>-->
+<!--                    </mat-form-field>-->
+
                     <mat-form-field class="example-full-width">
-                        <mat-label>Форма обучения и тема</mat-label>
-                        <input type="text" matInput formControlName="courseForm">
+                        <mat-label>Форма обучения</mat-label>
+                        <select matNativeControl formControlName="courseFormId" name="car">
+                            <option *ngFor="let i of courseForms" [value]="i.value">
+                                {{i.viewValue}}
+                            </option>
+                        </select>
+                        <mat-error>This is the required field!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Тема</mat-label>
+                        <input type="text" matInput formControlName="courseTopic">
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
 
@@ -705,14 +722,14 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Уровень</mat-label>
-                        <select matNativeControl [formControl]="courseDegree" name="car">
+                        <select matNativeControl formControlName="courseDegreeId" name="car">
                             <option *ngFor="let i of level" [value]="i.value">
                                 {{i.viewValue}}
                             </option>
                         </select>
                         <mat-error>This is the required field!</mat-error>
                     </mat-form-field>
-
+{{this.teacherCourseForm.value | json}}
 
                     <div>
                         <input type="file"

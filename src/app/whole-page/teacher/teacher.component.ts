@@ -24,6 +24,7 @@ import {CountriesService} from '../../services/countries.service';
 import {ScienceListGenerator} from './ScienceListGenerator';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import {LanguageService} from '../../services/language.service';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -53,7 +54,8 @@ export class TeacherComponent implements OnInit {
                 // tslint:disable-next-line:variable-name
                 @Inject(MAT_DIALOG_DATA) public _data: any,
                 // tslint:disable-next-line:variable-name
-                private _dialog: MatDialogRef<TeacherComponent>) {
+                private _dialog: MatDialogRef<TeacherComponent>,
+                private langService: LanguageService) {
         this.data = _data;
 
         this.filteredCoAuthorsFullNames = this.coAuthorsCtrl.valueChanges.pipe(
@@ -62,8 +64,8 @@ export class TeacherComponent implements OnInit {
 
 
         this.publicationForm = formBuilder.group({
-            pubPublished: new FormControl('', Validators.required),
-            pubType: new FormControl('', Validators.required),
+            pubPublishedId: new FormControl('', Validators.required),
+            pubTypeId: new FormControl('', Validators.required),
             pubCoAuthor: [],
             pubName: new FormControl('', Validators.required),
             pubYear: new FormControl('', Validators.required),
@@ -78,8 +80,8 @@ export class TeacherComponent implements OnInit {
         });
 
         this.eventForm = formBuilder.group({
-            event_type: new FormControl(''),
-            event_role: new FormControl(''),
+            event_type_id: new FormControl(''),
+            event_role_id: new FormControl(''),
             event_name: new FormControl('', Validators.required),
             event_city: new FormControl('', Validators.required),
             event_url: new FormControl(''),
@@ -107,8 +109,9 @@ export class TeacherComponent implements OnInit {
         }, {validators: StartEndDateValidator});
 
         this.teacherCourseForm = formBuilder.group({
-            userId: new FormControl(this.IdToken, Validators.required),
-            courseForm: new FormControl('', Validators.required),
+            userId: Number(this.IdToken),
+            courseFormId: new FormControl('', Validators.required),
+            courseTopic: new FormControl('', Validators.required),
             courseCenter: new FormControl('', Validators.required),
             courseHours: new FormControl('', Validators.required),
             coursePrice: new FormControl('', Validators.required),
@@ -116,7 +119,7 @@ export class TeacherComponent implements OnInit {
             enddate: new FormControl('', Validators.required),
             certificateNumber: new FormControl('', Validators.required),
             certificateDate: new FormControl('', Validators.required),
-            courseDegree: this.courseDegree,
+            courseDegreeId: new FormControl('', Validators.required),
             courseFile: new FormControl('', Validators.required)
         });
 
@@ -204,12 +207,12 @@ export class TeacherComponent implements OnInit {
     yy: number;
 
     elements: Sourse[] = [
-        {value: 'Материалы конференции', viewValue: 'Материалы конференции'},
-        {value: 'Монография', viewValue: 'Монография'},
-        {value: 'Учебник', viewValue: 'Учебник'},
-        {value: 'Пособие', viewValue: 'Пособие'},
-        {value: 'Охранный документ', viewValue: 'Охранный документ'},
-        {value: 'Периодическое издание', viewValue: 'Периодическое издание'},
+        // {value: 'Материалы конференции', viewValue: 'Материалы конференции'},
+        // {value: 'Монография', viewValue: 'Монография'},
+        // {value: 'Учебник', viewValue: 'Учебник'},
+        // {value: 'Пособие', viewValue: 'Пособие'},
+        // {value: 'Охранный документ', viewValue: 'Охранный документ'},
+        // {value: 'Периодическое издание', viewValue: 'Периодическое издание'},
     ];
 
     elements0: Sourse[] = [
@@ -238,21 +241,21 @@ export class TeacherComponent implements OnInit {
     ];
 
     elements2: Sourse[] = [
-        {value: 'Конференция', viewValue: 'Конференция'},
-        {value: 'Форум', viewValue: 'Форум'},
-        {value: 'Семинар', viewValue: 'Семинар'},
+        // {value: 'Конференция', viewValue: 'Конференция'},
+        // {value: 'Форум', viewValue: 'Форум'},
+        // {value: 'Семинар', viewValue: 'Семинар'},
     ];
 
     elements3: Sourse[] = [
-        {value: 'Председатель', viewValue: 'Председатель'},
-        {value: 'Участник', viewValue: 'Участник'},
-        {value: 'Слушатель', viewValue: 'Слушатель'},
-        {value: 'Секретарь/Модератор', viewValue: 'Секретарь/Модератор'},
+        // {value: 'Председатель', viewValue: 'Председатель'},
+        // {value: 'Участник', viewValue: 'Участник'},
+        // {value: 'Слушатель', viewValue: 'Слушатель'},
+        // {value: 'Секретарь/Модератор', viewValue: 'Секретарь/Модератор'},
     ];
 
     elements4: Sourse[] = [
-        {value: '1', viewValue: 'Отчественный'},
-        {value: '2', viewValue: 'Зарубежный'},
+        // {value: '1', viewValue: 'Отчественный'},
+        // {value: '2', viewValue: 'Зарубежный'},
     ];
 
     // elements5: Sourse[] = [
@@ -801,17 +804,9 @@ export class TeacherComponent implements OnInit {
         },
     ];
 
-    level: Sourse[] = [
-        {
-            value: 'Международный',
-            viewValue: 'Международный'
-        },
-        {
-            value: 'Республиканский',
-            viewValue: 'Республиканский'
-        }
-    ];
-    courseDegree = new FormControl(this.level[1].value);
+    level = [ ];
+
+    courseForms = [ ];
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -871,7 +866,16 @@ export class TeacherComponent implements OnInit {
 
 
   ngOnInit(): void {
-      this.getTeacherPublications();
+      this.langService.currentLanguage.subscribe(lang => {
+          this.getPublicationType(lang);
+          this.getPublicationPublished(lang);
+          this.getEventTypes(lang);
+          this.getEventRoles(lang);
+          this.getPatentTypes(lang);
+          this.getCourseDegree(lang);
+          this.getCourseForm(lang);
+      });
+      // this.getTeacherPublications();
       this.getAllUsers();
       this.getAllCountries();
       this._api.getAllTeachers().subscribe(
@@ -1062,6 +1066,126 @@ export class TeacherComponent implements OnInit {
   //   coAuthorsIds = Array.from(new Set(coAuthorsIds));
   //   console.log(coAuthorsIds);
   // }
+
+    getPublicationType(lang) {
+      this._api.getPublicationType(lang).subscribe(
+          res => {
+              console.log(res);
+              for(let i = 0; i < res.length; i++) {
+                  let temp = {
+                    value: res[i].type_id,
+                    viewValue: res[i].type_name
+                  };
+                  this.elements[i] = temp;
+              }
+          }, err => {
+              console.log(err);
+          }
+      );
+    }
+
+    getPublicationPublished(lang) {
+      this._api.getPublicationPublished(lang).subscribe(
+          res => {
+              console.log(res);
+              for (let i = 0; i < res.length; i++) {
+                  let temp = {
+                      value: res[i].place_id,
+                      viewValue: res[i].place_name
+                  }
+                  this.elements1[i] = temp;
+              }
+          }, err => {
+              console.log(err);
+          }
+      );
+    }
+
+    getEventTypes(lang) {
+      this._api.getEventTypes(lang).subscribe(
+          res => {
+              console.log(res);
+              for(let i = 0; i < res.length; i++) {
+                  let temp = {
+                      value: res[i].type_id,
+                      viewValue: res[i].type_name
+                  };
+                  this.elements2[i] = temp;
+              }
+          }, err => {
+              console.log(err);
+          }
+      );
+    }
+
+    getEventRoles(lang) {
+        this._api.getEventRoles(lang).subscribe(
+            res => {
+                console.log(res);
+                for(let i = 0; i < res.length; i++) {
+                    let temp = {
+                        value: res[i].role_id,
+                        viewValue: res[i].role_name
+                    };
+                    this.elements3[i] = temp;
+                }
+            }, err => {
+                console.log(err);
+            }
+        );
+    }
+
+    getPatentTypes(lang) {
+      this._api.getPatentTypes(lang).subscribe(
+          res => {
+              console.log(res);
+              for(let i = 0; i < res.length; i++) {
+                  let temp = {
+                    value: res[i].type_id,
+                    viewValue: res[i].type_name
+                  };
+                  this.elements4[i] = temp;
+              }
+          }, err => {
+              console.log(err);
+          }
+      );
+    }
+
+    getCourseDegree(lang) {
+      this._api.getCourseDegree(lang).subscribe(
+          res => {
+              console.log(res);
+              for(let i = 0; i < res.length; i++) {
+                  let temp = {
+                    value: parseInt(res[i].degree_id),
+                    viewValue: res[i].degree_name
+                  };
+                  this.level[i] = temp;
+              }
+          }, err => {
+              console.log(err);
+          }
+      );
+    }
+
+    getCourseForm(lang) {
+      this._api.getCourseForm(lang).subscribe(
+          res => {
+              console.log(res);
+              for(let i = 0; i < res.length; i++) {
+                  let temp = {
+                      value: parseInt(res[i].form_id),
+                      viewValue: res[i].form_name
+                  }
+                  this.courseForms[i] = temp;
+              }
+              console.log(this.courseForms);
+          }, err => {
+              console.log(err);
+          }
+      );
+    }
 
   sendTeacherPublication(message: string, action: string) {
       let coAuthorsIds = [];

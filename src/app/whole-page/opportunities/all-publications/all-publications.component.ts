@@ -3,6 +3,7 @@ import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {LanguageService} from '../../../services/language.service';
 
 @Component({
   selector: 'app-all-publications',
@@ -17,6 +18,7 @@ export class AllPublicationsComponent implements OnInit {
   displayedColumns = ['index', 'author', 'titlePublication', 'type', 'jointAuthors', 'year', 'city', 'publisher', 'Page', 'Url', 'Doi', 'fileName', 'checkedUser', 'actions'];
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;
+  language;
 
   getDecodedAccessToken(token: string): any {
     try {
@@ -29,17 +31,21 @@ export class AllPublicationsComponent implements OnInit {
 
   constructor(private http: DataControlService,
               private service: ApiService,
-              private deviceDetectorService: DeviceDetectorService) {
+              private deviceDetectorService: DeviceDetectorService,
+              private langService: LanguageService) {
     this.detectDevice();
   }
 
   ngOnInit(): void {
     this.detectDevice();
-    this.getAllPublications();
+    this.langService.currentLanguage.subscribe(lang => {
+      this.getAllPublications(lang);
+      this.language = lang;
+    });
   }
 
-  getAllPublications() {
-    this.service.getAllPublications().subscribe(res => {
+  getAllPublications(lang) {
+    this.service.getAllPublications(lang).subscribe(res => {
       // console.log(res);
       this.dataSource = res;
       for (let i = 0; i < res.length; i++) {
@@ -68,10 +74,10 @@ export class AllPublicationsComponent implements OnInit {
     this.service.updatePublicationStatus(publicationStatus).subscribe(
         res => {
           console.log(res);
-          this.getAllPublications();
+          this.getAllPublications(this.language);
         }, err => {
           console.log(err);
-          this.getAllPublications();
+          this.getAllPublications(this.language);
         }
     );
   }

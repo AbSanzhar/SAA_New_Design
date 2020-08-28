@@ -9,6 +9,7 @@ import {DocumentCreator} from '../teacher/rate-list-generator';
 import {Packer} from 'docx';
 import {ScienceListGenerator} from '../teacher/ScienceListGenerator';
 import {saveAs} from 'file-saver';
+import {LanguageService} from '../../services/language.service';
 
 @Component({
   selector: 'app-my-activities',
@@ -55,6 +56,7 @@ export class MyActivitiesComponent implements OnInit {
 
   public whichTable = 0;
   pageOfItems: Array<any>;
+  language;
 
   getDecodedAccessToken(token: string): any {
     try {
@@ -68,106 +70,113 @@ export class MyActivitiesComponent implements OnInit {
               // tslint:disable-next-line:variable-name
               private _api: ApiService,
               // tslint:disable-next-line:variable-name
-              private _dialog: MatDialog) {
+              private _dialog: MatDialog,
+              private langService: LanguageService) {
   }
 
   onChangePage(pageOfItems: Array<any>) {
     this.pageOfItems = pageOfItems;
   }
   ngOnInit(): void {
-    this._api.getPubTypeCount().subscribe(
-        res => {
-          console.log(res);
-          this.PubTypeCounts = res;
-        },
-        err => {
-          console.log(err);
-        }
-    );
+      this.langService.currentLanguage.subscribe(lang => {
+          this.getTeacherPublications(lang);
+          this.getTeacherEvents(lang);
+          this.getTeacherPatents(lang);
+          this.getTeacherCourses(lang);
+          this.language = lang;
+      });
+      this._api.getPubTypeCount().subscribe(
+            res => {
+              console.log(res);
+              this.PubTypeCounts = res;
+            },
+            err => {
+              console.log(err);
+            });
 
-    this._api.getUserDegreeCount().subscribe(
-        res => {
-          console.log(res);
-          this.UserDegreeCounts = res;
-        },
-        err => {
-          console.log(err);
-        }
-    );
-    this._api.getPublishCount().subscribe(
-        res => {
-          console.log(res);
-          this.publishCount = res;
-        },
-        err => {
-          console.log(err);
-        }
-    );
-    this._api.getCourseCount().subscribe(
-        res => {
-          console.log(res);
-          this.courceCount = res;
-        }, err => {
-          console.log(err);
-        }
-    );
-    this._api.getDisMembersCount().subscribe(
-        res => {
-          console.log(res);
-          this.disMembersCount = res;
-        }, err => {
-          console.log(err);
-        }
-    );
-    this._api.getUserById(this.IdToken).subscribe(
-        res => {
-          console.log(res);
-          if(res.patronymic != null) {
-            this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
-          } else {
-            this.name = res.firstName.charAt(0) + '.' + res.lastName;
-          }
-          // tslint:disable-next-line:prefer-for-of
-        },
-        err => {
-          console.log(err);
-        }
-    );
-    this.getTeacherPublications();
-    this.getTeacherEvents();
-    this.getTeacherDisSovet();
-    this.getTeacherPatents();
-    this.getTeacherScienceProjects();
-    this.getTeacherCourses();
-    this._api.getUserById(this.tokenId).subscribe(
-        res => {
-          this.currentUser = res;
-          this.userDepts = res.usersDepts;
-          // tslint:disable-next-line:prefer-for-of
-          for (let i = 0; i < res.roles.length; i++) {
-            this.roles.push(res.roles[i].roleName);
-            if (res.roles[i].roleName === 'Teacher') {
-              this.getTeacherPublications();
-              this.getTeacherEvents();
-              this.getTeacherDisSovet();
-              this.getTeacherPatents();
-              this.getTeacherScienceProjects();
-              this.getTeacherCourses();
-            } else if (res.roles[i].roleName === 'Head_Of_Dept') {
-              this.getDepUsers(this.userDepts[0].deptId);
+      this._api.getUserDegreeCount().subscribe(
+            res => {
+              console.log(res);
+              this.UserDegreeCounts = res;
+            },
+            err => {
+              console.log(err);
             }
-          }
-          console.log(res);
-        },
-        err => {
-          console.log(err);
-        }
-    );
+        );
+        this._api.getPublishCount().subscribe(
+            res => {
+              console.log(res);
+              this.publishCount = res;
+            },
+            err => {
+              console.log(err);
+            }
+        );
+        this._api.getCourseCount().subscribe(
+            res => {
+              console.log(res);
+              this.courceCount = res;
+            }, err => {
+              console.log(err);
+            }
+        );
+        this._api.getDisMembersCount().subscribe(
+            res => {
+              console.log(res);
+              this.disMembersCount = res;
+            }, err => {
+              console.log(err);
+            }
+        );
+        this._api.getUserById(this.IdToken).subscribe(
+            res => {
+              console.log(res);
+              if(res.patronymic != null) {
+                this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
+              } else {
+                this.name = res.firstName.charAt(0) + '.' + res.lastName;
+              }
+              // tslint:disable-next-line:prefer-for-of
+            },
+            err => {
+              console.log(err);
+            }
+        );
+        this.getTeacherPublications(this.language);
+        this.getTeacherEvents(this.language);
+        this.getTeacherDisSovet(this.language);
+        this.getTeacherPatents(this.language);
+        this.getTeacherScienceProjects();
+        this.getTeacherCourses(this.language);
+        this._api.getUserById(this.tokenId).subscribe(
+            res => {
+              this.currentUser = res;
+              this.userDepts = res.usersDepts;
+              // tslint:disable-next-line:prefer-for-of
+              for (let i = 0; i < res.roles.length; i++) {
+                this.roles.push(res.roles[i].roleName);
+                if (res.roles[i].roleName === 'Teacher') {
+                  this.getTeacherPublications(this.language);
+                  this.getTeacherEvents(this.language);
+                  this.getTeacherDisSovet(this.language);
+                  this.getTeacherPatents(this.language);
+                  this.getTeacherScienceProjects();
+                  this.getTeacherCourses(this.language);
+                } else if (res.roles[i].roleName === 'Head_Of_Dept') {
+                  this.getDepUsers(this.userDepts[0].deptId);
+                }
+              }
+              console.log(res);
+            },
+            err => {
+              console.log(err);
+            }
+        );
   }
 
-  getTeacherPublications() {
+  getTeacherPublications(lang) {
     const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
-    this._api.getPublicationsPage(query).subscribe(res => {
+    this._api.getPublicationsPage(query, lang).subscribe(res => {
       // console.log(res);
       this.TeacherPublications = res;
       console.log(res);
@@ -205,11 +214,11 @@ export class MyActivitiesComponent implements OnInit {
     console.log('asda');
     this.paginator.page = event.pageIndex;
     this.paginator.size = event.pageSize;
-    this.getTeacherPublications();
+    this.getTeacherPublications(this.language);
   }
 
-  getTeacherEvents() {
-    this._api.getEvent().subscribe(res => {
+  getTeacherEvents(lang) {
+    this._api.getEvent(lang).subscribe(res => {
       console.log(res);
       this.TeacherEvents = res;
       for (let i = 0; i < res.length; i++) {
@@ -235,8 +244,8 @@ export class MyActivitiesComponent implements OnInit {
     });
   }
 
-  getTeacherDisSovet() {
-    this._api.getAllMyDisSovets(this.tokenId).subscribe(
+  getTeacherDisSovet(lang) {
+    this._api.getAllMyDisSovets(this.tokenId, lang).subscribe(
         res => {
           console.log(res);
           this.TeacherDisSovet = res;
@@ -246,8 +255,8 @@ export class MyActivitiesComponent implements OnInit {
     );
   }
 
-  getTeacherPatents() {
-    this._api.getPatent().subscribe(
+  getTeacherPatents(lang) {
+    this._api.getPatent(lang).subscribe(
         res => {
           console.log(res);
           this.TeacherPatents = res;
@@ -325,8 +334,8 @@ export class MyActivitiesComponent implements OnInit {
     );
   }
 
-  getTeacherCourses() {
-    this._api.getCourses().subscribe(
+  getTeacherCourses(lang) {
+    this._api.getCourses(lang).subscribe(
         res => {
           console.log(res);
           this.TeacherCourses = res;
@@ -378,27 +387,27 @@ export class MyActivitiesComponent implements OnInit {
         if (tab === 'pub') {
           this._api.uploadPub(res).subscribe(result => {
             console.log(result);
-            this.getTeacherPublications();
+            this.getTeacherPublications(this.language);
           }, err => {
             console.log(err);
-            this.getTeacherPublications();
+            this.getTeacherPublications(this.language);
           });
         }
         if (tab === 'event') {
           this._api.uploadEvent(res).subscribe(result => {
-            this.getTeacherEvents();
+            this.getTeacherEvents(this.language);
           }, err => {
             console.log(err);
-            this.getTeacherEvents();
+            this.getTeacherEvents(this.language);
           });
         }
         if (tab === 'patent') {
           this._api.addPatent(res).subscribe(result => {
             console.log(result);
-            this.getTeacherPatents();
+            this.getTeacherPatents(this.language);
           }, error1 => {
             console.log(error1);
-            this.getTeacherPatents();
+            this.getTeacherPatents(this.language);
           });
         }
         if (tab === 'science') {
@@ -416,10 +425,10 @@ export class MyActivitiesComponent implements OnInit {
           this._api.uploadCourse(res).subscribe(
               result => {
                 console.log(result);
-                this.getTeacherCourses();
+                this.getTeacherCourses(this.language);
               }, err => {
                 console.log(err);
-                this.getTeacherCourses();
+                this.getTeacherCourses(this.language);
               }
           );
         }

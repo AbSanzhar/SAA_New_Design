@@ -1,13 +1,12 @@
 <div class="dialog-div">
   <div class="header">
-    <h1 class="full-name">{{this.data.member.firstname}} {{this.data.member.lastname}}</h1>
+    <h1 class="full-name">{{this.data.member.firstName}} {{this.data.member.lastName}}</h1>
   </div>
   <mat-form-field>
     <mat-select [(ngModel)]="selectValue">
-      <mat-option value="Председатель совета">Председатель совета</mat-option>
-      <mat-option value="Член совета">Член совета</mat-option>
+      <mat-option *ngFor="let disPosition of dispositions;" [value]="disPosition.value">{{disPosition.viewValue}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button [disabled]="selectValue == this.data.member.disposition" style="color: white; margin-top: 2%" mat-raised-button color="primary" (click)="changeDisPosition()" mat-dialog-close>Изменить</button>
+  <button [disabled]="selectValue == this.data.member.disPosition" style="color: white; margin-top: 2%" mat-raised-button color="primary" (click)="changeDisPosition()" mat-dialog-close>Изменить</button>
   <button style="margin-left: 2%" mat-raised-button mat-dialog-close>Закрыть</button>
 </div>

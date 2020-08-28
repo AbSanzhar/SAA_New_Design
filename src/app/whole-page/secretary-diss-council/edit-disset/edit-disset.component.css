@@ -1,0 +1,17 @@
+.btn-style {
+    margin-left: 45%;
+    margin-top: 2%;
+}
+
+.nav-text {
+    display: flex;
+    align-items: center;
+    color: #4C4C4C;
+}
+
+.btn-nav-header {
+    background: none;
+    border: none;
+    padding: 5px;
+    font-size: 14px;
+}
