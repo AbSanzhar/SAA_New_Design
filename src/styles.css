@@ -31,3 +31,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .active {
     color: #8F1812;
 }
+.title {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: #716F6F;
+}
+.description {
+    font-weight: normal;
+    font-size: 14px;
+    color: #8C8C8C;
+}
