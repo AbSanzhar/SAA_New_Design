@@ -331,9 +331,9 @@ export class ApiService {
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get(this.base + url + id + '?jwt_token=' + window.localStorage.getItem('token'));
   }
-  getAllScienceProjects(): Observable<any> {
-    const url = 'projects/all';
-    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  getAllScienceProjects(lang): Observable<any> {
+    const url = 'projects/all/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
   updateScienceProject(id, proj): Observable<any> {
     const url = 'projects/update/';
@@ -523,8 +523,10 @@ export class ApiService {
     return this.http.get<any>(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
-
-
+  getOneScienceProject(userId, lang): Observable<any> {
+    const url = 'projects/sc/';
+    return this.http.get<any>(this.base + url + userId + '/' + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
 
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');

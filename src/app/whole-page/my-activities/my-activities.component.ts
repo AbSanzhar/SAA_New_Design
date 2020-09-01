@@ -314,6 +314,9 @@ export class MyActivitiesComponent implements OnInit {
   }
 
   getTeacherScienceProjects() {
+      this._api.getOneScienceProject(14, 'en').subscribe(
+          res => console.log(res)
+      );
     this._api.getScienceProject().subscribe(
         res => {
           console.log(res);

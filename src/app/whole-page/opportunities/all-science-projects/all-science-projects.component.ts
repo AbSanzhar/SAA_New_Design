@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../../api/api.service';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {LanguageService} from '../../../services/language.service';
 
 @Component({
     selector: 'app-all-science-projects',
@@ -15,17 +16,25 @@ export class AllScienceProjectsComponent implements OnInit {
     // tslint:disable-next-line:variable-name
     constructor(
         private _api: ApiService,
-        private deviceDetectorService: DeviceDetectorService) {
+        private deviceDetectorService: DeviceDetectorService,
+        private languageService: LanguageService) {
         this.detectDevice();
     }
 
     dataSource: any[];
     allScienceProjecrs: any[] = [];
     displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
+    language;
 
     ngOnInit(): void {
+        this.languageService.currentLanguage.subscribe(lang => {
+
+            console.log(lang);
+            this.language = lang;
+            this.getAllScienceProjects(lang);
+        });
         this.detectDevice();
-        this.getAllScienceProjects();
+        this.getAllScienceProjects(this.language);
     }
 
     // scAgrDate: "2020-06-23T00:00:00.000+0000"
@@ -40,8 +49,8 @@ export class AllScienceProjectsComponent implements OnInit {
     // scPriority: "Энергетика и машиностроение"
     // scStDate: "2020-06-27T00:00:00.000+0000"
 
-    getAllScienceProjects() {
-        this._api.getAllScienceProjects().subscribe(
+    getAllScienceProjects(lang) {
+        this._api.getAllScienceProjects(lang).subscribe(
             res => {
                 this.dataSource = res;
                 // console.log(res);
