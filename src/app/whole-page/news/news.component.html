@@ -1,14 +1,14 @@
-<div class="container">
-    <div id="content">
-    <div fxLayout="row">
+<div class="container" ngStyle.lt-sm="'padding': '5%'">
+    <div fxLayout="row" fxLayout.lt-sm="column">
         <div fxFlex="5"></div>
-        <div style="flex-wrap: wrap" fxLayout="row wrap" fxLayoutGap="100px" fxFlex="70">
+        <div style="flex-wrap: wrap" fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="100px" fxFlex="70">
             <div style="position: relative;" *ngFor="let item of news;">
-                <div style="margin-bottom: 50%">
+                <div ngStyle.gt-sm="'margin-bottom': '50%'" ngStyle.lt-sm="'margin-bottom': '15%'">
                     <div>
-                        <img width="400px" src="{{item.image}}" alt="image of news">
+                        <img *ngIf="!isMobile" width="400px" src="{{item.image}}" alt="image of news">
+                        <img *ngIf="isMobile" width="300px" src="{{item.image}}" alt="image of news">
                     </div>
-                    <div class="overlayDiv">
+                    <div ngStyle.lt-sm="'width': '90%'" class="overlayDiv">
                         <mat-card>
                             <mat-card-header>
                                 <mat-card-title class="title">{{item.title}}</mat-card-title>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div fxFlex="3"></div>
-        <div fxFlex="18" fxLayoutGap="20%" fxLayout="column">
+        <div *ngIf="!isMobile" fxFlex="18" fxLayoutGap="20%" fxLayout="column">
             <div class="filter">
                 <div fxLayout="column" style="margin: 0; padding: 0;">
                     <button routerLink="./" routerLinkActive="isActive" style="color: #212121; background: rgba(12, 79, 181, 0.08); border-left: #015349 3px solid; text-align: left" mat-flat-button>Новости</button>
