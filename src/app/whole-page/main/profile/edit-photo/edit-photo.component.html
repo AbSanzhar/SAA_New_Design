@@ -10,7 +10,7 @@
                     <label>Фотография профиля: </label>
                     <form  enctype="multipart/form-data">
                         <label for="photo">Выберите файл</label>
-                        <input type="file" id="photo" (change)="onProfilePhotoSelected($event)">
+                        <input type="file" multiple accept="image/*,image/jpeg" id="photo" (change)="onProfilePhotoSelected($event)">
                     </form>
                 </div>
 

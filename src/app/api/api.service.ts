@@ -529,7 +529,7 @@ export class ApiService {
 
   uploadProfilePhoto(userId, profilePhoto): Observable<any> {
     const url = 'users/updatePhoto/';
-    return this.http.post(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'), profilePhoto);
+    return this.http.patch(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'), profilePhoto);
   }
 
   errorHandler(error: HttpErrorResponse) {
