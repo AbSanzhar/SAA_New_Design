@@ -1,0 +1,24 @@
+<div style="min-height: 100%">
+    <div style="margin: 2rem;">
+        <button class="link" routerLink="../profile" style="border: 0; background: none; font-size: 16px">Главная > </button>
+        <h4 style="display: inline; color: gray"> Настройки</h4>
+    </div>
+    <div class="content">
+        <div style="width: 70%">
+            <form>
+                <div class="forma">
+                    <label>Фотография профиля: </label>
+                    <form  enctype="multipart/form-data">
+                        <label for="photo">Выберите файл</label>
+                        <input type="file" id="photo" (change)="onProfilePhotoSelected($event)">
+                    </form>
+                </div>
+
+                <div style="text-align: center; margin: 5%">
+                    <button mat-button mat-dialog-close [disabled]="!selectedProfilePhotoFile" (click)="uploadProfilePhoto()">Загрузить</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

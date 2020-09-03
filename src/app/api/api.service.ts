@@ -325,7 +325,6 @@ export class ApiService {
     return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), newUser);
   }
 
-
   getScienceProject(): Observable<any> {
     const url = 'science-member/user/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
@@ -526,6 +525,11 @@ export class ApiService {
   getOneScienceProject(userId, lang): Observable<any> {
     const url = 'projects/sc/';
     return this.http.get<any>(this.base + url + userId + '/' + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  uploadProfilePhoto(userId, profilePhoto): Observable<any> {
+    const url = 'users/updatePhoto/';
+    return this.http.post(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'), profilePhoto);
   }
 
   errorHandler(error: HttpErrorResponse) {

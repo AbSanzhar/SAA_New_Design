@@ -64,6 +64,7 @@ import { Yp3Component } from './year-plan/yp3/yp3.component';
 import { Yp4Component } from './year-plan/yp4/yp4.component';
 import { Yp5Component } from './year-plan/yp5/yp5.component';
 import { Yp6Component } from './year-plan/yp6/yp6.component';
+import { EditPhotoComponent } from './main/profile/edit-photo/edit-photo.component';
 
 
 const r: Routes = [
@@ -84,6 +85,7 @@ const r: Routes = [
         {path: 'yp6', component: Yp6Component},
         {path: 'password', component: PasswordComponent},
         {path: 'settings', component: SettingsComponent},
+        {path: 'edit-photo', component: EditPhotoComponent},
         {path: 'opportunities/all-patents', component: AllPatentsComponent},
         {path: 'opportunities/all-publications', component: AllPublicationsComponent},
         {path: 'opportunities/all-dissets', component: AllDissetsComponent},
@@ -128,6 +130,7 @@ const r: Routes = [
       Yp4Component,
       Yp5Component,
       Yp6Component,
+      EditPhotoComponent,
   ],
     imports: [
         CommonModule,
