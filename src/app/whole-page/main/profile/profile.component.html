@@ -6,9 +6,13 @@
 <!--  </mat-tab-group>-->
   <div class="Inner">
     <div style="width: 33%;">
-      <div class="Img"></div>
-      <span>Изменить фото профиля</span>
-      <mat-icon routerLink="../edit-photo" style="cursor: pointer;">create</mat-icon>
+      <div [ngClass]="{noImage:photo!=null}" fxLayoutAlign="center center" class="Img">
+        <div style="width: 249px; height: 214px; position: relative; background-size: cover; clip-path: ellipse();" fxLayout="row" fxLayoutAlign="center center">
+          <img *ngIf="photo !== null" style="width: 249px; height: 214px; background-size: cover; clip-path: ellipse();" fxLayout="row" fxLayoutAlign="center center" src="https://nir.iitu.kz/{{photo}}">
+          <a style="color: #212121; position: absolute; z-index: 5; margin-top: 30%" routerLink="../edit-photo">Изменить фото профиля</a>
+<!--          <mat-icon routerLink="../edit-photo" style="cursor: pointer;">create</mat-icon>-->
+        </div>
+      </div>
     </div>
     <div style="align-items: center; display: flex;">
       <div>

@@ -53,7 +53,7 @@ export class EditPhotoComponent implements OnInit {
     });
     this.updateProfilePhoto = {
       photo : ProfilePhotoLink
-    }
+    };
     console.log(ProfilePhotoLink);
     this.service.uploadProfilePhoto(this.userId, this.updateProfilePhoto).subscribe(res => {
       console.log(res);

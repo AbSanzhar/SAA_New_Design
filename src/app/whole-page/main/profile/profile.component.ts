@@ -16,6 +16,7 @@ import {saveAs} from 'file-saver';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  photo;
   from: any = 1900;
   to: any = 2021;
   paginator = {
@@ -84,6 +85,7 @@ export class ProfileComponent implements OnInit {
           } else {
             this.name = res.firstName.charAt(0) + '.' + res.lastName;
           }
+          this.photo = res.photo;
           // tslint:disable-next-line:prefer-for-of
         },
         err => {

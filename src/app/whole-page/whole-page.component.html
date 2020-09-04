@@ -49,7 +49,8 @@
                         <button mat-button [matMenuTriggerFor]="menu">
                             <p style="margin-top: 7%" class="text">{{name}}</p>
                         </button>
-                        <img src="assets/images/camera_200.png" width="7%" style="border-radius: 50%">
+                        <img *ngIf="photo == null" src="assets/images/camera_200.png" width="7%" style="border-radius: 50%">
+                        <img *ngIf="photo !== null" src="https://nir.iitu.kz/{{photo}}" width="7%" style="border-radius: 50%">
                     </div>
                     <mat-menu #menu="matMenu">
                         <button style="padding: 0; margin: 0" mat-menu-item><a style="height: 100%"

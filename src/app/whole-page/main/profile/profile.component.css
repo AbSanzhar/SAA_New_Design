@@ -22,6 +22,17 @@
   background-size: cover;
   clip-path: ellipse();
 }
+
+.noImage {
+  background-image: url("../../../../assets/images/camera_200.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 249px;
+  height: 214px;
+  background-size: cover;
+  clip-path: ellipse();
+}
+
 .AddInf{
   margin: 2rem;
   display: flex;

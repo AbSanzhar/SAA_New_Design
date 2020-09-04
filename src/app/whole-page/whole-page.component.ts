@@ -19,6 +19,7 @@ export class WholePageComponent implements OnInit {
   isMobile;
   isDesktop;
   isTablet;
+  photo;
   showFiller = false;
   currentUserId: string;
   userRoles = [];
@@ -65,6 +66,7 @@ export class WholePageComponent implements OnInit {
         for (let i = 0; i < res.roles.length; i++) {
           this.userRoles.push(res.roles[i].roleName);
         }
+        this.photo = res.photo;
       },
       err => {
         console.log(err);
