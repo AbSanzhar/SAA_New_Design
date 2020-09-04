@@ -15,9 +15,10 @@
                 <div fxLayoutGap="2%" fxFlex="50" fxLayout="row">
                     <div fxFlex="5"></div>
                     <div fxFlex="70" fxLayout="row">
-                        <input style="border: 1px solid #C5BFBF; border-radius: 5px; margin-right: -1%; width: 100%"
+                        <input [(ngModel)]="search" style="border: 1px solid #C5BFBF; border-radius: 5px; margin-right: -1%; width: 100%"
                                type="text" matInput>
-                        <button mat-button style="background: #0CB5A0; height: 100%;">
+                        <button [routerLink]=
+                                        "[ './search']" [queryParams]="{keyword: search}" (click)="searching(search)" mat-button style="background: #0CB5A0; height: 100%;">
                             <mat-icon style="color: white">search</mat-icon>
                         </button>
                     </div>
@@ -70,10 +71,9 @@
                         <a [routerLinkActive]="['active']" mat-button routerLink="./activities"><p class="navigation"
                                                                                                    *ngIf="this.userRoles.indexOf('Teacher') != -1">
                             Публикации</p></a>
-                        <a mat-button><p class="navigation">Статистика</p></a>
-                        <a mat-button><p class="navigation">О проекте</p></a>
-                        <a mat-button><p class="navigation">О сервисе</p></a>
-                        <a mat-button><p class="navigation">Помощь</p></a>
+                        <a [routerLinkActive]="['active']" mat-button routerLink="./statistics" mat-button><p class="navigation">Статистика</p></a>
+                        <a [routerLinkActive]="['active']" mat-button routerLink="./about"><p class="navigation">О проекте</p></a>
+                        <a [routerLinkActive]="['active']" mat-button routerLink="./help"><p class="navigation">Помощь</p></a>
                     </mat-toolbar-row>
                 </mat-toolbar>
             </div>

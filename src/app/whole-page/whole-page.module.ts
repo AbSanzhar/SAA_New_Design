@@ -64,7 +64,11 @@ import { Yp3Component } from './year-plan/yp3/yp3.component';
 import { Yp4Component } from './year-plan/yp4/yp4.component';
 import { Yp5Component } from './year-plan/yp5/yp5.component';
 import { Yp6Component } from './year-plan/yp6/yp6.component';
+import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 import { EditPhotoComponent } from './main/profile/edit-photo/edit-photo.component';
+import { SearchComponent } from './search/search.component';
 
 
 const r: Routes = [
@@ -75,7 +79,11 @@ const r: Routes = [
       {path: '', component: NewsComponent},
         {path: 'profile', component: ProfileComponent},
         {path: 'activities', component: MyActivitiesComponent},
+        {path: 'about', component: AboutComponent},
+        {path: 'help', component: HelpComponent},
+        {path: 'statistics', component: StatisticsComponent},
         {path: 'opportunities', component: OpportunitiesComponent},
+        {path: 'search', component: SearchComponent},
         {path: 'yearPlan', component: YearPlanComponent},
         {path: 'yp1', component: Yp1Component},
         {path: 'yp2', component: Yp2Component},
@@ -130,7 +138,11 @@ const r: Routes = [
       Yp4Component,
       Yp5Component,
       Yp6Component,
+      AboutComponent,
+      HelpComponent,
+      StatisticsComponent,
       EditPhotoComponent,
+      SearchComponent,
   ],
     imports: [
         CommonModule,

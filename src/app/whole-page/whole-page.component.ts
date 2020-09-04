@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataControlService} from '../services/data-control.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../api/api.service';
@@ -13,7 +13,9 @@ import {CookieService} from '../services/cookie.service';
   styleUrls: ['./whole-page.component.css']
 })
 export class WholePageComponent implements OnInit {
+  @ViewChild('whole', {static: false})
   panelOpenState = false;
+  search: string;
   isMobile;
   isDesktop;
   isTablet;
@@ -25,6 +27,8 @@ export class WholePageComponent implements OnInit {
   language;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;
+  // private search: string;
+
   getDecodedAccessToken(token: string): any {
     try {
       return jwt_decode(token);
@@ -83,6 +87,10 @@ export class WholePageComponent implements OnInit {
     this.isMobile = this.deviceDetectorService.isMobile();
     this.isTablet = this.deviceDetectorService.isTablet();
     this.isDesktop = this.deviceDetectorService.isDesktop();
+  }
+
+  searching(key: string) {
+    // this.router.navigate(['./search'], {queryParams: {this.search}});
   }
 
 }
