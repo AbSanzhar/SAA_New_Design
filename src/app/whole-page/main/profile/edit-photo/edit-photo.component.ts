@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../../../../api/api.service';
 import * as $ from 'jquery';
 import * as jwt_decode from 'jwt-decode';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-edit-photo',
@@ -10,15 +11,19 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class EditPhotoComponent implements OnInit {
 
+  isMobile;
+  isDesktop;
+  isTablet;
   updateProfilePhoto;
   public selectedProfilePhotoFile: File = null;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   userId = this.DecodedToken.jti;
 
-  constructor(private service: ApiService) { }
+  constructor(private service: ApiService,
+              private deviceDetectorService: DeviceDetectorService) { }
 
   ngOnInit(): void {
-
+    this.detectDevice();
   }
 
   getDecodedAccessToken(token: string): any {
@@ -58,6 +63,12 @@ export class EditPhotoComponent implements OnInit {
     this.service.uploadProfilePhoto(this.userId, this.updateProfilePhoto).subscribe(res => {
       console.log(res);
     }, err => console.log(err));
+  }
+
+  detectDevice() {
+    this.isMobile = this.deviceDetectorService.isMobile();
+    this.isTablet = this.deviceDetectorService.isTablet();
+    this.isDesktop = this.deviceDetectorService.isDesktop();
   }
 
 }

@@ -1,0 +1,36 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="width: 100%;" fxLayoutGap="5%">
+    <mat-table [dataSource]="DepUsers">
+        <ng-container matColumnDef="userId">
+            <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+            <mat-cell *matCellDef="let employee"> {{employee.userId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef> Фамилия</mat-header-cell>
+            <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef> Имя</mat-header-cell>
+            <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> E-mail</mat-header-cell>
+            <mat-cell *matCellDef="let employee"> {{employee.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef> Описание</mat-header-cell>
+            <mat-cell *matCellDef="let employee"> {{employee.description}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="userType">
+            <mat-header-cell *matHeaderCellDef> Тип работника</mat-header-cell>
+            <mat-cell *matCellDef="let employee"> {{employee.userType}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsDepUsers"></mat-header-row>
+        <mat-row *matRowDef="let employee; columns: displayedColumnsDepUsers;"></mat-row>
+    </mat-table>
+</div>

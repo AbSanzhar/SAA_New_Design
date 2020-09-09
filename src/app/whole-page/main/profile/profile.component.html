@@ -1,16 +1,19 @@
-<div class="content">
-<!--  <mat-tab-group mat-align-tabs="center">-->
-<!--    <mat-tab label="Профиль">-->
-<!--      -->
-<!--    </mat-tab>-->
-<!--  </mat-tab-group>-->
+<div *ngIf="!isMobile" class="content">
+  <!--  <mat-tab-group mat-align-tabs="center">-->
+  <!--    <mat-tab label="Профиль">-->
+  <!--      -->
+  <!--    </mat-tab>-->
+  <!--  </mat-tab-group>-->
   <div class="Inner">
     <div style="width: 33%;">
       <div [ngClass]="{noImage:photo!=null}" fxLayoutAlign="center center" class="Img">
-        <div style="width: 249px; height: 214px; position: relative; background-size: cover; clip-path: ellipse();" fxLayout="row" fxLayoutAlign="center center">
-          <img *ngIf="photo !== null" style="width: 249px; height: 214px; background-size: cover; clip-path: ellipse();" fxLayout="row" fxLayoutAlign="center center" src="https://nir.iitu.kz/{{photo}}">
-          <a style="color: #212121; position: absolute; z-index: 5; margin-top: 30%" routerLink="../edit-photo">Изменить фото профиля</a>
-<!--          <mat-icon routerLink="../edit-photo" style="cursor: pointer;">create</mat-icon>-->
+        <div style="width: 249px; height: 214px; position: relative; background-size: cover; clip-path: ellipse();"
+             fxLayout="row" fxLayoutAlign="center center">
+          <img *ngIf="photo !== null" style="width: 249px; height: 214px; background-size: cover; clip-path: ellipse();"
+               fxLayout="row" fxLayoutAlign="center center" src="https://nir.iitu.kz/{{photo}}">
+          <a style="color: #212121; position: absolute; z-index: 5; margin-top: 30%" routerLink="../edit-photo">Изменить
+            фото профиля</a>
+          <!--          <mat-icon routerLink="../edit-photo" style="cursor: pointer;">create</mat-icon>-->
         </div>
       </div>
     </div>
@@ -50,9 +53,60 @@
     <div class="right-side">
       <div class="" *ngIf="userDepts[0]">
         <h3 style="font-weight: bold; margin-bottom: 0;">Кафедра</h3>
-        <h3 >{{this.userDepts[0].deptName}} - {{this.userDepts[0].userType}}</h3>
+        <h3>{{this.userDepts[0].deptName}} - {{this.userDepts[0].userType}}</h3>
       </div>
     </div>
   </div>
 </div>
-<div id="projectName">2: oianset osietnoasiedj oino aosietnoin oasiento oaseitnoind oisentoasintoon oisentoiansetoino oiasentoin oi asetin doinae oidnoajosi doinalketn oiwdnota onioiante oaidno</div>
+<div *ngIf="!isMobile" id="projectName">2: oianset osietnoasiedj oino aosietnoin oasiento oaseitnoind oisentoasintoon
+  oisentoiansetoino oiasentoin oi asetin doinae oidnoajosi doinalketn oiwdnota onioiante oaidno
+</div>
+
+<div *ngIf="isMobile">
+  <div style="margin: 5% 0" fxLayout="row" fxLayoutAlign="space-around center">
+    <span>
+      <img *ngIf="photo !== null" style="width: 100px; height: 100px; background-size: cover; clip-path: ellipse();"
+         fxLayout="row" fxLayoutAlign="center center" src="https://nir.iitu.kz/{{photo}}">
+      <img *ngIf="photo == null" style="width: 100px; height: 100px; background-size: cover; clip-path: ellipse();"
+         fxLayout="row" fxLayoutAlign="center center" src="assets/images/camera_200.png">
+    </span>
+    <span fxLayout="column">
+      <h2 style="">{{this.currentUser.firstName}} {{this.currentUser.lastName}}</h2>
+      <p>E-mail: {{this.currentUser.email}}</p>
+      <a style="color: #212121;%" routerLink="../edit-photo">Изменить фото профиля</a>
+                        <button mat-button [matMenuTriggerFor]="menu2">{{language}}
+                          <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #menu2="matMenu">
+                            <button mat-menu-item (click)="changeLang('kz')">ҚАЗ</button>
+                            <button mat-menu-item (click)="changeLang('ru')">РУС</button>
+                            <button mat-menu-item (click)="changeLang('en')">ENG</button>
+                        </mat-menu>
+    </span>
+  </div>
+  <mat-divider style="margin: 5% 0"></mat-divider>
+  <div style="margin: 0 5%">
+      <h3>Личная информация</h3>
+      <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">Вы заведующий этой кафедры</h3>
+    <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
+      <h3 style="font-weight: bold;  margin-bottom: 0;">Образование:</h3>
+      <div *ngFor="let degree of this.currentUser.degree">
+        <h3>{{degree.degreeName}}</h3>
+      </div>
+    </div>
+    <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
+      <h3 style="font-weight: bold;  margin-bottom: 0;">E-mail:</h3>
+      <p>{{this.currentUser.email}}</p>
+    </div>
+    <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
+      <h3 *ngIf="this.currentUser.gender == 'male'" style="font-weight: bold;  margin-bottom: 0;">Пол:</h3>
+      <p *ngIf="this.currentUser.gender == 'male'">Мужской</p>
+      <p *ngIf="this.currentUser.gender == 'female'">Женский</p>
+    </div>
+    <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
+      <h3 style="font-weight: bold;  margin-bottom: 0;">Контактный номер:</h3>
+      <p>{{this.currentUser.phoneNumber}}</p>
+    </div>
+      <h3 routerLink="../password" class="passwd-btn button">Пароль <mat-icon>keyboard_arrow_right</mat-icon></h3>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+label {
+    color: #A8A4A4;
+}
+
+input:not(.btn) {
+    background: #FDFDFD;
+    border: 1px solid #0CB5A0;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: .7rem 1rem;
+    font-family: Ubuntu, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+mat-table {
+    width: 100%;
+}
+
+/deep/ .mat-tab-label, /deep/ .mat-tab-label-active {
+    font-weight: bolder;
+    width: 90%;
+}
+
+.mat-column-eventId {
+    flex: 3rem;
+    max-width: 3rem;
+}
+
+.mat-column-Title {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-eventDate {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-eventCity {
+    flex: 5rem;
+    max-width: 7rem;
+}
+
+.mat-column-eventType {
+    flex: 10rem;
+    max-width: 10rem;
+}
+
+.mat-column-eventRole {
+    flex: 8rem;
+    max-width: 10rem;
+}
+
+.mat-column-eventTitle {
+    flex: 7rem;
+    max-width: 13rem;
+}
+

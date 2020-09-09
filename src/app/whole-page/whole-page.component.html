@@ -72,7 +72,7 @@
                         <a [routerLinkActive]="['active']" mat-button routerLink="./activities"><p class="navigation"
                                                                                                    *ngIf="this.userRoles.indexOf('Teacher') != -1">
                             Публикации</p></a>
-                        <a [routerLinkActive]="['active']" mat-button routerLink="./statistics" mat-button><p class="navigation">Статистика</p></a>
+                        <a [routerLinkActive]="['active']" mat-button routerLink="./statistics"><p class="navigation">Статистика</p></a>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./about"><p class="navigation">О проекте</p></a>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./help"><p class="navigation">Помощь</p></a>
                     </mat-toolbar-row>
@@ -103,25 +103,44 @@
             <div fxLayout="column" style="padding: 20px 0 20px 10px">
                 <div fxLayoutAlign="center center" fxLayoutGap="0" fxLayout="row">
                     <div fxLayoutAlign="center center" fxFlex="20">
-                        <img src="assets/images/camera_200.png" width="100%" style="border-radius: 50%">
+                        <a routerLink="./profile"><img *ngIf="photo == null" src="assets/images/camera_200.png" width="100%" style="border-radius: 50%"></a>
+                        <a routerLink="./profile"><img *ngIf="photo !== null" src="https://nir.iitu.kz/{{photo}}" width="100%" style="border-radius: 50%"></a>
                     </div>
                     <div fxLayoutAlign="center center" fxFlex="50" fxLayoutGap="0" fxLayout="column">
-                        <p style="color: white">{{name}} Test Name</p>
-                        <p style="color: #909090">Настройки</p>
+                        <a routerLink="./profile"><p style="color: white">{{name}} Test Name</p></a>
+                        <a routerLink="./settings" style="color: #909090; text-decoration: none;">Настройки</a>
                     </div>
                     <div fxLayoutAlign="center center" fxFlex="20">
-                        <mat-icon style="color: white">keyboard_arrow_right</mat-icon>
+<!--                        <a routerLink="./profile"><mat-icon style="color: white">keyboard_arrow_right</mat-icon></a>-->
+                        <mat-icon (click)="drawer.close()" style="color: white">close</mat-icon>
                     </div>
                 </div>
                 <mat-divider style="border-top-color: grey; margin: 10px"></mat-divider>
                 <div fxLayout="column" fxLayoutGap="0" fxLayoutAlign="center start">
                     <a mat-button routerLink="./"><p class="navigation2">Главная</p></a>
-                    <a mat-button routerLink="./activities"><p class="navigation2"
-                                                               *ngIf="this.userRoles.indexOf('Teacher') != -1">
-                        Публикации</p></a>
-                    <a mat-button><p class="navigation2">Статистика</p></a>
-                    <a mat-button><p class="navigation2">О проекте</p></a>
-                    <a mat-button><p class="navigation2">О сервисе</p></a>
+<!--                    <a mat-button routerLink="./activities"><p class="navigation2"-->
+<!--                                                               *ngIf="this.userRoles.indexOf('Teacher') != -1">-->
+<!--                        Публикации</p></a>-->
+                    <mat-accordion *ngIf="this.userRoles.indexOf('Teacher') != -1">
+                        <mat-expansion-panel style="background: #393939; box-shadow: 0 0 0 0; width: 250px;"
+                                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p style="margin: 0;" class="navigation2">Публикации</p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <a routerLink="./teachPub" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои публикации</p>
+                            </a>
+                            <a routerLink="./teachEvents" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои мероприятия</p></a>
+                            <a routerLink="./teachDis" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои диссоветы</p></a>
+                            <a routerLink="./teachPatents" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои патенты</p></a>
+                            <a routerLink="./teachDep" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои сотрудники</p></a>
+                            <a routerLink="./teachProj" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои научные проекты</p></a>
+                            <a routerLink="./teachCours" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои курсы</p></a>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <a routerLink="./statistics" mat-button><p class="navigation2">Статистика</p></a>
+                    <a routerLink="./about" mat-button><p class="navigation2">О проекте</p></a>
                     <a mat-button routerLink="./secretary-of-the-diss-council"><p class="navigation2">Секретарь
                         дис.совета</p></a>
                     <mat-accordion>
@@ -165,8 +184,9 @@
                             </div>
                         </mat-expansion-panel>
                     </mat-accordion>
-                    <a mat-button><p class="navigation2">Помощь<span style="color: #FF0000; font-weight: bold">?</span>
+                    <a routerLink="./help" mat-button><p class="navigation2">Помощь<span style="color: #FF0000; font-weight: bold; margin-left: 2%">?</span>
                     </p></a>
+                    <a (click)="logOut()" mat-button><p class="navigation2">Log out</p></a>
                 </div>
             </div>
         </mat-drawer>
@@ -191,9 +211,10 @@
         <div (click)="drawer.close()" fxLayout="row">
             <div fxFlex="5"></div>
             <div fxLayoutAlign="row" fxFlex="90">
-                <input style="border: 1px solid #C5BFBF; border-radius: 5px; margin-right: -1%;; width: 80%;"
+                <input [(ngModel)]="search" style="border: 1px solid #C5BFBF; border-radius: 5px; margin-right: -1%; width: 100%"
                        type="text" matInput>
-                <button mat-button style="background: #0CB5A0; width: 20%;">
+                <button [routerLink]=
+                                "[ './search']" [queryParams]="{keyword: search}" (click)="searching(search)" mat-button style="background: #0CB5A0; height: 100%;">
                     <mat-icon style="color: white">search</mat-icon>
                 </button>
             </div>

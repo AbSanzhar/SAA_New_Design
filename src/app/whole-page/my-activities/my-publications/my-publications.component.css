@@ -1,0 +1,250 @@
+label {
+    color: #A8A4A4;
+}
+
+input:not(.btn) {
+    background: #FDFDFD;
+    border: 1px solid #0CB5A0;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: .7rem 1rem;
+    font-family: Ubuntu, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+mat-table {
+    width: 100%;
+}
+
+/deep/ .mat-tab-label, /deep/ .mat-tab-label-active {
+    font-weight: bolder;
+    width: 90%;
+}
+
+.mat-column-pubId {
+    flex: 2rem;
+    max-width: 3rem;
+}
+
+.mat-column-eventId {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-disId {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-courseId {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-Collaborators {
+    flex: 6rem;
+    max-width: 7rem;
+}
+
+.mat-column-university {
+    flex: 9rem;
+    max-width: 9rem;
+}
+
+.mat-column-File {
+    flex: 5rem;
+    max-width: 1rem;
+}
+
+.mat-column-Year {
+    flex: 3rem;
+    max-width: 4rem;
+}
+
+.mat-column-Role {
+    flex: 6rem;
+    max-width: 6.5rem;
+}
+
+.mat-column-Title {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-eventDate {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-eventCity {
+    flex: 5rem;
+    max-width: 7rem;
+}
+
+.mat-column-eventType {
+    flex: 10rem;
+    max-width: 10rem;
+}
+
+.mat-column-pubType {
+    flex: 9rem;
+    max-width: 9rem;
+}
+
+.mat-column-eventRole {
+    flex: 8rem;
+    max-width: 10rem;
+}
+
+.mat-column-eventTitle {
+    flex: 7rem;
+    max-width: 13rem;
+}
+
+.mat-column-disRole {
+    flex: 8rem;
+    max-width: 8rem;
+}
+
+.mat-column-whoCheck {
+    flex: 8rem;
+    max-width: 8rem;
+}
+
+.mat-column-insertDate {
+    flex: 7rem;
+    max-width: 7rem;
+}
+
+.mat-column-status {
+    flex: 7rem;
+    max-width: 7rem;
+}
+
+.mat-column-ptntOwnerName {
+    flex: 7rem;
+    max-width: 7rem;
+}
+
+.mat-column-ptntPublishedTR {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-ptntIssueDate {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-ptntCountry {
+    flex: 6rem;
+    max-width: 6rem;
+}
+
+.mat-column-center {
+    flex: 11rem;
+    max-width: 11rem;
+}
+
+.mat-column-hours {
+    flex: 3rem;
+    max-width: 3rem;
+}
+
+.mat-column-price {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-certificates {
+    flex: 5rem;
+    max-width: 5rem;
+}
+
+.mat-column-id {
+    flex: 5rem;
+    max-width: 2rem;
+}
+
+.mat-column-name {
+    flex: 5rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-type {
+    flex: 2rem;
+    max-width: 2rem;
+    margin-right: 1%;
+}
+
+.mat-column-priority {
+    flex: 2rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+
+.mat-column-subPriority {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-subSubPriority {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-executor {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-customer {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-dirFullName {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-dept {
+    flex: 2rem;
+    max-width: 4rem;
+    margin-right: 1%;
+}
+
+.mat-column-agrDate {
+    flex: 2rem;
+    max-width: 3rem;
+    margin-right: 1%;
+}
+
+.mat-column-registerNumber {
+    flex: 2rem;
+    max-width: 5rem;
+    margin-right: 1%;
+}
+
+
+#projectName {
+    width: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#projectName:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    position: absolute;
+    background-color: #FFF;
+}

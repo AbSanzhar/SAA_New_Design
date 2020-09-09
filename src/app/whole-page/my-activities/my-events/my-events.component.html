@@ -1,0 +1,66 @@
+<div fxLayout="row" style="width: 600px;">
+    <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px">
+
+        <mat-table [dataSource]="TeacherEvents">
+            <ng-container matColumnDef="eventId">
+                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="eventType">
+                <mat-header-cell *matHeaderCellDef> Тип мероприятия</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventType}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="eventRole">
+                <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventRole}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="eventDate">
+                <mat-header-cell *matHeaderCellDef> Дата</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventDate}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="eventTitle">
+                <mat-header-cell *matHeaderCellDef> Название</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="eventCity">
+                <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventCity}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Url">
+                <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>
+                <mat-cell *matCellDef="let activity"> {{activity.eventUrl}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="File">
+                <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                <mat-cell *matCellDef="let activity"><a href="https://nir.iitu.kz/{{activity.eventFile}}"
+                                                        download="">
+                    <mat-icon color="primary">get_app</mat-icon>
+                </a></mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsEvent"></mat-header-row>
+            <mat-row *matRowDef="let activity; columns: displayedColumnsEvent;"></mat-row>
+        </mat-table>
+
+<!--        <div style="align-items: center; display: flex;">-->
+            <button style="margin: 0 10% 0 35%" (click)="create('event')" color="primary"
+                    mat-stroked-button>Добавить
+                <mat-icon color="primary">add_task</mat-icon>
+            </button>
+<!--            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                           [pageSize]="paginator.size"-->
+<!--                           [pageIndex]="paginator.page"-->
+<!--                           (change)="changeTableList($event)"-->
+<!--                           (page)="changeTableList($event)"-->
+<!--                           showFirstLastButtons></mat-paginator>-->
+<!--        </div>-->
+
+    </div>
+</div>

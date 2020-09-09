@@ -1,0 +1,40 @@
+<div fxLayout="row" style="width: 600px;">
+    <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px">
+        <mat-table [dataSource]="TeacherDisSovet">
+            <ng-container matColumnDef="disId">
+                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="university">
+                <mat-header-cell *matHeaderCellDef> Высшее учебное заведение</mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="disRole">
+                <mat-header-cell *matHeaderCellDef> Роль в диссовете</mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disRole}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="specialty">
+                <mat-header-cell *matHeaderCellDef> Специальность докторантуры/ направление подготовки
+                </mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="stopDate">
+                <mat-header-cell *matHeaderCellDef> Период деятельности</mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.disStopDate | date}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="numberAndDate">
+                <mat-header-cell *matHeaderCellDef> Номер и дата приказа</mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.ministryOrder}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsDisSovet"></mat-header-row>
+            <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>
+        </mat-table>
+
+    </div>
+</div>

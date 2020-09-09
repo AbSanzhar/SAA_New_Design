@@ -1,0 +1,81 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="width: 1000px; padding-bottom: 5%;" fxLayoutGap="2%">
+    <mat-table [dataSource]="TeacherCourses">
+        <ng-container matColumnDef="courseId">
+            <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>
+            <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="FL">
+            <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+            <mat-cell style="color: darkred!important;"
+                      *matCellDef="let course">{{course.courseUser.firstName}} {{course.courseUser.lastName}} {{course.courseUser.patronymic}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="form">
+            <mat-header-cell *matHeaderCellDef>Форма обучения и тема</mat-header-cell>
+            <mat-cell style="color: darkred!important;"
+                      *matCellDef="let course">{{course.courseForm}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="center">
+            <mat-header-cell *matHeaderCellDef>Базовый центр повышения квалификации</mat-header-cell>
+            <mat-cell style="color: darkred!important;"
+                      *matCellDef="let course">{{course.courseCenter}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="hours">
+            <mat-header-cell *matHeaderCellDef>Объем часов</mat-header-cell>
+            <mat-cell style="color: darkred!important;"
+                      *matCellDef="let course">{{course.courseHours}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef>Стоимость курсов</mat-header-cell>
+            <mat-cell style="color: darkred!important;"
+                      *matCellDef="let course">{{course.coursePrice}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="deadlines">
+            <mat-header-cell *matHeaderCellDef>Сроки прохождения</mat-header-cell>
+            <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.startdate}}
+                - {{course.enddate}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="certificates">
+            <mat-header-cell *matHeaderCellDef>№ Сертификата и дата</mat-header-cell>
+            <mat-cell style="color: darkred!important;"
+                      *matCellDef="let course">{{course.courseCertificateNumber}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="level">
+            <mat-header-cell *matHeaderCellDef>Уровень</mat-header-cell>
+            <mat-cell style="color: darkred!important;"
+                      *matCellDef="let course">{{course.courseDegree}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="File">
+            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+            <mat-cell *matCellDef="let course"><a href="https://nir.iitu.kz/{{course.courseFile}}"
+                                                  download="">
+                <mat-icon color="primary">get_app</mat-icon>
+            </a></mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
+        <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>
+
+    </mat-table>
+
+<!--    <div style="align-items: center; display: flex;">-->
+        <button style="margin: 0 10% 0 35%" (click)="create('course')" color="primary"
+                mat-stroked-button>Добавить
+            <mat-icon color="primary">add_task</mat-icon>
+        </button>
+<!--        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                       [pageSize]="paginator.size"-->
+<!--                       [pageIndex]="paginator.page"-->
+<!--                       (change)="changeTableList($event)"-->
+<!--                       (page)="changeTableList($event)"-->
+<!--                       showFirstLastButtons></mat-paginator>-->
+<!--    </div>-->
+</div>

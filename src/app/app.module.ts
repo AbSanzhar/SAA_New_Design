@@ -34,6 +34,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatDividerModule,
         FlexLayoutModule,
         MatListModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatCardModule
     ],
   providers: [],
   bootstrap: [AppComponent]

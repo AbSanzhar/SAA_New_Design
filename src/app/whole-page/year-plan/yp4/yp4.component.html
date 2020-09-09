@@ -1,7 +1,7 @@
 <div style="width: 600px" fxLayoutAlign="center start" fxLayout="column">
     <h2 style="color: #8F1812; margin: 10px;"> 2.2 Бюджетные НИР и руководство НИРС</h2>
 
-    <div style="width: 100%;">
+    <div style="width: 120%;">
         <mat-table [dataSource]="gettedBudgets" style="width: 100%;">
             <ng-container matColumnDef="budId">
                 <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
@@ -26,13 +26,9 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
                 <mat-cell *matCellDef="let activity">
-                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Budget'})">
-                        Изменить
-                    </button>
+                    <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Budget'})">Изм.</button>
                     <button style="margin-left: 5%" mat-stroked-button color="warn"
-                            (click)="deleteTableRow({data: activity, table: 'Budget'})">
-                        Удалить
-                    </button>
+                            (click)="deleteTableRow({data: activity, table: 'Budget'})">Удал.</button>
                 </mat-cell>
             </ng-container>
 

@@ -62,3 +62,6 @@ mat-form-field{
 .link:hover {
   cursor: pointer;
 }
+.example-full-width {
+  width: 100%;
+}

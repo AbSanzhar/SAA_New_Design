@@ -1,8 +1,8 @@
-<div class="container">
+<div *ngIf="!isMobile" class="container">
   <div class="content">
     <div class="header">
-      <div id="logo">
-        <img src="./assets/images/header/logoIITU.png"  alt="IITU logo">
+      <div class="logo">
+        <img src="./assets/images/header/logoIITU.png" alt="IITU logo">
       </div>
       <div id="accountName">
         <button mat-button (click)="openDialog()">Sign In</button>
@@ -22,10 +22,50 @@
         <div class="join">
           <mat-button-toggle-group>
             <input matInput placeholder="Email address" [(ngModel)]="inputLogin">
-            <mat-button-toggle (click)="openDialog()" style="display: flex; align-items: center;"><p class="btnText">JOIN FOR FREE<mat-icon style="vertical-align: middle">keyboard_arrow_right</mat-icon></p></mat-button-toggle> <!--<i class="material-icons">keyboard_arrow_right</i>-->
+            <mat-button-toggle (click)="openDialog()" style="display: flex; align-items: center;">
+              <p class="btnText">JOIN FOR FREE
+                <mat-icon style="vertical-align: middle">keyboard_arrow_right</mat-icon>
+              </p>
+            </mat-button-toggle> <!--<i class="material-icons">keyboard_arrow_right</i>-->
           </mat-button-toggle-group>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="isMobile" class="container">
+  <div fxLayoutAlign="start start" fxLayout="row" style="padding: 5% 0">
+    <div fxFlex="40" class="logo">
+      <img src="./assets/images/header/logoIITU.png" style="width: 100%" alt="IITU logo">
+    </div>
+    <div fxFlex="60" fxLayout="column">
+      <p style="font-size: 18px; font-weight: 400;">INTERNATIONAL</p>
+      <p style="font-size: 18px; font-weight: 400;">UNIVERSITY</p>
+    </div>
+  </div>
+  <div style="margin-top: 35%" fxLayoutAlign="center center">
+    <mat-card style="padding: 15px" fxLayoutAlign="center center">
+      <mat-card-content fxLayoutAlign="center center">
+        <form [formGroup]="form">
+          <div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="center center">
+            <mat-icon style="color: #015349">login</mat-icon>
+            <mat-form-field color="accent">
+              <input matInput formControlName="username" placeholder="Username" required>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="center center">
+            <mat-icon style="color: #015349">vpn_key</mat-icon>
+            <mat-form-field color="accent">
+              <input matInput formControlName="password" type="password" placeholder="Password" required>
+            </mat-form-field>
+          </div>
+          <mat-error *ngIf="error2">Login or password are incorrect!</mat-error>
+          <button (click)="signIn()" type="submit" class="signInbtn" mat-stroked-button>Sign in
+          </button>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

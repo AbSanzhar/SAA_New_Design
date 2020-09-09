@@ -1,14 +1,14 @@
-<div style="min-height: 100%">
+<div *ngIf="!isMobile" style="min-height: 100%">
   <div style="margin: 2rem;">
-    <button class="link" routerLink="../profile" style="border: 0; background: none; font-size: 16px">Главная > </button>
+    <button class="link" routerLink="../profile" style="border: 0; background: none; font-size: 16px">Главная ></button>
     <h4 style="display: inline; color: gray"> Настройки</h4>
   </div>
   <div class="content">
     <div style="width: 70%">
       <form [formGroup]="updateProfileForm">
         <div class="forma">
-        <label>Имя: </label>
-        <mat-form-field>
+          <label>Имя: </label>
+          <mat-form-field>
           <input placeholder="First Name" type="text" matInput required formControlName="firstName">
           <mat-error>First Name Required!</mat-error>
         </mat-form-field>
@@ -77,12 +77,51 @@
 <!--          <div class="label-div">-->
 <!--            <label>E-mail: </label>-->
 <!--          </div>-->
-<!--          <div class="input-div">-->
-<!--            <input type="text" formControlName="email" required="required">-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--          <div class="input-div">-->
+        <!--            <input type="text" formControlName="email" required="required">-->
+        <!--          </div>-->
+        <!--        </div>-->
 
       </form>
     </div>
   </div>
+</div>
+
+<div style="margin: 5% 0" *ngIf="isMobile" fxLayout="column" fxLayoutGap="5%">
+  <div>
+    <button class="link" routerLink="../profile" style="border: 0; background: none; font-size: 16px">Главная >
+    </button>
+    <h4 style="display: inline; color: gray"> Настройки</h4>
+  </div>
+
+  <form [formGroup]="updateProfileForm">
+    <div fxLayout="column" style="margin: 0 5%">
+      <mat-form-field class="example-full-width">
+        <input placeholder="First Name" type="text" matInput required formControlName="firstName">
+        <mat-error>First Name Required!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input placeholder="Last Name" type="text" matInput required formControlName="lastName">
+        <mat-error>Last Name Required!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input placeholder="Patronymic" type="text" matInput required formControlName="patronymic">
+        <mat-error>Patronymic Required!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input placeholder="E-mail" type="text" matInput required formControlName="email">
+        <mat-error>E-mail Required!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input placeholder="Your phohe number" type="text" matInput required formControlName="phoneNumber">
+        <mat-error>This field is required!</mat-error>
+      </mat-form-field>
+      <div style="text-align: center; margin: 5%">
+        <button color="primary" (click)="updateProfile('Successfully changed', 'OK')" routerLink="/.." type="submit"
+                mat-stroked-button>Сохранить
+        </button>
+      </div>
+    </div>
+  </form>
+
 </div>

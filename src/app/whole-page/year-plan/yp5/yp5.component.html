@@ -1,7 +1,7 @@
 <div style="width: 480px" fxLayoutAlign="center start" fxLayout="column">
     <h2 style="color: #8F1812; margin: 10px;"> 3. Организационно-методическая работа</h2>
 
-    <div>
+    <div style="width: 150%">
         <mat-table [dataSource]="gettedOrgMetActs" style="width: 100%;">
             <ng-container matColumnDef="orgId">
                 <mat-header-cell *matHeaderCellDef> Порядковый номер №</mat-header-cell>
@@ -27,11 +27,11 @@
                 <mat-header-cell *matHeaderCellDef> Дейтсвие</mat-header-cell>
                 <mat-cell *matCellDef="let activity">
                     <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'OrgMetAct'})">
-                        Изменить
+                        Изм.
                     </button>
                     <button style="margin-left: 5%" mat-stroked-button color="warn"
                             (click)="deleteTableRow({data: activity, table: 'OrgMetAct'})">
-                        Удалить
+                        Удал.
                     </button>
                 </mat-cell>
             </ng-container>

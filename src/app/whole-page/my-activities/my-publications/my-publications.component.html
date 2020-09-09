@@ -1,0 +1,144 @@
+<div fxLayout="row" style="width: 700px;">
+    <div fxLayout="column" fxLayoutAlign="start start">
+
+        <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px" style="margin: 2%; width: 100%">
+            <div style="width: 100%">
+                <label style="margin-right: 2%">От </label>
+                <input style="width: 50%" [(ngModel)]="from" type="number">
+            </div>
+            <div style="width: 100%">
+                <label style="margin-right: 2%">До </label>
+                <input style="width: 50%" [(ngModel)]="to" type="number">
+            </div>
+        </div>
+
+        <mat-table [dataSource]="TeacherPublications">
+            <ng-container matColumnDef="pubId">
+                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubId}} </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Title">
+                <mat-header-cell *matHeaderCellDef> Название публикации</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pubType">
+                <mat-header-cell *matHeaderCellDef> Тип публикации</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubType}}</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Collaborators">
+                <mat-header-cell *matHeaderCellDef> Соавторы</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                        <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">
+                            {{i + 1}}
+                            ) {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}
+                        </div>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Year">
+                <mat-header-cell *matHeaderCellDef> Год</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubYear}}</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="City">
+                <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCity}}</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Publisher">
+                <mat-header-cell *matHeaderCellDef> Издатель</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPubName}} </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Page">
+                <mat-header-cell *matHeaderCellDef> Страницы</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPage}}
+                        - {{publication.pubEndPage}}</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Url">
+                <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a
+                            href="{{publication.pubUrl}}">
+                        <mat-icon color="primary">public</mat-icon>
+                    </a></div>
+                </mat-cell>
+            </ng-container>
+            >
+            <ng-container matColumnDef="Doi">
+                <mat-header-cell *matHeaderCellDef> DOI</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubDoi}}</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pubStatus">
+                <mat-header-cell *matHeaderCellDef> Статус модерации</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                        <mat-icon style="color: green;" *ngIf="publication.pubStatus == 'Confirmed'">done
+                        </mat-icon>
+                        <mat-icon style="color: red"
+                                  *ngIf="publication.pubStatus == 'Returned for revision'">clear
+                        </mat-icon>
+                        <p *ngIf="publication.pubStatus == 'Under review'">На рас
+                            <wbr>
+                            смо
+                            <wbr>
+                            трен
+                            <wbr>
+                            нии
+                        </p>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="File">
+                <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                <mat-cell *matCellDef="let publication">
+                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a
+                            href="https://nir.iitu.kz/{{publication.pubFile}}" download="">
+                        <mat-icon color="primary">get_app</mat-icon>
+                    </a></div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>
+            <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
+        </mat-table>
+
+        <div style="align-items: center; display: flex;">
+            <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>
+                Добавить
+                <mat-icon color="primary">add_task</mat-icon>
+            </button>
+            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
+                           [pageSize]="paginator.size"
+                           [pageIndex]="paginator.page"
+                           (change)="changeTableList($event)"
+                           (page)="changeTableList($event)"
+                           showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

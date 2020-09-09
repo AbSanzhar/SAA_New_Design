@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataControlService} from '../../services/data-control.service';
 import {ApiService} from '../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
 import {MatDialog} from '@angular/material/dialog';
 import {TeacherComponent} from '../teacher/teacher.component';
-import {FormArray} from '@angular/forms';
 import {DocumentCreator} from '../teacher/rate-list-generator';
 import {Packer} from 'docx';
 import {ScienceListGenerator} from '../teacher/ScienceListGenerator';
@@ -112,49 +111,49 @@ export class MyActivitiesComponent implements OnInit {
               console.log(err);
             }
         );
-        this._api.getCourseCount().subscribe(
-            res => {
+      this._api.getCourseCount().subscribe(
+          res => {
               console.log(res);
               this.courceCount = res;
-            }, err => {
+          }, err => {
               console.log(err);
-            }
-        );
-        this._api.getDisMembersCount().subscribe(
-            res => {
+          }
+      );
+      this._api.getDisMembersCount().subscribe(
+          res => {
               console.log(res);
               this.disMembersCount = res;
-            }, err => {
+          }, err => {
               console.log(err);
-            }
-        );
-        this._api.getUserById(this.IdToken).subscribe(
-            res => {
+          }
+      );
+      this._api.getUserById(this.IdToken).subscribe(
+          res => {
               console.log(res);
-              if(res.patronymic != null) {
-                this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
+              if (res.patronymic != null) {
+                  this.name = res.firstName.charAt(0) + '.' + res.patronymic.charAt(0) + '.' + res.lastName;
               } else {
-                this.name = res.firstName.charAt(0) + '.' + res.lastName;
+                  this.name = res.firstName.charAt(0) + '.' + res.lastName;
               }
               // tslint:disable-next-line:prefer-for-of
-            },
-            err => {
+          },
+          err => {
               console.log(err);
-            }
-        );
-        this.getTeacherPublications(this.language);
-        this.getTeacherEvents(this.language);
-        this.getTeacherDisSovet(this.language);
-        this.getTeacherPatents(this.language);
-        this.getTeacherScienceProjects();
-        this.getTeacherCourses(this.language);
-        this._api.getUserById(this.tokenId).subscribe(
-            res => {
+          }
+      );
+      this.getTeacherPublications(this.language);
+      this.getTeacherEvents(this.language);
+      this.getTeacherDisSovet(this.language);
+      this.getTeacherPatents(this.language);
+      this.getTeacherScienceProjects();
+      this.getTeacherCourses(this.language);
+      this._api.getUserById(this.tokenId).subscribe(
+          res => {
               this.currentUser = res;
               this.userDepts = res.usersDepts;
               // tslint:disable-next-line:prefer-for-of
               for (let i = 0; i < res.roles.length; i++) {
-                this.roles.push(res.roles[i].roleName);
+                  this.roles.push(res.roles[i].roleName);
                 if (res.roles[i].roleName === 'Teacher') {
                   this.getTeacherPublications(this.language);
                   this.getTeacherEvents(this.language);

@@ -1,27 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
-import * as jwt_decode from 'jwt-decode';
 import {MatDialog} from '@angular/material/dialog';
-import {DeviceDetectorService} from 'ngx-device-detector';
-import {LanguageService} from '../../../services/language.service';
-import {CookieService} from '../../../services/cookie.service';
-import {BehaviorSubject} from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
+
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-my-dep-users',
+  templateUrl: './my-dep-users.component.html',
+  styleUrls: ['./my-dep-users.component.css']
 })
-export class ProfileComponent implements OnInit {
-  currentLanguage;
-  language;
-  isMobile;
-  isDesktop;
-  isTablet;
-  photo;
-  from: any = 1900;
-  to: any = 2021;
+export class MyDepUsersComponent implements OnInit {
   paginator = {
     length: 0,
     size: 1,
@@ -30,8 +19,9 @@ export class ProfileComponent implements OnInit {
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
   private name: any;
-  TeacherPublications: any[] = [];
   DepUsers: any[] = [];
+
+  displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
 
   public s = this.getDecodedAccessToken(localStorage.getItem('token'));
@@ -40,7 +30,8 @@ export class ProfileComponent implements OnInit {
   public userDepts = [];
   public roles = [];
 
-  pageOfItems: Array<any>;
+  public whichTable = 0;
+  language;
 
   getDecodedAccessToken(token: string): any {
     try {
@@ -54,25 +45,10 @@ export class ProfileComponent implements OnInit {
               // tslint:disable-next-line:variable-name
               private _api: ApiService,
               // tslint:disable-next-line:variable-name
-              private _dialog: MatDialog,
-              private langService: LanguageService,
-              private deviceDetectorService: DeviceDetectorService,
-              private cookieService: CookieService) {
-    if(!this.cookieService.getCookie('language')) {
-      this.cookieService.setCookie('language', 'ru', 1);
-      this.language = new BehaviorSubject('ru');
-      this.currentLanguage = this.language.asObservable();
-    } else {
-      this.language = new BehaviorSubject(this.cookieService.getCookie('language'));
-      this.currentLanguage = this.language.asObservable();
-    }
+              private _dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.langService.currentLanguage.subscribe(lang => {
-      this.language = lang;
-      console.log(this.language);
-    });
     this._api.getUserById(this.IdToken).subscribe(
         res => {
           console.log(res);
@@ -81,7 +57,6 @@ export class ProfileComponent implements OnInit {
           } else {
             this.name = res.firstName.charAt(0) + '.' + res.lastName;
           }
-          this.photo = res.photo;
           // tslint:disable-next-line:prefer-for-of
         },
         err => {
@@ -92,30 +67,45 @@ export class ProfileComponent implements OnInit {
         res => {
           this.currentUser = res;
           this.userDepts = res.usersDepts;
-          console.log(res);
+          // tslint:disable-next-line:prefer-for-of
+          for (let i = 0; i < res.roles.length; i++) {
+            this.roles.push(res.roles[i].roleName);
+            if (res.roles[i].roleName === 'Head_Of_Dept') {
+              this.getDepUsers(this.userDepts[0].deptId);
+            }
+          }
         },
         err => {
           console.log(err);
         }
     );
-    this.detectDevice();
   }
 
-  detectDevice() {
-    this.isMobile = this.deviceDetectorService.isMobile();
-    this.isTablet = this.deviceDetectorService.isTablet();
-    this.isDesktop = this.deviceDetectorService.isDesktop();
+  changeTableList(event) {
+    console.log('asda');
+    this.paginator.page = event.pageIndex;
+    this.paginator.size = event.pageSize;
   }
 
-  changeLang(language: string) {
-    this.langService.changeLanguage(language);
+  getDepUsers(id) {
+    this._api.getDepUsers(id).subscribe(
+        res => {
+          console.log(res);
+          // tslint:disable-next-line:prefer-for-of
+          for (let i = 0; i < res.usersDeptsEntities.length; i++) {
+            const tempUser = {
+              userId: res.usersDeptsEntities[i].primaryKey.userEntity.userId,
+              firstName: res.usersDeptsEntities[i].primaryKey.userEntity.firstName,
+              lastName: res.usersDeptsEntities[i].primaryKey.userEntity.lastName,
+              email: res.usersDeptsEntities[i].primaryKey.userEntity.email,
+              description: res.usersDeptsEntities[i].primaryKey.userEntity.description,
+              userType: res.usersDeptsEntities[i].userType
+            };
+            this.DepUsers.push(tempUser);
+          }
+        }, err => {
+          console.log(err);
+        }
+    );
   }
-  changeLanguage(language) {
-    this.language.next(language);
-    console.log(language);
-    this.cookieService.setCookie('language', language, 1);
-  }
-
 }
-
-

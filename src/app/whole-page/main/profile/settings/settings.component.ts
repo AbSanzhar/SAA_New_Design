@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ApiService} from '../../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
-import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
     selector: 'app-settings',
@@ -11,12 +11,16 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
+    isMobile;
+    isDesktop;
+    isTablet;
 
     // tslint:disable-next-line:variable-name
     constructor(private _api: ApiService,
                 private fb: FormBuilder,
                 // tslint:disable-next-line:variable-name
-                private _snackBar: MatSnackBar) {
+                private _snackBar: MatSnackBar,
+                private deviceDetectorService: DeviceDetectorService) {
     }
     public updateProfileForm: FormGroup;
     public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
@@ -32,6 +36,7 @@ export class SettingsComponent implements OnInit {
         }
     }
     ngOnInit(): void {
+        this.detectDevice();
         this.updateProfileForm = this.fb.group({
             firstName: new FormControl('', Validators.required),
             lastName: new FormControl('', Validators.required),
@@ -67,5 +72,10 @@ export class SettingsComponent implements OnInit {
         });
     }
 
+    detectDevice() {
+        this.isMobile = this.deviceDetectorService.isMobile();
+        this.isTablet = this.deviceDetectorService.isTablet();
+        this.isDesktop = this.deviceDetectorService.isDesktop();
+    }
 
 }

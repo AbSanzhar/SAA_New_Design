@@ -14,12 +14,12 @@
   padding: 0 5%;
 }
 
-#logo {
+.logo {
   margin: 0;
   padding: 0;
 }
 
-#logo img {
+.logo img {
   width: 60%;
 }
 

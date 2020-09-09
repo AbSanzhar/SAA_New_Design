@@ -1,0 +1,87 @@
+    <div fxLayout="column" fxLayoutAlign="center center" style="width: 700px;" fxLayoutGap="5%">
+        <mat-table [dataSource]="TeacherPatents">
+            <ng-container matColumnDef="ptntNumber">
+                <mat-header-cell *matHeaderCellDef> Номер патента</mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ptntId">
+                <mat-header-cell *matHeaderCellDef> Тип патента</mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ptntCountry">
+                <mat-header-cell *matHeaderCellDef> Страна</mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ptntIssueDate">
+                <mat-header-cell *matHeaderCellDef> Дата выдачи</mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ptntPublishedTR">
+                <mat-header-cell *matHeaderCellDef> Опубликован в TR</mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntPublishedTR}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ptntOwnerName">
+                <mat-header-cell *matHeaderCellDef> Автор</mat-header-cell>
+                <mat-cell
+                        *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef> Статус модерации</mat-header-cell>
+                <mat-cell *matCellDef="let patent">
+                    <mat-icon style="color: green;" *ngIf="patent.ptntStatus == 'Confirmed'">done</mat-icon>
+                    <mat-icon style="color: red" *ngIf="patent.ptntStatus == 'Returned for revision'">
+                        clear
+                    </mat-icon>
+                    <p *ngIf="patent.ptntStatus == 'Under review'">На рас
+                        <wbr>
+                        смо
+                        <wbr>
+                        трен
+                        <wbr>
+                        нии
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="insertDate">
+                <mat-header-cell *matHeaderCellDef> Дата ввода в базу</mat-header-cell>
+                <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="whoCheck">
+                <mat-header-cell *matHeaderCellDef> Кем проверено</mat-header-cell>
+                <mat-cell *matCellDef="let patent"><p
+                        *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="File">
+                <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrl}}"
+                                                      download="">
+                    <mat-icon color="primary">get_app</mat-icon>
+                </a></mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>
+            <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>
+        </mat-table>
+<!--        <div style="align-items: center; display: flex;">-->
+            <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary"
+                    mat-stroked-button>Добавить
+                <mat-icon color="primary">add_task</mat-icon>
+            </button>
+<!--            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                           [pageSize]="paginator.size"-->
+<!--                           [pageIndex]="paginator.page"-->
+<!--                           (change)="changeTableList($event)"-->
+<!--                           (page)="changeTableList($event)"-->
+<!--                           showFirstLastButtons></mat-paginator>-->
+<!--        </div>-->
+    </div>

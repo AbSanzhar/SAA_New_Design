@@ -69,6 +69,13 @@ import { HelpComponent } from './help/help.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { EditPhotoComponent } from './main/profile/edit-photo/edit-photo.component';
 import { SearchComponent } from './search/search.component';
+import { MyPublicationsComponent } from './my-activities/my-publications/my-publications.component';
+import { MyEventsComponent } from './my-activities/my-events/my-events.component';
+import { MyDissovetsComponent } from './my-activities/my-dissovets/my-dissovets.component';
+import { MyPatentsComponent } from './my-activities/my-patents/my-patents.component';
+import { MyDepUsersComponent } from './my-activities/my-dep-users/my-dep-users.component';
+import { MyScienceProjComponent } from './my-activities/my-science-proj/my-science-proj.component';
+import { MyCoursesComponent } from './my-activities/my-courses/my-courses.component';
 
 
 const r: Routes = [
@@ -79,6 +86,13 @@ const r: Routes = [
       {path: '', component: NewsComponent},
         {path: 'profile', component: ProfileComponent},
         {path: 'activities', component: MyActivitiesComponent},
+        {path: 'teachPub', component: MyPublicationsComponent},
+        {path: 'teachEvents', component: MyEventsComponent},
+        {path: 'teachPatents', component: MyPatentsComponent},
+        {path: 'teachDis', component: MyDissovetsComponent},
+        {path: 'teachProj', component: MyScienceProjComponent},
+        {path: 'teachDep', component: MyDepUsersComponent},
+        {path: 'teachCours', component: MyCoursesComponent},
         {path: 'about', component: AboutComponent},
         {path: 'help', component: HelpComponent},
         {path: 'statistics', component: StatisticsComponent},
@@ -143,6 +157,13 @@ const r: Routes = [
       StatisticsComponent,
       EditPhotoComponent,
       SearchComponent,
+      MyPublicationsComponent,
+      MyEventsComponent,
+      MyDissovetsComponent,
+      MyPatentsComponent,
+      MyDepUsersComponent,
+      MyScienceProjComponent,
+      MyCoursesComponent,
   ],
     imports: [
         CommonModule,
