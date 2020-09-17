@@ -25,6 +25,7 @@ import {ScienceListGenerator} from './ScienceListGenerator';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {LanguageService} from '../../services/language.service';
+import {Form} from 'docx/build/file/drawing/inline/graphic/graphic-data/pic/shape-properties/form';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -136,6 +137,16 @@ export class TeacherComponent implements OnInit {
             ptnt_file_name: new FormControl('', Validators.required),
         });
 
+        this.exhibitionForm = formBuilder.group({
+            ex_name: new FormControl(''),
+            ex_date: new FormControl('', Validators.required),
+            ex_place: new FormControl('', Validators.required),
+            ex_type_id: new FormControl('', Validators.required),
+            ex_role_id: new FormControl('', Validators.required),
+            ex_level_id: new FormControl('', Validators.required),
+            user_id: this.IdToken
+        });
+
     }
 
   fileToUpload: File = null;
@@ -147,6 +158,7 @@ export class TeacherComponent implements OnInit {
   newProjForm: FormGroup;
   teacherCourseForm: FormGroup;
   patentForm: FormGroup;
+  exhibitionForm: FormGroup;
   PubTypeCounts;
   UserDegreeCounts;
   publishCount;
@@ -262,7 +274,10 @@ export class TeacherComponent implements OnInit {
     //   {value: '1', viewValue: 'Казахстан'},
     // ];
 
-    elements5: Sourse[];
+    exhibitionLevels: Sourse[] = [ ];
+    exhibitionTypes: Sourse[] = [ ];
+    exhibitionRoles: Sourse[] = [ ];
+
 
 
     dividers: Sourse[] = [
@@ -874,6 +889,9 @@ export class TeacherComponent implements OnInit {
           this.getPatentTypes(lang);
           this.getCourseDegree(lang);
           this.getCourseForm(lang);
+          this.getExhibitionLevels(lang);
+          this.getExhibitionRoles(lang);
+          this.getExhibitionTypes(lang);
       });
       // this.getTeacherPublications();
       this.getAllUsers();
@@ -1187,6 +1205,51 @@ export class TeacherComponent implements OnInit {
       );
     }
 
+    getExhibitionLevels(lang) {
+      this._api.getExhibitionLevels(lang).subscribe(
+          res => {
+              console.log(res);
+              for (let i = 0; i < res.length; i++) {
+                  let temp = {
+                      value: res[i].exLevelId,
+                      viewValue: res[i].exLevelRu,
+                  }
+                  this.exhibitionLevels[i] = temp;
+              }
+          }, err => console.log(err)
+      );
+    }
+
+    getExhibitionRoles(lang) {
+      this._api.getExhibitionRoles(lang).subscribe(
+          res => {
+              console.log(res);
+              for (let i = 0; i < res.length; i++) {
+                  let temp = {
+                      value: res[i].exRoleId,
+                      viewValue: res[i].exRoleRu,
+                  }
+                  this.exhibitionRoles[i] = temp;
+              }
+          }, err => console.log(err)
+      );
+    }
+
+    getExhibitionTypes(lang) {
+      this._api.getExhibitionTypes(lang).subscribe(
+          res => {
+              console.log(res);
+              for(let i = 0; i < res.length; i++) {
+                  let temp = {
+                      value: res[i].exTypeId,
+                      viewValue: res[i].exTypeRu
+                  };
+                  this.exhibitionTypes[i] = temp;
+              }
+          }, err => console.log(err)
+      )
+    }
+
   sendTeacherPublication(message: string, action: string) {
       let coAuthorsIds = [];
       // tslint:disable-next-line:prefer-for-of
@@ -1278,6 +1341,23 @@ export class TeacherComponent implements OnInit {
                 duration: 2000,
             });
             this._dialog.close(this.teacherCourseForm.value);
+        }
+    }
+
+    sendTeacherExhibition(message: string, action: string) {
+        if (this.exhibitionForm.valid) {
+            // this._api.uploadEvent(this.eventForm.value).subscribe(
+            //     res => {
+            //         console.log(res);
+            //     }, err => {
+            //         console.log(err);
+            //     }
+            // );
+            // this.eventForm.reset();
+            this._snackBar.open(message, action, {
+                duration: 2000,
+            });
+            this._dialog.close(this.exhibitionForm.value);
         }
     }
 

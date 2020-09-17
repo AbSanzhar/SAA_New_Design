@@ -532,6 +532,31 @@ export class ApiService {
     return this.http.patch(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'), profilePhoto);
   }
 
+  getExhibitionLevels(lang): Observable<any> {
+    const url = 'exhibition/getLevel/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getExhibitionTypes(lang): Observable<any> {
+    const url = 'exhibition/getType/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getExhibitionRoles(lang): Observable<any> {
+    const url = 'exhibition/getRole/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  uploadExhibition(exhibition): Observable<any> {
+    const url = 'exhibition/add';
+    return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), exhibition);
+  }
+
+  getExhibitions(userId): Observable<any> {
+    const url = 'exhibition/getByUser/';
+    return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }

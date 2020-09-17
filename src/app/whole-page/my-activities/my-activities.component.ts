@@ -38,6 +38,7 @@ export class MyActivitiesComponent implements OnInit {
   DepUsers: any[] = [];
   TeacherScienceProjects: any[] = [];
   TeacherCourses: any[] = [];
+  TeacherExhibitions: any[] = [];
 
   displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File'];
   displayedColumnsEvent = ['eventId', 'eventTitle', 'eventType', 'eventRole', 'eventDate', 'eventCity', 'Url', 'File'];
@@ -46,6 +47,7 @@ export class MyActivitiesComponent implements OnInit {
   displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
   displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
+  displayedColumnsExhibition = ['id', 'name', 'date', 'place', 'type', 'role', 'level'];
 
   public s = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.s.jti;
@@ -82,7 +84,9 @@ export class MyActivitiesComponent implements OnInit {
           this.getTeacherEvents(lang);
           this.getTeacherPatents(lang);
           this.getTeacherCourses(lang);
+          this.getTeacherExhibitions(this.IdToken);
           this.language = lang;
+          this.getTeacherExhibitions(this.IdToken);
       });
       this._api.getPubTypeCount().subscribe(
             res => {
@@ -373,6 +377,24 @@ export class MyActivitiesComponent implements OnInit {
     );
   }
 
+  getTeacherExhibitions(userId) {
+      this._api.getExhibitions(userId).subscribe(
+          res => {
+              console.log(res);
+              this.TeacherExhibitions = res;
+              for(let i = 0; i < res.length; i++) {
+                  const langRoleSelector = 'exRole' + String(this.language[0]).toUpperCase() + this.language[1];
+                  const langTypeSelector = 'exType' + String(this.language[0]).toUpperCase() + this.language[1];
+                  const langLevelSelector = 'exLevel' + String(this.language[0]).toUpperCase() + this.language[1];
+                  this.TeacherExhibitions[i].exRole = res[i].exRoleId[langRoleSelector];
+                  this.TeacherExhibitions[i].exType = res[i].exTypeId[langTypeSelector];
+                  this.TeacherExhibitions[i].exLevel = res[i].exLevelId[langLevelSelector];
+              }
+          },
+          err => console.log(err),
+      );
+  }
+
   // tslint:disable-next-line:variable-name
   setWhichTable(number: number) {
     if (number !== this.whichTable) {
@@ -434,6 +456,19 @@ export class MyActivitiesComponent implements OnInit {
               }
           );
         }
+        if (tab === 'exhibition') {
+          this._api.uploadExhibition(res).subscribe(
+              result => {
+                  console.log(result);
+                  this.getTeacherExhibitions(this.IdToken);
+                  //this.getTeacherCourses(this.language);
+              }, err => {
+                  console.log(err);
+                  this.getTeacherExhibitions(this.IdToken);
+                  //this.getTeacherCourses(this.language);
+              }
+          );
+          }
       }
     });
   }
