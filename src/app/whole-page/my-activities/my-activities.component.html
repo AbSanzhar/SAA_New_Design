@@ -22,6 +22,8 @@
             </div>
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 7}" (click)="setWhichTable(7)">Выставки</a>
             </div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 8}" (click)="setWhichTable(8)">Мои
+                награды</a></div>
             <button (click)="download2()" style="border-color: white; margin-left: -3%; margin-top: 5%;"
                     mat-stroked-button
                     color="primary">Cкачать cписок научных трудов
@@ -662,6 +664,62 @@
                                        showFirstLastButtons></mat-paginator>
                     </div>
 
+                </div>
+
+                <div *ngIf="whichTable === 8">
+
+                    <mat-table [dataSource]="TeacherExhibitions" class="">
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.exId}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef> Название выставки</mat-header-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.exName}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="date">
+                            <mat-header-cell *matHeaderCellDef> Дата</mat-header-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.exDate | date}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="place">
+                            <mat-header-cell *matHeaderCellDef> Место проведения </mat-header-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.exPlace}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="role">
+                            <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.exRole}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="level">
+                            <mat-header-cell *matHeaderCellDef> Уровень</mat-header-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.exLevel}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="type">
+                            <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.exType}} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumnsExhibition"></mat-header-row>
+                        <mat-row *matRowDef="let activity; columns: displayedColumnsExhibition;"></mat-row>
+                    </mat-table>
+
+                    <div style="align-items: center; display: flex;">
+                        <button style="margin: 0 10% 0 35%" (click)="create('award')" color="primary"
+                                mat-stroked-button>Добавить
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
+                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
+                                       [pageSize]="paginator.size"
+                                       [pageIndex]="paginator.page"
+                                       (change)="changeTableList($event)"
+                                       (page)="changeTableList($event)"
+                                       showFirstLastButtons></mat-paginator>
+                    </div>
                 </div>
             </div>
         </div>

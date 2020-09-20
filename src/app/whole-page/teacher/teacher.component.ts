@@ -147,6 +147,14 @@ export class TeacherComponent implements OnInit {
             user_id: this.IdToken
         });
 
+        this.awardForm = formBuilder.group({
+            awrd_name: new FormControl('', Validators.required),
+            awrd_type: new FormControl('', Validators.required),
+            awrd_date: new FormControl('', Validators.required),
+            awrd_by_whom: new FormControl('', Validators.required),
+            awrd_to_whom: new FormControl('', Validators.required),
+        });
+
     }
 
   fileToUpload: File = null;
@@ -159,6 +167,7 @@ export class TeacherComponent implements OnInit {
   teacherCourseForm: FormGroup;
   patentForm: FormGroup;
   exhibitionForm: FormGroup;
+  awardForm: FormGroup;
   PubTypeCounts;
   UserDegreeCounts;
   publishCount;
@@ -1239,7 +1248,7 @@ export class TeacherComponent implements OnInit {
       this._api.getExhibitionTypes(lang).subscribe(
           res => {
               console.log(res);
-              for(let i = 0; i < res.length; i++) {
+              for (let i = 0; i < res.length; i++) {
                   let temp = {
                       value: res[i].exTypeId,
                       viewValue: res[i].exTypeRu
@@ -1341,6 +1350,15 @@ export class TeacherComponent implements OnInit {
                 duration: 2000,
             });
             this._dialog.close(this.teacherCourseForm.value);
+        }
+    }
+
+    sendTeacherAward(message: string, action: string) {
+        if (this.exhibitionForm.valid) {
+            this._snackBar.open(message, action, {
+                duration: 2000,
+            });
+            this._dialog.close(this.exhibitionForm.value);
         }
     }
 
