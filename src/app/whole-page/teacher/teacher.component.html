@@ -808,6 +808,47 @@
         </form>
     </div>
 
+    <div class="Inner" *ngIf="_data === 'award'">
+        <form [formGroup]="awardForm" class="example-form">
+            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить награду: </p>
 
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование</mat-label>
+                <input matInput formControlName="awrd_name" type="text" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Тип </mat-label>
+                <mat-select required formControlName="awrd_type">
+                    <mat-option *ngFor="let i of awardTypes" [value]="i.value">
+                        {{i.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата присуждения награды/премии</mat-label>
+                <input matInput formControlName="awrd_date" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Кем присуждено</mat-label>
+                <input matInput formControlName="awrd_by_whom" type="text" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Кому присуждено</mat-label>
+                <input matInput [value]="userID" formControlName="awrd_to_whom" type="text" disabled>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="awardForm.invalid" style="margin-top: 3%" (click)="sendTeacherAward('Successfully saved', 'OK')">
+                <p style="color: white; margin: 0; padding: 0">Добавить награду</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+        </form>
+    </div>
 
 </div>

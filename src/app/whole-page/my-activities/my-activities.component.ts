@@ -40,6 +40,7 @@ export class MyActivitiesComponent implements OnInit {
   TeacherScienceProjects: any[] = [];
   TeacherCourses: any[] = [];
   TeacherExhibitions: any[] = [];
+  TeacherAwards: any[] = [];
 
   displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File'];
   displayedColumnsEvent = ['eventId', 'eventTitle', 'eventType', 'eventRole', 'eventDate', 'eventCity', 'Url', 'File'];
@@ -49,6 +50,7 @@ export class MyActivitiesComponent implements OnInit {
   displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
   displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
   displayedColumnsExhibition = ['id', 'name', 'date', 'place', 'type', 'role', 'level'];
+  displayedColumnsAward = ['id', 'name', 'type', 'date', 'by_whom', 'to_whom'];
 
   public s = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.s.jti;

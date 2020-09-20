@@ -37,6 +37,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class TeacherComponent implements OnInit {
 
     TeacherPublications: any[] = [];
+    userID;
 
     get f() {
         return this.eventForm.controls;
@@ -152,7 +153,7 @@ export class TeacherComponent implements OnInit {
             awrd_type: new FormControl('', Validators.required),
             awrd_date: new FormControl('', Validators.required),
             awrd_by_whom: new FormControl('', Validators.required),
-            awrd_to_whom: new FormControl('', Validators.required),
+            awrd_to_whom: new FormControl(this.userID)
         });
 
     }
@@ -177,24 +178,7 @@ export class TeacherComponent implements OnInit {
   selectedPublicationFile: File = null;
   selectedEventFile: File = null;
   selectedValue: string;
-  selectedValue1: string;
-  selectedValue2: string;
   selectedValue3: string;
-  selectedValue4: string;
-  selectedValue5: string;
-  selectedValue6: string;
-  selectedValue7: string;
-  selectedValue8: string;
-  selectedValue9: string;
-  selectedValue10: string;
-  selectedValue11: string;
-  selectedValue12: string;
-  selectedValue13: string;
-  selectedValue14: string;
-  selectedValue15: string;
-  selectedValue16: string;
-  selectedValue17: string;
-  selectedValue18: string;
   selectedValue19: string;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
@@ -207,7 +191,6 @@ export class TeacherComponent implements OnInit {
   private PatentLinkEn: any;
   private selectedCourseFile: File = null;
 
-  visible = true;
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -227,6 +210,39 @@ export class TeacherComponent implements OnInit {
 
     years: number[] = [];
     yy: number;
+
+
+    awardTypes: Sourse[] = [
+        {
+            value: 'Награда международного уровня',
+            viewValue: 'Награда международного уровня'
+        },
+        {
+            value: 'Премия международного уровня',
+            viewValue: 'Премия международного уровня'
+        },
+        {
+            value: 'Государственная премия в области науки',
+            viewValue: 'Государственная премия в области науки'
+        },
+        {
+            value: 'Именные научные премии',
+            viewValue: 'Именные научные премии'
+        },
+        {
+            value: 'Государственные научные стипендии',
+            viewValue: 'Государственные научные стипендии'
+        },
+        {
+            value: 'Стипендии молодым ученым',
+            viewValue: 'Стипендии молодым ученым'
+        },
+        {
+            value: 'Иные стипендии',
+            viewValue: 'Иные стипендии'
+        },
+    ];
+
 
     elements: Sourse[] = [
         // {value: 'Материалы конференции', viewValue: 'Материалы конференции'},
@@ -974,7 +990,7 @@ export class TeacherComponent implements OnInit {
       this._api.getUserById(this.IdToken).subscribe(
             res => {
                 this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
-                // tslint:disable-next-line:prefer-for-of
+                this.userID = res.userId;
             },
             err => {
                 console.log(err);
@@ -1360,11 +1376,11 @@ export class TeacherComponent implements OnInit {
     }
 
     sendTeacherAward(message: string, action: string) {
-        if (this.exhibitionForm.valid) {
+        if (this.awardForm.valid) {
             this._snackBar.open(message, action, {
                 duration: 2000,
             });
-            this._dialog.close(this.exhibitionForm.value);
+            this._dialog.close(this.awardForm.value);
         }
     }
 
@@ -1432,18 +1448,6 @@ export class TeacherComponent implements OnInit {
         console.log(pubLink);
     }
 
-    openUploadPubDialog() {
-        const dialogRef = this.dialog.open(PublicationUploadComponent);
-        dialogRef.afterClosed().subscribe(res => {
-            if (typeof res !== 'undefined' && res !== 'false') {
-                this.selectedPublicationFile = res;
-                console.log(this.selectedPublicationFile);
-                this.uploadPublicationFile();
-            }
-            console.log(`Result is ${res}`);
-        });
-    }
-
     uploadEventFile() {
         const formData = new FormData();
         let EventLink;
@@ -1481,57 +1485,7 @@ export class TeacherComponent implements OnInit {
         );
     }
 
-    openUploadPatentDialog() {
-        const PatentDialog = this.dialog.open(PatentUploadComponent);
-        PatentDialog.afterClosed().subscribe(
-            res => {
-                if (typeof res !== 'undefined' && res !== 'false') {
-                    this.PatentFileEn = res[0];
-                    this.PatentFileKz = res[1];
-                    this.PatentFileRu = res[2];
-                    this.uploadPatentFiles();
-                }
-                console.log(res);
-            }
-        );
-    }
-
     uploadPatentFiles() {
-        // console.log(this.PatentFileEn);
-        const formData = new FormData();
-        // let linkRu;
-        // formData.append('file', this.PatentFileEn);
-        // $.ajax({
-        //   url: 'https://nir.iitu.kz:8443/saa-uploader/uploadPatentFile',
-        //   type: 'POST',
-        //   data: formData,
-        //   processData: false,
-        //   contentType: false,
-        //   async: false,
-        //   // tslint:disable-next-line:only-arrow-functions
-        // }).done(function(data) {
-        //   const obj = JSON.parse(data);
-        //   console.log(obj);
-        //   linkRu = obj.filePath;
-        // });
-        // this.PatentLinkRu = linkRu;
-        // let linkKZ;
-        // const formDataKZ = new FormData();
-        // formDataKZ.append('file', this.PatentFileKz);
-        // $.ajax({
-        //   url: 'https://nir.iitu.kz:8443/saa-uploader/uploadPatentFile',
-        //   type: 'POST',
-        //   data: formDataKZ,
-        //   processData: false,
-        //   contentType: false,
-        //   async: false,
-        //   // tslint:disable-next-line:only-arrow-functions
-        // }).done(function(data) {
-        //   const obj = JSON.parse(data);
-        //   console.log(obj);
-        //   linkKZ = obj.filePath;
-        // });
-        // this.PatentLinkKz = linkKZ;
         let linkEN;
         const formDataEN = new FormData();
         formDataEN.append('file', this.PatentFileEn);
@@ -1553,11 +1507,7 @@ export class TeacherComponent implements OnInit {
         console.log(this.PatentLinkRu);
 
         this.patentForm.patchValue({
-            // ptnt_file_kz: this.PatentLinkKz,
             ptnt_file: this.PatentLinkEn,
-            // ptnt_file_ru: this.PatentLinkRu,
-            // ptnt_file_name_ru: this.PatentFileRu.name,
-            // ptnt_file_name_kz: this.PatentFileKz.name,
             ptnt_file_name: this.PatentFileEn.name,
         });
     }
@@ -1570,21 +1520,6 @@ export class TeacherComponent implements OnInit {
                     this.sendProject(res);
                     this._dialog.close(this.newProjForm.value);
                 }
-                // console.log(res);
-            }
-        );
-    }
-
-    openUploadCourseDialog() {
-        const CourseDialog = this.dialog.open(CourseUploadComponent);
-        CourseDialog.afterClosed().subscribe(
-            res => {
-                if (typeof res !== 'undefined' && res !== 'false') {
-                    this.selectedCourseFile = res;
-                    console.log(this.selectedCourseFile);
-                    this.uploadCourseFile();
-                }
-                console.log(res);
             }
         );
     }
@@ -1613,10 +1548,8 @@ export class TeacherComponent implements OnInit {
     }
 
     sendProject(newProjMemForm) {
-        // console.log(this.newProjForm.value);
         this._api.addProject(this.newProjForm.value).subscribe(
             res => {
-                // console.log(res);
                 const control = newProjMemForm.controls.ScienceMember as FormArray;
                 const members = control.value;
                 const mainMember = {
@@ -1626,7 +1559,6 @@ export class TeacherComponent implements OnInit {
                     userId: this.IdToken
                 };
                 this._api.addMemberToProject(mainMember).subscribe(
-                    // tslint:disable-next-line:no-shadowed-variable
                     res => {
                         console.log(res);
                     },
@@ -1756,23 +1688,7 @@ export class TeacherComponent implements OnInit {
             error => {
                 console.error(error);
             });
-        // for (const country of this.allCountries) {
-        //     this.elements5.push(country.name, country.code);
-        // }
     }
-
-    getTeacherPublications() {
-        this._api.getPublications().subscribe(res => {
-            this.TeacherPublications = res;
-            console.log(this.TeacherPublications);
-            for (let i = 0; i < res.length; i++) {
-                this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
-            }
-        }, err => {
-            console.log(err);
-        });
-    }
-
 }
 
 interface Sourse {
