@@ -557,6 +557,11 @@ export class ApiService {
     return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
+  getExhibitionCount(): Observable<any> {
+    const url = 'ratingList/ExhibitionLevel';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }

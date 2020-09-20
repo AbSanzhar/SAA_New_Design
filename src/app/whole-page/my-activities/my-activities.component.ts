@@ -31,6 +31,7 @@ export class MyActivitiesComponent implements OnInit {
   publishCount;
   courceCount;
   disMembersCount;
+  exhibitionCount;
   TeacherPublications: any[] = [];
   TeacherEvents: any[] = [];
   TeacherDisSovet: any[] = [];
@@ -127,6 +128,14 @@ export class MyActivitiesComponent implements OnInit {
           res => {
               console.log(res);
               this.disMembersCount = res;
+          }, err => {
+              console.log(err);
+          }
+      );
+      this._api.getExhibitionCount().subscribe(
+          res => {
+              console.log(res);
+              this.exhibitionCount = res;
           }, err => {
               console.log(err);
           }
@@ -476,7 +485,7 @@ export class MyActivitiesComponent implements OnInit {
   public download(): void {
     const documentCreator = new DocumentCreator();
     // tslint:disable-next-line:max-line-length
-    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount);
+    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount);
 
     Packer.toBlob(doc).then(blob => {
       console.log(blob);

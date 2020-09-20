@@ -2,7 +2,7 @@ import { AlignmentType, Document, HeadingLevel, Packer, Paragraph, TabStopPositi
     WidthType, VerticalMergeType  } from 'docx';
 
 export class DocumentCreator {
-    public static create(PubTypeCount, UserDegreeCount, publishCount, courceCount, disMemberCount): Document {
+    public static create(PubTypeCount, UserDegreeCount, publishCount, courceCount, disMemberCount, exhibitionCount): Document {
         const document = new Document({
             creator: 'Men'
         });
@@ -5238,7 +5238,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${exhibitionCount.international}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -5294,7 +5294,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${exhibitionCount.republic}, ${exhibitionCount.regional}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
