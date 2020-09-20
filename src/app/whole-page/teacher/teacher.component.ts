@@ -164,6 +164,7 @@ export class TeacherComponent implements OnInit {
   publishCount;
   courceCount;
   disMembersCount;
+  exhibitionCount;
   selectedPublicationFile: File = null;
   selectedEventFile: File = null;
   selectedValue: string;
@@ -956,6 +957,11 @@ export class TeacherComponent implements OnInit {
                 console.log(err);
             }
         );
+      this._api.getExhibitionCount().subscribe(
+          res => {
+              this.exhibitionCount = res;
+          }
+      );
       this._api.getUserById(this.IdToken).subscribe(
             res => {
                 this.name = res.firstName.charAt(0) + '.' +  res.patronymic.charAt(0) + '.' + res.lastName;
@@ -1365,7 +1371,7 @@ export class TeacherComponent implements OnInit {
     public download(): void {
         const documentCreator = new DocumentCreator();
         // tslint:disable-next-line:max-line-length
-        const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount);
+        const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount);
 
         Packer.toBlob(doc).then(blob => {
             console.log(blob);

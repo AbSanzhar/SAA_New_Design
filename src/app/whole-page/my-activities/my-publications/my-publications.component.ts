@@ -27,6 +27,7 @@ export class MyPublicationsComponent implements OnInit {
   publishCount;
   courceCount;
   disMembersCount;
+  exhibitionCount;
   private name: any;
   TeacherPublications: any[] = [];
   displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File'];
@@ -101,6 +102,11 @@ export class MyPublicationsComponent implements OnInit {
           console.log(err);
         }
     );
+    this._api.getExhibitionCount().subscribe(
+        res => {
+            this.exhibitionCount = res;
+        }
+    );
     this.langService.currentLanguage.subscribe(lang => {
       this.getTeacherPublications(lang);
       this.language = lang;
@@ -167,7 +173,7 @@ export class MyPublicationsComponent implements OnInit {
   public download(): void {
     const documentCreator = new DocumentCreator();
     // tslint:disable-next-line:max-line-length
-    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount);
+    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount);
 
     Packer.toBlob(doc).then(blob => {
       console.log(blob);
