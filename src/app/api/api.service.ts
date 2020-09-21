@@ -562,6 +562,21 @@ export class ApiService {
     return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
+  getAwardsTypes(lang): Observable<any> {
+    const url = 'awards/getTypes/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  uploadTeacherAward(award): Observable<any> {
+    const url = 'awards/add';
+    return this.http.post(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'), award);
+  }
+
+  getTeacherAwards(userId): Observable<any> {
+    const url = 'awards/getByUser/';
+    return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }

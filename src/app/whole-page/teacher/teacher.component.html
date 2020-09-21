@@ -814,13 +814,13 @@
 
             <mat-form-field class="example-full-width">
                 <mat-label>Наименование</mat-label>
-                <input matInput formControlName="awrd_name" type="text" required>
+                <input matInput formControlName="awardName" type="text" required>
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Тип </mat-label>
-                <mat-select required formControlName="awrd_type">
+                <mat-select required formControlName="awardTypeId">
                     <mat-option *ngFor="let i of awardTypes" [value]="i.value">
                         {{i.viewValue}}
                     </mat-option>
@@ -830,20 +830,21 @@
 
             <mat-form-field class="example-full-width">
                 <mat-label>Дата присуждения награды/премии</mat-label>
-                <input matInput formControlName="awrd_date" type="date" required>
+                <input matInput formControlName="awardDate" type="date" required>
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
                 <mat-label>Кем присуждено</mat-label>
-                <input matInput formControlName="awrd_by_whom" type="text" required>
+                <input matInput formControlName="awardBy" type="text" required>
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <mat-label>Кому присуждено</mat-label>
-                <input matInput [value]="userID" formControlName="awrd_to_whom" type="text" disabled>
-            </mat-form-field>
+<!--            <mat-form-field class="example-full-width">-->
+<!--                <mat-label>Кому присуждено</mat-label>-->
+<!--                <input matInput [value]="userID" formControlName="awrd_to_whom" type="text" disabled>-->
+<!--            </mat-form-field>-->
+            {{this.awardForm.value | json}}
 
             <button mat-raised-button color="primary" [disabled]="awardForm.invalid" style="margin-top: 3%" (click)="sendTeacherAward('Successfully saved', 'OK')">
                 <p style="color: white; margin: 0; padding: 0">Добавить награду</p></button>

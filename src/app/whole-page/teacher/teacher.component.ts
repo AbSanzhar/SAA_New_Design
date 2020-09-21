@@ -149,11 +149,11 @@ export class TeacherComponent implements OnInit {
         });
 
         this.awardForm = formBuilder.group({
-            awrd_name: new FormControl('', Validators.required),
-            awrd_type: new FormControl('', Validators.required),
-            awrd_date: new FormControl('', Validators.required),
-            awrd_by_whom: new FormControl('', Validators.required),
-            awrd_to_whom: new FormControl(this.userID)
+            awardName: new FormControl('', Validators.required),
+            awardTypeId: new FormControl('', Validators.required),
+            awardDate: new FormControl('', Validators.required),
+            awardBy: new FormControl('', Validators.required),
+            awardUserId: new FormControl(this.IdToken)
         });
 
     }
@@ -213,34 +213,34 @@ export class TeacherComponent implements OnInit {
 
 
     awardTypes: Sourse[] = [
-        {
-            value: 'Награда международного уровня',
-            viewValue: 'Награда международного уровня'
-        },
-        {
-            value: 'Премия международного уровня',
-            viewValue: 'Премия международного уровня'
-        },
-        {
-            value: 'Государственная премия в области науки',
-            viewValue: 'Государственная премия в области науки'
-        },
-        {
-            value: 'Именные научные премии',
-            viewValue: 'Именные научные премии'
-        },
-        {
-            value: 'Государственные научные стипендии',
-            viewValue: 'Государственные научные стипендии'
-        },
-        {
-            value: 'Стипендии молодым ученым',
-            viewValue: 'Стипендии молодым ученым'
-        },
-        {
-            value: 'Иные стипендии',
-            viewValue: 'Иные стипендии'
-        },
+        // {
+        //     value: 'Награда международного уровня',
+        //     viewValue: 'Награда международного уровня'
+        // },
+        // {
+        //     value: 'Премия международного уровня',
+        //     viewValue: 'Премия международного уровня'
+        // },
+        // {
+        //     value: 'Государственная премия в области науки',
+        //     viewValue: 'Государственная премия в области науки'
+        // },
+        // {
+        //     value: 'Именные научные премии',
+        //     viewValue: 'Именные научные премии'
+        // },
+        // {
+        //     value: 'Государственные научные стипендии',
+        //     viewValue: 'Государственные научные стипендии'
+        // },
+        // {
+        //     value: 'Стипендии молодым ученым',
+        //     viewValue: 'Стипендии молодым ученым'
+        // },
+        // {
+        //     value: 'Иные стипендии',
+        //     viewValue: 'Иные стипендии'
+        // },
     ];
 
 
@@ -849,6 +849,7 @@ export class TeacherComponent implements OnInit {
 
     courseForms = [ ];
 
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -918,6 +919,7 @@ export class TeacherComponent implements OnInit {
           this.getExhibitionLevels(lang);
           this.getExhibitionRoles(lang);
           this.getExhibitionTypes(lang);
+          this.getAwardTypes(lang);
       });
       // this.getTeacherPublications();
       this.getAllUsers();
@@ -1278,7 +1280,30 @@ export class TeacherComponent implements OnInit {
                   this.exhibitionTypes[i] = temp;
               }
           }, err => console.log(err)
-      )
+      );
+    }
+
+    getAwardTypes(lang) {
+      this._api.getAwardsTypes(lang).subscribe(
+          res => {
+              console.log(res);
+              for (let i = 0; i < res.length; i++) {
+                  let temp;
+                  if(lang == 'kz' || lang == 'en') {
+                      temp = {
+                          value: res[i].awardTypeId,
+                          viewValue: res[i]['awardTypeName' + String(lang)[0].toUpperCase() + String(lang)[1]]
+                      };
+                  } else {
+                      temp = {
+                          value: res[i].awardTypeId,
+                          viewValue: res[i].awardTypeName
+                      };
+                  }
+                  this.awardTypes[i] = temp;
+              }
+          }, err => console.log(err)
+      );
     }
 
   sendTeacherPublication(message: string, action: string) {

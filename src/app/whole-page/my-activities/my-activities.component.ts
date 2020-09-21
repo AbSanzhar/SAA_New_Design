@@ -90,6 +90,7 @@ export class MyActivitiesComponent implements OnInit {
           this.getTeacherExhibitions(this.IdToken);
           this.language = lang;
           this.getTeacherExhibitions(this.IdToken);
+          this.getTeacherAwards(this.IdToken);
       });
       this._api.getPubTypeCount().subscribe(
             res => {
@@ -406,6 +407,24 @@ export class MyActivitiesComponent implements OnInit {
       );
   }
 
+  getTeacherAwards(userId) {
+      this._api.getTeacherAwards(userId).subscribe(
+          res => {
+              console.log(res);
+              this.TeacherAwards = res;
+              for(let i = 0; i < res.length; i++) {
+                  let langTypeSelector;
+                  if(this.language == 'ru') {
+                      langTypeSelector = 'awardTypeName';
+                  } else {
+                      langTypeSelector = 'awardTypeName' + String(this.language[0]).toUpperCase() + this.language[1];
+                  }
+                  this.TeacherAwards[i].awardType = res[i].awardTypeEntity[langTypeSelector];
+              }
+          }, err => console.log(err)
+      );
+  }
+
   // tslint:disable-next-line:variable-name
   setWhichTable(number: number) {
     if (number !== this.whichTable) {
@@ -472,13 +491,22 @@ export class MyActivitiesComponent implements OnInit {
               result => {
                   console.log(result);
                   this.getTeacherExhibitions(this.IdToken);
-                  //this.getTeacherCourses(this.language);
               }, err => {
                   console.log(err);
                   this.getTeacherExhibitions(this.IdToken);
-                  //this.getTeacherCourses(this.language);
               }
           );
+          }
+          if (tab === 'award') {
+              this._api.uploadTeacherAward(res).subscribe(
+                  result => {
+                      console.log(result);
+                      this.getTeacherAwards(this.IdToken);
+                  }, err => {
+                      console.log(err);
+                      this.getTeacherAwards(this.IdToken);
+                  }
+              );
           }
       }
     });

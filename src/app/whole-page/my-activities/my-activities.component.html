@@ -667,35 +667,35 @@
 
                 <div *ngIf="whichTable === 8">
 
-                    <mat-table [dataSource]="displayedColumnsAward" class="">
+                    <mat-table [dataSource]="TeacherAwards" class="">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> id </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.awardId}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="name">
                             <mat-header-cell *matHeaderCellDef> Наименование награды/перемии</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> name </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.awardName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="type">
                             <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> Тип </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.awardType}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="date">
                             <mat-header-cell *matHeaderCellDef> Дата присуждения награды/премии </mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> date </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.awardDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="by_whom">
                             <mat-header-cell *matHeaderCellDef> Кем присуждено</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> by_whom </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.awardBy}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="to_whom">
                             <mat-header-cell *matHeaderCellDef> Кому присуждено</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> to_whom </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{activity.awardUserId.firstName}} {{activity.awardUserId.lastName}} </mat-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumnsAward"></mat-header-row>
