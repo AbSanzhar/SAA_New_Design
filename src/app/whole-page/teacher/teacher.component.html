@@ -844,7 +844,6 @@
 <!--                <mat-label>Кому присуждено</mat-label>-->
 <!--                <input matInput [value]="userID" formControlName="awrd_to_whom" type="text" disabled>-->
 <!--            </mat-form-field>-->
-            {{this.awardForm.value | json}}
 
             <button mat-raised-button color="primary" [disabled]="awardForm.invalid" style="margin-top: 3%" (click)="sendTeacherAward('Successfully saved', 'OK')">
                 <p style="color: white; margin: 0; padding: 0">Добавить награду</p></button>
