@@ -851,4 +851,112 @@
         </form>
     </div>
 
+    <div class="Inner" *ngIf="_data === 'activity1'">
+        <form [formGroup]="activity1Form" class="example-form">
+            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить деятельность: </p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование деятельности</mat-label>
+                <input matInput formControlName="activity1_name" type="text" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата C</mat-label>
+                <input matInput formControlName="activity1_startDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата По</mat-label>
+                <input matInput formControlName="activity1_endDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="activity1Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity1('Successfully saved', 'OK')">
+                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="_data === 'activity2'">
+        <form [formGroup]="activity2Form" class="example-form">
+            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить деятельность: </p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование деятельности</mat-label>
+                <input matInput formControlName="activity2_name" type="text" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата C</mat-label>
+                <input matInput formControlName="activity2_startDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата По</mat-label>
+                <input matInput formControlName="activity2_endDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="activity2Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity2('Successfully saved', 'OK')">
+                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="_data === 'activity3'">
+        <form [formGroup]="activity3Form" class="example-form">
+            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить событие: </p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование события</mat-label>
+                <input matInput formControlName="activity3_name" type="text" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата C</mat-label>
+                <input matInput formControlName="activity3_startDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата По</mat-label>
+                <input matInput formControlName="activity3_endDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="activity3Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity3('Successfully saved', 'OK')">
+                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+        </form>
+    </div>
+
+    <div class="Inner" *ngIf="_data === 'activity4'">
+        <form [formGroup]="activity4Form" class="example-form">
+            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить событие: </p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Наименование события</mat-label>
+                <input matInput formControlName="activity4_name" type="text" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата C</mat-label>
+                <input matInput formControlName="activity4_startDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Дата По</mat-label>
+                <input matInput formControlName="activity4_endDate" type="date" required>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="activity4Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity4('Successfully saved', 'OK')">
+                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+        </form>
+    </div>
+
 </div>

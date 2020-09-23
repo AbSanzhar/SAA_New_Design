@@ -47,7 +47,7 @@ import {MatCardModule} from '@angular/material/card';
     SignInDialogComponent,
     PatentUploadComponent,
     EventUploadComponent,
-    PublicationUploadComponent,
+    PublicationUploadComponent
   ],
     imports: [
         BrowserModule,

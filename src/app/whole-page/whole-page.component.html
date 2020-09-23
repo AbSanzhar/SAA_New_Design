@@ -71,7 +71,7 @@
                            [routerLinkActiveOptions]="{ exact: true }"><p class="navigation">Главная</p></a>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./activities"><p class="navigation"
                                                                                                    *ngIf="this.userRoles.indexOf('Teacher') != -1">
-                            Публикации</p></a>
+                            Моя деятельность</p></a>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./statistics"><p class="navigation">Статистика</p></a>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./about"><p class="navigation">О проекте</p></a>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./help"><p class="navigation">Помощь</p></a>

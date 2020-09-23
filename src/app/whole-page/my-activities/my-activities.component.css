@@ -206,6 +206,16 @@ mat-table {
     max-width: 2rem;
 }
 
+.mat-column-teacherID {
+    flex: 7rem;
+    max-width: 7rem;
+}
+
+.mat-column-actName {
+    flex: 20rem;
+    max-width: 20rem;
+}
+
 .mat-column-name {
     flex: 5rem;
     max-width: 4rem;

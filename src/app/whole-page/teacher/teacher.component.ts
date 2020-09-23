@@ -156,6 +156,34 @@ export class TeacherComponent implements OnInit {
             awardUserId: new FormControl(this.IdToken)
         });
 
+        this.activity1Form = formBuilder.group({
+            activity1_teacherID: new FormControl(this.IdToken),
+            activity1_name: new FormControl('', Validators.required),
+            activity1_startDate: new FormControl('', Validators.required),
+            activity1_endDate: new FormControl('', Validators.required),
+        });
+
+        this.activity2Form = formBuilder.group({
+            activity2_teacherID: new FormControl(this.IdToken),
+            activity2_name: new FormControl('', Validators.required),
+            activity2_startDate: new FormControl('', Validators.required),
+            activity2_endDate: new FormControl('', Validators.required),
+        });
+
+        this.activity3Form = formBuilder.group({
+            activity3_teacherID: new FormControl(this.IdToken),
+            activity3_name: new FormControl('', Validators.required),
+            activity3_startDate: new FormControl('', Validators.required),
+            activity3_endDate: new FormControl('', Validators.required),
+        });
+
+        this.activity4Form = formBuilder.group({
+            activity4_teacherID: new FormControl(this.IdToken),
+            activity4_name: new FormControl('', Validators.required),
+            activity4_startDate: new FormControl('', Validators.required),
+            activity4_endDate: new FormControl('', Validators.required),
+        });
+
     }
 
   fileToUpload: File = null;
@@ -169,6 +197,10 @@ export class TeacherComponent implements OnInit {
   patentForm: FormGroup;
   exhibitionForm: FormGroup;
   awardForm: FormGroup;
+  activity1Form: FormGroup;
+  activity2Form: FormGroup;
+  activity3Form: FormGroup;
+  activity4Form: FormGroup;
   PubTypeCounts;
   UserDegreeCounts;
   publishCount;
@@ -1406,6 +1438,42 @@ export class TeacherComponent implements OnInit {
                 duration: 2000,
             });
             this._dialog.close(this.awardForm.value);
+        }
+    }
+
+    sendTeacherActivity1(message: string, action: string) {
+        if (this.activity1Form.valid) {
+            this._snackBar.open(message, action, {
+                duration: 2000,
+            });
+            this._dialog.close(this.activity1Form.value);
+        }
+    }
+
+    sendTeacherActivity2(message: string, action: string) {
+        if (this.activity2Form.valid) {
+            this._snackBar.open(message, action, {
+                duration: 2000,
+            });
+            this._dialog.close(this.activity2Form.value);
+        }
+    }
+
+    sendTeacherActivity3(message: string, action: string) {
+        if (this.activity3Form.valid) {
+            this._snackBar.open(message, action, {
+                duration: 2000,
+            });
+            this._dialog.close(this.activity3Form.value);
+        }
+    }
+
+    sendTeacherActivity4(message: string, action: string) {
+        if (this.activity4Form.valid) {
+            this._snackBar.open(message, action, {
+                duration: 2000,
+            });
+            this._dialog.close(this.activity4Form.value);
         }
     }
 

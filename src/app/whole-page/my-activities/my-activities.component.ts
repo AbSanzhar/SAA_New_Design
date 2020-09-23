@@ -41,6 +41,10 @@ export class MyActivitiesComponent implements OnInit {
   TeacherCourses: any[] = [];
   TeacherExhibitions: any[] = [];
   TeacherAwards: any[] = [];
+  Activity1: any[] = [];
+  Activity2: any[] = [];
+  Activity3: any[] = [];
+  Activity4: any[] = [];
 
   displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File'];
   displayedColumnsEvent = ['eventId', 'eventTitle', 'eventType', 'eventRole', 'eventDate', 'eventCity', 'Url', 'File'];
@@ -51,6 +55,10 @@ export class MyActivitiesComponent implements OnInit {
   displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
   displayedColumnsExhibition = ['id', 'name', 'date', 'place', 'type', 'role', 'level'];
   displayedColumnsAward = ['id', 'name', 'type', 'date', 'by_whom', 'to_whom'];
+  displayedColumnsActivity1 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
+  displayedColumnsActivity2 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
+  displayedColumnsActivity3 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
+  displayedColumnsActivity4 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
 
   public s = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.s.jti;
