@@ -26,12 +26,16 @@ export class MyActivitiesComponent implements OnInit {
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
   private name: any;
+
   PubTypeCounts;
   UserDegreeCounts;
   publishCount;
   courceCount;
   disMembersCount;
   exhibitionCount;
+  awardCount;
+  activityCount;
+
   TeacherPublications: any[] = [];
   TeacherEvents: any[] = [];
   TeacherDisSovet: any[] = [];
@@ -149,6 +153,18 @@ export class MyActivitiesComponent implements OnInit {
               this.exhibitionCount = res;
           }, err => {
               console.log(err);
+          }
+      );
+      this._api.getRatingListAwardsCount().subscribe(
+          res => {
+              this.awardCount = res;
+              console.log(res);
+          }
+      );
+      this._api.getRatingListActivities().subscribe(
+          res => {
+              console.log(res);
+              this.activityCount = res;
           }
       );
       this._api.getUserById(this.IdToken).subscribe(
@@ -523,7 +539,7 @@ export class MyActivitiesComponent implements OnInit {
   public download(): void {
     const documentCreator = new DocumentCreator();
     // tslint:disable-next-line:max-line-length
-    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount);
+    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount, this.awardCount, this.activityCount);
 
     Packer.toBlob(doc).then(blob => {
       console.log(blob);

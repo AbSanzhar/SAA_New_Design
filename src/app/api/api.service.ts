@@ -577,6 +577,26 @@ export class ApiService {
     return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
+  getRatingListAwardsCount(): Observable<any> {
+    const url = 'ratingList/Awards';
+    return this.http.get(this.base + url + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getTeacherActivityTypes(lang): Observable<any> {
+    const url = 'activity/getTypes/';
+    return this.http.get(this.base + url + lang + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getTeacherActivities(userId): Observable<any> {
+    const url = 'activity/getByUser/';
+    return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
+  }
+
+  getRatingListActivities(): Observable<any> {
+    const url = 'ratingList/Activity';
+    return this.http.get(this.base + url);
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }

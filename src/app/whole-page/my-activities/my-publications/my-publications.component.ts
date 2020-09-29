@@ -170,17 +170,17 @@ export class MyPublicationsComponent implements OnInit {
     });
   }
 
-  public download(): void {
-    const documentCreator = new DocumentCreator();
-    // tslint:disable-next-line:max-line-length
-    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount);
-
-    Packer.toBlob(doc).then(blob => {
-      console.log(blob);
-      saveAs(blob, 'Рейтинг лист.docx');
-      console.log('Document created successfully');
-    });
-  }
+  // public download(): void {
+  //   const documentCreator = new DocumentCreator();
+  //   // tslint:disable-next-line:max-line-length
+  //   const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount);
+  //
+  //   Packer.toBlob(doc).then(blob => {
+  //     console.log(blob);
+  //     saveAs(blob, 'Рейтинг лист.docx');
+  //     console.log('Document created successfully');
+  //   });
+  // }
 
   public download2(): void {
     console.log(this.TeacherPublications);

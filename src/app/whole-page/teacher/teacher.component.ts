@@ -207,6 +207,7 @@ export class TeacherComponent implements OnInit {
   courceCount;
   disMembersCount;
   exhibitionCount;
+  awardCount;
   selectedPublicationFile: File = null;
   selectedEventFile: File = null;
   selectedValue: string;
@@ -952,6 +953,7 @@ export class TeacherComponent implements OnInit {
           this.getExhibitionRoles(lang);
           this.getExhibitionTypes(lang);
           this.getAwardTypes(lang);
+          this.getActivityTypes(lang);
       });
       // this.getTeacherPublications();
       this.getAllUsers();
@@ -1019,6 +1021,11 @@ export class TeacherComponent implements OnInit {
       this._api.getExhibitionCount().subscribe(
           res => {
               this.exhibitionCount = res;
+          }
+      );
+      this._api.getRatingListAwardsCount().subscribe(
+          res => {
+              this.awardCount = res;
           }
       );
       this._api.getUserById(this.IdToken).subscribe(
@@ -1338,6 +1345,14 @@ export class TeacherComponent implements OnInit {
       );
     }
 
+    getActivityTypes(lang) {
+      this._api.getTeacherActivityTypes(lang).subscribe(
+          res => {
+              console.log(res);
+          }, err => console.log(err)
+      );
+    }
+
   sendTeacherPublication(message: string, action: string) {
       let coAuthorsIds = [];
       // tslint:disable-next-line:prefer-for-of
@@ -1495,17 +1510,17 @@ export class TeacherComponent implements OnInit {
     }
 
 
-    public download(): void {
-        const documentCreator = new DocumentCreator();
-        // tslint:disable-next-line:max-line-length
-        const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount);
-
-        Packer.toBlob(doc).then(blob => {
-            console.log(blob);
-            saveAs(blob, 'Рейтинг лист.docx');
-            console.log('Document created successfully');
-        });
-    }
+    // public download(): void {
+    //     const documentCreator = new DocumentCreator();
+    //     // tslint:disable-next-line:max-line-length
+    //     const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount, this.awardCount);
+    //
+    //     Packer.toBlob(doc).then(blob => {
+    //         console.log(blob);
+    //         saveAs(blob, 'Рейтинг лист.docx');
+    //         console.log('Document created successfully');
+    //     });
+    // }
 
     public download2(): void {
       console.log(this.TeacherPublications);

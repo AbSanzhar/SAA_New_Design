@@ -2,7 +2,7 @@ import { AlignmentType, Document, HeadingLevel, Packer, Paragraph, TabStopPositi
     WidthType, VerticalMergeType  } from 'docx';
 
 export class DocumentCreator {
-    public static create(PubTypeCount, UserDegreeCount, publishCount, courceCount, disMemberCount, exhibitionCount): Document {
+    public static create(PubTypeCount, UserDegreeCount, publishCount, courceCount, disMemberCount, exhibitionCount, awardCount, activityCount): Document {
         const document = new Document({
             creator: 'Men'
         });
@@ -3270,7 +3270,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${awardCount.international_premium}, ${awardCount.international_award}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -3327,7 +3327,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${awardCount.state_science_premium}, ${awardCount.named_science_premium}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -3383,7 +3383,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${awardCount.state_science_scholarship}, ${awardCount.young_scientist_scholarship}/${awardCount.other_scholarship}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -5497,7 +5497,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${activityCount.law_activity}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -5563,7 +5563,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${activityCount.nir_activity}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -5866,7 +5866,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${activityCount.smm_activity}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
