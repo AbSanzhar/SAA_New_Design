@@ -59,10 +59,10 @@ export class MyActivitiesComponent implements OnInit {
   displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
   displayedColumnsExhibition = ['id', 'name', 'date', 'place', 'type', 'role', 'level'];
   displayedColumnsAward = ['id', 'name', 'type', 'date', 'by_whom', 'to_whom'];
-  displayedColumnsActivity1 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
-  displayedColumnsActivity2 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
-  displayedColumnsActivity3 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
-  displayedColumnsActivity4 = ['id', 'teacherID', 'actName', 'startDate', 'endDate'];
+  displayedColumnsActivity1 = ['id', 'actName', 'startDate', 'endDate'];
+  displayedColumnsActivity2 = ['id', 'actName', 'startDate', 'endDate'];
+  displayedColumnsActivity3 = ['id', 'actName', 'startDate', 'endDate'];
+  displayedColumnsActivity4 = ['id', 'actName', 'startDate', 'endDate'];
 
   public s = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.s.jti;
@@ -103,6 +103,7 @@ export class MyActivitiesComponent implements OnInit {
           this.language = lang;
           this.getTeacherExhibitions(this.IdToken);
           this.getTeacherAwards(this.IdToken);
+          this.getTeacherActivities(this.IdToken);
       });
       this._api.getPubTypeCount().subscribe(
             res => {
@@ -122,7 +123,7 @@ export class MyActivitiesComponent implements OnInit {
               console.log(err);
             }
         );
-        this._api.getPublishCount().subscribe(
+      this._api.getPublishCount().subscribe(
             res => {
               console.log(res);
               this.publishCount = res;
@@ -194,7 +195,7 @@ export class MyActivitiesComponent implements OnInit {
               // tslint:disable-next-line:prefer-for-of
               for (let i = 0; i < res.roles.length; i++) {
                   this.roles.push(res.roles[i].roleName);
-                if (res.roles[i].roleName === 'Teacher') {
+                  if (res.roles[i].roleName === 'Teacher') {
                   this.getTeacherPublications(this.language);
                   this.getTeacherEvents(this.language);
                   this.getTeacherDisSovet(this.language);
@@ -356,7 +357,7 @@ export class MyActivitiesComponent implements OnInit {
       this._api.getOneScienceProject(14, 'en').subscribe(
           res => console.log(res)
       );
-    this._api.getScienceProject().subscribe(
+      this._api.getScienceProject().subscribe(
         res => {
           console.log(res);
           this.TeacherScienceProjects = res;
@@ -418,7 +419,7 @@ export class MyActivitiesComponent implements OnInit {
           res => {
               console.log(res);
               this.TeacherExhibitions = res;
-              for(let i = 0; i < res.length; i++) {
+              for (let i = 0; i < res.length; i++) {
                   const langRoleSelector = 'exRole' + String(this.language[0]).toUpperCase() + this.language[1];
                   const langTypeSelector = 'exType' + String(this.language[0]).toUpperCase() + this.language[1];
                   const langLevelSelector = 'exLevel' + String(this.language[0]).toUpperCase() + this.language[1];
@@ -436,15 +437,36 @@ export class MyActivitiesComponent implements OnInit {
           res => {
               console.log(res);
               this.TeacherAwards = res;
-              for(let i = 0; i < res.length; i++) {
+              for (let i = 0; i < res.length; i++) {
                   let langTypeSelector;
-                  if(this.language == 'ru') {
+                  if (this.language == 'ru') {
                       langTypeSelector = 'awardTypeName';
                   } else {
                       langTypeSelector = 'awardTypeName' + String(this.language[0]).toUpperCase() + this.language[1];
                   }
                   this.TeacherAwards[i].awardType = res[i].awardTypeEntity[langTypeSelector];
               }
+          }, err => console.log(err)
+      );
+  }
+
+  getTeacherActivities(userId) {
+      this._api.getTeacherActivities(userId).subscribe(
+          res => {
+              console.log(res);
+              for(let i = 0; i < res.length; i++) {
+                  if(res[i].activityTypeId.activityTypeId == 1) {
+                      this.Activity1.push(res[i]);
+                  } else if (res[i].activityTypeId.activityTypeId == 2) {
+                      this.Activity2.push(res[i]);
+                  } else if (res[i].activityTypeId.activityTypeId == 3) {
+                      this.Activity3.push(res[i]);
+                  } else if (res[i].activityTypeId.activityTypeId == 4) {
+                      this.Activity4.push(res[i]);
+                  }
+
+              }
+
           }, err => console.log(err)
       );
   }
@@ -461,7 +483,7 @@ export class MyActivitiesComponent implements OnInit {
       width: '50%',
       data: tab
     }).afterClosed().subscribe(res => {
-      if(typeof res !== 'undefined' && res !== 'false') {
+      if (typeof res !== 'undefined' && res !== 'false') {
         if (tab === 'pub') {
           this._api.uploadPub(res).subscribe(result => {
             console.log(result);
@@ -521,7 +543,7 @@ export class MyActivitiesComponent implements OnInit {
               }
           );
           }
-          if (tab === 'award') {
+        if (tab === 'award') {
               this._api.uploadTeacherAward(res).subscribe(
                   result => {
                       console.log(result);
@@ -529,6 +551,17 @@ export class MyActivitiesComponent implements OnInit {
                   }, err => {
                       console.log(err);
                       this.getTeacherAwards(this.IdToken);
+                  }
+              );
+          }
+          if (tab === 'activity1' || tab === 'activity2' || tab === 'activity3' || tab === 'activity4') {
+              this._api.uploadTeacherActivity(res).subscribe(
+                  result => {
+                      console.log(result);
+                      this.getTeacherActivities(this.IdToken);
+                  }, err => {
+                      console.log(err);
+                      this.getTeacherActivities(this.IdToken);
                   }
               );
           }

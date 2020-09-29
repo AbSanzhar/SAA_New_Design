@@ -592,6 +592,11 @@ export class ApiService {
     return this.http.get(this.base + url + userId + '?jwt_token=' + window.localStorage.getItem('token'));
   }
 
+  uploadTeacherActivity(activity): Observable<any> {
+    const url = 'activity/add';
+    return this.http.post(this.base + url, activity);
+  }
+
   getRatingListActivities(): Observable<any> {
     const url = 'ratingList/Activity';
     return this.http.get(this.base + url);

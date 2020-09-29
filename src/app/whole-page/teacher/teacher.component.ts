@@ -38,6 +38,7 @@ export class TeacherComponent implements OnInit {
 
     TeacherPublications: any[] = [];
     userID;
+    activityTypeId = 1;
 
     get f() {
         return this.eventForm.controls;
@@ -157,31 +158,35 @@ export class TeacherComponent implements OnInit {
         });
 
         this.activity1Form = formBuilder.group({
-            activity1_teacherID: new FormControl(this.IdToken),
-            activity1_name: new FormControl('', Validators.required),
-            activity1_startDate: new FormControl('', Validators.required),
-            activity1_endDate: new FormControl('', Validators.required),
+            activity_user_id: new FormControl(this.IdToken),
+            activity_type_id: new FormControl('1', Validators.required),
+            activity_name: new FormControl('', Validators.required),
+            activity_from_date: new FormControl('', Validators.required),
+            activity_to_date: new FormControl('', Validators.required),
         });
 
         this.activity2Form = formBuilder.group({
-            activity2_teacherID: new FormControl(this.IdToken),
-            activity2_name: new FormControl('', Validators.required),
-            activity2_startDate: new FormControl('', Validators.required),
-            activity2_endDate: new FormControl('', Validators.required),
+            activity_user_id: new FormControl(this.IdToken),
+            activity_type_id: new FormControl('2', Validators.required),
+            activity_name: new FormControl('', Validators.required),
+            activity_from_date: new FormControl('', Validators.required),
+            activity_to_date: new FormControl('', Validators.required),
         });
 
         this.activity3Form = formBuilder.group({
-            activity3_teacherID: new FormControl(this.IdToken),
-            activity3_name: new FormControl('', Validators.required),
-            activity3_startDate: new FormControl('', Validators.required),
-            activity3_endDate: new FormControl('', Validators.required),
+            activity_user_id: new FormControl(this.IdToken),
+            activity_type_id: new FormControl('3', Validators.required),
+            activity_name: new FormControl('', Validators.required),
+            activity_from_date: new FormControl('', Validators.required),
+            activity_to_date: new FormControl('', Validators.required),
         });
 
         this.activity4Form = formBuilder.group({
-            activity4_teacherID: new FormControl(this.IdToken),
-            activity4_name: new FormControl('', Validators.required),
-            activity4_startDate: new FormControl('', Validators.required),
-            activity4_endDate: new FormControl('', Validators.required),
+            activity_user_id: new FormControl(this.IdToken),
+            activity_type_id: new FormControl('4', Validators.required),
+            activity_name: new FormControl('', Validators.required),
+            activity_from_date: new FormControl('', Validators.required),
+            activity_to_date: new FormControl('', Validators.required),
         });
 
     }

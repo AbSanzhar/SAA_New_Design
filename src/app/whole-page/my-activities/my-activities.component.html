@@ -723,27 +723,27 @@
                     <mat-table [dataSource]="Activity1">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> ID </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="teacherID">
-                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>
-                        </ng-container>
+<!--                        <ng-container matColumnDef="teacherID">-->
+<!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
+<!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
+<!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
                             <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> name </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
                             <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> startDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
                             <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> endDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumnsActivity1"></mat-header-row>
@@ -768,27 +768,27 @@
                     <mat-table [dataSource]="Activity2">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> ID </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="teacherID">
-                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>
-                        </ng-container>
+                        <!--                        <ng-container matColumnDef="teacherID">-->
+                        <!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
+                        <!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
+                        <!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
                             <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> name </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
                             <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> startDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
                             <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> endDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumnsActivity2"></mat-header-row>
@@ -813,27 +813,27 @@
                     <mat-table [dataSource]="Activity3">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> ID </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="teacherID">
-                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>
-                        </ng-container>
+                        <!--                        <ng-container matColumnDef="teacherID">-->
+                        <!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
+                        <!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
+                        <!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
                             <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> name </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
                             <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> startDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
                             <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> endDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumnsActivity3"></mat-header-row>
@@ -858,27 +858,27 @@
                     <mat-table [dataSource]="Activity4">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> ID </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="teacherID">
-                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>
-                        </ng-container>
+                        <!--                        <ng-container matColumnDef="teacherID">-->
+                        <!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
+                        <!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
+                        <!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
                             <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> name </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
                             <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> startDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
                             <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
-                            <mat-cell *matCellDef="let activity"> endDate </mat-cell>
+                            <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumnsActivity4"></mat-header-row>
