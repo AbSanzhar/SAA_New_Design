@@ -602,6 +602,16 @@ export class ApiService {
     return this.http.get(this.base + url);
   }
 
+  getRatingListActivityRoles(): Observable<any> {
+    const url = 'ratingList/ActivityRole';
+    return this.http.get(this.base + url);
+  }
+
+  getActivityRoles(lang): Observable<any> {
+    const url = 'activity/getRoles/';
+    return this.http.get(this.base + url + lang);
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }

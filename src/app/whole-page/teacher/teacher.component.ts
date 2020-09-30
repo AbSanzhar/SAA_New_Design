@@ -176,6 +176,7 @@ export class TeacherComponent implements OnInit {
         this.activity3Form = formBuilder.group({
             activity_user_id: new FormControl(this.IdToken),
             activity_type_id: new FormControl('3', Validators.required),
+            activity_role_id: new FormControl('', Validators.required),
             activity_name: new FormControl('', Validators.required),
             activity_from_date: new FormControl('', Validators.required),
             activity_to_date: new FormControl('', Validators.required),
@@ -341,6 +342,7 @@ export class TeacherComponent implements OnInit {
     exhibitionLevels: Sourse[] = [ ];
     exhibitionTypes: Sourse[] = [ ];
     exhibitionRoles: Sourse[] = [ ];
+    activityRoles: Sourse[] = [];
 
 
 
@@ -959,6 +961,7 @@ export class TeacherComponent implements OnInit {
           this.getExhibitionTypes(lang);
           this.getAwardTypes(lang);
           this.getActivityTypes(lang);
+          this.getActivityRoles(lang);
       });
       // this.getTeacherPublications();
       this.getAllUsers();
@@ -1354,6 +1357,21 @@ export class TeacherComponent implements OnInit {
       this._api.getTeacherActivityTypes(lang).subscribe(
           res => {
               console.log(res);
+          }, err => console.log(err)
+      );
+    }
+
+    getActivityRoles(lang) {
+      this._api.getActivityRoles(lang).subscribe(
+          res => {
+              console.log(res);
+              for (let i = 0; i < res.length; i++) {
+                  let temp = {
+                      value: res[i].activityRoleId,
+                      viewValue: res[i].activityRoleName
+                  };
+                  this.activityRoles[i] = temp;
+              }
           }, err => console.log(err)
       );
     }

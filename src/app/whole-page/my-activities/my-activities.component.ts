@@ -35,6 +35,7 @@ export class MyActivitiesComponent implements OnInit {
   exhibitionCount;
   awardCount;
   activityCount;
+  activityRoleCount;
 
   TeacherPublications: any[] = [];
   TeacherEvents: any[] = [];
@@ -166,6 +167,12 @@ export class MyActivitiesComponent implements OnInit {
           res => {
               console.log(res);
               this.activityCount = res;
+          }
+      );
+      this._api.getRatingListActivityRoles().subscribe(
+          res => {
+              console.log(res);
+              this.activityRoleCount = res;
           }
       );
       this._api.getUserById(this.IdToken).subscribe(
@@ -572,7 +579,7 @@ export class MyActivitiesComponent implements OnInit {
   public download(): void {
     const documentCreator = new DocumentCreator();
     // tslint:disable-next-line:max-line-length
-    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount, this.awardCount, this.activityCount);
+    const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount, this.awardCount, this.activityCount, this.activityRoleCount);
 
     Packer.toBlob(doc).then(blob => {
       console.log(blob);

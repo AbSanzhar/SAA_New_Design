@@ -2,7 +2,7 @@ import { AlignmentType, Document, HeadingLevel, Packer, Paragraph, TabStopPositi
     WidthType, VerticalMergeType  } from 'docx';
 
 export class DocumentCreator {
-    public static create(PubTypeCount, UserDegreeCount, publishCount, courceCount, disMemberCount, exhibitionCount, awardCount, activityCount): Document {
+    public static create(PubTypeCount, UserDegreeCount, publishCount, courceCount, disMemberCount, exhibitionCount, awardCount, activityCount, activityRoleCount): Document {
         const document = new Document({
             creator: 'Men'
         });
@@ -5687,7 +5687,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${activityRoleCount.moderator}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -5743,7 +5743,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${activityRoleCount.org_member}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',
@@ -5798,7 +5798,7 @@ export class DocumentCreator {
                                     children: [new Paragraph({
                                         children: [
                                             new TextRun({
-                                                text: '',
+                                                text: `${activityRoleCount.speaker}`,
                                                 size: 20,
                                                 font: {
                                                     name: 'Courier New',

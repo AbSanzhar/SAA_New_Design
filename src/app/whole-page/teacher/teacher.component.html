@@ -914,6 +914,16 @@
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
 
+            <mat-form-field>
+                <mat-label>Роль </mat-label>
+                <mat-select required formControlName="activity_role_id">
+                    <mat-option *ngFor="let i of activityRoles" [value]="i.value">
+                        {{i.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>This is the required field!</mat-error>
+            </mat-form-field>
+
             <mat-form-field class="example-full-width">
                 <mat-label>Дата C</mat-label>
                 <input matInput formControlName="activity_from_date" type="date" required>
