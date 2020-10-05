@@ -38,13 +38,14 @@
                                 <p fxFlex="80">Lorem ipsum dolor sit amet</p>
                             </div>
                         </mat-menu>
-                        <button mat-button [matMenuTriggerFor]="menu2">{{language}}
+                        <button [matMenuTriggerFor]="languageMenu" mat-icon-button type="button">
+                            <span>{{currentLang.name}}</span>
                             <mat-icon>keyboard_arrow_down</mat-icon>
                         </button>
-                        <mat-menu #menu2="matMenu">
-                            <button mat-menu-item (click)="changeLang('kz')">ҚАЗ</button>
-                            <button mat-menu-item (click)="changeLang('ru')">РУС</button>
-                            <button mat-menu-item (click)="changeLang('en')">ENG</button>
+                        <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
+                            <button mat-menu-item *ngFor="let lang of availableLangs" (click)="setLang(lang)">
+                                <span>{{lang.name}}</span>
+                            </button>
                         </mat-menu>
                         <button mat-button [matMenuTriggerFor]="menu">
                             <p style="margin-top: 7%" class="text">{{name}}</p>
@@ -55,10 +56,10 @@
                     <mat-menu #menu="matMenu">
                         <button style="padding: 0; margin: 0" mat-menu-item><a style="height: 100%"
                                                                                routerLink="./profile"
-                                                                               mat-button>Моя страница</a></button>
+                                                                               mat-button>{{"My page" | translate}}</a></button>
                         <button style="padding: 0; margin: 0" mat-menu-item><a style="height: 100%"
                                                                                routerLink="./password"
-                                                                               mat-button>Сменить пароль</a></button>
+                                                                               mat-button>{{"Change password" | translate}}</a></button>
                         <mat-divider></mat-divider>
                         <button mat-menu-item (click)="logOut()">Log out</button>
                     </mat-menu>
@@ -68,13 +69,13 @@
                 <mat-toolbar>
                     <mat-toolbar-row>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./"
-                           [routerLinkActiveOptions]="{ exact: true }"><p class="navigation">Главная</p></a>
+                           [routerLinkActiveOptions]="{ exact: true }"><p class="navigation">{{"Home" | translate}}</p></a>
                         <a [routerLinkActive]="['active']" mat-button routerLink="./activities"><p class="navigation"
                                                                                                    *ngIf="this.userRoles.indexOf('Teacher') != -1">
-                            Моя деятельность</p></a>
-                        <a [routerLinkActive]="['active']" mat-button routerLink="./statistics"><p class="navigation">Статистика</p></a>
-                        <a [routerLinkActive]="['active']" mat-button routerLink="./about"><p class="navigation">О проекте</p></a>
-                        <a [routerLinkActive]="['active']" mat-button routerLink="./help"><p class="navigation">Помощь</p></a>
+                            {{"My activities" | translate}}</p></a>
+                        <a [routerLinkActive]="['active']" mat-button routerLink="./statistics"><p class="navigation">{{"Statistics" | translate}}</p></a>
+                        <a [routerLinkActive]="['active']" mat-button routerLink="./about"><p class="navigation">{{"About the project" | translate}}</p></a>
+                        <a [routerLinkActive]="['active']" mat-button routerLink="./help"><p class="navigation">{{"Help" | translate}}</p></a>
                     </mat-toolbar-row>
                 </mat-toolbar>
             </div>
@@ -86,11 +87,11 @@
             <mat-toolbar-row fxFlexAlign="row" fxLayoutAlign="center center" style="height: 100%; background: #212121;">
                 <a fxLayoutAlign="center center" mat-button routerLink="./yearPlan"><p style="color: white; margin: 0;"
                                                                                        class="navigation2">
-                    Преподаватели</p></a>
+                    {{"Teachers" | translate}}</p></a>
                 <a fxLayoutAlign="center center" mat-button routerLink="./secretary-of-the-diss-council"><p
-                        style="margin: 0; color: white;" class="navigation2">Секретарь диссертационного совета</p></a>
+                        style="margin: 0; color: white;" class="navigation2">{{"Secretary of the Dissertation Council" | translate}}</p></a>
                 <a fxLayoutAlign="center center" mat-button routerLink="./opportunities"><p
-                        style="color: white; margin: 0;" class="navigation2">Сотрудник отдела по науке</p></a>
+                        style="color: white; margin: 0;" class="navigation2">{{"Science Department Officer" | translate}}</p></a>
             </mat-toolbar-row>
         </mat-toolbar>
     </div>
@@ -186,7 +187,7 @@
                     </mat-accordion>
                     <a routerLink="./help" mat-button><p class="navigation2">Помощь<span style="color: #FF0000; font-weight: bold; margin-left: 2%">?</span>
                     </p></a>
-                    <a (click)="logOut()" mat-button><p class="navigation2">Log out</p></a>
+                    <a (click)="logOut()" mat-button><p class="navigation2">{{"Log out" | translate}}</p></a>
                 </div>
             </div>
         </mat-drawer>

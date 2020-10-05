@@ -15,7 +15,7 @@ import {PasswordComponent} from './whole-page/main/profile/password/password.com
 import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {SettingsComponent} from './whole-page/main/profile/settings/settings.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -35,6 +35,20 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import {MissingTranslationHandler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import '@angular/common/locales/global/pl';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MissingTranslationService} from './services/missing-translation-service.service';
+// import localeEn from '@angular/common/locales/en';
+// import localeRu from '@angular/common/locales/ru';
+// import {registerLocaleData} from '@angular/common';
+//
+// registerLocaleData(localeEn, 'en');
+// registerLocaleData(localeRu, 'ru');
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+    return new TranslateHttpLoader(http);
+    // , './assets/locale/i18n', '.json'
+}
 
 @NgModule({
   declarations: [
@@ -76,7 +90,16 @@ import {MatCardModule} from '@angular/material/card';
         FlexLayoutModule,
         MatListModule,
         MatExpansionModule,
-        MatCardModule
+        MatCardModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+            // useDefaultLang: false,
+            // missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationService }
+        })
     ],
   providers: [],
   bootstrap: [AppComponent]

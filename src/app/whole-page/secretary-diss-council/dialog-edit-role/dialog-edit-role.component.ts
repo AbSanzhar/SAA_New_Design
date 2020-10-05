@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ApiService} from '../../../api/api.service';
-import {LanguageService} from '../../../services/language.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dialog-edit-role',
@@ -12,14 +11,16 @@ import {LanguageService} from '../../../services/language.service';
 export class DialogEditRoleComponent implements OnInit {
   selectValue;
   dispositions = [];
+  lang: any;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private service: ApiService,
-              private langService: LanguageService) { }
+              private translateService: TranslateService) {
+  }
 
   ngOnInit(): void {
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getDisPositions(lang);
-    });
+    this.lang = this.translateService.currentLang;
+    this.getDisPositions(this.lang);
     console.log(this.data);
     this.selectValue = this.data.member.disPosition;
     console.log(this.selectValue);
@@ -43,11 +44,11 @@ export class DialogEditRoleComponent implements OnInit {
     this.service.getDisPositions(lang).subscribe(
         res => {
           console.log(res);
-          for(let i = 0; i < res.length; i++) {
+          for (let i = 0; i < res.length; i++) {
             let temp = {
               viewValue: res[i].univer_name,
               value: res[i].univer_id
-            }
+            };
             this.dispositions[i] = temp;
           }
         }, err => {

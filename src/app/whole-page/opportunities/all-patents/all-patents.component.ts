@@ -3,7 +3,7 @@ import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {LanguageService} from '../../../services/language.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-all-patents',
@@ -24,17 +24,14 @@ export class AllPatentsComponent implements OnInit {
               // tslint:disable-next-line:variable-name
               private _api: ApiService,
               private deviceDetectorService: DeviceDetectorService,
-              private langService: LanguageService) {
+              private translateService: TranslateService) {
     this.detectDevice();
   }
 
   ngOnInit(): void {
     this.detectDevice();
-    this.langService.currentLanguage.subscribe(lang => {
-      console.log(lang);
-      this.getAllPatents(lang);
-      this.language = lang;
-    });
+    this.language = this.translateService.currentLang;
+    this.getAllPatents(this.language);
   }
 
   getDecodedAccessToken(token: string): any {
@@ -44,6 +41,7 @@ export class AllPatentsComponent implements OnInit {
       return null;
     }
   }
+
   getAllPatents(lang) {
     // tslint:disable-next-line:variable-name
     const science_id = {

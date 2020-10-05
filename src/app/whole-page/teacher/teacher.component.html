@@ -9,35 +9,35 @@
 
             <div class="Inner" *ngIf="_data === 'pub'">
                 <form [formGroup]="publicationForm" class="example-form">
-                    <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои публикации: </p>
+                    <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add to my posts" | translate}}: </p>
                     <mat-form-field>
-                        <mat-label>Тип источника</mat-label>
+                        <mat-label>{{"Source type" | translate}}</mat-label>
                         <mat-select [(ngModel)]="selectedValue" formControlName="pubTypeId" required>
                             <mat-option *ngFor="let i of elements" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field *ngIf="publicationForm.get('pubTypeId').value != 3">
-                        <mat-label>Где опубликовано</mat-label>
+                        <mat-label>{{"Published" | translate}}</mat-label>
                         <mat-select formControlName="pubPublishedId" required>
                             <mat-option *ngFor="let i of elements1;" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field *ngIf="publicationForm.get('pubTypeId').value == 3">
-                        <mat-label>Где опубликовано</mat-label>
+                        <mat-label>{{"Published" | translate}}</mat-label>
                         <mat-select formControlName="pubPublishedId" required>
                             <mat-option *ngFor="let i of elements0" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
 <!--                    <mat-form-field class="example-full-width">-->
@@ -73,11 +73,9 @@
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Название</mat-label>
+                        <mat-label>{{"Title" | translate}}</mat-label>
                         <input matInput formControlName="pubName" type="text" placeholder="Ex. name" required>
-                        <mat-error>
-                            Publication Name is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
@@ -90,41 +88,31 @@
 <!--                            <option *ngFor="let i of years" [selected]="yy === i">{{i}}</option>-->
 <!--                        </mat-select>-->
                         </mat-select>
-                        <mat-error>
-                            Publication Name is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Название журнала/издательства</mat-label>
+                        <mat-label>{{"Name of magazine / publisher" | translate}}</mat-label>
                         <input matInput formControlName="pubPubName" type="text" placeholder="Ex. name" required>
-                        <mat-error>
-                            Name is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Город</mat-label>
+                        <mat-label>{{"City" | translate}}</mat-label>
                         <input matInput formControlName="pubCity" type="text" placeholder="Ex. Almaty" required>
-                        <mat-error>
-                            City is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Начало публикации(страницы)</mat-label>
+                        <mat-label>{{"Start of publication (pages)" | translate}}</mat-label>
                         <input matInput formControlName="pubPage" type="number" placeholder="Ex. 230">
-                        <mat-error>
-                            Publication's number of pages is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Конец страницы публикации(страница)</mat-label>
+                        <mat-label>{{"End of publication page (page)" | translate}}</mat-label>
                         <input matInput formControlName="pubEndPage" type="number" placeholder="Ex. 230">
-                        <mat-error>
-                            Publication's number of pages is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
 
@@ -148,8 +136,8 @@
                     </div>
 
                     <button mat-raised-button color="primary" [disabled]="publicationForm.invalid" style="margin-top: 3%;">
-                        <p style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication('Successfully saved', 'OK')">Сохранить публикацию</p></button>
-                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                        <p style="color: white; margin: 0; padding: 0" (click)="sendTeacherPublication('Successfully saved', 'OK')">{{"Save" | translate}}</p></button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
                 </form>
             </div>
 
@@ -159,54 +147,50 @@
 <!--        <mat-tab label="Создать мероприятие">-->
             <div class="Inner" *ngIf="_data === 'event'">
                 <form [formGroup]="eventForm" class="example-form">
-                    <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои мероприятия: </p>
+                    <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add to my events:" | translate}} </p>
 
                     <mat-form-field>
-                        <mat-label>Тип мероприятия</mat-label>
+                        <mat-label>{{"Event type:" | translate}}</mat-label>
                         <mat-select [(ngModel)]="selectedValue3" required formControlName="event_type_id">
                             <mat-option *ngFor="let i of elements2" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label>Роль</mat-label>
+                        <mat-label>{{"Role"}}</mat-label>
                         <mat-select [(ngModel)]="selectedValue" required formControlName="event_role_id">
                             <mat-option *ngFor="let i of elements3" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Название</mat-label>
+                        <mat-label>{{"Title" | translate}}</mat-label>
                         <input matInput formControlName="event_name" type="text" placeholder="Ex. Smth." required>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Дата</mat-label>
+                        <mat-label>{{"Date" | translate}}</mat-label>
                         <input matInput formControlName="event_date" type="date" required>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Город</mat-label>
+                        <mat-label>{{"City" | translate}}</mat-label>
                         <input matInput formControlName="event_city" type="text" placeholder="Ex. Almaty" required>
-                        <mat-error>
-                            City is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>URL</mat-label>
                         <input matInput formControlName="event_url" type="text" placeholder="Ex. https//iitu.kz">
-                        <mat-error>
-                            URL is <strong>required</strong>
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <div>
@@ -219,8 +203,8 @@
 <!--                    </div>-->
 
                     <button mat-raised-button color="primary" [disabled]="eventForm.invalid" style="margin-top: 3%" (click)="sendTeacherEvent('Successfully saved', 'OK')">
-                        <p style="color: white; margin: 0; padding: 0">Добавить мероприятие</p></button>
-                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                        <p style="color: white; margin: 0; padding: 0">{{"Save" | translate}}</p></button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
                 </form>
             </div>
 <!--        </mat-tab>-->
@@ -229,14 +213,12 @@
 <!--        <mat-tab label="Добавить патент">-->
             <div class="Inner" *ngIf="_data === 'patent'">
                 <form [formGroup]="patentForm" class="example-form">
-                    <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в патенты: </p>
+                    <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add to Patents:" | translate}} </p>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Номер патента</mat-label>
+                        <mat-label>{{"Patent number" | translate}}</mat-label>
                         <input matInput formControlName="ptnt_number" type="number" required>
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
 
@@ -249,33 +231,29 @@
                                 {{i.name}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label>Тип патента</mat-label>
+                        <mat-label>{{"Type of patent:" | translate}}</mat-label>
                         <mat-select formControlName="ptnt_type_id" required>
                             <mat-option *ngFor="let i of elements4" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Опубликован в TR</mat-label>
+                        <mat-label>{{"Posted in"}} TR</mat-label>
                         <input matInput formControlName="ptnt_published_TR" type="text" required>
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Дата выдачи</mat-label>
                         <input matInput formControlName="ptnt_issue_date" type="date" required>
-                        <mat-error>
-                            This is the required field!
-                        </mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
 
@@ -288,8 +266,8 @@
 <!--                        <button mat-raised-button (click)="openUploadPatentDialog()">Загрузить файл</button>-->
 <!--                    </div>-->
                     <button mat-raised-button color="primary" [disabled]="patentForm.invalid" style="margin-top: 3%" (click)="sendTeacherPatent('Successfully saved', 'OK')">
-                        <p style="color: white; margin: 0; padding: 0">Сохранить</p></button>
-                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                        <p style="color: white; margin: 0; padding: 0">{{"Save" | translate}}</p></button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
                 </form>
             </div>
 <!--        </mat-tab>-->
@@ -631,7 +609,7 @@
 <!--        <mat-tab label="Создать курсы повышения квалификации">-->
             <div class="Inner" *ngIf="_data === 'course'">
                 <form [formGroup]="teacherCourseForm" class="example-form">
-                    <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить в мои курсы: </p>
+                    <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add to my courses:" | translate}} </p>
 
 <!--                    <mat-form-field class="example-full-width">-->
 <!--                        <mat-label>Форма обучения и тема</mat-label>-->
@@ -640,41 +618,40 @@
 <!--                    </mat-form-field>-->
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Форма обучения</mat-label>
+                        <mat-label>{{"Form of study" | translate}}</mat-label>
                         <select matNativeControl formControlName="courseFormId" name="car">
                             <option *ngFor="let i of courseForms" [value]="i.value">
                                 {{i.viewValue}}
                             </option>
                         </select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Тема</mat-label>
+                        <mat-label>{{"Topic" | translate}}</mat-label>
                         <input type="text" matInput formControlName="courseTopic">
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Базовый центр повышения квалификации</mat-label>
+                        <mat-label>{{"Basic training center" | translate}}</mat-label>
                         <input type="text" matInput formControlName="courseCenter">
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Объем часов</mat-label>
+                        <mat-label>{{"Amount of time" | translate}}</mat-label>
                         <input type="number" matInput formControlName="courseHours">
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Стоимость курсов (в тг)</mat-label>
-                        <input type="number" matInput formControlName="coursePrice">
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Сроки прохождения</mat-label>
+                        <mat-label>{{"Terms of passage" | translate}}</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
                             <input formControlName="startdate" matStartDate placeholder="Start date">
                             <input formControlName="enddate" matEndDate placeholder="End date">
@@ -709,25 +686,25 @@
 <!--                    <p>Selected range: {{teacherCourseForm.value | json}}</p>-->
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>№ Сертификата</mat-label>
+                        <mat-label>№ {{"Certificate" | translate}}</mat-label>
                         <input type="text" matInput formControlName="certificateNumber">
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Дата выдачи сертификата</mat-label>
+                        <mat-label>{{"Date of issue of the certificate" | translate}}</mat-label>
                         <input type="date" matInput formControlName="certificateDate">
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Уровень</mat-label>
+                        <mat-label>{{"Level" | translate}}</mat-label>
                         <select matNativeControl formControlName="courseDegreeId" name="car">
                             <option *ngFor="let i of level" [value]="i.value">
                                 {{i.viewValue}}
                             </option>
                         </select>
-                        <mat-error>This is the required field!</mat-error>
+                        <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 {{this.teacherCourseForm.value | json}}
 
@@ -740,8 +717,8 @@
 <!--                    <div>-->
 <!--                        <button mat-raised-button (click)="openUploadCourseDialog()">Загрузить сертификат</button>-->
 <!--                    </div>-->
-                    <button mat-raised-button [disabled]="teacherCourseForm.invalid" style="margin-top: 3%" (click)="sendTeacherCourse('Successfully saved', 'OK')">Создать курс</button>
-                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                    <button mat-raised-button [disabled]="teacherCourseForm.invalid" style="margin-top: 3%" (click)="sendTeacherCourse('Successfully saved', 'OK')">{{"Save" | translate}}</button>
+                    <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
                 </form>
             </div>
 <!--        </mat-tab>-->
@@ -813,31 +790,31 @@
             <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить награду: </p>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Наименование</mat-label>
+                <mat-label>{{"Title" | translate}}</mat-label>
                 <input matInput formControlName="awardName" type="text" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>T{{"his is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Тип </mat-label>
+                <mat-label>{{"The Type" | translate}} </mat-label>
                 <mat-select required formControlName="awardTypeId">
                     <mat-option *ngFor="let i of awardTypes" [value]="i.value">
                         {{i.viewValue}}
                     </mat-option>
                 </mat-select>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата присуждения награды/премии</mat-label>
+                <mat-label>{{"Date of award / award" | translate}}</mat-label>
                 <input matInput formControlName="awardDate" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Кем присуждено</mat-label>
+                <mat-label>{{"Awarded by" | translate}}</mat-label>
                 <input matInput formControlName="awardBy" type="text" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
 <!--            <mat-form-field class="example-full-width">-->
@@ -846,126 +823,126 @@
 <!--            </mat-form-field>-->
 
             <button mat-raised-button color="primary" [disabled]="awardForm.invalid" style="margin-top: 3%" (click)="sendTeacherAward('Successfully saved', 'OK')">
-                <p style="color: white; margin: 0; padding: 0">Добавить награду</p></button>
-            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                <p style="color: white; margin: 0; padding: 0">{{"Save" | translate}}</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
         </form>
     </div>
 
     <div class="Inner" *ngIf="_data === 'activity1'">
         <form [formGroup]="activity1Form" class="example-form">
-            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить деятельность: </p>
+            <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add activity:" | translate}} </p>
             <mat-form-field class="example-full-width">
-                <mat-label>Наименование события</mat-label>
+                <mat-label>{{"Event name" | translate}}</mat-label>
                 <input matInput formControlName="activity_name" type="text" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата C</mat-label>
+                <mat-label>{{"Date from" | translate}}</mat-label>
                 <input matInput formControlName="activity_from_date" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата По</mat-label>
+                <mat-label>{{"Date to" | translate}}</mat-label>
                 <input matInput formControlName="activity_to_date" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" [disabled]="activity1Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity1('Successfully saved', 'OK')">
-                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
-            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                <p style="color: white; margin: 0; padding: 0">{{"Save" | translate}}</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
         </form>
     </div>
 
     <div class="Inner" *ngIf="_data === 'activity2'">
         <form [formGroup]="activity2Form" class="example-form">
-            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить деятельность: </p>
+            <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add activity:" | translate}} </p>
             <mat-form-field class="example-full-width">
-                <mat-label>Наименование события</mat-label>
+                <mat-label>{{"Event name" | translate}}</mat-label>
                 <input matInput formControlName="activity_name" type="text" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата C</mat-label>
+                <mat-label>{{"Date from" | translate}}</mat-label>
                 <input matInput formControlName="activity_from_date" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата По</mat-label>
+                <mat-label>{{"Date to" | translate}}</mat-label>
                 <input matInput formControlName="activity_to_date" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" [disabled]="activity2Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity2('Successfully saved', 'OK')">
-                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
-            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                <p style="color: white; margin: 0; padding: 0">{{"Save" | translate}}</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
         </form>
     </div>
 
     <div class="Inner" *ngIf="_data === 'activity3'">
         <form [formGroup]="activity3Form" class="example-form">
-            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить событие: </p>
+            <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add event:" | translate}} </p>
             <mat-form-field class="example-full-width">
-                <mat-label>Наименование события</mat-label>
+                <mat-label>{{"Event name" | translate}}</mat-label>
                 <input matInput formControlName="activity_name" type="text" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Роль </mat-label>
+                <mat-label>{{"Role" | translate}} </mat-label>
                 <mat-select required formControlName="activity_role_id">
                     <mat-option *ngFor="let i of activityRoles" [value]="i.value">
                         {{i.viewValue}}
                     </mat-option>
                 </mat-select>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата C</mat-label>
+                <mat-label>{{"Date from" | translate}}</mat-label>
                 <input matInput formControlName="activity_from_date" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата По</mat-label>
+                <mat-label>{{"Date to" | translate}}</mat-label>
                 <input matInput formControlName="activity_to_date" type="date" required>
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" [disabled]="activity3Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity3('Successfully saved', 'OK')">
-                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
-            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                <p style="color: white; margin: 0; padding: 0">{{"Save" | translate}}</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
         </form>
     </div>
 
     <div class="Inner" *ngIf="_data === 'activity4'">
         <form [formGroup]="activity4Form" class="example-form">
-            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить событие: </p>
+            <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add event:" | translate}}: </p>
             <mat-form-field class="example-full-width">
-                <mat-label>Наименование события</mat-label>
+                <mat-label>{{"Event name" | translate}}</mat-label>
                 <input matInput formControlName="activity_name" type="text" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата C</mat-label>
+                <mat-label>{{"Date from" | translate}}</mat-label>
                 <input matInput formControlName="activity_from_date" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата По</mat-label>
+                <mat-label>{{"Date to" | translate}}</mat-label>
                 <input matInput formControlName="activity_to_date" type="date" required>
-                <mat-error>This is the required field!</mat-error>
+                <mat-error>{{"This is the required field!" | translate}}</mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" [disabled]="activity4Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity4('Successfully saved', 'OK')">
-                <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
-            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
+                <p style="color: white; margin: 0; padding: 0">{{"Save" | translate}}</p></button>
+            <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">{{"Close" | translate}}</button>
         </form>
     </div>
 

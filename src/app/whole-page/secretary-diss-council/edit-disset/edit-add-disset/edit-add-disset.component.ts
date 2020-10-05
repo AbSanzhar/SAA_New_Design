@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Form} from 'docx/build/file/drawing/inline/graphic/graphic-data/pic/shape-properties/form';
 import {ApiService} from '../../../../api/api.service';
-import {LanguageService} from '../../../../services/language.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-add-disset',
@@ -12,6 +11,7 @@ import {LanguageService} from '../../../../services/language.service';
 })
 export class EditAddDissetComponent implements OnInit {
 
+  lang: any;
   idDisset: number;
   form: FormGroup;
   selectedValue;
@@ -28,9 +28,11 @@ export class EditAddDissetComponent implements OnInit {
     // {value: 'Председатель совета', viewValue: 'Председатель'},
     // {value: 'Член совета', viewValue: 'Член'}
   ];
+
   constructor(private route: ActivatedRoute,
               private service: ApiService,
-              private langService: LanguageService) {
+              public translateService: TranslateService
+  ) {
     this.form = new FormGroup({
       disMemberTypeId: new FormControl('', Validators.required),
       academicDegree: new FormControl('', Validators.required),
@@ -44,14 +46,13 @@ export class EditAddDissetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.lang = this.translateService.currentLang;
     this.route.params.subscribe(param => {
       // tslint:disable-next-line:radix
       this.idDisset = parseInt(param.id);
     });
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getDisPositions(lang);
-      this.getDisMemberTypes(lang);
-    });
+    this.getDisPositions(this.lang);
+    this.getDisMemberTypes(this.lang);
     this.getMembers();
     this.getExUsers();
   }
@@ -90,11 +91,11 @@ export class EditAddDissetComponent implements OnInit {
     this.service.getDisPositions(lang).subscribe(
         res => {
           console.log(res);
-          for(let i = 0; i < res.length; i++) {
+          for (let i = 0; i < res.length; i++) {
             const temp = {
               viewValue: res[i].univer_name,
               value: res[i].univer_id
-            }
+            };
             this.elements2[i] = temp;
           }
         }, err => {
@@ -107,11 +108,11 @@ export class EditAddDissetComponent implements OnInit {
     this.service.getDisMemberType(lang).subscribe(
         res => {
           console.log(res);
-          for(let i = 0; i < res.length; i++) {
+          for (let i = 0; i < res.length; i++) {
             const temp = {
               viewValue: res[i].type_name,
               value: res[i].type_id
-            }
+            };
             this.elements[i] = temp;
           }
         }, err => {
@@ -122,6 +123,7 @@ export class EditAddDissetComponent implements OnInit {
 
 
 }
+
 interface Sourse {
   value: string;
   viewValue: string;

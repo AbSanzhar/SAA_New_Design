@@ -7,15 +7,11 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {StartEndDateValidator} from '../../shared/start-end-date.validator';
 import {Packer} from 'docx';
 import {saveAs} from 'file-saver';
-import {DocumentCreator} from './rate-list-generator';
 import * as $ from 'jquery';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {PublicationUploadComponent} from './publication-upload/publication-upload.component';
 import {EventUploadComponent} from './event-upload/event-upload.component';
-import {PatentUploadComponent} from './patent-upload/patent-upload.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddProjectMemberDialogComponent} from './add-project-member-dialog/add-project-member-dialog.component';
-import {CourseUploadComponent} from './course-upload/course-upload.component';
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -24,8 +20,7 @@ import {CountriesService} from '../../services/countries.service';
 import {ScienceListGenerator} from './ScienceListGenerator';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {LanguageService} from '../../services/language.service';
-import {Form} from 'docx/build/file/drawing/inline/graphic/graphic-data/pic/shape-properties/form';
+import {TranslateService} from '@ngx-translate/core';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -36,6 +31,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class TeacherComponent implements OnInit {
 
+    lang: any;
     TeacherPublications: any[] = [];
     userID;
     activityTypeId = 1;
@@ -58,7 +54,9 @@ export class TeacherComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) public _data: any,
                 // tslint:disable-next-line:variable-name
                 private _dialog: MatDialogRef<TeacherComponent>,
-                private langService: LanguageService) {
+                public translateService: TranslateService
+                // private langService: LanguageService
+    ) {
         this.data = _data;
 
         this.filteredCoAuthorsFullNames = this.coAuthorsCtrl.valueChanges.pipe(
@@ -948,21 +946,20 @@ export class TeacherComponent implements OnInit {
 
 
   ngOnInit(): void {
-      this.langService.currentLanguage.subscribe(lang => {
-          this.getPublicationType(lang);
-          this.getPublicationPublished(lang);
-          this.getEventTypes(lang);
-          this.getEventRoles(lang);
-          this.getPatentTypes(lang);
-          this.getCourseDegree(lang);
-          this.getCourseForm(lang);
-          this.getExhibitionLevels(lang);
-          this.getExhibitionRoles(lang);
-          this.getExhibitionTypes(lang);
-          this.getAwardTypes(lang);
-          this.getActivityTypes(lang);
-          this.getActivityRoles(lang);
-      });
+      this.lang = this.translateService.currentLang;
+          this.getPublicationType(this.lang);
+          this.getPublicationPublished(this.lang);
+          this.getEventTypes(this.lang);
+          this.getEventRoles(this.lang);
+          this.getPatentTypes(this.lang);
+          this.getCourseDegree(this.lang);
+          this.getCourseForm(this.lang);
+          this.getExhibitionLevels(this.lang);
+          this.getExhibitionRoles(this.lang);
+          this.getExhibitionTypes(this.lang);
+          this.getAwardTypes(this.lang);
+          this.getActivityTypes(this.lang);
+          this.getActivityRoles(this.lang);
       // this.getTeacherPublications();
       this.getAllUsers();
       this.getAllCountries();

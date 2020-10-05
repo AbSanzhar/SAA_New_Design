@@ -4,9 +4,9 @@ import {ApiService} from '../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
 import {MatDialog} from '@angular/material/dialog';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {LanguageService} from '../../../services/language.service';
 import {CookieService} from '../../../services/cookie.service';
 import {BehaviorSubject} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -55,10 +55,10 @@ export class ProfileComponent implements OnInit {
               private _api: ApiService,
               // tslint:disable-next-line:variable-name
               private _dialog: MatDialog,
-              private langService: LanguageService,
+              private translateService: TranslateService,
               private deviceDetectorService: DeviceDetectorService,
               private cookieService: CookieService) {
-    if(!this.cookieService.getCookie('language')) {
+    if (!this.cookieService.getCookie('language')) {
       this.cookieService.setCookie('language', 'ru', 1);
       this.language = new BehaviorSubject('ru');
       this.currentLanguage = this.language.asObservable();
@@ -69,10 +69,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.langService.currentLanguage.subscribe(lang => {
-      this.language = lang;
-      console.log(this.language);
-    });
+    this.language = this.translateService.currentLang;
+    console.log(this.language);
     this._api.getUserById(this.IdToken).subscribe(
         res => {
           console.log(res);
@@ -107,9 +105,6 @@ export class ProfileComponent implements OnInit {
     this.isDesktop = this.deviceDetectorService.isDesktop();
   }
 
-  changeLang(language: string) {
-    this.langService.changeLanguage(language);
-  }
   changeLanguage(language) {
     this.language.next(language);
     console.log(language);

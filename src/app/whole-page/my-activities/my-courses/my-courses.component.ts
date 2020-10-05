@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import {MatDialog} from '@angular/material/dialog';
-import {LanguageService} from '../../../services/language.service';
 import {TeacherComponent} from '../../teacher/teacher.component';
 import * as jwt_decode from 'jwt-decode';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -18,6 +18,7 @@ export class MyCoursesComponent implements OnInit {
     size: 1,
     page: 0,
   };
+  lang: any;
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;
   private name: any;
@@ -54,14 +55,13 @@ export class MyCoursesComponent implements OnInit {
               private _api: ApiService,
               // tslint:disable-next-line:variable-name
               private _dialog: MatDialog,
-              private langService: LanguageService) {
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getTeacherCourses(lang);
-      this.language = lang;
-    });
+      this.lang = this.translateService.currentLang;
+      this.getTeacherCourses(this.lang);
+      this.language = this.lang;
     this._api.getPubTypeCount().subscribe(
         res => {
           console.log(res);
