@@ -16,7 +16,7 @@
                             <mat-card-content>
                                 <p class="description">{{item.description}}</p>
                                 <button mat-flat-button color="primary" style="color: white; border-radius: 25px;">
-                                    Discover
+                                    {{"Discover" | translate}}
                                     <svg width="8" height="13" viewBox="0 0 8 13" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.294983 11.2951L4.87498 6.70508L0.294983 2.11508L1.70498 0.705078L7.70498 6.70508L1.70498 12.7051L0.294983 11.2951Z"
@@ -34,11 +34,11 @@
         <div *ngIf="!isMobile" fxFlex="18" fxLayoutGap="20%" fxLayout="column">
             <div class="filter">
                 <div fxLayout="column" style="margin: 0; padding: 0;">
-                    <button routerLink="./" routerLinkActive="isActive" style="color: #212121; background: rgba(12, 79, 181, 0.08); border-left: #015349 3px solid; text-align: left" mat-flat-button>Новости</button>
-                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>Последние новости</button>
-                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>Для преподавателя</button>
-                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>Для сотрудника отдела по науке</button>
-                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>Для секретаря дис.совета</button>
+                    <button routerLink="./" routerLinkActive="isActive" style="color: #212121; background: rgba(12, 79, 181, 0.08); border-left: #015349 3px solid; text-align: left" mat-flat-button>{{"News" | translate}}</button>
+                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>{{"Last news" | translate}}</button>
+                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>{{"For teacher" | translate}}</button>
+                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>{{"For an employee of the science department" | translate}}</button>
+                    <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>{{"For the secretary of the dissertation council" | translate}}</button>
                 </div>
             </div>
             <div fxLayout="column" class="filter" style="padding: 5%">
