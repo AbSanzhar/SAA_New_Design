@@ -2,13 +2,13 @@
   <div fxFlex="10"></div>
   <div fxFlex="80" fxLayout="row">
     <div fxLayout="column" fxFlex="25">
-        <h2 style="color: #827878;">Сведения по университету</h2>
+        <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
         <div fxLayout="column">
-            <a routerLink="./" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Преподаватели</a>
-            <a routerLink="./all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Патенты</a>
-            <a routerLink="./all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Публикации</a>
-            <a routerLink="./all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Дис. советы</a>
-            <a routerLink="./all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Научные проекты</a>
+            <a routerLink="./" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Teachers" | translate}}</a>
+            <a routerLink="./all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Patents" | translate}}</a>
+            <a routerLink="./all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Publications" | translate}}</a>
+            <a routerLink="./all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Dissertation Councils" | translate}}</a>
+            <a routerLink="./all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Scientific projects" | translate}}</a>
         </div>
     </div>
     <div fxLayout="column" fxFlex="75">
@@ -19,17 +19,17 @@
         </ng-container>
 
         <ng-container matColumnDef="lastName">
-          <mat-header-cell *matHeaderCellDef> Фамилия</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Surname" | translate}}</mat-header-cell>
           <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="firstName">
-          <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Name" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="middleName">
-          <mat-header-cell *matHeaderCellDef> Отчество </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Patronymic" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let employee"> {{employee.patronymic}} </mat-cell>
         </ng-container>
 
@@ -39,7 +39,7 @@
         </ng-container>
 
         <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> действие</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
           <mat-cell *matCellDef="let employee" (click)="openDialogEdit(employee)">
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
           </mat-cell>
