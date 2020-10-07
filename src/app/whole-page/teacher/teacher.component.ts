@@ -180,6 +180,7 @@ export class TeacherComponent implements OnInit {
             activity_name: new FormControl('', Validators.required),
             activity_from_date: new FormControl('', Validators.required),
             activity_to_date: new FormControl('', Validators.required),
+            activity_file: new FormControl('', Validators.required)
         });
 
         this.activity4Form = formBuilder.group({
@@ -229,6 +230,7 @@ export class TeacherComponent implements OnInit {
   private PatentLinkKz: any;
   private PatentLinkEn: any;
   private selectedCourseFile: File = null;
+  private selectedActivityFile: File = null;
 
   selectable = true;
   removable = true;
@@ -1678,6 +1680,29 @@ export class TeacherComponent implements OnInit {
         console.log(CourseLink);
     }
 
+    uploadActivity3File() {
+        const formData = new FormData();
+        let CourseLink;
+        formData.append('file', this.selectedActivityFile);
+        $.ajax({
+            url: 'https://nir.iitu.kz:8443/saa-uploader/activity',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            async: false,
+            // tslint:disable-next-line:only-arrow-functions
+        }).done(function(data) {
+            const obj = JSON.parse(data);
+            console.log(obj);
+            CourseLink = obj.filePath;
+        });
+        this.activity3Form.patchValue({
+            activity_file: CourseLink
+        });
+        console.log(CourseLink);
+    }
+
     sendProject(newProjMemForm) {
         this._api.addProject(this.newProjForm.value).subscribe(
             res => {
@@ -1808,6 +1833,20 @@ export class TeacherComponent implements OnInit {
             this.selectedCourseFile = file;
             console.log(this.selectedCourseFile);
             this.uploadCourseFile();
+        }
+
+    }
+
+    onActivity3ProjFileChange(event) {
+
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.activity3Form.patchValue({
+                activity_file: file
+            });
+            this.selectedActivityFile = file;
+            console.log(this.selectedActivityFile);
+            this.uploadActivity3File();
         }
 
     }

@@ -936,6 +936,11 @@
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
 
+            <div>
+                <input type="file"
+                       (change)="onActivity3ProjFileChange($event)">
+            </div>
+
             <button mat-raised-button color="primary" [disabled]="activity3Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity3('Successfully saved', 'OK')">
                 <p style="color: white; margin: 0; padding: 0">Добавить деятельность</p></button>
             <button mat-raised-button style="margin: 1% 0 1% 1%" mat-dialog-close="false">Закрыть</button>
