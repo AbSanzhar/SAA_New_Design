@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '../../api/api.service';
-import {LanguageService} from '../../services/language.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
@@ -13,11 +13,12 @@ export class SearchComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   constructor(private _api: ApiService,
               private activateRoute: ActivatedRoute,
-              private langService: LanguageService
+              private translateService: TranslateService
   ) {
   }
 
   language;
+  lang: any;
   TeacherPublications: any[] = [];
   message = this.activateRoute.snapshot.queryParamMap.get('keyword');
   paginator = {
@@ -28,10 +29,9 @@ export class SearchComponent implements OnInit {
   displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File'];
 
   ngOnInit(): void {
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getTeacherPublications(lang);
-      this.language = lang;
-    });
+    this.lang = this.translateService.currentLang;
+    this.getTeacherPublications(this.lang);
+    this.language = this.lang;
     this.getTeacherPublications(this.language);
   }
 

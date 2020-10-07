@@ -3,7 +3,7 @@ import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import * as jwt_decode from 'jwt-decode';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {LanguageService} from '../../../services/language.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-all-publications',
@@ -11,6 +11,7 @@ import {LanguageService} from '../../../services/language.service';
   styleUrls: ['./all-publications.component.css']
 })
 export class AllPublicationsComponent implements OnInit {
+  lang: any;
   isMobile;
   isDesktop;
   isTablet;
@@ -32,16 +33,15 @@ export class AllPublicationsComponent implements OnInit {
   constructor(private http: DataControlService,
               private service: ApiService,
               private deviceDetectorService: DeviceDetectorService,
-              private langService: LanguageService) {
+              private translateService: TranslateService) {
     this.detectDevice();
   }
 
   ngOnInit(): void {
     this.detectDevice();
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getAllPublications(lang);
-      this.language = lang;
-    });
+    this.lang = this.translateService.currentLang;
+    this.getAllPublications(this.lang);
+    this.language = this.lang;
   }
 
   getAllPublications(lang) {
@@ -57,7 +57,7 @@ export class AllPublicationsComponent implements OnInit {
         if (a.pubId > b.pubId) {
           return -1;
         }
-        if ( b.pubId > a.pubId) {
+        if (b.pubId > a.pubId) {
           return 1;
         }
         return 0;

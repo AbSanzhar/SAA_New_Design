@@ -2,13 +2,13 @@
   <div fxFlex="10"></div>
   <div fxFlex="80" fxLayout="row">
     <div fxLayout="column" fxFlex="25">
-      <h2 style="color: #827878;">Сведения по университету</h2>
+      <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
       <div fxLayout="column">
-        <a routerLink="../" style="text-decoration: none;" class="linkTable">Преподаватели</a>
-        <a routerLink="../all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Патенты</a>
-        <a routerLink="../all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Публикации</a>
-        <a routerLink="../all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Дис. советы</a>
-        <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">Научные проекты</a>
+        <a routerLink="../" style="text-decoration: none;" class="linkTable">{{"Teachers" | translate}}</a>
+        <a routerLink="../all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Patents" | translate}}</a>
+        <a routerLink="../all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Publications" | translate}}</a>
+        <a routerLink="../all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Dissertation Councils" | translate}}</a>
+        <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Scientific projects" | translate}}</a>
       </div>
     </div>
     <div fxLayout="column" fxFlex="75">
@@ -19,32 +19,32 @@
         </ng-container>
 
         <ng-container matColumnDef="patentNumber">
-          <mat-header-cell *matHeaderCellDef> Номер патента </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Patent number" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="country">
-          <mat-header-cell *matHeaderCellDef> Страна </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Country" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="inventionPatent">
-          <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Type of patent"}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="author">
-          <mat-header-cell *matHeaderCellDef> Автор </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Author" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="issueDate">
-          <mat-header-cell *matHeaderCellDef> Дата выдачи </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Date of issue" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="insertedDay">
-          <mat-header-cell *matHeaderCellDef> Дата ввода в базу </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Date of entry into the database" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>
         </ng-container>
 
@@ -64,12 +64,12 @@
         </ng-container>
 
         <ng-container matColumnDef="status">
-          <mat-header-cell *matHeaderCellDef> Статус модерации </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Moderation status" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> {{patent.ptntStatus}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Action" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent">
             <button *ngIf="patent.ptntStatus == 'Under review' || patent.ptntStatus == 'Returned for revision'" (click)="setPatentStatus(patent.ptntId, 2)" mat-icon-button color="accent" aria-label="Example icon button with a heart icon">
               <mat-icon>done</mat-icon>
@@ -81,7 +81,7 @@
         </ng-container>
 
         <ng-container matColumnDef="checkedUser">
-          <mat-header-cell *matHeaderCellDef> Кем проверено </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{"Verified by" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent"> <p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p> </mat-cell>
         </ng-container>
 
@@ -94,7 +94,7 @@
 </div>
 
 <div style="width: 1000px" fxLayoutAlign="center start" *ngIf="isMobile" fxLayout="column">
-  <h2 style="color: #827878; margin: 15px;">Сведения по университету</h2>
+  <h2 style="color: #827878; margin: 15px;">{{"Information about the university" | translate}}</h2>
   <div style="width: 1000px">
     <mat-table style="width: 100%" [dataSource]="dataSource2">
       <ng-container matColumnDef="index">
@@ -103,32 +103,32 @@
       </ng-container>
 
       <ng-container matColumnDef="patentNumber">
-        <mat-header-cell *matHeaderCellDef> Номер патента </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Patent number" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="country">
-        <mat-header-cell *matHeaderCellDef> Страна </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Country" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="inventionPatent">
-        <mat-header-cell *matHeaderCellDef> Тип патента </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Type of patent" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="author">
-        <mat-header-cell *matHeaderCellDef> Автор </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Author" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="issueDate">
-        <mat-header-cell *matHeaderCellDef> Дата выдачи </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Date of issue" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="insertedDay">
-        <mat-header-cell *matHeaderCellDef> Дата ввода в базу </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Date of entry into the database" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>
       </ng-container>
 
@@ -148,12 +148,12 @@
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef> Статус модерации </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Moderation status" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> {{patent.ptntStatus}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Action" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent">
           <button *ngIf="patent.ptntStatus == 'Under review' || patent.ptntStatus == 'Returned for revision'" (click)="setPatentStatus(patent.ptntId, 2)" mat-icon-button color="accent" aria-label="Example icon button with a heart icon">
             <mat-icon>done</mat-icon>
@@ -165,7 +165,7 @@
       </ng-container>
 
       <ng-container matColumnDef="checkedUser">
-        <mat-header-cell *matHeaderCellDef> Кем проверено </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{"Verified by" | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let patent"> <p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p> </mat-cell>
       </ng-container>
 

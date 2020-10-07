@@ -3,9 +3,6 @@ import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
-import {CookieService} from '../services/cookie.service';
-// import {Http, Headers} from '@angular/http';
-// import ResponseContentType;
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +11,7 @@ import {CookieService} from '../services/cookie.service';
 
 export class ApiService {
 
-  constructor(private http: HttpClient,
-              private cookieService: CookieService) { }
+  constructor(private http: HttpClient) { }
 
   private base =  window['cfgApiBaseUrl'];
   // private base = 'http://localhost:8077/';

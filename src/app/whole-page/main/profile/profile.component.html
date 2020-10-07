@@ -11,8 +11,7 @@
              fxLayout="row" fxLayoutAlign="center center">
           <img *ngIf="photo !== null" style="width: 249px; height: 214px; background-size: cover; clip-path: ellipse();"
                fxLayout="row" fxLayoutAlign="center center" src="https://nir.iitu.kz/{{photo}}">
-          <a style="color: #212121; position: absolute; z-index: 5; margin-top: 30%" routerLink="../edit-photo">Изменить
-            фото профиля</a>
+          <a style="color: #212121; position: absolute; z-index: 5; margin-top: 30%" routerLink="../edit-photo">{{"Change profile photo" | translate}}</a>
           <!--          <mat-icon routerLink="../edit-photo" style="cursor: pointer;">create</mat-icon>-->
         </div>
       </div>
@@ -25,9 +24,9 @@
         </div>
         <div style="width: 100%;" *ngIf="this.currentUser">
           <h3>E-mail: {{this.currentUser.email}}</h3>
-          <h3 *ngIf="this.currentUser.gender == 'male'">Пол: Мужской</h3>
-          <h3 *ngIf="this.currentUser.gender == 'female'">Пол: Женский</h3>
-          <h3>Контактный номер: {{this.currentUser.phoneNumber}}</h3>
+          <h3 *ngIf="this.currentUser.gender == 'male'">{{"Gender: Male" | translate}}</h3>
+          <h3 *ngIf="this.currentUser.gender == 'female'">{{"Gender: Female" | translate}}</h3>
+          <h3>{{"Contacts" | translate}}: {{this.currentUser.phoneNumber}}</h3>
         </div>
 
       </div>
@@ -37,22 +36,22 @@
   <div class="AddInf">
     <div class="left-side">
       <div>
-        <h3 style=" margin-bottom: 0;">Личная информация</h3>
-        <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">Вы заведующий этой кафедры</h3>
+        <h3 style=" margin-bottom: 0;">{{"Personal information" | translate}}</h3>
+        <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">{{"You are the head of this department" | translate}}</h3>
       </div>
       <div *ngIf="currentUser">
-        <h3 style="font-weight: bold;  margin-bottom: 0;">Образование</h3>
+        <h3 style="font-weight: bold;  margin-bottom: 0;">{{"Education" | translate}}</h3>
         <div *ngFor="let degree of this.currentUser.degree">
-          <h3>{{degree.degreeName}}</h3>
+          <h3>{{degree.degreeName | translate}}</h3>
         </div>
       </div>
       <div>
-        <h3 routerLink="../password" class="passwd-btn button">Пароль <mat-icon>keyboard_arrow_right</mat-icon></h3>
+        <h3 routerLink="../password" class="passwd-btn button">{{"Password" | translate}} <mat-icon>keyboard_arrow_right</mat-icon></h3>
       </div>
     </div>
     <div class="right-side">
       <div class="" *ngIf="userDepts[0]">
-        <h3 style="font-weight: bold; margin-bottom: 0;">Кафедра</h3>
+        <h3 style="font-weight: bold; margin-bottom: 0;">{{"Department" | translate}}</h3>
         <h3>{{this.userDepts[0].deptName}} - {{this.userDepts[0].userType}}</h3>
       </div>
     </div>
@@ -73,25 +72,25 @@
     <span fxLayout="column">
       <h2 style="">{{this.currentUser.firstName}} {{this.currentUser.lastName}}</h2>
       <p>E-mail: {{this.currentUser.email}}</p>
-      <a style="color: #212121;%" routerLink="../edit-photo">Изменить фото профиля</a>
-                        <button mat-button [matMenuTriggerFor]="menu2">{{language}}
-                          <mat-icon>keyboard_arrow_down</mat-icon>
-                        </button>
-                        <mat-menu #menu2="matMenu">
-                            <button mat-menu-item (click)="changeLang('kz')">ҚАЗ</button>
-                            <button mat-menu-item (click)="changeLang('ru')">РУС</button>
-                            <button mat-menu-item (click)="changeLang('en')">ENG</button>
-                        </mat-menu>
+      <a style="color: #212121;%" routerLink="../edit-photo">{{"Change profile photo" | translate}}</a>
+<!--                        <button mat-button [matMenuTriggerFor]="menu2">{{language}}-->
+<!--                          <mat-icon>keyboard_arrow_down</mat-icon>-->
+<!--                        </button>-->
+<!--                        <mat-menu #menu2="matMenu">-->
+<!--                            <button mat-menu-item (click)="changeLang('kz')">ҚАЗ</button>-->
+<!--                            <button mat-menu-item (click)="changeLang('ru')">РУС</button>-->
+<!--                            <button mat-menu-item (click)="changeLang('en')">ENG</button>-->
+<!--                        </mat-menu>-->
     </span>
   </div>
   <mat-divider style="margin: 5% 0"></mat-divider>
   <div style="margin: 0 5%">
-      <h3>Личная информация</h3>
-      <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">Вы заведующий этой кафедры</h3>
+      <h3>{{"Personal information" | translate}}</h3>
+      <h3 style="font-weight: bold" *ngIf="this.roles.indexOf('Head_Of_Dept') != -1">{{"You are the head of this department" | translate}}</h3>
     <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
-      <h3 style="font-weight: bold;  margin-bottom: 0;">Образование:</h3>
+      <h3 style="font-weight: bold;  margin-bottom: 0;">{{"Education" | translate}}:</h3>
       <div *ngFor="let degree of this.currentUser.degree">
-        <h3>{{degree.degreeName}}</h3>
+        <h3>{{degree.degreeName | translate}}</h3>
       </div>
     </div>
     <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
@@ -99,14 +98,13 @@
       <p>{{this.currentUser.email}}</p>
     </div>
     <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
-      <h3 *ngIf="this.currentUser.gender == 'male'" style="font-weight: bold;  margin-bottom: 0;">Пол:</h3>
-      <p *ngIf="this.currentUser.gender == 'male'">Мужской</p>
-      <p *ngIf="this.currentUser.gender == 'female'">Женский</p>
+      <h3 *ngIf="this.currentUser.gender == 'male'">{{"Gender: Male" | translate}}</h3>
+      <h3 *ngIf="this.currentUser.gender == 'female'">{{"Gender: Female" | translate}}</h3>
     </div>
     <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="5%">
-      <h3 style="font-weight: bold;  margin-bottom: 0;">Контактный номер:</h3>
+      <h3 style="font-weight: bold;  margin-bottom: 0;">{{"Contacts" | translate}}:</h3>
       <p>{{this.currentUser.phoneNumber}}</p>
     </div>
-      <h3 routerLink="../password" class="passwd-btn button">Пароль <mat-icon>keyboard_arrow_right</mat-icon></h3>
+      <h3 routerLink="../password" class="passwd-btn button">{{"Password" | translate}} <mat-icon>keyboard_arrow_right</mat-icon></h3>
   </div>
 </div>

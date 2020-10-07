@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {DataControlService} from '../../../services/data-control.service';
 import {ApiService} from '../../../api/api.service';
 import {MatDialog} from '@angular/material/dialog';
-import {LanguageService} from '../../../services/language.service';
 import {TeacherComponent} from '../../teacher/teacher.component';
 import * as jwt_decode from 'jwt-decode';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -14,6 +14,7 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class MyPatentsComponent implements OnInit {
   from: any = 1900;
+  lang: any;
   to: any = 2021;
   paginator = {
     length: 0,
@@ -50,14 +51,13 @@ export class MyPatentsComponent implements OnInit {
               private _api: ApiService,
               // tslint:disable-next-line:variable-name
               private _dialog: MatDialog,
-              private langService: LanguageService) {
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getTeacherPatents(lang);
-      this.language = lang;
-    });
+    this.lang = this.translateService.currentLang;
+    this.getTeacherPatents(this.lang);
+    this.language = this.lang;
     this.getTeacherPatents(this.language);
     this._api.getUserById(this.tokenId).subscribe(
         res => {

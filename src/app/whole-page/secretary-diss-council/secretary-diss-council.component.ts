@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DataControlService} from '../../services/data-control.service';
 import {ApiService} from '../../api/api.service';
-import {LanguageService} from '../../services/language.service';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-secretary-diss-council',
@@ -15,16 +14,16 @@ export class SecretaryDissCouncilComponent implements OnInit {
   isMobile;
   isDesktop;
   isTablet;
+  lang: any;
 
   // tslint:disable-next-line:variable-name
   constructor(private _api: ApiService,
-              private langService: LanguageService,
+              private translateService: TranslateService,
               private deviceDetectorService: DeviceDetectorService) { }
 
   ngOnInit(): void {
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getAllDissets(lang);
-    });
+    this.lang = this.translateService.currentLang;
+      this.getAllDissets(this.lang);
     this.detectDevice();
   }
 

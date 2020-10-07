@@ -4,12 +4,12 @@
     <div class="flex-label"><p style="margin-right: 15%">Роли:</p></div>
     <div class="flex-options-list">
       <form [formGroup]="formOptions">
-        <div class="option-text"><mat-slide-toggle formControlName="option1">Преподаватель</mat-slide-toggle></div>
-        <div class="option-text"><mat-slide-toggle formControlName="option2">Научный руководитель</mat-slide-toggle></div>
-        <div class="option-text"><mat-slide-toggle formControlName="option3">Секретарь диссовета</mat-slide-toggle></div>
+        <div class="option-text"><mat-slide-toggle formControlName="option1">{{"Teacher" | translate}}</mat-slide-toggle></div>
+        <div class="option-text"><mat-slide-toggle formControlName="option2">{{"Supervisor" | translate}}</mat-slide-toggle></div>
+        <div class="option-text"><mat-slide-toggle formControlName="option3">{{"Secretary of the Dissertation Council" | translate}}</mat-slide-toggle></div>
       </form>
     </div>
   </div>
 
-  <div class="center"><button mat-flat-button color="accent" class="center" (click)="saveChange()"><p style="color: #FFFFFF">Сохранить</p></button></div>
+  <div class="center"><button mat-flat-button color="accent" class="center" (click)="saveChange()"><p style="color: #FFFFFF">{{"Save" | translate}}</p></button></div>
 </div>

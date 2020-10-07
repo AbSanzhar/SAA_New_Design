@@ -2,45 +2,38 @@
     <div fxFlex="10"></div>
     <div fxFlex="80" fxFlexAlign="row">
         <div fxFlex="27" fxFlexAlign="column">
-            <h2 class="textM">Мои таблицы</h2>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 0}" (click)="setWhichTable(0)">Мои
-                публикации</a></div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 1}" (click)="setWhichTable(1)">Мои
-                мероприятия</a></div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 2}" (click)="setWhichTable(2)">Мои
-                диссоветы</a></div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 3}" (click)="setWhichTable(3)">Мои
-                патенты</a>
+            <h2 class="textM">{{"My tables" | translate}}</h2>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 0}" (click)="setWhichTable(0)">{{"My publications" | translate}}</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 1}" (click)="setWhichTable(1)">{{"My events" | translate}}</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 2}" (click)="setWhichTable(2)">{{"My discourses" | translate}}</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 3}" (click)="setWhichTable(3)">{{"My patents" | translate}}</a>
             </div>
             <div class="linkTable"><a *ngIf="this.roles.indexOf('Head_Of_Dept') != - 1"
-                                      [ngClass]="{'is-active': whichTable === 4}" (click)="setWhichTable(4)">Мои
-                сотрудники</a></div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 5}" (click)="setWhichTable(5)">Мои научные
-                проекты</a></div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 6}" (click)="setWhichTable(6)">Мои
-                курсы</a>
+                                      [ngClass]="{'is-active': whichTable === 4}" (click)="setWhichTable(4)">{{"My staff" | translate}}</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 5}" (click)="setWhichTable(5)">{{"My scientific projects" | translate}}</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 6}" (click)="setWhichTable(6)">{{"My courses" | translate}}</a>
             </div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 7}" (click)="setWhichTable(7)">Выставки</a>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 7}" (click)="setWhichTable(7)">{{"Exhibitions" | translate}}</a>
             </div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 8}" (click)="setWhichTable(8)">Награды и премии</a></div>
-            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 9}" (click)="setWhichTable(9)">Экспертно-аналитическая<br>деятельность</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 8}" (click)="setWhichTable(8)">{{"Awards and prizes" | translate}}</a></div>
+            <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 9}" (click)="setWhichTable(9)">{{"Expert and analytical" | translate}}<br>{{"activity" | translate}}</a></div>
             <button (click)="download2()" style="border-color: white; margin-left: -3%; margin-top: 5%;"
                     mat-stroked-button
-                    color="primary">Cкачать cписок научных трудов
+                    color="primary">{{"Download the list of scientific papers" | translate}}
             </button>
             <button (click)="download()" style="border-color: white; margin-top: 5%; margin-left: -3%;"
                     mat-stroked-button
-                    color="primary">Скачать рейтинг лист
+                    color="primary">{{"Download rating sheet" | translate}}
             </button>
         </div>
         <div fxFlex="73" fxFlexAlign="column">
             <div fxFlexAlign="row" *ngIf="whichTable === 0">
                 <div fxFlex="50">
-                    <label>От </label>
+                    <label>{{"From" | translate}} </label>
                     <input [(ngModel)]="from" type="number">
                 </div>
                 <div fxFlex="50">
-                    <label>До </label>
+                    <label>{{"To" | translate}} </label>
                     <input [(ngModel)]="to" type="number">
                 </div>
             </div>
@@ -165,7 +158,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>
-                            Добавить
+                            {{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -187,27 +180,27 @@
                         </ng-container>
 
                         <ng-container matColumnDef="eventType">
-                            <mat-header-cell *matHeaderCellDef> Тип мероприятия</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Event type" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.eventType}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="eventRole">
-                            <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Role" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.eventRole}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="eventDate">
-                            <mat-header-cell *matHeaderCellDef> Дата</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Date" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.eventDate}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="eventTitle">
-                            <mat-header-cell *matHeaderCellDef> Название</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.eventName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="eventCity">
-                            <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"City" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.eventCity}} </mat-cell>
                         </ng-container>
 
@@ -217,7 +210,7 @@
                         </ng-container>
 
                         <ng-container matColumnDef="File">
-                            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> File</mat-header-cell>
                             <mat-cell *matCellDef="let activity"><a href="https://nir.iitu.kz/{{activity.eventFile}}"
                                                                     download="">
                                 <mat-icon color="primary">get_app</mat-icon>
@@ -230,7 +223,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('event')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -251,28 +244,28 @@
                         </ng-container>
 
                         <ng-container matColumnDef="university">
-                            <mat-header-cell *matHeaderCellDef> Высшее учебное заведение</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Higher educational institution" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="disRole">
-                            <mat-header-cell *matHeaderCellDef> Роль в диссовете</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Role in the dissertation council" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let disset"> {{disset.disRole}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="specialty">
-                            <mat-header-cell *matHeaderCellDef> Специальность докторантуры/ направление подготовки
+                            <mat-header-cell *matHeaderCellDef> {{"Doctoral specialty / direction of training" | translate}}
                             </mat-header-cell>
                             <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="stopDate">
-                            <mat-header-cell *matHeaderCellDef> Период деятельности</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Period of activity" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let disset"> {{disset.disStopDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="numberAndDate">
-                            <mat-header-cell *matHeaderCellDef> Номер и дата приказа</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Order number and date" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let disset"> {{disset.ministryOrder}} </mat-cell>
                         </ng-container>
 
@@ -282,7 +275,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -297,38 +290,38 @@
                 <div *ngIf="whichTable === 3">
                     <mat-table [dataSource]="TeacherPatents" class="">
                         <ng-container matColumnDef="ptntNumber">
-                            <mat-header-cell *matHeaderCellDef> Номер патента</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Patent number" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="ptntId">
-                            <mat-header-cell *matHeaderCellDef> Тип патента</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Type of patent" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="ptntCountry">
-                            <mat-header-cell *matHeaderCellDef> Страна</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Country" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="ptntIssueDate">
-                            <mat-header-cell *matHeaderCellDef> Дата выдачи</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Date of issue" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="ptntPublishedTR">
-                            <mat-header-cell *matHeaderCellDef> Опубликован в TR</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Published in TR" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent"> {{patent.ptntPublishedTR}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="ptntOwnerName">
-                            <mat-header-cell *matHeaderCellDef> Автор</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Author" | translate}}</mat-header-cell>
                             <mat-cell
                                     *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="status">
-                            <mat-header-cell *matHeaderCellDef> Статус модерации</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Moderation status" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent">
                                 <mat-icon style="color: green;" *ngIf="patent.ptntStatus == 'Confirmed'">done</mat-icon>
                                 <mat-icon style="color: red" *ngIf="patent.ptntStatus == 'Returned for revision'">
@@ -346,12 +339,12 @@
                         </ng-container>
 
                         <ng-container matColumnDef="insertDate">
-                            <mat-header-cell *matHeaderCellDef> Дата ввода в базу</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Date of entry into the database" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="whoCheck">
-                            <mat-header-cell *matHeaderCellDef> Кем проверено</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Verified by" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let patent"><p
                                     *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p>
                             </mat-cell>
@@ -370,7 +363,7 @@
                     </mat-table>
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -390,12 +383,12 @@
                         </ng-container>
 
                         <ng-container matColumnDef="lastName">
-                            <mat-header-cell *matHeaderCellDef> Фамилия</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Surname" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="firstName">
-                            <mat-header-cell *matHeaderCellDef> Имя</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Name" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
                         </ng-container>
 
@@ -405,12 +398,12 @@
                         </ng-container>
 
                         <ng-container matColumnDef="description">
-                            <mat-header-cell *matHeaderCellDef> Описание</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Description" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let employee"> {{employee.description}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="userType">
-                            <mat-header-cell *matHeaderCellDef> Тип работника</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Employee type" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let employee"> {{employee.userType}} </mat-cell>
                         </ng-container>
 
@@ -427,12 +420,12 @@
                         </ng-container>
 
                         <ng-container matColumnDef="name">
-                            <mat-header-cell *matHeaderCellDef> Наименование</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"> {{project.scName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="type">
-                            <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"> {{project.scType}} </mat-cell>
                         </ng-container>
 
@@ -447,66 +440,66 @@
                         <!--              </ng-container>-->
 
                         <ng-container matColumnDef="priority">
-                            <mat-header-cell class="Razdel" *matHeaderCellDef> Раздел</mat-header-cell>
+                            <mat-header-cell class="Razdel" *matHeaderCellDef> {{"Section" | translate}}</mat-header-cell>
                             <mat-cell class="Razdel Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="subPriority">
-                            <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="subSubPriority">
-                            <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="executor">
-                            <mat-header-cell *matHeaderCellDef> Исполнитель</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Executor" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="customer">
-                            <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Customer" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scCustomer}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="dirFullName">
-                            <mat-header-cell *matHeaderCellDef> Научный руководитель</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Supervisor" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDirFullName}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="dept">
-                            <mat-header-cell *matHeaderCellDef> Подразделение</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Subdivision" | translate}}</mat-header-cell>
                             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="agrDate">
-                            <mat-header-cell *matHeaderCellDef> Дата договора</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Agreement date" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let project"><p>{{project.scAgrDate | date}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="registerNumber">
-                            <mat-header-cell *matHeaderCellDef> Регистрационный номер</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Registration number" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let project"><p>{{project.scNum}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
-                            <mat-header-cell *matHeaderCellDef> Дата начала проекта</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Project start date" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let project"><p>{{project.scStDate | date}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
-                            <mat-header-cell *matHeaderCellDef> Дата сдачи проекта</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Project completion date" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let project"><p>{{project.scEndDate | date}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="totalSum">
-                            <mat-header-cell *matHeaderCellDef> Общая сумма гранта</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Total grant amount" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let project"><p>{{project.scTotalSum}}</p></mat-cell>
                         </ng-container>
 
@@ -515,7 +508,7 @@
                     </mat-table>
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('science')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -535,55 +528,55 @@
                         </ng-container>
 
                         <ng-container matColumnDef="FL">
-                            <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>{{"Full name" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;"
                                       *matCellDef="let course">{{course.courseUser.firstName}} {{course.courseUser.lastName}} {{course.courseUser.patronymic}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="form">
-                            <mat-header-cell *matHeaderCellDef>Форма обучения и тема</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>{{"Form of study and topic" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;"
                                       *matCellDef="let course">{{course.courseForm}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="center">
-                            <mat-header-cell *matHeaderCellDef>Базовый центр повышения квалификации</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>{{"Basic training center" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;"
                                       *matCellDef="let course">{{course.courseCenter}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="hours">
-                            <mat-header-cell *matHeaderCellDef>Объем часов</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>{{"Amount of time" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;"
                                       *matCellDef="let course">{{course.courseHours}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="price">
-                            <mat-header-cell *matHeaderCellDef>Стоимость курсов</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>{{"Course cost" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;"
                                       *matCellDef="let course">{{course.coursePrice}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="deadlines">
-                            <mat-header-cell *matHeaderCellDef>Сроки прохождения</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>{{"Terms of passage" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;" *matCellDef="let course">{{course.startdate}}
                                 - {{course.enddate}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="certificates">
-                            <mat-header-cell *matHeaderCellDef>№ Сертификата и дата</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>№ {{"Certificate" | translate}} & {{"Date" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;"
                                       *matCellDef="let course">{{course.courseCertificateNumber}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="level">
-                            <mat-header-cell *matHeaderCellDef>Уровень</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>{{"Level" | translate}}</mat-header-cell>
                             <mat-cell style="color: darkred!important;"
                                       *matCellDef="let course">{{course.courseDegree}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="File">
-                            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> File</mat-header-cell>
                             <mat-cell *matCellDef="let course"><a href="https://nir.iitu.kz/{{course.courseFile}}"
                                                                   download="">
                                 <mat-icon color="primary">get_app</mat-icon>
@@ -597,7 +590,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('course')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -618,32 +611,32 @@
                         </ng-container>
 
                         <ng-container matColumnDef="name">
-                            <mat-header-cell *matHeaderCellDef> Название выставки</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.exName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="date">
-                            <mat-header-cell *matHeaderCellDef> Дата</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Date" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.exDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="place">
-                            <mat-header-cell *matHeaderCellDef> Место проведения </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Location" | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.exPlace}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="role">
-                            <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Role" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.exRole}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="level">
-                            <mat-header-cell *matHeaderCellDef> Уровень</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Level" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.exLevel}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="type">
-                            <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.exType}} </mat-cell>
                         </ng-container>
 
@@ -653,7 +646,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('exhibition')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -675,27 +668,27 @@
                         </ng-container>
 
                         <ng-container matColumnDef="name">
-                            <mat-header-cell *matHeaderCellDef> Наименование награды/перемии</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Name of the award / prize" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.awardName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="type">
-                            <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.awardType}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="date">
-                            <mat-header-cell *matHeaderCellDef> Дата присуждения награды/премии </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Date of award / award" | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.awardDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="by_whom">
-                            <mat-header-cell *matHeaderCellDef> Кем присуждено</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Awarded by" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.awardBy}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="to_whom">
-                            <mat-header-cell *matHeaderCellDef> Кому присуждено</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Who is awarded" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{activity.awardUserId.firstName}} {{activity.awardUserId.lastName}} </mat-cell>
                         </ng-container>
 
@@ -705,7 +698,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('award')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -719,7 +712,7 @@
 
                 <div *ngIf="whichTable === 9">
                     <div style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
-                    <h2 class="textM">Участие в составе рабочих групп, разработка предложений к законопроектам, нормативным правовым актам, программам и их экспертиза</h2>
+                    <h2 class="textM">{{"Participation in working groups, development of proposals for bills, regulatory legal acts, programs and their expertise" | translate}}</h2>
                     <mat-table [dataSource]="Activity1">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
@@ -732,17 +725,17 @@
 <!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
-                            <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
-                            <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
-                            <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
@@ -752,7 +745,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('activity1')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -764,7 +757,7 @@
                     </div>
                     </div>
                     <div style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
-                    <h2 class="textM">Участие в экспертизе научных, научно-технических программ, проектов, отчетов НИР, диссертаций, научных публикаций в составе редакционных коллегий журналов</h2>
+                    <h2 class="textM">{{"Participation in the examination of scientific, scientific and technical programs, projects, research reports, dissertations, scientific publications as part of the editorial boards of journals" | translate}}</h2>
                     <mat-table [dataSource]="Activity2">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
@@ -777,17 +770,17 @@
                         <!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
-                            <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title"}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
-                            <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
-                            <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
@@ -797,7 +790,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('activity2')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -809,7 +802,7 @@
                     </div>
                     </div>
                     <div style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
-                    <h2 class="textM">Участие в работе съездов, конференций, симпозиумов, семинаров международного и республиканского уровня</h2>
+                    <h2 class="textM">{{"Participation in congresses, conferences, symposia, seminars of the international and republican level" | translate}}</h2>
                     <mat-table [dataSource]="Activity3">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
@@ -822,17 +815,17 @@
                         <!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
-                            <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
-                            <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
-                            <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
@@ -842,7 +835,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('activity3')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
@@ -854,7 +847,7 @@
                     </div>
                     </div>
                     <div style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
-                    <h2 class="textM">Количество выступлений на телевидении и радио, публикаций в журналах, газетах и электронных изданиях республиканских и местных газетах</h2>
+                    <h2 class="textM">{{"Number of appearances on television and radio, publications in magazines, newspapers and electronic editions of republican and local newspapers" | translate}}</h2>
                     <mat-table [dataSource]="Activity4">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
@@ -867,17 +860,17 @@
                         <!--                        </ng-container>-->
 
                         <ng-container matColumnDef="actName">
-                            <mat-header-cell *matHeaderCellDef> Наименование деятельности</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="startDate">
-                            <mat-header-cell *matHeaderCellDef> дата С </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="endDate">
-                            <mat-header-cell *matHeaderCellDef> дата По</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
                         </ng-container>
 
@@ -887,7 +880,7 @@
 
                     <div style="align-items: center; display: flex;">
                         <button style="margin: 0 10% 0 35%" (click)="create('activity4')" color="primary"
-                                mat-stroked-button>Добавить
+                                mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
                         <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"

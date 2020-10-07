@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogEditRoleComponent} from '../dialog-edit-role/dialog-edit-role.component';
 import {ApiService} from '../../../api/api.service';
-import {LanguageService} from '../../../services/language.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-disset',
@@ -17,8 +17,9 @@ export class EditDissetComponent implements OnInit {
   dataSource: any[];
   displayedColumns = ['email', 'fullName', 'role', 'actions'];
   language;
+
   constructor(private route: ActivatedRoute, private editRoleDialog: MatDialog, private service: ApiService,
-               private langService: LanguageService) {
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -26,10 +27,8 @@ export class EditDissetComponent implements OnInit {
       // tslint:disable-next-line:radix
       this.idDisset = parseInt(param.id);
     });
-    this.langService.currentLanguage.subscribe(lang => {
-      this.getOneDisMembers(lang);
-      this.language = lang;
-    });
+    this.language = this.translateService.currentLang;
+    this.getOneDisMembers(this.language);
     this.editRoleDialog.afterAllClosed.subscribe(res => {
       this.getOneDisMembers(this.language);
     });

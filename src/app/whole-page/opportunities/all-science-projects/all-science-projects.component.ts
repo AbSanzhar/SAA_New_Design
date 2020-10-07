@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../../api/api.service';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {LanguageService} from '../../../services/language.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-all-science-projects',
@@ -17,7 +17,7 @@ export class AllScienceProjectsComponent implements OnInit {
     constructor(
         private _api: ApiService,
         private deviceDetectorService: DeviceDetectorService,
-        private languageService: LanguageService) {
+        private translateService: TranslateService) {
         this.detectDevice();
     }
 
@@ -25,14 +25,13 @@ export class AllScienceProjectsComponent implements OnInit {
     allScienceProjecrs: any[] = [];
     displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
     language;
+    lang: any;
 
     ngOnInit(): void {
-        this.languageService.currentLanguage.subscribe(lang => {
-
-            console.log(lang);
-            this.language = lang;
-            this.getAllScienceProjects(lang);
-        });
+        this.lang = this.translateService.currentLang;
+        console.log(this.lang);
+        this.language = this.lang;
+        this.getAllScienceProjects(this.lang);
         this.detectDevice();
         this.getAllScienceProjects(this.language);
     }

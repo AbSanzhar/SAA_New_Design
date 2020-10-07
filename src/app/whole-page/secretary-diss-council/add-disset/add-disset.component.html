@@ -1,52 +1,52 @@
 <div class="container">
   <div class="content">
     <div class="nav-text">
-      <button routerLink="../" class="btn-nav-header">Доп. возможности</button>
+      <button routerLink="../" class="btn-nav-header">{{"Add. capabilities" | translate}}</button>
       <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
-      Добавить диссовет
+      {{"Add dissertation council" | translate}}
     </div>
 
     <div class="form-box">
       <form [formGroup]="form">
-        <p style="color: darkred; font-weight: 500; font-size: 18px">Новый диссовет: </p>
+        <p style="color: darkred; font-weight: 500; font-size: 18px">{{"New dissertation council" | translate}}: </p>
 
         <mat-form-field class="example-full-width">
-          <mat-label>ВУЗ</mat-label>
+          <mat-label>{{"University" | translate}}</mat-label>
           <select matNativeControl formControlName="disInfo" name="car">
             <option *ngFor="let i of universities" [value]="i.value">
               {{i.viewValue}}
             </option>
           </select>
-          <mat-error>This is the required field!</mat-error>
+          <mat-error>{{"This is the required field!" | translate}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Начиная с</mat-label>
+          <mat-label>{{"From" | translate}}</mat-label>
           <input matInput formControlName="disStartDate" type="date" required>
-          <mat-error>The field is required.</mat-error>
+          <mat-error>{{"This is the required field!" | translate}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Заканчивая в</mat-label>
+          <mat-label>{{"To" | translate}}</mat-label>
           <input matInput formControlName="disStopDate" type="date" required>
-          <mat-error>The field is required.</mat-error>
+          <mat-error>{{"This is the required field!" | translate}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Основание создания(№ приказа МОНРК)</mat-label>
+          <mat-label>{{"Basis of the publication (Order No. of the MES RK)" | translate}}</mat-label>
           <input matInput formControlName="ministryOrder" type="number" required>
-          <mat-error>The field is required.</mat-error>
+          <mat-error>{{"This is the required field!" | translate}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Количественный состав (чел.)</mat-label>
+          <mat-label>{{"Quantitative composition (people)" | translate}}</mat-label>
           <input matInput formControlName="membersNum" type="number" required>
-          <mat-error>The field is required.</mat-error>
+          <mat-error>{{"This is the required field!" | translate}}</mat-error>
         </mat-form-field>
 
         <!--TODO [disabled]="form.invalid"-->
         <button [disabled]="form.invalid" mat-raised-button color="primary" ><p
-                style="color: white; margin: 0; padding: 0" (click)="add()">Создать</p></button>
+                style="color: white; margin: 0; padding: 0" (click)="add()">{{"Add" | translate}}</p></button>
       </form>
     </div>
   </div>
