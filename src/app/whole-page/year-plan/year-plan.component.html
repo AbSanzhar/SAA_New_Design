@@ -1,357 +1,405 @@
 <div fxFlexAlign="row">
-  <div fxFlex="10"></div>
-  <div fxFlex="80"><mat-tab-group>
-    <mat-tab [label]="'EDUCATIONAL WORK' | translate">
-      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-          <div class="col-12 text-center table-responsive">
-            <p class="nameHeader"> {{"Implementation of the training load" | translate}}</p>
-
-            <mat-table [dataSource]="gettedPlamPerfomances" class="">
-              <ng-container matColumnDef="ppId">
-                <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}} №</mat-header-cell>
-                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="activities">
-                <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-              </ng-container>
-
-
-              <ng-container matColumnDef="implementation">
-                <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity">
-                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'PP'})">
-                    {{"Edit" | translate}}
-                  </button>
-                  <button style="margin-left: 5%" mat-stroked-button color="warn"
-                          (click)="deleteTableRow({data: activity, table: 'PP'})">
-                    {{"Delete" | translate}}
-                  </button>
-                </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
-              <mat-row *matRowDef="let activity; columns: displayedColumns5;"></mat-row>
-
-            </mat-table>
-
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-left: 37%">
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('PP')">
-          {{"Add a note" | translate}}
-        </button>
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">{{"Download" | translate}}
-          ИПП(.docx)
-        </button>
-      </div>
-
-    </mat-tab>
-
-    <mat-tab [label]="'EDUCATIONAL AND METHODOLOGICAL WORK' | translate">
-
-      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-          <p class="nameHeader">
-            1.{{"METHODOLOGICAL WORK" | translate}}
-          </p>
-
-          <mat-table [dataSource]="gettedActs" class="">
-            <ng-container matColumnDef="acId">
-              <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}} №</mat-header-cell>
-              <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="activities">
-              <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}, {{"term" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="timeFrame">
-              <mat-header-cell *matHeaderCellDef> {{"Plan execution time" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity"> {{activity.timeFrame}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="implementation">
-              <mat-header-cell *matHeaderCellDef> {{"Actual implementation of the plan" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="actions">
-              <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity">
-                <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Acad-Meth'})">
-                  {{"Edit" | translate}}
-                </button>
-                <button style="margin-left: 5%" mat-stroked-button color="warn"
-                        (click)="deleteTableRow({data: activity, table: 'Acad-Meth'})">
-                  {{"Delete" | translate}}
-                </button>
-              </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let activity; columns: displayedColumns;"></mat-row>
-
-              </mat-table>
-            </div>
-          </div>
-
-          <div style="margin-left: 37%">
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="addTableRow('Acad-Meth')">{{"Add a note" | translate}}</button>
-            <button style="margin: 2%;" type= "submit" mat-stroked-button color="warn" (click)="downloadPlan()">{{"Download" | translate}} ИПП(.docx)</button>
-          </div>
-        </mat-tab>
-
-    <mat-tab [label]="'RESEARCH WORK' | translate">
-
-      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-          <p class="nameHeader">
-            2.{{"Scientific work" | translate}}
-          </p>
-
-          <mat-table [dataSource]="gettedResearch" class="">
-            <ng-container matColumnDef="commId">
-              <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}} №</mat-header-cell>
-              <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="activities">
-              <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}, {{"term" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="output">
-              <mat-header-cell *matHeaderCellDef> {{"Workload" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity"> {{activity.output}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="plan">
-              <mat-header-cell *matHeaderCellDef> {{"Plan execution time" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="implementation">
-              <mat-header-cell *matHeaderCellDef> {{"Actual implementation of the plan" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="actions">
-              <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
-              <mat-cell *matCellDef="let activity">
-                <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Research'})">
-                  {{"Edit" | translate}}
-                </button>
-                <button style="margin-left: 5%" mat-stroked-button color="warn"
-                        (click)="deleteTableRow({data: activity, table: 'Research'})">
-                  {{"Delete" | translate}}
-                </button>
-              </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
-            <mat-row *matRowDef="let activity; columns: displayedColumns1;"></mat-row>
-
-          </mat-table>
-        </div>
-      </div>
-
-      <div style="margin-left: 37%">
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('Research')">
-          {{"Add a note" | translate}}
-        </button>
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">{{"Download" | translate}}
-          ИПП(.docx)
-        </button>
-      </div>
-
-    </mat-tab>
-
-    <mat-tab [label]="'BUDGET RESEARCH AND STEERING GUIDANCE' | translate">
-      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-          <div class="col-12 text-center table-responsive">
-            <p class="nameHeader">2.2 {{"Budget research and research work management" | translate}}</p>
-
-            <mat-table [dataSource]="gettedBudgets" class="">
-              <ng-container matColumnDef="budId">
-                <mat-header-cell *matHeaderCellDef> {{"Serial number"| translate}} №</mat-header-cell>
-                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="activities">
-                <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="plan">
-                <mat-header-cell *matHeaderCellDef> {{"Plan" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="implementation">
-                <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity">
-                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'Budget'})">
-                    {{"Edit" | translate}}
-                  </button>
-                  <button style="margin-left: 5%" mat-stroked-button color="warn"
-                          (click)="deleteTableRow({data: activity, table: 'Budget'})">
-                    {{"Delete" | translate}}
-                  </button>
-                </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
-              <mat-row *matRowDef="let activity; columns: displayedColumns2;"></mat-row>
-
-            </mat-table>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-left: 37%">
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('Budget')">
-          {{"Add a note" | translate}}
-        </button>
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">{{"Download" | translate}}
-          ИПП(.docx)
-        </button>
-      </div>
-
-    </mat-tab>
-
-    <mat-tab [label]="'ORGANIZATIONAL AND METHODOLOGICAL WORK' | translate">
-      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-          <div class="col-12 text-center table-responsive">
-            <p class="nameHeader"> 3. {{"ORGANIZATIONAL AND METHODOLOGICAL WORK" | translate}}</p>
-
-            <mat-table [dataSource]="gettedOrgMetActs" class="">
-              <ng-container matColumnDef="orgId">
-                <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}} №</mat-header-cell>
-                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="activities">
-                <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="plan">
-                <mat-header-cell *matHeaderCellDef> {{"Plan" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="implementation">
-                <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity">
-                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'OrgMetAct'})">
-                    {{"Edit" | translate}}
-                  </button>
-                  <button style="margin-left: 5%" mat-stroked-button color="warn"
-                          (click)="deleteTableRow({data: activity, table: 'OrgMetAct'})">
-                    {{"Delete" | translate}}
-                  </button>
-                </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
-              <mat-row *matRowDef="let activity; columns: displayedColumns3;"></mat-row>
-
-            </mat-table>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-left: 37%">
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('OrgMetAct')">
-          {{"Add a note" | translate}}
-        </button>
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">{{"Download" | translate}}
-          ИПП(.docx)
-        </button>
-      </div>
-
-    </mat-tab>
-
-    <mat-tab [label]="'OTHER ACTIVITIES' | translate">
-      <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-          <div class="col-12 text-center table-responsive">
-            <p class="nameHeader">4. {{"Educational, vocational guidance, public work, work on the provision of paid services, equipping offices, advanced training" | translate}} </p>
-
-            <mat-table [dataSource]="gettedEduSocials" class="">
-              <ng-container matColumnDef="eduId">
-                <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}} №</mat-header-cell>
-                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="activities">
-                <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
-              </ng-container>
-
-
-              <ng-container matColumnDef="implementation">
-                <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
-                <mat-cell *matCellDef="let activity">
-                  <button mat-stroked-button color="warn" (click)="editTableRow({data: activity, table: 'EduSocial'})">
-                    {{"Edit" | translate}}
-                  </button>
-                  <button style="margin-left: 5%" mat-stroked-button color="warn"
-                          (click)="deleteTableRow({data: activity, table: 'EduSocial'})">
-                    {{"Delete" | translate}}
-                  </button>
-                </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
-              <mat-row *matRowDef="let activity; columns: displayedColumns4;"></mat-row>
-
-            </mat-table>
-
-          </div>
-        </div>
-
-      </div>
-
-      <div style="margin-left: 37%">
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="addTableRow('EduSocial')">
-          {{"Add a note" | translate}}
-        </button>
-        <button style="margin: 2%;" type="submit" mat-stroked-button color="warn" (click)="downloadPlan()">{{"Download" | translate}}
-          ИПП(.docx)
-        </button>
-      </div>
-
-    </mat-tab>
-
-  </mat-tab-group></div>
-  <div fxFlex="10"></div>
+    <div fxFlex="10"></div>
+    <div fxFlex="80">
+        <mat-tab-group>
+            <mat-tab [label]="'EDUCATIONAL WORK' | translate">
+                <ng-template mat-tab-label>
+                    <label matTooltip="{{'EDUCATIONAL WORK' | translate}}">{{"EDUCATIONAL WORK" | translate}}</label>
+                </ng-template>
+                <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+                    <div class="row">
+                        <div class="col-12 text-center table-responsive">
+                            <p class="nameHeader"> {{"Implementation of the training load" | translate}}</p>
+
+                            <mat-table [dataSource]="gettedPlamPerfomances" class="">
+                                <ng-container matColumnDef="ppId">
+                                    <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}}№
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="activities">
+                                    <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="implementation">
+                                    <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity">
+                                        <button mat-stroked-button color="warn"
+                                                (click)="editTableRow({data: activity, table: 'PP'})">
+                                            {{"Edit" | translate}}
+                                        </button>
+                                        <button style="margin-left: 5%" mat-stroked-button color="warn"
+                                                (click)="deleteTableRow({data: activity, table: 'PP'})">
+                                            {{"Delete" | translate}}
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+                                <mat-row *matRowDef="let activity; columns: displayedColumns5;"></mat-row>
+
+                            </mat-table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-left: 37%">
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="addTableRow('PP')">
+                        {{"Add a note" | translate}}
+                    </button>
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="downloadPlan()">{{"Download" | translate}}
+                        ИПП(.docx)
+                    </button>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'EDUCATIONAL AND METHODOLOGICAL WORK' | translate">
+              <ng-template mat-tab-label>
+                <label matTooltip="{{'EDUCATIONAL AND METHODOLOGICAL WORK' | translate}}">{{"EDUCATIONAL AND METHODOLOGICAL WORK" | translate}}</label>
+              </ng-template>
+                <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+                    <div class="row">
+                        <p class="nameHeader">
+                            1.{{"EDUCATIONAL AND METHODOLOGICAL WORK" | translate}}
+                        </p>
+
+                        <mat-table [dataSource]="gettedActs" class="">
+                            <ng-container matColumnDef="acId">
+                                <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}} №</mat-header-cell>
+                                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="activities">
+                                <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}
+                                    , {{"term" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="timeFrame">
+                                <mat-header-cell
+                                        *matHeaderCellDef> {{"Plan execution time" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.timeFrame}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="implementation">
+                                <mat-header-cell
+                                        *matHeaderCellDef> {{"Actual implementation of the plan" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity">
+                                    <button mat-stroked-button color="warn"
+                                            (click)="editTableRow({data: activity, table: 'Acad-Meth'})">
+                                        {{"Edit" | translate}}
+                                    </button>
+                                    <button style="margin-left: 5%" mat-stroked-button color="warn"
+                                            (click)="deleteTableRow({data: activity, table: 'Acad-Meth'})">
+                                        {{"Delete" | translate}}
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let activity; columns: displayedColumns;"></mat-row>
+
+                        </mat-table>
+                    </div>
+                </div>
+
+                <div style="margin-left: 37%">
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="addTableRow('Acad-Meth')">{{"Add a note" | translate}}</button>
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="downloadPlan()">{{"Download" | translate}} ИПП(.docx)
+                    </button>
+                </div>
+            </mat-tab>
+
+            <mat-tab [label]="'RESEARCH WORK' | translate">
+              <ng-template mat-tab-label>
+                <label matTooltip="{{'Scientific work' | translate}}">{{"RESEARCH WORK" | translate}}</label>
+              </ng-template>
+                <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+                    <div class="row">
+                        <p class="nameHeader">
+                            2.{{"Scientific work" | translate}}
+                        </p>
+
+                        <mat-table [dataSource]="gettedResearch" class="">
+                            <ng-container matColumnDef="commId">
+                                <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}} №</mat-header-cell>
+                                <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="activities">
+                                <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}
+                                    , {{"term" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="output">
+                                <mat-header-cell *matHeaderCellDef> {{"Workload" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.output}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="plan">
+                                <mat-header-cell
+                                        *matHeaderCellDef> {{"Plan execution time" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="implementation">
+                                <mat-header-cell
+                                        *matHeaderCellDef> {{"Actual implementation of the plan" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity">
+                                    <button mat-stroked-button color="warn"
+                                            (click)="editTableRow({data: activity, table: 'Research'})">
+                                        {{"Edit" | translate}}
+                                    </button>
+                                    <button style="margin-left: 5%" mat-stroked-button color="warn"
+                                            (click)="deleteTableRow({data: activity, table: 'Research'})">
+                                        {{"Delete" | translate}}
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+                            <mat-row *matRowDef="let activity; columns: displayedColumns1;"></mat-row>
+
+                        </mat-table>
+                    </div>
+                </div>
+
+                <div style="margin-left: 37%">
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="addTableRow('Research')">
+                        {{"Add a note" | translate}}
+                    </button>
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="downloadPlan()">{{"Download" | translate}}
+                        ИПП(.docx)
+                    </button>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'BUDGET RESEARCH AND STEERING GUIDANCE' | translate">
+              <ng-template mat-tab-label>
+                <label matTooltip="{{'Budget research and research work management' | translate}}">{{"BUDGET RESEARCH AND STEERING GUIDANCE" | translate}}</label>
+              </ng-template>
+                <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+                    <div class="row">
+                        <div class="col-12 text-center table-responsive">
+                            <p class="nameHeader">2.2 {{"Budget research and research work management" | translate}}</p>
+
+                            <mat-table [dataSource]="gettedBudgets" class="">
+                                <ng-container matColumnDef="budId">
+                                    <mat-header-cell *matHeaderCellDef> {{"Serial number"| translate}}№
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="activities">
+                                    <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="plan">
+                                    <mat-header-cell *matHeaderCellDef> {{"Plan" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="implementation">
+                                    <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity">
+                                        <button mat-stroked-button color="warn"
+                                                (click)="editTableRow({data: activity, table: 'Budget'})">
+                                            {{"Edit" | translate}}
+                                        </button>
+                                        <button style="margin-left: 5%" mat-stroked-button color="warn"
+                                                (click)="deleteTableRow({data: activity, table: 'Budget'})">
+                                            {{"Delete" | translate}}
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                                <mat-row *matRowDef="let activity; columns: displayedColumns2;"></mat-row>
+
+                            </mat-table>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-left: 37%">
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="addTableRow('Budget')">
+                        {{"Add a note" | translate}}
+                    </button>
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="downloadPlan()">{{"Download" | translate}}
+                        ИПП(.docx)
+                    </button>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'ORGANIZATIONAL AND METHODOLOGICAL WORK' | translate">
+              <ng-template mat-tab-label>
+                <label matTooltip="{{'ORGANIZATIONAL AND METHODOLOGICAL WORK' | translate}}">{{"ORGANIZATIONAL AND METHODOLOGICAL WORK" | translate}}</label>
+              </ng-template>
+                <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+                    <div class="row">
+                        <div class="col-12 text-center table-responsive">
+                            <p class="nameHeader"> 3. {{"ORGANIZATIONAL AND METHODOLOGICAL WORK" | translate}}</p>
+
+                            <mat-table [dataSource]="gettedOrgMetActs" class="">
+                                <ng-container matColumnDef="orgId">
+                                    <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}}№
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="activities">
+                                    <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="plan">
+                                    <mat-header-cell *matHeaderCellDef> {{"Plan" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.plan}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="implementation">
+                                    <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity">
+                                        <button mat-stroked-button color="warn"
+                                                (click)="editTableRow({data: activity, table: 'OrgMetAct'})">
+                                            {{"Edit" | translate}}
+                                        </button>
+                                        <button style="margin-left: 5%" mat-stroked-button color="warn"
+                                                (click)="deleteTableRow({data: activity, table: 'OrgMetAct'})">
+                                            {{"Delete" | translate}}
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+                                <mat-row *matRowDef="let activity; columns: displayedColumns3;"></mat-row>
+
+                            </mat-table>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-left: 37%">
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="addTableRow('OrgMetAct')">
+                        {{"Add a note" | translate}}
+                    </button>
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="downloadPlan()">{{"Download" | translate}}
+                        ИПП(.docx)
+                    </button>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'OTHER ACTIVITIES' | translate">
+              <ng-template mat-tab-label>
+                <label matTooltip="{{'Educational, vocational guidance, public work, work on the provision of paid services, equipping offices, advanced training' | translate}}">{{"OTHER ACTIVITIES" | translate}}</label>
+              </ng-template>
+                <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+                    <div class="row">
+                        <div class="col-12 text-center table-responsive">
+                            <p class="nameHeader">
+                                4. {{"Educational, vocational guidance, public work, work on the provision of paid services, equipping offices, advanced training" | translate}} </p>
+
+                            <mat-table [dataSource]="gettedEduSocials" class="">
+                                <ng-container matColumnDef="eduId">
+                                    <mat-header-cell *matHeaderCellDef> {{"Serial number" | translate}}№
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let activity, let i = index"> {{i + 1}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="activities">
+                                    <mat-header-cell *matHeaderCellDef> {{"Work name" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.activities}} </mat-cell>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="implementation">
+                                    <mat-header-cell *matHeaderCellDef>{{"Performance" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity"> {{activity.implementation}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
+                                    <mat-cell *matCellDef="let activity">
+                                        <button mat-stroked-button color="warn"
+                                                (click)="editTableRow({data: activity, table: 'EduSocial'})">
+                                            {{"Edit" | translate}}
+                                        </button>
+                                        <button style="margin-left: 5%" mat-stroked-button color="warn"
+                                                (click)="deleteTableRow({data: activity, table: 'EduSocial'})">
+                                            {{"Delete" | translate}}
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns4"></mat-header-row>
+                                <mat-row *matRowDef="let activity; columns: displayedColumns4;"></mat-row>
+
+                            </mat-table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="margin-left: 37%">
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="addTableRow('EduSocial')">
+                        {{"Add a note" | translate}}
+                    </button>
+                    <button style="margin: 2%;" type="submit" mat-stroked-button color="warn"
+                            (click)="downloadPlan()">{{"Download" | translate}}
+                        ИПП(.docx)
+                    </button>
+                </div>
+
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+    <div fxFlex="10"></div>
 </div>

@@ -76,6 +76,7 @@ import localeKz from '@angular/common/locales/kk';
 import localeRu from '@angular/common/locales/ru';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import '@angular/common/locales/global/pl';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 const r: Routes = [
@@ -196,7 +197,8 @@ const r: Routes = [
         MatTableModule,
         FlexLayoutModule,
         DeviceDetectorModule,
-        TranslateModule
+        TranslateModule,
+        MatTooltipModule
     ],
     providers: [
         {
