@@ -2,6 +2,10 @@ label {
     color: #A8A4A4;
 }
 
+.margin {
+    margin: 0 10% 0 35%;
+}
+
 input:not(.btn) {
     background: #FDFDFD;
     border: 1px solid #0CB5A0;

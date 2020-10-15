@@ -129,7 +129,7 @@
         </mat-table>
 
         <div style="align-items: center; display: flex;">
-            <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>
+            <button [ngClass]="{margin: !isMobile}" (click)="create('pub')" color="primary" mat-stroked-button>
                 Добавить
                 <mat-icon color="primary">add_task</mat-icon>
             </button>

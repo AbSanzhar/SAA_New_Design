@@ -182,7 +182,7 @@ export class MyScienceProjComponent implements OnInit {
 
     create(tab: string) {
         this._dialog.open(TeacherComponent, {
-            width: '50%',
+            width: '70%',
             data: tab
         }).afterClosed().subscribe(res => {
             if (typeof res !== 'undefined' && res !== 'false') {

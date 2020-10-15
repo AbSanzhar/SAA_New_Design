@@ -7,6 +7,7 @@ import * as jwt_decode from 'jwt-decode';
 import {TeacherComponent} from '../../teacher/teacher.component';
 import {MatDialog} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
     selector: 'app-my-publications',
@@ -14,6 +15,10 @@ import {TranslateService} from '@ngx-translate/core';
     styleUrls: ['./my-publications.component.css']
 })
 export class MyPublicationsComponent implements OnInit {
+
+    isMobile;
+    isDesktop;
+    isTablet;
 
     lang: any;
     from: any = 1900;
@@ -55,10 +60,12 @@ export class MyPublicationsComponent implements OnInit {
                 // tslint:disable-next-line:variable-name
                 private _api: ApiService,
                 // tslint:disable-next-line:variable-name
-                private _dialog: MatDialog) {
+                private _dialog: MatDialog,
+                private deviceDetectorService: DeviceDetectorService) {
     }
 
     ngOnInit(): void {
+        this.detectDevice();
         this._api.getPubTypeCount().subscribe(
             res => {
                 console.log(res);
@@ -145,6 +152,12 @@ export class MyPublicationsComponent implements OnInit {
         );
     }
 
+    detectDevice() {
+        this.isMobile = this.deviceDetectorService.isMobile();
+        this.isTablet = this.deviceDetectorService.isTablet();
+        this.isDesktop = this.deviceDetectorService.isDesktop();
+    }
+
     getTeacherPublications(lang) {
         const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
         this._api.getPublicationsPage(query, lang).subscribe(res => {
@@ -216,7 +229,7 @@ export class MyPublicationsComponent implements OnInit {
 
     create(tab: string) {
         this._dialog.open(TeacherComponent, {
-            width: '50%',
+            width: '75%',
             data: tab
         }).afterClosed().subscribe(res => {
             if (typeof res !== 'undefined' && res !== 'false') {
