@@ -1,17 +1,17 @@
-<div fxLayout="column" fxLayoutAlign="center center" style="width: 1000px; padding-bottom: 5%;" fxLayoutGap="2%">
+<div fxLayout="column" fxLayoutAlign="center start" style="width: 1200px; padding-bottom: 5%;" fxLayoutGap="2%">
     <mat-table [dataSource]="TeacherScienceProjects">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> ИРН </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"> {{project.scId}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Наименование</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Title' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"> {{project.scName}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="type">
-            <mat-header-cell *matHeaderCellDef> Тип</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'The Type' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"> {{project.scType}} </mat-cell>
         </ng-container>
 
@@ -26,66 +26,66 @@
         <!--              </ng-container>-->
 
         <ng-container matColumnDef="priority">
-            <mat-header-cell class="Razdel" *matHeaderCellDef> Раздел</mat-header-cell>
+            <mat-header-cell class="Razdel" *matHeaderCellDef> {{'Section' | translate}} </mat-header-cell>
             <mat-cell class="Razdel Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="subPriority">
-            <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Subsection' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="subSubPriority">
-            <mat-header-cell *matHeaderCellDef> Подраздел</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Subsection' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="executor">
-            <mat-header-cell *matHeaderCellDef> Исполнитель</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Executor' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="customer">
-            <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Customer' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scCustomer}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="dirFullName">
-            <mat-header-cell *matHeaderCellDef> Научный руководитель</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Supervisor' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDirFullName}}</p>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="dept">
-            <mat-header-cell *matHeaderCellDef> Подразделение</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Subdivision' | translate}} </mat-header-cell>
             <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="agrDate">
-            <mat-header-cell *matHeaderCellDef> Дата договора</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Agreement date' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let project"><p>{{project.scAgrDate | date}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="registerNumber">
-            <mat-header-cell *matHeaderCellDef> Регистрационный номер</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Registration number' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let project"><p>{{project.scNum}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="startDate">
-            <mat-header-cell *matHeaderCellDef> Дата начала проекта</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Project start date' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let project"><p>{{project.scStDate | date}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="endDate">
-            <mat-header-cell *matHeaderCellDef> Дата сдачи проекта</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Project completion date' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let project"><p>{{project.scEndDate | date}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="totalSum">
-            <mat-header-cell *matHeaderCellDef> Общая сумма гранта</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{'Total grant amount' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let project"><p>{{project.scTotalSum}}</p></mat-cell>
         </ng-container>
 
@@ -93,10 +93,12 @@
         <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
     </mat-table>
 <!--    <div style="align-items: center; display: flex;">-->
-        <button (click)="create('science')" color="primary"
-                mat-stroked-button>Добавить
+    <div class="test">
+        <button style="width: 100%;" (click)="create('science')" color="primary"
+                mat-stroked-button>{{'Add' | translate}}
             <mat-icon color="primary">add_task</mat-icon>
         </button>
+    </div>
 <!--        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
 <!--                       [pageSize]="paginator.size"-->
 <!--                       [pageIndex]="paginator.page"-->

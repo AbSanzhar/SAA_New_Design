@@ -1,17 +1,17 @@
-<div fxLayout="column" fxLayoutAlign="center center" style="width: 100%;" fxLayoutGap="5%">
-    <mat-table [dataSource]="DepUsers">
+<div fxLayout="column" fxLayoutAlign="center start" style="width: 700px;">
+    <mat-table [dataSource]="DepUsers" style="width: 100%;">
         <ng-container matColumnDef="userId">
             <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
             <mat-cell *matCellDef="let employee"> {{employee.userId}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="lastName">
-            <mat-header-cell *matHeaderCellDef> Фамилия</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{"Surname" | translate}}</mat-header-cell>
             <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="firstName">
-            <mat-header-cell *matHeaderCellDef> Имя</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{"Name" | translate}}</mat-header-cell>
             <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
         </ng-container>
 
@@ -21,12 +21,12 @@
         </ng-container>
 
         <ng-container matColumnDef="description">
-            <mat-header-cell *matHeaderCellDef> Описание</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{"Description" | translate}}</mat-header-cell>
             <mat-cell *matCellDef="let employee"> {{employee.description}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="userType">
-            <mat-header-cell *matHeaderCellDef> Тип работника</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{"Employee type" | translate}}</mat-header-cell>
             <mat-cell *matCellDef="let employee"> {{employee.userType}} </mat-cell>
         </ng-container>
 

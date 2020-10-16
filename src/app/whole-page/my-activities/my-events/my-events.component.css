@@ -56,4 +56,9 @@ mat-table {
     flex: 7rem;
     max-width: 13rem;
 }
-
+.test {
+    margin: 2%;
+    width: 25%;
+    align-items: center;
+    display: flex;
+}

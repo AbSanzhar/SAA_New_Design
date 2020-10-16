@@ -1,18 +1,18 @@
-<div fxLayout="row" style="width: 700px;">
-    <div fxLayout="column" fxLayoutAlign="start start">
+<div fxLayout="row" style="width: 950px; margin: 2% 2% 7%">
+    <div style="width: 100%" fxLayout="column" fxLayoutAlign="center start">
 
         <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px" style="margin: 2%; width: 100%">
-            <div style="width: 100%">
+            <div style="width: 50%">
                 <label style="margin-right: 2%">От </label>
                 <input style="width: 50%" [(ngModel)]="from" type="number">
             </div>
-            <div style="width: 100%">
+            <div style="width: 50%">
                 <label style="margin-right: 2%">До </label>
                 <input style="width: 50%" [(ngModel)]="to" type="number">
             </div>
         </div>
 
-        <mat-table [dataSource]="TeacherPublications">
+        <mat-table [dataSource]="TeacherPublications" style="width: 100%">
             <ng-container matColumnDef="pubId">
                 <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
 
@@ -22,21 +22,21 @@
             </ng-container>
 
             <ng-container matColumnDef="Title">
-                <mat-header-cell *matHeaderCellDef> Название публикации</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div>
                 </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="pubType">
-                <mat-header-cell *matHeaderCellDef> Тип публикации</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"Post type" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubType}}</div>
                 </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Collaborators">
-                <mat-header-cell *matHeaderCellDef> Соавторы</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"Co-authors" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
                         <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">
@@ -48,28 +48,28 @@
             </ng-container>
 
             <ng-container matColumnDef="Year">
-                <mat-header-cell *matHeaderCellDef> Год</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"Year" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubYear}}</div>
                 </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="City">
-                <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"City" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCity}}</div>
                 </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Publisher">
-                <mat-header-cell *matHeaderCellDef> Издатель</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"Publisher" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPubName}} </div>
                 </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Page">
-                <mat-header-cell *matHeaderCellDef> Страницы</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"Pages" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPage}}
                         - {{publication.pubEndPage}}</div>
@@ -94,7 +94,7 @@
             </ng-container>
 
             <ng-container matColumnDef="pubStatus">
-                <mat-header-cell *matHeaderCellDef> Статус модерации</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> {{"Moderation status" | translate}}</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
                         <mat-icon style="color: green;" *ngIf="publication.pubStatus == 'Confirmed'">done
@@ -115,7 +115,7 @@
             </ng-container>
 
             <ng-container matColumnDef="File">
-                <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> File</mat-header-cell>
                 <mat-cell *matCellDef="let publication">
                     <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a
                             href="https://nir.iitu.kz/{{publication.pubFile}}" download="">
@@ -128,17 +128,17 @@
             <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
         </mat-table>
 
-        <div style="align-items: center; display: flex;">
-            <button [ngClass]="{margin: !isMobile}" (click)="create('pub')" color="primary" mat-stroked-button>
-                Добавить
+        <div style="align-items: center; display: flex; margin: 2%; width: 20%;">
+            <button style="width: 100%" [ngClass]="{margin: !isMobile}" (click)="create('pub')" color="primary" mat-stroked-button>
+                {{"Add" | translate}}
                 <mat-icon color="primary">add_task</mat-icon>
             </button>
-            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
-                           [pageSize]="paginator.size"
-                           [pageIndex]="paginator.page"
-                           (change)="changeTableList($event)"
-                           (page)="changeTableList($event)"
-                           showFirstLastButtons></mat-paginator>
+<!--            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                           [pageSize]="paginator.size"-->
+<!--                           [pageIndex]="paginator.page"-->
+<!--                           (change)="changeTableList($event)"-->
+<!--                           (page)="changeTableList($event)"-->
+<!--                           showFirstLastButtons></mat-paginator>-->
         </div>
     </div>
 </div>

@@ -50,21 +50,21 @@
                         </ng-container>
 
                         <ng-container matColumnDef="Title">
-                            <mat-header-cell *matHeaderCellDef> Название публикации</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="pubType">
-                            <mat-header-cell *matHeaderCellDef> Тип публикации</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Post type" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubType}}</div>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="Collaborators">
-                            <mat-header-cell *matHeaderCellDef> Соавторы</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Co-authors" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
                                     <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">
@@ -76,28 +76,28 @@
                         </ng-container>
 
                         <ng-container matColumnDef="Year">
-                            <mat-header-cell *matHeaderCellDef> Год</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Year" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubYear}}</div>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="City">
-                            <mat-header-cell *matHeaderCellDef> Город</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"City" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCity}}</div>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="Publisher">
-                            <mat-header-cell *matHeaderCellDef> Издатель</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Publisher" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPubName}} </div>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="Page">
-                            <mat-header-cell *matHeaderCellDef> Страницы</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Pages" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPage}}
                                     - {{publication.pubEndPage}}</div>
@@ -122,7 +122,7 @@
                         </ng-container>
 
                         <ng-container matColumnDef="pubStatus">
-                            <mat-header-cell *matHeaderCellDef> Статус модерации</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> {{"Moderation status" | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
                                     <mat-icon style="color: green;" *ngIf="publication.pubStatus == 'Confirmed'">done
@@ -143,7 +143,7 @@
                         </ng-container>
 
                         <ng-container matColumnDef="File">
-                            <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> File </mat-header-cell>
                             <mat-cell *matCellDef="let publication">
                                 <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a
                                         href="https://nir.iitu.kz/{{publication.pubFile}}" download="">
