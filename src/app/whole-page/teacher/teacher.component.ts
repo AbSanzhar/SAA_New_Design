@@ -87,7 +87,7 @@ export class TeacherComponent implements OnInit {
             event_city: new FormControl('', Validators.required),
             event_url: new FormControl(''),
             event_date: new FormControl('', Validators.required),
-            event_file: new FormControl('', Validators.required),
+            event_file: new FormControl(''),
             event_user_id: this.IdToken
         });
 

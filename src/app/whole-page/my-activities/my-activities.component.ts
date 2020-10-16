@@ -98,7 +98,6 @@ export class MyActivitiesComponent implements OnInit {
 
     ngOnInit(): void {
         this.lang = this.translateService.currentLang;
-        alert(this.lang);
         this.getTeacherPublications(this.lang);
         this.getTeacherEvents(this.lang);
         this.getTeacherPatents(this.lang);
