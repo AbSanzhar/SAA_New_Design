@@ -65,8 +65,6 @@ export class WholePageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log('SAULEEEE SUPER');
-    console.log(this.availableLangs);
     this.detectDevice();
     // if(!this.cookieService.getCookie('language')) {
     //   this.cookieService.setCookie('language', 'ru', 1);
@@ -117,7 +115,7 @@ export class WholePageComponent implements OnInit, AfterViewInit {
     this.currentLang = lng;
     this.translate.use(lng.code);
     this.translate.currentLang = lng.code;
-    console.log('curr lang ', this.currentLang);
+    // console.log('curr lang ', this.currentLang);
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
   }
@@ -137,7 +135,5 @@ export class WholePageComponent implements OnInit, AfterViewInit {
     this.translate.currentLang = this.currentLang.code;
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
-    console.log('YAY');
-    console.log(this.availableLangs);
   }
 }

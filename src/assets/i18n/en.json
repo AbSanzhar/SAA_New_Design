@@ -168,9 +168,16 @@
   "Form of study and topic": "Form of study and topic",
   "Course cost": "Course cost",
   "Location": "Location",
+  "Teacher ID": "Teacher ID",
+  "Teacher Name": "Teacher Name",
+  "Uploaded date": "Uploaded date",
+  "Publication Name": "Publication Name",
+  "Type of activity": "Type of activity",
   "Name of the award / prize": "Name of the award / prize",
   "Who is awarded": "Who is awarded",
   "Subsection": "Subsection",
   "Executor": "Executor",
+  "Teachers activity": "Teachers activity",
+  "The activity of the teachers of the department": "The activity of the teachers of the department",
   "My events": "My events"
 }

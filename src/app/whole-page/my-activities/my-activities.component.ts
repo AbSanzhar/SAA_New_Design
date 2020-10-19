@@ -23,6 +23,7 @@ export class MyActivitiesComponent implements OnInit {
         size: 1,
         page: 0,
     };
+    isHeadOfDept: boolean;
     lang: any;
     public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
     public IdToken = this.DecodedToken.jti;
@@ -47,6 +48,7 @@ export class MyActivitiesComponent implements OnInit {
     TeacherCourses: any[] = [];
     TeacherExhibitions: any[] = [];
     TeacherAwards: any[] = [];
+    StaffActivity: any[] = [];
     Activity1: any[] = [];
     Activity2: any[] = [];
     Activity3: any[] = [];
@@ -61,6 +63,7 @@ export class MyActivitiesComponent implements OnInit {
     displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
     displayedColumnsExhibition = ['id', 'name', 'date', 'place', 'type', 'role', 'level'];
     displayedColumnsAward = ['id', 'name', 'type', 'date', 'by_whom', 'to_whom'];
+    displayedColumnsStaffActivity = ['id', 'teacherId', 'teacherName', 'date', 'publicationName', 'activity'];
     displayedColumnsActivity1 = ['id', 'actName', 'startDate', 'endDate'];
     displayedColumnsActivity2 = ['id', 'actName', 'startDate', 'endDate'];
     displayedColumnsActivity3 = ['id', 'actName', 'startDate', 'endDate'];
@@ -109,7 +112,6 @@ export class MyActivitiesComponent implements OnInit {
         this.getTeacherActivities(this.IdToken);
         this._api.getPubTypeCount().subscribe(
             res => {
-                console.log(res);
                 this.PubTypeCounts = res;
             },
             err => {
@@ -118,7 +120,6 @@ export class MyActivitiesComponent implements OnInit {
 
         this._api.getUserDegreeCount().subscribe(
             res => {
-                console.log(res);
                 this.UserDegreeCounts = res;
             },
             err => {
@@ -127,7 +128,6 @@ export class MyActivitiesComponent implements OnInit {
         );
         this._api.getPublishCount().subscribe(
             res => {
-                console.log(res);
                 this.publishCount = res;
             },
             err => {
@@ -136,7 +136,6 @@ export class MyActivitiesComponent implements OnInit {
         );
         this._api.getCourseCount().subscribe(
             res => {
-                console.log(res);
                 this.courceCount = res;
             }, err => {
                 console.log(err);
@@ -144,7 +143,6 @@ export class MyActivitiesComponent implements OnInit {
         );
         this._api.getDisMembersCount().subscribe(
             res => {
-                console.log(res);
                 this.disMembersCount = res;
             }, err => {
                 console.log(err);
@@ -152,7 +150,6 @@ export class MyActivitiesComponent implements OnInit {
         );
         this._api.getExhibitionCount().subscribe(
             res => {
-                console.log(res);
                 this.exhibitionCount = res;
             }, err => {
                 console.log(err);
@@ -161,24 +158,20 @@ export class MyActivitiesComponent implements OnInit {
         this._api.getRatingListAwardsCount().subscribe(
             res => {
                 this.awardCount = res;
-                console.log(res);
             }
         );
         this._api.getRatingListActivities().subscribe(
             res => {
-                console.log(res);
                 this.activityCount = res;
             }
         );
         this._api.getRatingListActivityRoles().subscribe(
             res => {
-                console.log(res);
                 this.activityRoleCount = res;
             }
         );
         this._api.getUserById(this.IdToken).subscribe(
             res => {
-                console.log(res);
                 if (res.patronymic != null) {
                     this.name = res.firstName.charAt(0) + '.' + res.patronymic.charAt(0) + '.' + res.lastName;
                 } else {
@@ -190,12 +183,12 @@ export class MyActivitiesComponent implements OnInit {
                 console.log(err);
             }
         );
-        this.getTeacherPublications(this.language);
-        this.getTeacherEvents(this.language);
-        this.getTeacherDisSovet(this.language);
-        this.getTeacherPatents(this.language);
+        this.getTeacherPublications(this.lang);
+        this.getTeacherEvents(this.lang);
+        this.getTeacherDisSovet(this.lang);
+        this.getTeacherPatents(this.lang);
         this.getTeacherScienceProjects();
-        this.getTeacherCourses(this.language);
+        this.getTeacherCourses(this.lang);
         this._api.getUserById(this.tokenId).subscribe(
             res => {
                 this.currentUser = res;
@@ -204,17 +197,17 @@ export class MyActivitiesComponent implements OnInit {
                 for (let i = 0; i < res.roles.length; i++) {
                     this.roles.push(res.roles[i].roleName);
                     if (res.roles[i].roleName === 'Teacher') {
-                        this.getTeacherPublications(this.language);
-                        this.getTeacherEvents(this.language);
-                        this.getTeacherDisSovet(this.language);
-                        this.getTeacherPatents(this.language);
+                        this.getTeacherPublications(this.lang);
+                        this.getTeacherEvents(this.lang);
+                        this.getTeacherDisSovet(this.lang);
+                        this.getTeacherPatents(this.lang);
                         this.getTeacherScienceProjects();
-                        this.getTeacherCourses(this.language);
+                        this.getTeacherCourses(this.lang);
                     } else if (res.roles[i].roleName === 'Head_Of_Dept') {
                         this.getDepUsers(this.userDepts[0].deptId);
+                        this.isHeadOfDept = true;
                     }
                 }
-                console.log(res);
             },
             err => {
                 console.log(err);
@@ -225,10 +218,7 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherPublications(lang) {
         const query = '?_page=' + this.paginator.page + '&_limit=' + this.paginator.size;
         this._api.getPublicationsPage(query, lang).subscribe(res => {
-            // console.log(res);
             this.TeacherPublications = res;
-            console.log(res);
-            // console.log(this.TeacherPublications);
             for (let i = 0; i < res.length; i++) {
                 this.TeacherPublications[i].pubYear = new Date(res[i].pubYear).getFullYear();
             }
@@ -259,15 +249,13 @@ export class MyActivitiesComponent implements OnInit {
     }
 
     changeTableList(event) {
-        console.log('asda');
         this.paginator.page = event.pageIndex;
         this.paginator.size = event.pageSize;
-        this.getTeacherPublications(this.language);
+        this.getTeacherPublications(this.lang);
     }
 
     getTeacherEvents(lang) {
         this._api.getEvent(lang).subscribe(res => {
-            console.log(res);
             this.TeacherEvents = res;
             for (let i = 0; i < res.length; i++) {
                 const year = new Date(res[i].eventDate).getFullYear();
@@ -295,7 +283,6 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherDisSovet(lang) {
         this._api.getAllMyDisSovets(this.tokenId, lang).subscribe(
             res => {
-                console.log(res);
                 this.TeacherDisSovet = res;
             }, err => {
                 console.log(err);
@@ -306,7 +293,6 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherPatents(lang) {
         this._api.getPatent(lang).subscribe(
             res => {
-                console.log(res);
                 this.TeacherPatents = res;
                 for (let i = 0; i < res.length; i++) {
                     const year = new Date(res[i].ptntInsertedDate).getFullYear();
@@ -324,6 +310,7 @@ export class MyActivitiesComponent implements OnInit {
                     this.TeacherPatents[i].ptntIssueDate = day2 + '/' + month2 + '/' + year2;
                 }
 
+                // tslint:disable-next-line:only-arrow-functions
                 this.TeacherPatents.sort(function(a, b) {
                     if (a.ptntId > b.ptntId) {
                         return -1;
@@ -342,7 +329,6 @@ export class MyActivitiesComponent implements OnInit {
     getDepUsers(id) {
         this._api.getDepUsers(id).subscribe(
             res => {
-                console.log(res);
                 // tslint:disable-next-line:prefer-for-of
                 for (let i = 0; i < res.usersDeptsEntities.length; i++) {
                     const tempUser = {
@@ -362,13 +348,12 @@ export class MyActivitiesComponent implements OnInit {
     }
 
     getTeacherScienceProjects() {
-        this._api.getOneScienceProject(14, 'en').subscribe(
-            res => console.log(res)
-        );
+        this._api.getOneScienceProject(14, 'en').subscribe(res => {
+        });
         this._api.getScienceProject().subscribe(
             res => {
-                console.log(res);
                 this.TeacherScienceProjects = res;
+                // tslint:disable-next-line:only-arrow-functions
                 this.TeacherScienceProjects.sort(function(a, b) {
                     if (a.scId > b.scId) {
                         return -1;
@@ -388,7 +373,6 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherCourses(lang) {
         this._api.getCourses(lang).subscribe(
             res => {
-                console.log(res);
                 this.TeacherCourses = res;
                 for (let i = 0; i < res.length; i++) {
                     const startYear = new Date(res[i].startdate).getFullYear();
@@ -407,6 +391,7 @@ export class MyActivitiesComponent implements OnInit {
                         + new Date(res[i].enddate).getDate() : new Date(res[i].enddate).getDate();
                     this.TeacherCourses[i].enddate = endDay + '/' + endMonth + '/' + endYear;
                 }
+                // tslint:disable-next-line:only-arrow-functions
                 this.TeacherCourses.sort(function(a, b) {
                     if (a.courseId > b.courseId) {
                         return -1;
@@ -425,32 +410,31 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherExhibitions(userId) {
         this._api.getExhibitions(userId).subscribe(
             res => {
-                console.log(res);
                 this.TeacherExhibitions = res;
                 for (let i = 0; i < res.length; i++) {
-                    const langRoleSelector = 'exRole' + String(this.language[0]).toUpperCase() + this.language[1];
-                    const langTypeSelector = 'exType' + String(this.language[0]).toUpperCase() + this.language[1];
-                    const langLevelSelector = 'exLevel' + String(this.language[0]).toUpperCase() + this.language[1];
+                    const langRoleSelector = 'exRole' + String(this.lang[0]).toUpperCase() + this.lang[1];
+                    const langTypeSelector = 'exType' + String(this.lang[0]).toUpperCase() + this.lang[1];
+                    const langLevelSelector = 'exLevel' + String(this.lang[0]).toUpperCase() + this.lang[1];
                     this.TeacherExhibitions[i].exRole = res[i].exRoleId[langRoleSelector];
                     this.TeacherExhibitions[i].exType = res[i].exTypeId[langTypeSelector];
                     this.TeacherExhibitions[i].exLevel = res[i].exLevelId[langLevelSelector];
                 }
             },
-            err => console.log(err),
+            err =>
+                console.log(err),
         );
     }
 
     getTeacherAwards(userId) {
         this._api.getTeacherAwards(userId).subscribe(
             res => {
-                console.log(res);
                 this.TeacherAwards = res;
                 for (let i = 0; i < res.length; i++) {
                     let langTypeSelector;
-                    if (this.language == 'ru') {
+                    if (this.lang === 'ru') {
                         langTypeSelector = 'awardTypeName';
                     } else {
-                        langTypeSelector = 'awardTypeName' + String(this.language[0]).toUpperCase() + this.language[1];
+                        langTypeSelector = 'awardTypeName' + String(this.lang[0]).toUpperCase() + this.lang[1];
                     }
                     this.TeacherAwards[i].awardType = res[i].awardTypeEntity[langTypeSelector];
                 }
@@ -461,15 +445,15 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherActivities(userId) {
         this._api.getTeacherActivities(userId).subscribe(
             res => {
-                console.log(res);
+                // tslint:disable-next-line:prefer-for-of
                 for (let i = 0; i < res.length; i++) {
-                    if (res[i].activityTypeId.activityTypeId == 1) {
+                    if (res[i].activityTypeId.activityTypeId === 1) {
                         this.Activity1.push(res[i]);
-                    } else if (res[i].activityTypeId.activityTypeId == 2) {
+                    } else if (res[i].activityTypeId.activityTypeId === 2) {
                         this.Activity2.push(res[i]);
-                    } else if (res[i].activityTypeId.activityTypeId == 3) {
+                    } else if (res[i].activityTypeId.activityTypeId === 3) {
                         this.Activity3.push(res[i]);
-                    } else if (res[i].activityTypeId.activityTypeId == 4) {
+                    } else if (res[i].activityTypeId.activityTypeId === 4) {
                         this.Activity4.push(res[i]);
                     }
 
@@ -494,34 +478,32 @@ export class MyActivitiesComponent implements OnInit {
             if (typeof res !== 'undefined' && res !== 'false') {
                 if (tab === 'pub') {
                     this._api.uploadPub(res).subscribe(result => {
-                        console.log(result);
-                        this.getTeacherPublications(this.language);
+                        this.getTeacherPublications(this.lang);
                     }, err => {
                         console.log(err);
-                        this.getTeacherPublications(this.language);
+                        this.getTeacherPublications(this.lang);
                     });
                 }
                 if (tab === 'event') {
                     this._api.uploadEvent(res).subscribe(result => {
-                        this.getTeacherEvents(this.language);
+                        this.getTeacherEvents(this.lang);
                     }, err => {
                         console.log(err);
-                        this.getTeacherEvents(this.language);
+                        this.getTeacherEvents(this.lang);
                     });
                 }
                 if (tab === 'patent') {
                     this._api.addPatent(res).subscribe(result => {
-                        console.log(result);
-                        this.getTeacherPatents(this.language);
+                        this.getTeacherPatents(this.lang);
                     }, error1 => {
                         console.log(error1);
-                        this.getTeacherPatents(this.language);
+                        this.getTeacherPatents(this.lang);
                     });
                 }
                 if (tab === 'science') {
                     this._api.addProject(res).subscribe(
                         result => {
-                            console.log(result);
+                            // console.log(result);
                             this.getTeacherScienceProjects();
                         }, err => {
                             console.log(err);
@@ -532,18 +514,16 @@ export class MyActivitiesComponent implements OnInit {
                 if (tab === 'course') {
                     this._api.uploadCourse(res).subscribe(
                         result => {
-                            console.log(result);
-                            this.getTeacherCourses(this.language);
+                            this.getTeacherCourses(this.lang);
                         }, err => {
                             console.log(err);
-                            this.getTeacherCourses(this.language);
+                            this.getTeacherCourses(this.lang);
                         }
                     );
                 }
                 if (tab === 'exhibition') {
                     this._api.uploadExhibition(res).subscribe(
                         result => {
-                            console.log(result);
                             this.getTeacherExhibitions(this.IdToken);
                         }, err => {
                             console.log(err);
@@ -554,7 +534,6 @@ export class MyActivitiesComponent implements OnInit {
                 if (tab === 'award') {
                     this._api.uploadTeacherAward(res).subscribe(
                         result => {
-                            console.log(result);
                             this.getTeacherAwards(this.IdToken);
                         }, err => {
                             console.log(err);
@@ -565,7 +544,6 @@ export class MyActivitiesComponent implements OnInit {
                 if (tab === 'activity1' || tab === 'activity2' || tab === 'activity3' || tab === 'activity4') {
                     this._api.uploadTeacherActivity(res).subscribe(
                         result => {
-                            console.log(result);
                             this.getTeacherActivities(this.IdToken);
                         }, err => {
                             console.log(err);
@@ -583,20 +561,15 @@ export class MyActivitiesComponent implements OnInit {
         const doc = DocumentCreator.create(this.PubTypeCounts, this.UserDegreeCounts, this.publishCount, this.courceCount, this.disMembersCount, this.exhibitionCount, this.awardCount, this.activityCount, this.activityRoleCount);
 
         Packer.toBlob(doc).then(blob => {
-            console.log(blob);
             saveAs(blob, 'Рейтинг лист.docx');
-            console.log('Document created successfully');
         });
     }
 
     public download2(): void {
-        console.log(this.TeacherPublications);
         const documentCreator = new ScienceListGenerator();
         const doc = documentCreator.create(this.name, this.TeacherPublications);
         Packer.toBlob(doc).then(blob => {
-            console.log(blob);
             saveAs(blob, 'Список научных трудов.docx');
-            console.log('Document created successfully');
         });
     }
 

@@ -17,6 +17,7 @@
             </div>
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 8}" (click)="setWhichTable(8)">{{"Awards and prizes" | translate}}</a></div>
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 9}" (click)="setWhichTable(9)">{{"Expert and analytical" | translate}}<br>{{"activity" | translate}}</a></div>
+            <div *ngIf="isHeadOfDept" class="linkTable"><a [ngClass]="{'is-active': whichTable === 10}" (click)="setWhichTable(10)">{{"Teachers activity" | translate}}</a></div>
             <button (click)="download2()" style="border-color: white; margin-left: -3%; margin-top: 5%;"
                     mat-stroked-button
                     color="primary">{{"Download the list of scientific papers" | translate}}
@@ -890,6 +891,55 @@
                                        (page)="changeTableList($event)"
                                        showFirstLastButtons></mat-paginator>
                     </div>
+                    </div>
+                </div>
+
+                <div *ngIf="whichTable === 10">
+                    <div style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
+                        <h2 class="textM">{{"The activity of the teachers of the department" | translate}}</h2>
+                        <mat-table [dataSource]="StaffActivity">
+                            <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{ activity.id }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="teacherId">
+                                <mat-header-cell *matHeaderCellDef> {{"Teacher ID" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{ activity.teacherId }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="teacherName">
+                                <mat-header-cell *matHeaderCellDef> {{"Teacher Name" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{ activity.teacherName }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="date">
+                                <mat-header-cell *matHeaderCellDef> {{"Uploaded date" | translate}} </mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{ activity.date | date}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="publicationName">
+                                <mat-header-cell *matHeaderCellDef> {{"Publication Name" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{ activity.publicationName | date}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="activity">
+                                <mat-header-cell *matHeaderCellDef> {{"Type of activity" | translate}}</mat-header-cell>
+                                <mat-cell *matCellDef="let activity"> {{ activity.activity | date}} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumnsStaffActivity"></mat-header-row>
+                            <mat-row *matRowDef="let activity; columns: displayedColumnsStaffActivity;"></mat-row>
+                        </mat-table>
+
+                        <div style="align-items: center; display: flex;">
+                            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
+                                           [pageSize]="paginator.size"
+                                           [pageIndex]="paginator.page"
+                                           (change)="changeTableList($event)"
+                                           (page)="changeTableList($event)"
+                                           showFirstLastButtons></mat-paginator>
+                        </div>
                     </div>
                 </div>
             </div>
