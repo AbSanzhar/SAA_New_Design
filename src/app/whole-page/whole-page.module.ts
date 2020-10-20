@@ -77,6 +77,9 @@ import localeRu from '@angular/common/locales/ru';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import '@angular/common/locales/global/pl';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DiscoverNewsComponent } from './news/discover-news/discover-news.component';
+import { CrudComponent } from './crud/crud.component';
+import { UpdateNewsComponent } from './crud/update-news/update-news.component';
 
 
 const r: Routes = [
@@ -87,6 +90,7 @@ const r: Routes = [
             {path: '', component: NewsComponent},
             {path: 'profile', component: ProfileComponent},
             {path: 'activities', component: MyActivitiesComponent},
+            {path: 'crud', component: CrudComponent},
             {path: 'teachPub', component: MyPublicationsComponent},
             {path: 'teachEvents', component: MyEventsComponent},
             {path: 'teachPatents', component: MyPatentsComponent},
@@ -165,6 +169,9 @@ const r: Routes = [
         MyDepUsersComponent,
         MyScienceProjComponent,
         MyCoursesComponent,
+        DiscoverNewsComponent,
+        CrudComponent,
+        UpdateNewsComponent,
     ],
     imports: [
         CommonModule,

@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+.mat-column-newsId {
+    flex: 1rem;
+    max-width: 3rem;
+}
+.mat-column-newsTitle {
+    flex: 1rem;
+    max-width: 9rem;
+}
+/*.mat-column-bodyTitle {*/
+/*    flex: 1rem;*/
+/*    max-width: 30rem;*/
+/*}*/
+.mat-column-date {
+    flex: 1rem;
+    max-width: 7rem;
+}
+.mat-column-authorId {
+    flex: 1rem;
+    max-width: 5rem;
+}
+.mat-column-authorEmail {
+    flex: 1rem;
+    max-width: 12rem;
+}
+.mat-column-action {
+    flex: 1rem;
+    max-width: 12rem;
+}

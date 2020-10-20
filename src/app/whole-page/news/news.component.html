@@ -1,21 +1,21 @@
 <div class="container" ngStyle.lt-sm="'padding': '5%'">
     <div fxLayout="row" fxLayout.lt-sm="column">
         <div fxFlex="5"></div>
-        <div style="flex-wrap: wrap" fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="100px" fxFlex="70">
-            <div style="position: relative;" *ngFor="let item of news;">
+        <div *ngIf="allNews" style="flex-wrap: wrap" fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="100px" fxFlex="70">
+            <div style="position: relative;" *ngFor="let item of allNews;">
                 <div ngStyle.gt-sm="'margin-bottom': '50%'" ngStyle.lt-sm="'margin-bottom': '15%'">
                     <div>
-                        <img *ngIf="!isMobile" width="400px" src="{{item.image}}" alt="image of news">
-                        <img *ngIf="isMobile" width="300px" src="{{item.image}}" alt="image of news">
+                        <img *ngIf="!isMobile" width="400px" src="assets/images/news/news1.png" alt="image of news">
+                        <img *ngIf="isMobile" width="300px" src="assets/images/news/news1.png" alt="image of news">
                     </div>
                     <div ngStyle.lt-sm="'width': '90%'" class="overlayDiv">
                         <mat-card>
                             <mat-card-header>
-                                <mat-card-title class="title">{{item.title}}</mat-card-title>
+                                <mat-card-title class="title">{{item.newsTitle}}</mat-card-title>
                             </mat-card-header>
                             <mat-card-content>
-                                <p class="description">{{item.description}}</p>
-                                <button mat-flat-button color="primary" style="color: white; border-radius: 25px;">
+                                <p class="description">{{item.bodyTitle}}</p>
+                                <button (click)="openNewsDialog(item.newsId)" mat-flat-button color="primary" style="color: white; border-radius: 25px;">
                                     {{"Discover" | translate}}
                                     <svg width="8" height="13" viewBox="0 0 8 13" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div fxFlex="3"></div>
-        <div *ngIf="!isMobile" fxFlex="18" fxLayoutGap="20%" fxLayout="column">
+        <div *ngIf="!isMobile" fxFlex="18" fxLayoutGap="20%" fxLayout="column"  >
             <div class="filter">
                 <div fxLayout="column" style="margin: 0; padding: 0;">
                     <button routerLink="./" routerLinkActive="isActive" style="color: #212121; background: rgba(12, 79, 181, 0.08); border-left: #015349 3px solid; text-align: left" mat-flat-button>{{"News" | translate}}</button>
@@ -41,36 +41,36 @@
                     <button routerLink="./" style="color: #8C8C8C; background: #F3F5F7; text-align: left" mat-flat-button>{{"For the secretary of the dissertation council" | translate}}</button>
                 </div>
             </div>
-            <div fxLayout="column" class="filter" style="padding: 5%">
-                <p style="color: black; font-size: 16px">Some content</p>
-                <div fxLayout="column">
-                    <div fxLayout="row">
-                        <p fxFlex="70" style="color: #0C3BB5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div fxFlex="3"></div>
-                        <img fxFlex="25" height="72" src="assets/images/news/some1.png" alt="">
-                    </div>
-                    <div><p style="color: #8C8C8C; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
-                    <mat-divider></mat-divider>
-                </div>
-                <div fxLayout="column">
-                    <div fxLayout="row">
-                        <p fxFlex="70" style="color: #0C3BB5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div fxFlex="5"></div>
-                        <img fxFlex="25" height="72" src="assets/images/news/some2.png" alt="">
-                    </div>
-                    <div><p style="color: #8C8C8C; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
-                    <mat-divider></mat-divider>
-                </div>
-                <div fxLayout="column">
-                    <div fxLayout="row">
-                        <p fxFlex="70" style="color: #0C3BB5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div fxFlex="5"></div>
-                        <img fxFlex="25" height="72" src="assets/images/news/some3.png" alt="">
-                    </div>
-                    <div><p style="color: #8C8C8C; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
-                    <mat-divider></mat-divider>
-                </div>
-            </div>
+<!--            <div fxLayout="column" class="filter" style="padding: 5%">-->
+<!--                <p style="color: black; font-size: 16px">Some content</p>-->
+<!--                <div fxLayout="column">-->
+<!--                    <div fxLayout="row">-->
+<!--                        <p fxFlex="70" style="color: #0C3BB5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+<!--                        <div fxFlex="3"></div>-->
+<!--                        <img fxFlex="25" height="72" src="assets/images/news/some1.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div><p style="color: #8C8C8C; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>-->
+<!--                    <mat-divider></mat-divider>-->
+<!--                </div>-->
+<!--                <div fxLayout="column">-->
+<!--                    <div fxLayout="row">-->
+<!--                        <p fxFlex="70" style="color: #0C3BB5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+<!--                        <div fxFlex="5"></div>-->
+<!--                        <img fxFlex="25" height="72" src="assets/images/news/some2.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div><p style="color: #8C8C8C; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>-->
+<!--                    <mat-divider></mat-divider>-->
+<!--                </div>-->
+<!--                <div fxLayout="column">-->
+<!--                    <div fxLayout="row">-->
+<!--                        <p fxFlex="70" style="color: #0C3BB5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+<!--                        <div fxFlex="5"></div>-->
+<!--                        <img fxFlex="25" height="72" src="assets/images/news/some3.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div><p style="color: #8C8C8C; font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>-->
+<!--                    <mat-divider></mat-divider>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div fxFlex="5">
         </div>

@@ -71,9 +71,34 @@ mat-table {
     max-width: 3rem;
 }
 
+.mat-column-Doi {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-Url {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-Page {
+    flex: 1rem;
+    max-width: 3rem;
+}
+
+.mat-column-File {
+    flex: 1rem;
+    max-width: 5rem;
+}
+
 .mat-column-disId {
     flex: 1rem;
     max-width: 3rem;
+}
+
+.mat-column-pubStatus {
+    flex: 1rem;
+    max-width: 4rem;
 }
 
 .mat-column-courseId {
@@ -92,8 +117,8 @@ mat-table {
 }
 
 .mat-column-File {
-    flex: 5rem;
-    max-width: 1rem;
+    flex: 1rem;
+    max-width: 3rem;
 }
 
 .mat-column-Year {

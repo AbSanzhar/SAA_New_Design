@@ -54,7 +54,7 @@ export class MyActivitiesComponent implements OnInit {
     Activity3: any[] = [];
     Activity4: any[] = [];
 
-    displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File'];
+    displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File', 'Action'];
     displayedColumnsEvent = ['eventId', 'eventTitle', 'eventType', 'eventRole', 'eventDate', 'eventCity', 'Url', 'File'];
     displayedColumnsDisSovet = ['disId', 'university', 'disRole', 'specialty', 'stopDate', 'numberAndDate'];
     displayedColumnsPatent = ['ptntNumber', 'ptntId', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'File'];
@@ -570,6 +570,12 @@ export class MyActivitiesComponent implements OnInit {
         const doc = documentCreator.create(this.name, this.TeacherPublications);
         Packer.toBlob(doc).then(blob => {
             saveAs(blob, 'Список научных трудов.docx');
+        });
+    }
+
+    deletePub(pubId) {
+        this._api.deletePublication(pubId).subscribe(res => {
+            this.getTeacherPublications(this.lang);
         });
     }
 

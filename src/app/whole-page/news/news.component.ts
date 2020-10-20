@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {News} from '../../shared/model/News';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {ApiService} from '../../api/api.service';
+import {MatDialog} from '@angular/material/dialog';
+import {DiscoverNewsComponent} from './discover-news/discover-news.component';
 
 @Component({
   selector: 'app-news',
@@ -11,6 +14,7 @@ export class NewsComponent implements OnInit {
     isMobile;
     isDesktop;
     isTablet;
+    allNews: any;
 
   news: News[] = [
       {id: 1, title: 'Заголовок Статьи', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/news/news1.png', url: '#'},
@@ -22,11 +26,18 @@ export class NewsComponent implements OnInit {
       ];
 
 
-  constructor(private deviceDetectorService: DeviceDetectorService) {
+  constructor(
+      private deviceDetectorService: DeviceDetectorService,
+      // tslint:disable-next-line:variable-name
+      private _api: ApiService,
+      // tslint:disable-next-line:variable-name
+      private _dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
       this.detectDevice();
+      this.getAllNews();
   }
 
     detectDevice() {
@@ -35,4 +46,18 @@ export class NewsComponent implements OnInit {
         this.isDesktop = this.deviceDetectorService.isDesktop();
     }
 
+    getAllNews() {
+      this._api.getNews().subscribe(res => {
+          this.allNews = res;
+          console.log('RESUUULT');
+          console.log(res);
+      });
+    }
+
+    openNewsDialog(id) {
+        this._dialog.open(DiscoverNewsComponent, {
+            width: '50%',
+            data: id
+        });
+    }
 }

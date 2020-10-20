@@ -1,0 +1,47 @@
+<div style="padding: 0 5%" fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="center center">
+    <table mat-table [dataSource]="news">
+        <ng-container matColumnDef="newsId">
+            <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+            <mat-cell *matCellDef="let news">{{news.newsId}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="newsTitle">
+            <mat-header-cell *matHeaderCellDef> Title</mat-header-cell>
+            <mat-cell *matCellDef="let news">{{news.newsTitle}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="bodyTitle">
+            <mat-header-cell *matHeaderCellDef> Article</mat-header-cell>
+            <mat-cell *matCellDef="let news">{{news.bodyTitle}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+            <mat-cell *matCellDef="let news">{{news.date | date}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="authorId">
+            <mat-header-cell *matHeaderCellDef> Author ID</mat-header-cell>
+            <mat-cell *matCellDef="let news">{{news.author.userId}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="authorEmail">
+            <mat-header-cell *matHeaderCellDef> e-mail</mat-header-cell>
+            <mat-cell *matCellDef="let news">{{news.author.email}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+            <mat-cell *matCellDef="let news">
+                <div fxLayout="row" fxLayoutGap="5%">
+                    <button (click)="update(news)" mat-stroked-button color="accent">Update</button>
+                    <button (click)="delete(news.newsId)" mat-stroked-button color="warn">Delete</button>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsNews"></mat-header-row>
+        <mat-row *matRowDef="let publication; columns: displayedColumnsNews;"></mat-row>
+    </table>
+    <button mat-flat-button color="primary" style="color: white; width: 200px">Add News</button>
+</div>

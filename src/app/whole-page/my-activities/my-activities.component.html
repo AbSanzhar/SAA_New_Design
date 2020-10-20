@@ -1,7 +1,7 @@
 <div fxFlexAlign="row">
-    <div fxFlex="10"></div>
-    <div fxFlex="80" fxFlexAlign="row">
-        <div fxFlex="27" fxFlexAlign="column">
+    <div fxFlex="5"></div>
+    <div fxFlex="90" fxFlexAlign="row">
+        <div fxFlex="18" fxFlexAlign="column">
             <h2 class="textM">{{"My tables" | translate}}</h2>
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 0}" (click)="setWhichTable(0)">{{"My publications" | translate}}</a></div>
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 1}" (click)="setWhichTable(1)">{{"My events" | translate}}</a></div>
@@ -27,7 +27,7 @@
                     color="primary">{{"Download rating sheet" | translate}}
             </button>
         </div>
-        <div fxFlex="73" fxFlexAlign="column">
+        <div fxFlex="82" fxFlexAlign="column">
             <div fxFlexAlign="row" *ngIf="whichTable === 0">
                 <div fxFlex="50">
                     <label>{{"From" | translate}} </label>
@@ -114,7 +114,7 @@
                                 </a></div>
                             </mat-cell>
                         </ng-container>
-                        >
+
                         <ng-container matColumnDef="Doi">
                             <mat-header-cell *matHeaderCellDef> DOI</mat-header-cell>
                             <mat-cell *matCellDef="let publication">
@@ -150,6 +150,13 @@
                                         href="https://nir.iitu.kz/{{publication.pubFile}}" download="">
                                     <mat-icon color="primary">get_app</mat-icon>
                                 </a></div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Action">
+                            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                            <mat-cell *matCellDef="let publication">
+                                <button (click)="deletePub(publication.pubId)" mat-stroked-button color="warn">{{"Delete" | translate}}</button>
                             </mat-cell>
                         </ng-container>
 
@@ -945,5 +952,5 @@
             </div>
         </div>
     </div>
-    <div fxFlex="10"></div>
+    <div fxFlex="5"></div>
 </div>
