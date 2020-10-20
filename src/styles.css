@@ -42,3 +42,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 14px;
     color: #8C8C8C;
 }
+.heading {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 22px;
+    color: #716F6F;
+}

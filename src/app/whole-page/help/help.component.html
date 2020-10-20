@@ -1,9 +1,46 @@
 <div fxLayout="row">
     <div fxFlex="15"></div>
-    <div style="flex-wrap: wrap" fxLayout="row wrap" fxLayoutGap="100px" fxFlex="70">
-        <div fxLayoutAlign="space-around center" fxFlex="25" style="position: relative;" *ngFor="let item of faq;">
-                Здесь будет страница помощи
-        </div>
-    </div>
+    <fieldset fxLayout="column" fxLayoutGap="1vh" fxFlex="70">
+        <legend>{{"Your data" | translate}}</legend>
+        <form [formGroup]="form" fxLayout="column">
+<!--            <p class="heading">{{"Your data" | translate}}</p>-->
+            <mat-form-field>
+                <mat-label>{{"Organization Name" | translate}}</mat-label>
+                <input matInput formControlName="organizationName" required>
+                <mat-error>The field is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{"Organization Type" | translate}}</mat-label>
+                <input matInput formControlName="organizationType" required>
+                <mat-error>The field is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{"BIN" | translate}}</mat-label>
+                <input matInput formControlName="bin" required>
+                <mat-error>The field is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{"The Contact Person" | translate}}</mat-label>
+                <input matInput formControlName="contactPerson" required>
+                <mat-error>The field is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{"Phone Number" | translate}}</mat-label>
+                <input matInput formControlName="phone" required>
+                <mat-error>The field is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{"email" | translate}}</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error>The field is required.</mat-error>
+            </mat-form-field>
+            <button [disabled]="form.invalid" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%; width: 200px">{{"Apply" | translate}}</button>
+        </form>
+    </fieldset>
     <div fxFlex="15"></div>
 </div>
