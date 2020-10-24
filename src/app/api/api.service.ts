@@ -655,4 +655,9 @@ export class ApiService {
     return this.http.post<any>(this.base + url, data).pipe(catchError(this.errorHandler));
   }
 
+  uploadOrderCompany(company): Observable<any> {
+    const url = 'orders/add';
+    return this.http.post(this.base + url, company);
+  }
+
 }
