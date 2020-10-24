@@ -665,4 +665,9 @@ export class ApiService {
     return this.http.get(this.base + url + lang);
   }
 
+  getUsers(): Observable<any> {
+    const url = 'users/all';
+    return this.http.get(this.base + url);
+  }
+
 }
