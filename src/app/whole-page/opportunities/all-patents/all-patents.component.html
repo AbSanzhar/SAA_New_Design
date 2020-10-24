@@ -71,10 +71,10 @@
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef> {{"Action" | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let patent">
-            <button *ngIf="patent.ptntStatus == 'Under review' || patent.ptntStatus == 'Returned for revision'" (click)="setPatentStatus(patent.ptntId, 2)" mat-icon-button color="accent" aria-label="Example icon button with a heart icon">
+            <button title="Confirm" *ngIf="patent.ptntStatus == 'Under review' || patent.ptntStatus == 'Returned for revision'" (click)="setPatentStatus(patent.ptntId, 2)" mat-icon-button color="accent" aria-label="Example icon button with a heart icon">
               <mat-icon>done</mat-icon>
             </button>
-            <button *ngIf="patent.ptntStatus == 'Under review' || patent.ptntStatus == 'Confirmed'" (click)="setPatentStatus(patent.ptntId, 3)" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+            <button title="Return for revision" *ngIf="patent.ptntStatus == 'Under review' || patent.ptntStatus == 'Confirmed'" (click)="setPatentStatus(patent.ptntId, 3)" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
               <mat-icon>clear</mat-icon>
             </button>
           </mat-cell>

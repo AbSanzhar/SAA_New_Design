@@ -96,7 +96,7 @@ export class AddDissetComponent implements OnInit {
                     );
                 }
                 console.log(res);
-            }
-        );
+                this.form.reset();
+            });
     }
 }

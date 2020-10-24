@@ -274,18 +274,18 @@
                         <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>
                     </mat-table>
 
-                    <div style="align-items: center; display: flex;">
-                        <button style="margin: 0 10% 0 35%" (click)="create('patent')" color="primary"
-                                mat-stroked-button>{{"Add" | translate}}
-                            <mat-icon color="primary">add_task</mat-icon>
-                        </button>
-                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
-                                       [pageSize]="paginator.size"
-                                       [pageIndex]="paginator.page"
-                                       (change)="changeTableList($event)"
-                                       (page)="changeTableList($event)"
-                                       showFirstLastButtons></mat-paginator>
-                    </div>
+<!--                    <div style="align-items: center; display: flex;">-->
+<!--                        <button style="margin: 0 10% 0 35%" (click)="create('dissovet')" color="primary"-->
+<!--                                mat-stroked-button>{{"Add" | translate}}-->
+<!--                            <mat-icon color="primary">add_task</mat-icon>-->
+<!--                        </button>-->
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
+<!--                    </div>-->
                 </div>
 
                 <div *ngIf="whichTable === 3">
@@ -413,21 +413,21 @@
                     </mat-table>
                 </div>
 
-                <div *ngIf="whichTable === 5">
-                    <mat-table [dataSource]="TeacherScienceProjects" class="">
+                <div style="overflow-x: scroll" *ngIf="whichTable === 5">
+                    <mat-table [dataSource]="TeacherScienceProjects" style="width: 150rem">
                         <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"> {{project.scId}} </mat-cell>
+                            <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell> <!--class="Razdely"-->
                         </ng-container>
 
                         <ng-container matColumnDef="name">
                             <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"> {{project.scName}} </mat-cell>
+                            <mat-cell *matCellDef="let project"> {{project.scName}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="type">
                             <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"> {{project.scType}} </mat-cell>
+                            <mat-cell *matCellDef="let project"> {{project.scType}} </mat-cell>
                         </ng-container>
 
                         <!--              <ng-container matColumnDef="priority">-->
@@ -441,42 +441,42 @@
                         <!--              </ng-container>-->
 
                         <ng-container matColumnDef="priority">
-                            <mat-header-cell class="Razdel" *matHeaderCellDef> {{"Section" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdel Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p>
+                            <mat-header-cell *matHeaderCellDef> {{"Section" | translate}}</mat-header-cell>
+                            <mat-cell *matCellDef="let project"><p>{{project.scPriority}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="subPriority">
                             <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p>
+                            <mat-cell *matCellDef="let project"><p>{{project.scSubPriority}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="subSubPriority">
                             <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>
+                            <mat-cell *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="executor">
                             <mat-header-cell *matHeaderCellDef> {{"Executor" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
+                            <mat-cell *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="customer">
                             <mat-header-cell *matHeaderCellDef> {{"Customer" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scCustomer}}</p></mat-cell>
+                            <mat-cell *matCellDef="let project"><p>{{project.scCustomer}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="dirFullName">
                             <mat-header-cell *matHeaderCellDef> {{"Supervisor" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDirFullName}}</p>
+                            <mat-cell *matCellDef="let project"><p>{{project.scDirFullName}}</p>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="dept">
                             <mat-header-cell *matHeaderCellDef> {{"Subdivision" | translate}}</mat-header-cell>
-                            <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
+                            <mat-cell *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="agrDate">
@@ -512,12 +512,12 @@
                                 mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
-                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
-                                       [pageSize]="paginator.size"
-                                       [pageIndex]="paginator.page"
-                                       (change)="changeTableList($event)"
-                                       (page)="changeTableList($event)"
-                                       showFirstLastButtons></mat-paginator>
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
                     </div>
                 </div>
 
@@ -594,12 +594,12 @@
                                 mat-stroked-button>{{"Add" | translate}}
                             <mat-icon color="primary">add_task</mat-icon>
                         </button>
-                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
-                                       [pageSize]="paginator.size"
-                                       [pageIndex]="paginator.page"
-                                       (change)="changeTableList($event)"
-                                       (page)="changeTableList($event)"
-                                       showFirstLastButtons></mat-paginator>
+<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
+<!--                                       [pageSize]="paginator.size"-->
+<!--                                       [pageIndex]="paginator.page"-->
+<!--                                       (change)="changeTableList($event)"-->
+<!--                                       (page)="changeTableList($event)"-->
+<!--                                       showFirstLastButtons></mat-paginator>-->
                     </div>
 
                 </div>

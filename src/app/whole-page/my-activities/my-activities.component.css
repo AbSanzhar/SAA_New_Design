@@ -241,71 +241,71 @@ mat-table {
     max-width: 20rem;
 }
 
-.mat-column-name {
-    flex: 5rem;
-    max-width: 4rem;
-    margin-right: 1%;
-}
+/*.mat-column-name {*/
+/*    flex: 5rem;*/
+/*    max-width: 4rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-type {
-    flex: 2rem;
-    max-width: 2rem;
-    margin-right: 1%;
-}
+/*.mat-column-type {*/
+/*    flex: 2rem;*/
+/*    max-width: 2rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-priority {
-    flex: 2rem;
-    max-width: 3rem;
-    margin-right: 1%;
-}
+/*.mat-column-priority {*/
+/*    flex: 2rem;*/
+/*    max-width: 3rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-subPriority {
-    flex: 2rem;
-    max-width: 4rem;
-    margin-right: 1%;
-}
+/*.mat-column-subPriority {*/
+/*    flex: 2rem;*/
+/*    max-width: 4rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-subSubPriority {
-    flex: 2rem;
-    max-width: 4rem;
-    margin-right: 1%;
-}
+/*.mat-column-subSubPriority {*/
+/*    flex: 2rem;*/
+/*    max-width: 4rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-executor {
-    flex: 2rem;
-    max-width: 4rem;
-    margin-right: 1%;
-}
+/*.mat-column-executor {*/
+/*    flex: 2rem;*/
+/*    max-width: 4rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-customer {
-    flex: 2rem;
-    max-width: 4rem;
-    margin-right: 1%;
-}
+/*.mat-column-customer {*/
+/*    flex: 2rem;*/
+/*    max-width: 4rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-dirFullName {
-    flex: 2rem;
-    max-width: 4rem;
-    margin-right: 1%;
-}
+/*.mat-column-dirFullName {*/
+/*    flex: 2rem;*/
+/*    max-width: 4rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-dept {
-    flex: 2rem;
-    max-width: 4rem;
-    margin-right: 1%;
-}
+/*.mat-column-dept {*/
+/*    flex: 2rem;*/
+/*    max-width: 4rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-agrDate {
-    flex: 2rem;
-    max-width: 3rem;
-    margin-right: 1%;
-}
+/*.mat-column-agrDate {*/
+/*    flex: 2rem;*/
+/*    max-width: 3rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
-.mat-column-registerNumber {
-    flex: 2rem;
-    max-width: 5rem;
-    margin-right: 1%;
-}
+/*.mat-column-registerNumber {*/
+/*    flex: 2rem;*/
+/*    max-width: 5rem;*/
+/*    margin-right: 1%;*/
+/*}*/
 
 
 #projectName {

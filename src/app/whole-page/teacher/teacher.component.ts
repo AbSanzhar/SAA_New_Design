@@ -1289,10 +1289,11 @@ export class TeacherComponent implements OnInit {
           res => {
               console.log(res);
               for(let i = 0; i < res.length; i++) {
-                  let temp = {
+                  const temp = {
+                      // tslint:disable-next-line:radix
                       value: parseInt(res[i].form_id),
                       viewValue: res[i].form_name
-                  }
+                  };
                   this.courseForms[i] = temp;
               }
               console.log(this.courseForms);

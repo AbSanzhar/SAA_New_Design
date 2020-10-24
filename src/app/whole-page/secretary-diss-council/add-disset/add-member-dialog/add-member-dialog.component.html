@@ -1,80 +1,89 @@
-    <form [formGroup]="membersForm">
-        <p style="color: darkred; font-weight: 500; font-size: 18px">Добавление участников дис. совета: </p>
-        <div formArrayName="disMember">
-            <div *ngFor="let row of this.disMember; let i= index"  [formGroupName]="i">
+<form style="overflow-y: auto; height: 600px;" [formGroup]="membersForm">
+    <p style="color: darkred; font-weight: 500; font-size: 18px">Добавление участников дис. совета: </p>
+    <div formArrayName="disMember">
+        <div fxLayoutGap="100px" *ngFor="let row of this.disMember; let i= index" [formGroupName]="i">
 
-        <mat-form-field *ngIf="this.selectedValue[i] == 'Внутренний сотрудник'">
-            <mat-label>Фамилия и Имя</mat-label>
-            <mat-select formControlName="userId" required>
-                <mat-option *ngFor="let i of members" [value]="i.userId">
-                    {{i.firstName}} {{i.lastName}}
-                </mat-option>
-            </mat-select>
-            <mat-error>This is the required field.</mat-error>
-        </mat-form-field>
+            <div fxLayout="column">
+                <p style="color: darkred; font-weight: 500; font-size: 14px">Участник №{{i + 1}}</p>
+                <mat-form-field style="width: 100%" *ngIf="this.selectedValue[i] == 'Внутренний сотрудник'">
+                    <mat-label>Фамилия и Имя</mat-label>
+                    <mat-select formControlName="userId" required>
+                        <mat-option *ngFor="let i of members" [value]="i.userId">
+                            {{i.firstName}} {{i.lastName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This is the required field.</mat-error>
+                </mat-form-field>
 
-        <mat-form-field *ngIf="this.selectedValue[i] == 'Внешний сотрудник'">
-            <mat-label>Фамилия и Имя</mat-label>
-            <mat-select formControlName="userId" required>
-                <mat-option *ngFor="let i of exUsers" [value]="i.userId">
-                    {{i.firstName}} {{i.lastName}}
-                </mat-option>
-            </mat-select>
-            <mat-error>This is the required field.</mat-error>
-        </mat-form-field>
+                <mat-form-field style="width: 100%" *ngIf="this.selectedValue[i] == 'Внешний сотрудник'">
+                    <mat-label>Фамилия и Имя</mat-label>
+                    <mat-select formControlName="userId" required>
+                        <mat-option *ngFor="let i of exUsers" [value]="i.userId">
+                            {{i.firstName}} {{i.lastName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This is the required field.</mat-error>
+                </mat-form-field>
 
 
-        <mat-form-field>
-            <mat-label>Тип сотрудника</mat-label>
-            <mat-select [(ngModel)]="selectedValue[i]" formControlName="memberType" required>
-                <mat-option *ngFor="let i of elements" [value]="i.value">
-                    {{i.viewValue}}
-                </mat-option>
-            </mat-select>
-            <mat-error>This is the required field!</mat-error>
-        </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-label>Тип сотрудника</mat-label>
+                    <mat-select [(ngModel)]="selectedValue[i]" formControlName="memberType" required>
+                        <mat-option *ngFor="let i of elements" [value]="i.value">
+                            {{i.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This is the required field!</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Ученная степень</mat-label>
-            <input matInput formControlName="academicDegree" type="text" required>
-            <mat-error>The field is required.</mat-error>
-        </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-label>Ученная степень</mat-label>
+                    <input matInput formControlName="academicDegree" type="text" required>
+                    <mat-error>The field is required.</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Шифр специальности</mat-label>
-            <input matInput formControlName="specCode" type="text" required>
-            <mat-error>The field is required.</mat-error>
-        </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-label>Шифр специальности</mat-label>
+                    <input matInput formControlName="specCode" type="text" required>
+                    <mat-error>The field is required.</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Шифр специальности в диссовете</mat-label>
-            <input matInput formControlName="disSpecCode" type="text" required>
-            <mat-error>The field is required.</mat-error>
-        </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-label>Шифр специальности в диссовете</mat-label>
+                    <input matInput formControlName="disSpecCode" type="text" required>
+                    <mat-error>The field is required.</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Место работы и должность</mat-label>
-            <input matInput formControlName="workPlace" type="text" required>
-            <mat-error>The field is required.</mat-error>
-        </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-label>Место работы и должность</mat-label>
+                    <input matInput formControlName="workPlace" type="text" required>
+                    <mat-error>The field is required.</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Позиция в дис. совете
-            </mat-label>
-            <mat-select formControlName="disPosition" required>
-                <mat-option *ngFor="let i of elements2" [value]="i.value">
-                    {{i.viewValue}}
-                </mat-option>
-            </mat-select>
-            <mat-error>This is the required field!</mat-error>
-        </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-label>Позиция в дис. совете
+                    </mat-label>
+                    <mat-select formControlName="disPosition" required>
+                        <mat-option *ngFor="let i of elements2" [value]="i.value">
+                            {{i.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This is the required field!</mat-error>
+                </mat-form-field>
             </div>
         </div>
-        <div>
-            <button mat-raised-button style="color: white" (click)="addDisMemberRow()" color="accent">Добавить участника</button>
-            <button mat-raised-button style="color: white; margin-left: 2%" (click)="deleteDisMember()" color="warn">Удалить участника</button>
-            <button (click)="addNewMember()" style="margin-left: 3%" mat-raised-button>Создать внешнего пользователя</button>
-        </div>
-        <button [disabled]="membersForm.invalid" style="color: white; margin-top: 2%" mat-raised-button color="primary" [mat-dialog-close]="membersForm">Создать дис. совет</button>
+    </div>
+    <div>
+        <button mat-raised-button style="color: white" (click)="addDisMemberRow()" color="accent">Добавить участника
+        </button>
+        <button mat-raised-button style="color: white; margin-left: 2%" (click)="deleteDisMember()" color="warn">Удалить
+            участника
+        </button>
+        <button (click)="addNewMember()" style="margin-left: 3%" mat-raised-button>Создать внешнего пользователя
+        </button>
+    </div>
+    <button [disabled]="membersForm.invalid" style="color: white; margin-top: 2%" mat-raised-button color="primary"
+            [mat-dialog-close]="membersForm">Создать дис. совет
+    </button>
 
-    </form>
+</form>

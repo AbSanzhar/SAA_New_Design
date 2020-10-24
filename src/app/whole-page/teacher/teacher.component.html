@@ -619,13 +619,23 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>{{"Form of study" | translate}}</mat-label>
-                        <select matNativeControl formControlName="courseFormId" name="car">
-                            <option *ngFor="let i of courseForms" [value]="i.value">
-                                {{i.viewValue}}
-                            </option>
-                        </select>
+                        <mat-select formControlName="courseFormId" required>
+                            <mat-option *ngFor="let i of courseForms" [value]="i.form_name">
+                                {{i.form_name}}
+                            </mat-option>
+                        </mat-select>
                         <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
+
+<!--                    <mat-form-field class="example-full-width">-->
+<!--                        <mat-label>{{"Form of study" | translate}}</mat-label>-->
+<!--                        <mat-select  formControlName="courseFormId">-->
+<!--                            <mat-option *ngFor="let i of courseForms" [value]="i.value">-->
+<!--                                {{i.viewValue}}-->
+<!--                            </mat-option>-->
+<!--                        </mat-select>-->
+<!--                        <mat-error>{{"This is the required field!" | translate}}</mat-error>-->
+<!--                    </mat-form-field>-->
 
                     <mat-form-field class="example-full-width">
                         <mat-label>{{"Topic" | translate}}</mat-label>
@@ -647,14 +657,15 @@
 
                     <mat-form-field class="example-full-width">
                         <mat-label>Стоимость курсов (в тг)</mat-label>
+                        <input type="number" matInput formControlName="coursePrice">
                         <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                         <mat-label>{{"Terms of passage" | translate}}</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
-                            <input formControlName="startdate" matStartDate placeholder="Start date">
-                            <input formControlName="enddate" matEndDate placeholder="End date">
+                            <input matInput formControlName="startdate" matStartDate placeholder="Start date">
+                            <input matInput formControlName="enddate" matEndDate placeholder="End date">
                         </mat-date-range-input>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -706,7 +717,6 @@
                         </select>
                         <mat-error>{{"This is the required field!" | translate}}</mat-error>
                     </mat-form-field>
-{{this.teacherCourseForm.value | json}}
 
                     <div>
                         <input type="file"

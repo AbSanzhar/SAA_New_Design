@@ -41,9 +41,9 @@
 <!--</mat-table>-->
 
 <div *ngIf="!isMobile" fxLayout="row">
-    <div fxFlex="10"></div>
-    <div fxFlex="80" fxLayout="row">
-        <div fxLayout="column" fxFlex="25">
+    <div fxFlex="5"></div>
+    <div fxFlex="90" fxLayout="row">
+        <div fxLayout="column" fxFlex="15">
             <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
             <div fxLayout="column">
                 <a routerLink="../" style="text-decoration: none;" class="linkTable">{{"Teachers" | translate}}</a>
@@ -57,8 +57,8 @@
                    class="linkTable">{{"Scientific projects" | translate}}</a>
             </div>
         </div>
-        <div fxLayout="column" fxFlex="75">
-            <mat-table [dataSource]="allScienceProjecrs" class="">
+        <div style="overflow-x: scroll" fxLayout="column" fxFlex="85">
+            <mat-table style="width: 300%" [dataSource]="allScienceProjecrs" class="">
                 <ng-container matColumnDef="id">
                     <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>
                     <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell>
@@ -66,33 +66,33 @@
 
                 <ng-container matColumnDef="name">
                     <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scName}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scName}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="type">
                     <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scType}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scType}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="priority">
                     <mat-header-cell *matHeaderCellDef> {{"Section" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scPriority}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scPriority}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="subPriority">
                     <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubPriority}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scSubPriority}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="subSubPriority">
                     <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>
+                    <mat-cell *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="executor">
                     <mat-header-cell *matHeaderCellDef> {{"Executor" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="customer">
@@ -107,12 +107,12 @@
 
                 <ng-container matColumnDef="dept">
                     <mat-header-cell *matHeaderCellDef> {{"Subdivision" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="agrDate">
                     <mat-header-cell *matHeaderCellDef> {{"Agreement date" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scAgrDate}} </p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scAgrDate}} </p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="registerNumber">
@@ -122,12 +122,12 @@
 
                 <ng-container matColumnDef="startDate">
                     <mat-header-cell *matHeaderCellDef> {{"Start" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scStDate}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scStDate}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="endDate">
                     <mat-header-cell *matHeaderCellDef> {{"Delivery" | translate}}</mat-header-cell>
-                    <mat-cell class="Razdely" *matCellDef="let project"><p>{{project.scEndDate}}</p></mat-cell>
+                    <mat-cell *matCellDef="let project"><p>{{project.scEndDate}}</p></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="totalSum">
@@ -141,6 +141,7 @@
         </div>
         <div fxFlex="10"></div>
     </div>
+    <div fxFlex="5"></div>
 </div>
 
 
