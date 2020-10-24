@@ -196,7 +196,7 @@ export class ApiService {
     const url = 'publication/';
     const id = this.getDecodedAccessToken(localStorage.getItem('token')).jti;
     return this.http.get<any>(
-        this.base + url + id + '/' + lang + '/' + '?jwt_token='
+        this.base + url + id + '/' + lang + '?jwt_token='
         + window.localStorage.getItem('token') + query).pipe(catchError(this.errorHandler));
   }
 
@@ -653,6 +653,11 @@ export class ApiService {
   uploadNews(data): Observable<any> {
     const url = 'news/';
     return this.http.post<any>(this.base + url, data).pipe(catchError(this.errorHandler));
+  }
+
+  uploadOrderCompany(company): Observable<any> {
+    const url = 'orders/add';
+    return this.http.post(this.base + url, company);
   }
 
 }

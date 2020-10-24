@@ -6,40 +6,43 @@
 <!--            <p class="heading">{{"Your data" | translate}}</p>-->
             <mat-form-field>
                 <mat-label>{{"Organization Name" | translate}}</mat-label>
-                <input matInput formControlName="organizationName" required>
+                <input matInput formControlName="orderCompanyName" required>
                 <mat-error>The field is required.</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{"Organization Type" | translate}}</mat-label>
-                <input matInput formControlName="organizationType" required>
+                <input matInput formControlName="orderCompanyType" required>
                 <mat-error>The field is required.</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{"BIN" | translate}}</mat-label>
-                <input matInput formControlName="bin" required>
+                <input matInput formControlName="orderCompanyBin" required>
                 <mat-error>The field is required.</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{"The Contact Person" | translate}}</mat-label>
-                <input matInput formControlName="contactPerson" required>
+                <input matInput formControlName="orderContactName" required>
                 <mat-error>The field is required.</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{"Phone Number" | translate}}</mat-label>
-                <input matInput formControlName="phone" required>
+                <input matInput formControlName="orderContactPhone" required>
                 <mat-error>The field is required.</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{"email" | translate}}</mat-label>
-                <input matInput formControlName="email" required>
+                <input matInput formControlName="orderContactEmail" required>
                 <mat-error>The field is required.</mat-error>
             </mat-form-field>
-            <button [disabled]="form.invalid" mat-raised-button color="primary" style="color: white; margin: 1% 5% 1% 1%; width: 200px">{{"Apply" | translate}}</button>
+            <button [disabled]="form.invalid"
+                    mat-raised-button color="primary"
+                    style="color: white; margin: 1% 5% 1% 1%; width: 200px"
+                    (click)="sendOrderCompany()">{{"Apply" | translate}}</button>
         </form>
     </fieldset>
     <div fxFlex="15"></div>

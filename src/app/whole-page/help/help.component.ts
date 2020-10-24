@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FAQ} from '../../shared/model/FAQ';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ApiService} from '../../api/api.service';
 
 @Component({
   selector: 'app-help',
@@ -11,24 +12,23 @@ export class HelpComponent implements OnInit {
 
   form: FormGroup;
 
-  // faq: FAQ[] = [
-  //   {id: 1, question: 'Example question', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/faq/bell.svg'},
-  //   {id: 2, question: 'Example question', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/faq/photo.svg'},
-  //   {id: 3, question: 'Example question', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/faq/photo.svg'},
-  //   {id: 4, question: 'Example question', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/faq/bell.svg'},
-  //   {id: 5, question: 'Example question', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/faq/bell.svg'},
-  //   {id: 6, question: 'Example question', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/faq/bell.svg'},
-  // ];
-
-  constructor() {
+  constructor(private service: ApiService) {
     this.form = new FormGroup({
-      organizationName: new FormControl('', Validators.required),
-      organizationType: new FormControl('', Validators.required),
-      bin: new FormControl('', Validators.required),
-      contactPerson: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      orderCompanyName: new FormControl('', Validators.required),
+      orderCompanyType: new FormControl('', Validators.required),
+      orderCompanyBin: new FormControl('', Validators.required),
+      orderContactName: new FormControl('', Validators.required),
+      orderContactPhone: new FormControl('', Validators.required),
+      orderContactEmail: new FormControl('', [Validators.required, Validators.email]),
     });
+  }
+
+  sendOrderCompany() {
+    this.service.uploadOrderCompany(this.form.value).subscribe(
+        res => console.log(res),
+        err => console.log(err)
+    );
+    this.form.reset();
   }
 
   ngOnInit(): void {
