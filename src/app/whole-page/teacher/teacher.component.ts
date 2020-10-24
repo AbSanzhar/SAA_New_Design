@@ -948,20 +948,38 @@ export class TeacherComponent implements OnInit {
 
 
   ngOnInit(): void {
-      this.lang = this.translateService.currentLang;
-          this.getPublicationType(this.lang);
-          this.getPublicationPublished(this.lang);
-          this.getEventTypes(this.lang);
-          this.getEventRoles(this.lang);
-          this.getPatentTypes(this.lang);
-          this.getCourseDegree(this.lang);
-          this.getCourseForm(this.lang);
-          this.getExhibitionLevels(this.lang);
-          this.getExhibitionRoles(this.lang);
-          this.getExhibitionTypes(this.lang);
-          this.getAwardTypes(this.lang);
-          this.getActivityTypes(this.lang);
-          this.getActivityRoles(this.lang);
+      this.lang = this.translateService.store.currentLang;
+      this.getPublicationType(this.lang);
+      this.getPublicationPublished(this.lang);
+      this.getEventTypes(this.lang);
+      this.getEventRoles(this.lang);
+      this.getPatentTypes(this.lang);
+      this.getCourseDegree(this.lang);
+      this.getCourseForm(this.lang);
+      this.getExhibitionLevels(this.lang);
+      this.getExhibitionRoles(this.lang);
+      this.getExhibitionTypes(this.lang);
+      this.getAwardTypes(this.lang);
+      this.getActivityTypes(this.lang);
+      this.getActivityRoles(this.lang);
+      this.translateService.onLangChange.subscribe(
+          lang => {
+              this.lang = lang.lang;
+              console.log(this.lang);
+              this.getPublicationType(this.lang);
+              this.getPublicationPublished(this.lang);
+              this.getEventTypes(this.lang);
+              this.getEventRoles(this.lang);
+              this.getPatentTypes(this.lang);
+              this.getCourseDegree(this.lang);
+              this.getCourseForm(this.lang);
+              this.getExhibitionLevels(this.lang);
+              this.getExhibitionRoles(this.lang);
+              this.getExhibitionTypes(this.lang);
+              this.getAwardTypes(this.lang);
+              this.getActivityTypes(this.lang);
+              this.getActivityRoles(this.lang);
+          });
       // this.getTeacherPublications();
       this.getAllUsers();
       this.getAllCountries();

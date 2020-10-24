@@ -100,16 +100,21 @@ export class MyActivitiesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.lang = this.translateService.currentLang;
-        this.getTeacherPublications(this.lang);
-        this.getTeacherEvents(this.lang);
-        this.getTeacherPatents(this.lang);
-        this.getTeacherCourses(this.lang);
-        this.getTeacherExhibitions(this.IdToken);
-        this.language = this.lang;
-        this.getTeacherExhibitions(this.IdToken);
-        this.getTeacherAwards(this.IdToken);
-        this.getTeacherActivities(this.IdToken);
+        this.lang = this.translateService.store.currentLang;
+        this.translateService.onLangChange.subscribe(
+            lang => {
+                this.lang = lang.lang;
+                this.getTeacherPublications(this.lang);
+                this.getTeacherEvents(this.lang);
+                this.getTeacherPatents(this.lang);
+                this.getTeacherCourses(this.lang);
+                this.getTeacherExhibitions(this.IdToken);
+                this.language = this.lang;
+                this.getTeacherExhibitions(this.IdToken);
+                this.getTeacherAwards(this.IdToken);
+                this.getTeacherActivities(this.IdToken);
+            }
+        );
         this._api.getPubTypeCount().subscribe(
             res => {
                 this.PubTypeCounts = res;
@@ -183,12 +188,6 @@ export class MyActivitiesComponent implements OnInit {
                 console.log(err);
             }
         );
-        this.getTeacherPublications(this.lang);
-        this.getTeacherEvents(this.lang);
-        this.getTeacherDisSovet(this.lang);
-        this.getTeacherPatents(this.lang);
-        this.getTeacherScienceProjects();
-        this.getTeacherCourses(this.lang);
         this._api.getUserById(this.tokenId).subscribe(
             res => {
                 this.currentUser = res;
@@ -575,8 +574,8 @@ export class MyActivitiesComponent implements OnInit {
 
     deletePub(pubId) {
         this._api.deletePublication(pubId).subscribe(res => {
-            this.getTeacherPublications(this.lang);
-        });
+            this.getTeacherPublications(this.translateService.store.currentLang);
+        }, err => this.getTeacherPublications(this.translateService.store.currentLang));
     }
 
 }
