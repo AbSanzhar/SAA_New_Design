@@ -90,9 +90,11 @@
                                                                                        class="navigation2">
                     {{"Teachers" | translate}}</p></a>
                 <a fxLayoutAlign="center center" mat-button routerLink="./secretary-of-the-diss-council"><p
-                        style="margin: 0; color: white;" class="navigation2">{{"Secretary of the Dissertation Council" | translate}}</p></a>
+                        style="margin: 0; color: white;" class="navigation2"
+                        *ngIf="userRoles.indexOf('Science_Secretary_Dissovet') !== -1">{{"Secretary of the Dissertation Council" | translate}}</p></a>
                 <a fxLayoutAlign="center center" mat-button routerLink="./opportunities"><p
-                        style="color: white; margin: 0;" class="navigation2">{{"Science Department Officer" | translate}}</p></a>
+                        style="color: white; margin: 0;" class="navigation2"
+                        *ngIf="userRoles.indexOf('Science_Dept') !== -1">{{"Science Department Officer" | translate}}</p></a>
             </mat-toolbar-row>
         </mat-toolbar>
     </div>
