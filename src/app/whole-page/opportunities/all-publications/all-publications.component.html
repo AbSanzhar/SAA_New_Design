@@ -1,7 +1,7 @@
 <div *ngIf="!isMobile" fxLayout="row">
-  <div fxFlex="10"></div>
-  <div fxFlex="80" fxLayout="row">
-    <div fxLayout="column" fxFlex="25">
+  <div fxFlex="5"></div>
+  <div fxFlex="90" fxLayout="row">
+    <div fxLayout="column" fxFlex="15">
       <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
       <div fxLayout="column">
         <a routerLink="../" style="text-decoration: none;" class="linkTable">{{"Teachers" | translate}}</a>
@@ -11,7 +11,7 @@
         <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Scientific projects" | translate}}</a>
       </div>
     </div>
-    <div fxLayout="column" fxFlex="75">
+    <div fxLayout="column" fxFlex="85">
       <mat-table [dataSource]="dataSource" class="">
         <ng-container matColumnDef="index">
           <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
@@ -103,7 +103,7 @@
       </mat-table>
     </div>
   </div>
-  <div fxFlex="10"></div>
+  <div fxFlex="5"></div>
 </div>
 
 <div style="width: 1000px" fxLayoutAlign="center start" *ngIf="isMobile" fxLayout="column">

@@ -96,7 +96,7 @@ table {
 
 .mat-column-publisher {
   flex: 6rem;
-  max-width: 5rem;
+  max-width: 6rem;
 }
 
 .mat-column-Page {
@@ -122,7 +122,7 @@ table {
 
 .mat-column-author {
   flex: 6rem;
-  max-width: 4rem;
+  max-width: 11rem;
 }
 
 .mat-column-checkedUser {

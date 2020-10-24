@@ -16,7 +16,7 @@ export class AllPublicationsComponent implements OnInit {
   isDesktop;
   isTablet;
   dataSource: any[];
-  displayedColumns = ['index', 'author', 'titlePublication', 'type', 'jointAuthors', 'year', 'city', 'publisher', 'Page', 'Url', 'Doi', 'fileName', 'checkedUser', 'actions'];
+  displayedColumns = ['index', 'author', 'titlePublication', 'type', 'jointAuthors', 'year', 'city', 'publisher', 'Page', 'Doi', 'checkedUser', 'Url', 'fileName', 'actions'];
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public tokenId = this.DecodedToken.jti;
   language;

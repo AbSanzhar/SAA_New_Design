@@ -64,16 +64,37 @@ table {
 }
 .mat-column-country {
   flex: 2rem;
+  max-width: 7rem;
+}
+.mat-column-actions {
+  text-align: center;
+  flex: 2rem;
   max-width: 5rem;
 }
 .mat-column-inventionPatent {
   flex: 2rem;
   max-width: 5rem;
 }
-.mat-column-author {
+/*.mat-column-author {*/
+/*  flex: 2rem;*/
+/*  max-width: 11rem;*/
+/*}*/
+.mat-column-insertedDay {
   flex: 2rem;
-  max-width: 4rem;
+  max-width: 5rem;
 }
+.mat-column-issueDate {
+  flex: 2rem;
+  max-width: 5rem;
+}
+.mat-column-status {
+  flex: 2rem;
+  max-width: 7rem;
+}
+/*.mat-column-checkedUser {*/
+/*  flex: 2rem;*/
+/*  max-width: 11rem;*/
+/*}*/
 .mat-column-kz, .mat-column-ru, .mat-column-en {
   flex: 2rem;
   max-width: 2rem;

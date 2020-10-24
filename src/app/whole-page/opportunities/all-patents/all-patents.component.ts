@@ -14,7 +14,7 @@ export class AllPatentsComponent implements OnInit {
   isMobile;
   isDesktop;
   isTablet;
-  displayedColumns2 = ['index', 'patentNumber', 'country', 'inventionPatent', 'author', 'insertedDay', 'issueDate', 'kz', 'ru', 'en', 'actions', 'checkedUser', 'status'];
+  displayedColumns2 = ['index', 'patentNumber', 'country', 'inventionPatent', 'author', 'insertedDay', 'issueDate', 'checkedUser', 'status', 'kz', 'ru', 'en', 'actions'];
   dataSource2: any[];
   public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
   public IdToken = this.DecodedToken.jti;

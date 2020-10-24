@@ -19,6 +19,11 @@ export class LoginComponent implements OnInit {
   isDesktop;
   isTablet;
   inputLogin = '';
+  showCardIndex = 2;
+  page = 2;
+  marginIndex = 0;
+
+  // @Input() arrCard: Project[];
 
   constructor(public dialog: MatDialog,
               private router: Router,

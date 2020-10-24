@@ -58,3 +58,7 @@ table {
   color: #fff;
   border-radius: 16px;
 }
+.mat-column-index {
+  flex: 2rem;
+  max-width: 2rem;
+}
