@@ -157,18 +157,18 @@
                         <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
                     </mat-table>
 
-<!--                    <div style="align-items: center; display: flex;">-->
-<!--                        <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>-->
-<!--                            {{"Add" | translate}}-->
-<!--                            <mat-icon color="primary">add_task</mat-icon>-->
-<!--                        </button>-->
-<!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-<!--                                       [pageSize]="paginator.size"-->
-<!--                                       [pageIndex]="paginator.page"-->
-<!--                                       (change)="changeTableList($event)"-->
-<!--                                       (page)="changeTableList($event)"-->
-<!--                                       showFirstLastButtons></mat-paginator>-->
-<!--                    </div>-->
+                    <div style="align-items: center; display: flex;">
+                        <button style="margin: 0 10% 0 35%" (click)="create('pub')" color="primary" mat-stroked-button>
+                            {{"Add" | translate}}
+                            <mat-icon color="primary">add_task</mat-icon>
+                        </button>
+                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"
+                                       [pageSize]="paginator.size"
+                                       [pageIndex]="paginator.page"
+                                       (change)="changeTableList($event)"
+                                       (page)="changeTableList($event)"
+                                       showFirstLastButtons></mat-paginator>
+                    </div>
 
 
                 </div>

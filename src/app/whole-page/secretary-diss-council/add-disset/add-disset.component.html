@@ -12,7 +12,7 @@
 
         <mat-form-field class="example-full-width">
           <mat-label>{{"University" | translate}}</mat-label>
-          <select matNativeControl formControlName="disInfo" name="car">
+          <select matNativeControl formControlName="universityId" name="car">
             <option *ngFor="let i of universities" [value]="i.value">
               {{i.viewValue}}
             </option>

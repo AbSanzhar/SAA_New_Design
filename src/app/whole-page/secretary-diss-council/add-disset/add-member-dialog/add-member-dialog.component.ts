@@ -4,6 +4,7 @@ import {ApiService} from '../../../../api/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AddNewExMemberDialogComponent} from '../add-new-ex-member-dialog/add-new-ex-member-dialog.component';
 import {ChangeDetection} from '@angular/cli/lib/config/schema';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-member-dialog',
@@ -20,22 +21,25 @@ export class AddMemberDialogComponent implements AfterViewInit {
 
 
   elements: Sourse[] = [
-    {value: 'Внутренний сотрудник', viewValue: 'Внутренний сотрудник'},
-    {value: 'Внешний сотрудник', viewValue: 'Внешний сотрудник'}
+    // {value: 'Внутренний сотрудник', viewValue: 'Внутренний сотрудник'},
+    // {value: 'Внешний сотрудник', viewValue: 'Внешний сотрудник'}
   ];
 
   elements2: Sourse[] = [
-    {value: 'Председатель совета', viewValue: 'Председатель'},
-    {value: 'Член совета', viewValue: 'Член'}
+    // {value: 'Председатель совета', viewValue: 'Председатель'},
+    // {value: 'Член совета', viewValue: 'Член'}
   ];
 
   constructor(private formBuilder: FormBuilder,
               private service: ApiService,
               private dialog: MatDialog,
-              private cd: ChangeDetectorRef) {
+              private cd: ChangeDetectorRef,
+              private translateService: TranslateService) {
     this.membersForm = formBuilder.group({
       disMember: this.formBuilder.array([]),
     });
+    this.getDisMemerTypes(this.translateService.currentLang);
+    this.getDisPositions(this.translateService.currentLang);
   }
 
   ngAfterViewInit(): void {
@@ -87,12 +91,12 @@ export class AddMemberDialogComponent implements AfterViewInit {
 
   initItems(): FormGroup {
     return this.formBuilder.group({
-      memberType: [null, Validators.required],
+      memberTypeId: [null, Validators.required],
       academicDegree: [null, Validators.required],
       specCode: [null, Validators.required],
       disSpecCode: [null, Validators.required],
       workPlace: [null, Validators.required],
-      disPosition: [null, Validators.required],
+      disPositionId: [null, Validators.required],
       disId: [null],
       userId: [null]
     });
@@ -108,6 +112,33 @@ export class AddMemberDialogComponent implements AfterViewInit {
           this.exUsers.push(newUser);
         }
     );
+  }
+
+  getDisMemerTypes(lang) {
+    this.service.getDisMemberType(lang).subscribe(
+        res => {
+          for (let i = 0; i < res.length; i++) {
+            const temp = {
+              viewValue: res[i].type_name,
+              value: res[i].type_id
+            };
+            this.elements.push(temp);
+          }
+        }
+    );
+  }
+
+  getDisPositions(lang) {
+    this.service.getDisPositions(lang).subscribe(
+        res => {
+          for (let i = 0; i < res.length; i++) {
+            const temp = {
+              viewValue: res[i].univer_name,
+              value: res[i].univer_id
+            };
+            this.elements2.push(temp);
+          }
+        });
   }
 }
 

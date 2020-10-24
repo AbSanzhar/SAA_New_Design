@@ -5,7 +5,7 @@
 
             <div fxLayout="column">
                 <p style="color: darkred; font-weight: 500; font-size: 14px">Участник №{{i + 1}}</p>
-                <mat-form-field style="width: 100%" *ngIf="this.selectedValue[i] == 'Внутренний сотрудник'">
+                <mat-form-field style="width: 100%" *ngIf="this.selectedValue[i] == 1">
                     <mat-label>Фамилия и Имя</mat-label>
                     <mat-select formControlName="userId" required>
                         <mat-option *ngFor="let i of members" [value]="i.userId">
@@ -15,7 +15,7 @@
                     <mat-error>This is the required field.</mat-error>
                 </mat-form-field>
 
-                <mat-form-field style="width: 100%" *ngIf="this.selectedValue[i] == 'Внешний сотрудник'">
+                <mat-form-field style="width: 100%" *ngIf="this.selectedValue[i] == 2">
                     <mat-label>Фамилия и Имя</mat-label>
                     <mat-select formControlName="userId" required>
                         <mat-option *ngFor="let i of exUsers" [value]="i.userId">
@@ -28,7 +28,7 @@
 
                 <mat-form-field style="width: 100%">
                     <mat-label>Тип сотрудника</mat-label>
-                    <mat-select [(ngModel)]="selectedValue[i]" formControlName="memberType" required>
+                    <mat-select [(ngModel)]="selectedValue[i]" formControlName="memberTypeId" required>
                         <mat-option *ngFor="let i of elements" [value]="i.value">
                             {{i.viewValue}}
                         </mat-option>
@@ -63,7 +63,7 @@
                 <mat-form-field style="width: 100%">
                     <mat-label>Позиция в дис. совете
                     </mat-label>
-                    <mat-select formControlName="disPosition" required>
+                    <mat-select formControlName="disPositionId" required>
                         <mat-option *ngFor="let i of elements2" [value]="i.value">
                             {{i.viewValue}}
                         </mat-option>
@@ -83,7 +83,8 @@
         </button>
     </div>
     <button [disabled]="membersForm.invalid" style="color: white; margin-top: 2%" mat-raised-button color="primary"
-            [mat-dialog-close]="membersForm">Создать дис. совет
+            [mat-dialog-close]="membersForm"
+            routerLink="../">Создать дис. совет
     </button>
 
 </form>

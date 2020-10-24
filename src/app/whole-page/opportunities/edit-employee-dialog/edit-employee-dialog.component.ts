@@ -22,13 +22,14 @@ export class EditEmployeeDialogComponent implements OnInit {
   public newForm: FormGroup;
   ngOnInit(): void {
       // tslint:disable-next-line:prefer-for-of
+      console.log(this.data);
     for (let i = 0; i < this.data.roles.length; i++) {
       this.userRoles.push(this.data.roles[i].roleName);
     }
     this.formOptions = new FormGroup({
-      option1: new FormControl(this.userRoles.indexOf('Teacher') === -1 ? false : true),
-      option2: new FormControl(this.userRoles.indexOf('Science_Project_Manager') === -1 ? false : true),
-      option3: new FormControl(this.userRoles.indexOf('Science_Secretary_Dissovet') === -1 ? false : true)
+      option1: new FormControl(this.userRoles.indexOf('Teacher') !== -1),
+      option2: new FormControl(this.userRoles.indexOf('Science_Project_Manager') !== -1),
+      option3: new FormControl(this.userRoles.indexOf('Science_Secretary_Dissovet') !== -1)
     });
   }
 
@@ -40,9 +41,9 @@ export class EditEmployeeDialogComponent implements OnInit {
       patronymic: new FormControl(this.data.patronymic),
       email: new FormControl(this.data.email),
       role: new FormArray([
-        new FormControl(this.formOptions.getRawValue().option1 ? true : false),
-        new FormControl(this.formOptions.getRawValue().option2 ? true : false),
-        new FormControl(this.formOptions.getRawValue().option3 ? true : false)
+        new FormControl(this.formOptions.getRawValue().option1),
+        new FormControl(this.formOptions.getRawValue().option2),
+        new FormControl(this.formOptions.getRawValue().option3)
       ])
     });
      // console.log(this.newForm.get('role'));

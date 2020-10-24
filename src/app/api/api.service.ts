@@ -660,4 +660,9 @@ export class ApiService {
     return this.http.post(this.base + url, company);
   }
 
+  getAllDisSovets(lang): Observable<any> {
+    const url = 'dissovet/all/';
+    return this.http.get(this.base + url + lang);
+  }
+
 }

@@ -20,35 +20,35 @@
 
         <ng-container matColumnDef="universityName">
           <mat-header-cell *matHeaderCellDef> {{"University" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{disset.universityName}} </mat-cell>
+          <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="role">
-          <mat-header-cell *matHeaderCellDef> {{"Role" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>
-        </ng-container>
+<!--        <ng-container matColumnDef="role">-->
+<!--          <mat-header-cell *matHeaderCellDef> {{"Role" | translate}} </mat-header-cell>-->
+<!--          <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>-->
+<!--        </ng-container>-->
 
-        <ng-container matColumnDef="specialty">
-          <mat-header-cell *matHeaderCellDef> {{"Specialty" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
-        </ng-container>
+<!--        <ng-container matColumnDef="specialty">-->
+<!--          <mat-header-cell *matHeaderCellDef> {{"Specialty" | translate}} </mat-header-cell>-->
+<!--          <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>-->
+<!--        </ng-container>-->
 
         <ng-container matColumnDef="activityPeriod">
           <mat-header-cell *matHeaderCellDef> {{"Period of activity" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{disset.activityPeriod}} </mat-cell>
+          <mat-cell *matCellDef="let disset"> {{ disset.disStartDate | date}} {{disset.disStopDate | date }} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="orderNumberAndOrder">
           <mat-header-cell *matHeaderCellDef> {{"Order number and date" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{disset.orderNumber + ' ' + disset.date}} </mat-cell>
+          <mat-cell *matCellDef="let disset"> {{ disset.ministryOrder}}, {{ disset.disStartDate | date }} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> {{"Action" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset">
-            <button mat-flat-button color="accent" class="btn-style">{{"Accept" | translate}}</button>
-          </mat-cell>
-        </ng-container>
+<!--        <ng-container matColumnDef="actions">-->
+<!--          <mat-header-cell *matHeaderCellDef> {{"Action" | translate}} </mat-header-cell>-->
+<!--          <mat-cell *matCellDef="let disset">-->
+<!--            <button mat-flat-button color="accent" class="btn-style">{{"Accept" | translate}}</button>-->
+<!--          </mat-cell>-->
+<!--        </ng-container>-->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let disset; columns: displayedColumns;"></mat-row>

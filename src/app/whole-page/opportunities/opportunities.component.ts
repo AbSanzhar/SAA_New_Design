@@ -21,7 +21,7 @@ export class OpportunitiesComponent implements OnInit {
   }
 
   getAllEmployees() {
-    this._api.getAllTeachers().subscribe(response => {
+    this._api.getOwnUsers().subscribe(response => {
       console.log(response);
       this.dataSource = response;
       this.dataSource.sort(this.compareEmployees);

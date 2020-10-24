@@ -20,7 +20,7 @@ export class AddDissetComponent implements OnInit {
                 private translateService: TranslateService,
                 private cd: ChangeDetectorRef) {
         this.form = new FormGroup({
-            disInfo: new FormControl('', Validators.required),
+            universityId: new FormControl('', Validators.required),
             disStartDate: new FormControl('', Validators.required),
             disStopDate: new FormControl('', Validators.required),
             ministryOrder: new FormControl('', Validators.required),
@@ -81,6 +81,8 @@ export class AddDissetComponent implements OnInit {
                             console.log(disId);
                             // tslint:disable-next-line:prefer-for-of
                             for (let i = 0; i < members.length; i++) {
+                                members[i].disId = disId;
+                                console.log(members[i]);
                                 this._api.uploadDisMember(disId, members[i]).subscribe(
                                     mem => {
                                         console.log(mem);
