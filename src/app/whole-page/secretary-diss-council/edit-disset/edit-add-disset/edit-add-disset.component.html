@@ -1,95 +1,99 @@
-<div class="container">
-
-  <div class="content">
-
+<div fxLayout="row">
+  <div fxFlex="5"></div>
+  <div fxFlex="90" fxLayout="column" fxLayoutGap="5%">
     <div class="nav-text">
-      <button class="btn-nav-header" routerLink="../../">Доп. возможности</button> <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon><button class="btn-nav-header" routerLink="../">Диссоветы №{{idDisset}}</button>
-      <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon> Добавление участника
+        <button class="btn-nav-header" routerLink="../../">Доп. возможности</button>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+        <button class="btn-nav-header" routerLink="../">Диссоветы №{{idDisset}}</button>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+        Добавление участника
     </div>
 
-    <div class="title-div">
+    <div>
+        <h1 class="title-text">Диссоветы №{{idDisset}}</h1>
 
-      <h1 class="title-text">Диссоветы №{{idDisset}}</h1>
-
-      <small class="small-title-text">Участники</small>
+        <small class="small-title-text">Участники</small>
     </div>
 
     <div class="box">
 
-      <div class="form-box">
-        <form [formGroup]="form">
-          <div class="div-label">
-          <mat-form-field *ngIf="this.selectedValue == this.elements[0].value">
-            <mat-label>Фамилия и Имя</mat-label>
-            <mat-select formControlName="userId" required>
-              <mat-option *ngFor="let i of members" [value]="i.userId">
-                {{i.firstName}} {{i.lastName}}
-              </mat-option>
-            </mat-select>
-            <mat-error>This is the required field.</mat-error>
-          </mat-form-field>
-          </div>
+        <div class="form-box">
+            <form [formGroup]="form">
+                <div class="div-label">
+                    <mat-form-field *ngIf="this.selectedValue == this.elements[0].value">
+                        <mat-label>Фамилия и Имя</mat-label>
+                        <mat-select formControlName="userId" required>
+                            <mat-option *ngFor="let i of members" [value]="i.userId">
+                                {{i.firstName}} {{i.lastName}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>This is the required field.</mat-error>
+                    </mat-form-field>
+                </div>
 
-          <mat-form-field *ngIf="this.selectedValue == this.elements[1].value">
-            <mat-label>Фамилия и Имя</mat-label>
-            <mat-select formControlName="userId" required>
-              <mat-option *ngFor="let i of exUsers" [value]="i.userId">
-                {{i.firstName}} {{i.lastName}}
-              </mat-option>
-            </mat-select>
-            <mat-error>This is the required field.</mat-error>
-          </mat-form-field>
-
-
-          <mat-form-field>
-            <mat-label>Тип сотрудника</mat-label>
-            <mat-select [(ngModel)]="selectedValue" formControlName="disMemberTypeId" required>
-              <mat-option *ngFor="let i of elements" [value]="i.value">
-                {{i.viewValue}}
-              </mat-option>
-            </mat-select>
-            <mat-error>This is the required field!</mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Позиция в дис. совете
-            </mat-label>
-            <mat-select formControlName="disPositionId" required>
-              <mat-option *ngFor="let i of elements2" [value]="i.value">
-                {{i.viewValue}}
-              </mat-option>
-            </mat-select>
-            <mat-error>This is the required field!</mat-error>
-          </mat-form-field>
-
-          <div class="div-label">
-            <label for="academicDegree">Ученная степень:</label>
-            <input id="academicDegree" type="text" name="academicDegree" formControlName="academicDegree">
-          </div>
-
-          <div class="div-label">
-            <label for="specCode">Шифр специальности</label>
-            <input id="specCode" type="text" name="specCode" formControlName="specCode">
-          </div>
-
-          <div class="div-label">
-            <label for="disSpecCode">Шифр специальности в дис. совете</label>
-            <input id="disSpecCode" type="text" name="disSpecCode" formControlName="disSpecCode">
-          </div>
-
-          <div class="div-label">
-            <label for="workPlace">Место работы</label>
-            <input id="workPlace" type="text" name="workPlace" formControlName="workPlace">
-          </div>
-
-        </form>
-      </div>
+                <mat-form-field *ngIf="this.selectedValue == this.elements[1].value">
+                    <mat-label>Фамилия и Имя</mat-label>
+                    <mat-select formControlName="userId" required>
+                        <mat-option *ngFor="let i of exUsers" [value]="i.userId">
+                            {{i.firstName}} {{i.lastName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This is the required field.</mat-error>
+                </mat-form-field>
 
 
-      <div class="btn-div">
-        <button routerLink="../../../" [disabled]="form.invalid" mat-flat-button color="primary" class="btn-style" (click)="addToExitingDisSovet()">Добавить участника</button>
-      </div>
+                <mat-form-field>
+                    <mat-label>Тип сотрудника</mat-label>
+                    <mat-select [(ngModel)]="selectedValue" formControlName="disMemberTypeId" required>
+                        <mat-option *ngFor="let i of elements" [value]="i.value">
+                            {{i.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This is the required field!</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Позиция в дис. совете
+                    </mat-label>
+                    <mat-select formControlName="disPositionId" required>
+                        <mat-option *ngFor="let i of elements2" [value]="i.value">
+                            {{i.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>This is the required field!</mat-error>
+                </mat-form-field>
+
+                <div class="div-label">
+                    <label for="academicDegree">Ученная степень:</label>
+                    <input id="academicDegree" type="text" name="academicDegree" formControlName="academicDegree">
+                </div>
+
+                <div class="div-label">
+                    <label for="specCode">Шифр специальности</label>
+                    <input id="specCode" type="text" name="specCode" formControlName="specCode">
+                </div>
+
+                <div class="div-label">
+                    <label for="disSpecCode">Шифр специальности в дис. совете</label>
+                    <input id="disSpecCode" type="text" name="disSpecCode" formControlName="disSpecCode">
+                </div>
+
+                <div class="div-label">
+                    <label for="workPlace">Место работы</label>
+                    <input id="workPlace" type="text" name="workPlace" formControlName="workPlace">
+                </div>
+
+            </form>
+        </div>
+
+
+        <div class="btn-div">
+            <button routerLink="../../../" [disabled]="form.invalid" mat-flat-button color="primary" class="btn-style"
+                    (click)="addToExitingDisSovet()">Добавить участника
+            </button>
+        </div>
     </div>
-
   </div>
+
+  <div fxFlex="5"></div>
 </div>

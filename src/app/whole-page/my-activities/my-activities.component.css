@@ -98,7 +98,7 @@ mat-table {
 
 .mat-column-pubStatus {
     flex: 1rem;
-    max-width: 4rem;
+    max-width: 7rem;
 }
 
 .mat-column-courseId {
@@ -111,10 +111,10 @@ mat-table {
     max-width: 7rem;
 }
 
-.mat-column-university {
-    flex: 9rem;
-    max-width: 9rem;
-}
+/*.mat-column-university {*/
+/*    flex: 9rem;*/
+/*    max-width: 9rem;*/
+/*}*/
 
 .mat-column-File {
     flex: 1rem;
@@ -136,40 +136,40 @@ mat-table {
     max-width: 6rem;
 }
 
-.mat-column-eventDate {
-    flex: 6rem;
-    max-width: 6rem;
-}
+/*.mat-column-eventDate {*/
+/*    flex: 6rem;*/
+/*    max-width: 6rem;*/
+/*}*/
 
-.mat-column-eventCity {
-    flex: 5rem;
-    max-width: 7rem;
-}
+/*.mat-column-eventCity {*/
+/*    flex: 5rem;*/
+/*    max-width: 7rem;*/
+/*}*/
 
-.mat-column-eventType {
-    flex: 10rem;
-    max-width: 10rem;
-}
+/*.mat-column-eventType {*/
+/*    flex: 10rem;*/
+/*    max-width: 10rem;*/
+/*}*/
 
 .mat-column-pubType {
     flex: 9rem;
     max-width: 9rem;
 }
 
-.mat-column-eventRole {
-    flex: 8rem;
-    max-width: 10rem;
-}
+/*.mat-column-eventRole {*/
+/*    flex: 8rem;*/
+/*    max-width: 10rem;*/
+/*}*/
 
-.mat-column-eventTitle {
-    flex: 7rem;
-    max-width: 13rem;
-}
+/*.mat-column-eventTitle {*/
+/*    flex: 7rem;*/
+/*    max-width: 13rem;*/
+/*}*/
 
-.mat-column-disRole {
-    flex: 8rem;
-    max-width: 8rem;
-}
+/*.mat-column-disRole {*/
+/*    flex: 8rem;*/
+/*    max-width: 8rem;*/
+/*}*/
 
 .mat-column-whoCheck {
     flex: 8rem;
