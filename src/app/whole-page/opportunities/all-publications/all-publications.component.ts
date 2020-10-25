@@ -42,6 +42,9 @@ export class AllPublicationsComponent implements OnInit {
     this.lang = this.translateService.currentLang;
     this.getAllPublications(this.lang);
     this.language = this.lang;
+    this.translateService.onLangChange.subscribe(
+        lang => this.getAllPublications(lang.lang)
+    );
   }
 
   getAllPublications(lang) {

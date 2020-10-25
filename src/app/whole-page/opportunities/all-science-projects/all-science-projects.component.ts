@@ -29,24 +29,13 @@ export class AllScienceProjectsComponent implements OnInit {
 
     ngOnInit(): void {
         this.lang = this.translateService.currentLang;
-        console.log(this.lang);
         this.language = this.lang;
         this.getAllScienceProjects(this.lang);
         this.detectDevice();
-        this.getAllScienceProjects(this.language);
+        this.translateService.onLangChange.subscribe(
+            lang => this.getAllScienceProjects(lang.lang)
+        );
     }
-
-    // scAgrDate: "2020-06-23T00:00:00.000+0000"
-    // scCustomer: "test"
-    // scDept: "Information Systems"
-    // scEndDate: "2020-07-12T00:00:00.000+0000"
-    // scExecutor: "test"
-    // scFirstName: "Admin Adminov"
-    // scId: 10
-    // scName: "test"
-    // scNum: "1"
-    // scPriority: "Энергетика и машиностроение"
-    // scStDate: "2020-06-27T00:00:00.000+0000"
 
     getAllScienceProjects(lang) {
         this._api.getAllScienceProjects(lang).subscribe(

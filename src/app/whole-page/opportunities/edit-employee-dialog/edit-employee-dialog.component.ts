@@ -46,8 +46,6 @@ export class EditEmployeeDialogComponent implements OnInit {
         new FormControl(this.formOptions.getRawValue().option3)
       ])
     });
-     // console.log(this.newForm.get('role'));
-     // console.log(this.newForm.get('role')['controls'][0].value);
      const isTeacher = (this.newForm.get('role') as FormArray).controls[0].value;
      const isSciencePM = (this.newForm.get('role') as FormArray).controls[1].value;
      const isDisSec = (this.newForm.get('role') as FormArray).controls[2].value;

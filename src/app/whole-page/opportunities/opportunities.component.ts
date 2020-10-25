@@ -22,7 +22,6 @@ export class OpportunitiesComponent implements OnInit {
 
   getAllEmployees() {
     this._api.getUsers().subscribe(response => {
-      console.log(response);
       this.dataSource = response;
       this.dataSource.sort(this.compareEmployees);
     });
@@ -38,7 +37,6 @@ export class OpportunitiesComponent implements OnInit {
   openDialogEdit(employee) {
     this.editDialog.open(EditEmployeeDialogComponent, {data: employee
     }).afterClosed().subscribe(result => {
-      console.log(result);
       this.getAllEmployees();
     });
   }

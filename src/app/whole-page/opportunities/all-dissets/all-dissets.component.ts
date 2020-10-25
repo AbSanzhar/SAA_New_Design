@@ -21,17 +21,21 @@ export class AllDissetsComponent implements OnInit {
               private translateService: TranslateService,
               private api: ApiService) {
     this.detectDevice();
+    this.translateService.onLangChange.subscribe(
+        lang => {
+          this.getAllDissets(lang.lang);
+        }
+    );
   }
 
   ngOnInit(): void {
     this.detectDevice();
-    this.getAllDissets();
+    this.getAllDissets(this.translateService.currentLang);
   }
 
-  getAllDissets() {
-    this.api.getAllDisSovets(this.translateService.currentLang).subscribe(
+  getAllDissets(lang) {
+    this.api.getAllDisSovets(lang).subscribe(
         res => {
-          console.log(res);
           this.dataSource = res;
         }
     );

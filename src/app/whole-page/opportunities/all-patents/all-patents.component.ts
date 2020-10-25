@@ -32,6 +32,9 @@ export class AllPatentsComponent implements OnInit {
     this.detectDevice();
     this.language = this.translateService.currentLang;
     this.getAllPatents(this.language);
+    this.translateService.onLangChange.subscribe(
+        lang => this.getAllPatents(lang.lang)
+    );
   }
 
   getDecodedAccessToken(token: string): any {
