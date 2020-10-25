@@ -6,6 +6,7 @@ import * as jwt_decode from 'jwt-decode';
 import {ApiService} from '../../../api/api.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
     selector: 'app-add-disset',
@@ -14,13 +15,16 @@ import {Router} from '@angular/router';
 })
 export class AddDissetComponent implements OnInit {
     private lang: any;
+    isMobile;
+    width;
 
     constructor(private dialog: MatDialog,
                 // tslint:disable-next-line:variable-name
                 private _api: ApiService,
                 private translateService: TranslateService,
                 private cd: ChangeDetectorRef,
-                private router: Router) {
+                private router: Router,
+                private deviceDetectorService: DeviceDetectorService) {
         this.form = new FormGroup({
             universityId: new FormControl('', Validators.required),
             disStartDate: new FormControl('', Validators.required),
@@ -29,6 +33,13 @@ export class AddDissetComponent implements OnInit {
             membersNum: new FormControl('', Validators.required),
             secretaryId: new FormControl(this.tokenId)
         });
+        this.isMobile = this.deviceDetectorService.isMobile();
+        if (!this.isMobile) {
+            this.width = '50%';
+        }
+        else {
+            this.width  = '100%';
+        }
     }
 
     form: FormGroup;
@@ -70,7 +81,7 @@ export class AddDissetComponent implements OnInit {
 
     add(): void {
         const dialogRef = this.dialog.open(AddMemberDialogComponent, {
-            width: '50%',
+            width: this.width
         });
         dialogRef.afterClosed().subscribe(
             res => {

@@ -4,3 +4,15 @@
     align-items: center;
     display: flex;
 }
+.mat-column-id {
+    flex: 4%;
+    max-width: 4%;
+}
+.mat-column-priority, .mat-column-subSubPriority, .mat-column-subPriority {
+    flex: 10%;
+    max-width: 10%;
+}
+.mat-column-name, .mat-column-type, .executor {
+    flex: 7%;
+    max-width: 7%;
+}

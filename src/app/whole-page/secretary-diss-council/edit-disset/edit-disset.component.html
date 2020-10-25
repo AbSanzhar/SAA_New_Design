@@ -4,34 +4,34 @@
         <div class="nav-text">
             <button routerLink="../../" class="btn-nav-header">Доп. возможности</button>
             <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
-            Диссоветы №{{idDisset}}
+            {{"Dissertation council" | translate}} №{{idDisset}}
         </div>
         <div class="title-div">
-            <h1 class="title-text">Диссоветы №{{idDisset}}</h1>
+            <h1 class="title-text">{{"Dissertation council" | translate}} №{{idDisset}}</h1>
             <h2 class="title-text">ВУЗ - {{disInfo}}</h2>
-            <small class="small-title-text">Участники</small>
+            <small class="small-title-text">{{"Participants" | translate}}</small>
             <div class="box">
                 <mat-table [dataSource]="dataSource" class="">
 
                     <ng-container matColumnDef="email">
-                        <mat-header-cell *matHeaderCellDef> Тип сотрудника</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{"Employee type" | translate}}</mat-header-cell>
                         <mat-cell *matCellDef="let member">
                             <p>{{member.memberType}}</p>
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="fullName">
-                        <mat-header-cell *matHeaderCellDef> ФИО</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{"Full name" | translate}}</mat-header-cell>
                         <mat-cell *matCellDef="let member"> {{member.lastName + ' ' + member.firstName}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="role">
-                        <mat-header-cell *matHeaderCellDef> Роль</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{"Role" | translate}}</mat-header-cell>
                         <mat-cell *matCellDef="let member"> {{member.disPosition}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="actions">
-                        <mat-header-cell *matHeaderCellDef> Изменить позицию в дис. совете</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{"Change position in the dissertation council" | translate}}</mat-header-cell>
                         <mat-cell *matCellDef="let member">
                             <button (click)="editRole(member)" mat-icon-button
                                     aria-label="Example icon button with a home icon">

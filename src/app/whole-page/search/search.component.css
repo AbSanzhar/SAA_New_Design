@@ -1,0 +1,52 @@
+.mat-column-pubId {
+    flex: 2rem;
+    max-width: 2rem;
+}
+.mat-column-Year {
+    flex: 3%;
+    max-width: 3%;
+}
+.mat-column-City {
+    flex: 7%;
+    max-width: 7%;
+}
+.mat-column-Collaborators {
+    flex: 12%;
+    max-width: 12%;
+}
+.mat-column-Title {
+    flex: 17%;
+    max-width: 17%;
+}
+.mat-column-pubType {
+    flex: 15%;
+    max-width: 15%;
+}
+.mat-column-Publisher {
+    flex: 10%;
+    max-width: 10%;
+}
+.mat-column-Page {
+    flex: 10%;
+    max-width: 10%;
+}
+.mat-column-Url {
+    flex: 5%;
+    max-width: 5%;
+}
+.mat-column-Url {
+    flex: 7%;
+    max-width: 7%;
+}
+.mat-column-Doi {
+    flex: 7%;
+    max-width: 7%;
+}
+.mat-column-pubStatus {
+    flex: 5%;
+    max-width: 5%;
+}
+.mat-column-File {
+    flex: 5%;
+    max-width: 5%;
+}

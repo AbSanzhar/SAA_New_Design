@@ -2,22 +2,22 @@
     <div style="margin: 2rem;">
         <button class="link" routerLink="../profile" style="border: 0; background: none; font-size: 16px">Главная >
         </button>
-        <h4 style="display: inline; color: gray"> Настройки</h4>
+        <h4 style="display: inline; color: gray"> {{'Settings' | translate}}</h4>
     </div>
     <div class="content">
         <div style="width: 70%">
             <form>
                 <div class="forma">
-                    <label>Фотография профиля: </label>
+                    <label>{{"Profile picture" | translate}}: </label>
                     <form enctype="multipart/form-data">
-                        <label for="photo">Выберите файл</label>
+                        <label for="photo">{{"Select a file" | translate}}</label>
                         <input type="file" multiple accept="image/*,image/jpeg" id="photo" (change)="onProfilePhotoSelected($event)">
                     </form>
                 </div>
 
                 <div style="text-align: center; margin: 5%">
                     <button mat-button mat-dialog-close [disabled]="!selectedProfilePhotoFile"
-                            (click)="uploadProfilePhoto()">Загрузить
+                            (click)="uploadProfilePhoto()">{{"Download" | translate}}
                     </button>
                 </div>
 
@@ -28,9 +28,9 @@
 
 <div style="margin: 5% 0" *ngIf="isMobile" fxLayout="column" fxLayoutGap="5%">
     <div>
-        <button class="link" routerLink="../profile" style="border: 0; background: none; font-size: 16px">Главная >
+        <button class="link" routerLink="../profile" style="border: 0; background: none; font-size: 16px">{{"Home" | translate}} >
         </button>
-        <h4 style="display: inline; color: gray"> Настройки</h4>
+        <h4 style="display: inline; color: gray"> {{"Settings" | translate}}</h4>
     </div>
 
     <form fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="center center">
@@ -38,12 +38,12 @@
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
-    color: #A8A4A4;">Фотография профиля: </p>
+    color: #A8A4A4;">{{"Profile picture" | translate}}: </p>
             <form enctype="multipart/form-data">
                 <input type="file" multiple accept="image/*,image/jpeg" (change)="onProfilePhotoSelected($event)">
             </form>
             <button mat-flat-button color="primary" style="color: white;" mat-dialog-close [disabled]="!selectedProfilePhotoFile"
-                    (click)="uploadProfilePhoto()">Загрузить
+                    (click)="uploadProfilePhoto()">{{"Download" | translate}}
             </button>
     </form>
 </div>

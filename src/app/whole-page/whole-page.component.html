@@ -112,7 +112,7 @@
                     </div>
                     <div fxLayoutAlign="center center" fxFlex="50" fxLayoutGap="0" fxLayout="column">
                         <a routerLink="./profile"><p style="color: white">{{name}} Test Name</p></a>
-                        <a routerLink="./settings" style="color: #909090; text-decoration: none;">Настройки</a>
+                        <a routerLink="./settings" style="color: #909090; text-decoration: none;">{{"Settings" | translate}}</a>
                     </div>
                     <div fxLayoutAlign="center center" fxFlex="20">
 <!--                        <a routerLink="./profile"><mat-icon style="color: white">keyboard_arrow_right</mat-icon></a>-->
@@ -121,7 +121,7 @@
                 </div>
                 <mat-divider style="border-top-color: grey; margin: 10px"></mat-divider>
                 <div fxLayout="column" fxLayoutGap="0" fxLayoutAlign="center start">
-                    <a mat-button routerLink="./"><p class="navigation2">Главная</p></a>
+                    <a mat-button routerLink="./"><p class="navigation2">{{"Home" | translate}}</p></a>
 <!--                    <a mat-button routerLink="./activities"><p class="navigation2"-->
 <!--                                                               *ngIf="this.userRoles.indexOf('Teacher') != -1">-->
 <!--                        Публикации</p></a>-->
@@ -130,43 +130,39 @@
                                              (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    <p style="margin: 0;" class="navigation2">Публикации</p>
+                                    <p style="margin: 0;" class="navigation2">{{"Publications" | translate}}</p>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
-                            <a routerLink="./teachPub" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои публикации</p>
+                            <a routerLink="./teachPub" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"My publications" | translate}}</p>
                             </a>
-                            <a routerLink="./teachEvents" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои мероприятия</p></a>
-                            <a routerLink="./teachDis" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои диссоветы</p></a>
-                            <a routerLink="./teachPatents" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои патенты</p></a>
-                            <a routerLink="./teachDep" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои сотрудники</p></a>
-                            <a routerLink="./teachProj" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои научные проекты</p></a>
-                            <a routerLink="./teachCours" mat-button><p style="margin: 0; text-align: left" class="navigation2">Мои курсы</p></a>
+                            <a routerLink="./teachEvents" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"My events" | translate}}</p></a>
+                            <a routerLink="./teachDis" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"My discourses" | translate}}</p></a>
+                            <a routerLink="./teachPatents" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"My patents" | translate}}</p></a>
+                            <a routerLink="./teachDep" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"My staff" | translate}}</p></a>
+                            <a routerLink="./teachProj" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"My scientific projects" | translate}}</p></a>
+                            <a routerLink="./teachCours" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"My courses" | translate}}</p></a>
                         </mat-expansion-panel>
                     </mat-accordion>
-                    <a routerLink="./statistics" mat-button><p class="navigation2">Статистика</p></a>
-                    <a routerLink="./about" mat-button><p class="navigation2">О проекте</p></a>
-                    <a mat-button routerLink="./secretary-of-the-diss-council"><p class="navigation2">Секретарь
-                        дис.совета</p></a>
+                    <a routerLink="./statistics" mat-button><p class="navigation2">{{"Statistics" | translate}}</p></a>
+                    <a routerLink="./about" mat-button><p class="navigation2">{{"About the project" | translate}}</p></a>
+                    <a mat-button routerLink="./secretary-of-the-diss-council"><p class="navigation2">{{"Secretary of the Dissertation Council" | translate}}</p></a>
                     <mat-accordion>
                         <mat-expansion-panel style="background: #393939; box-shadow: 0 0 0 0; width: 250px;"
                                              (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    <p style="margin: 0;" class="navigation2">Преподаватели</p>
+                                    <p style="margin: 0;" class="navigation2">{{"Teachers" | translate}}</p>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
-                            <a routerLink="./yp1" mat-button><p style="margin: 0; text-align: left" class="navigation2">Учебная работа</p>
+                            <a routerLink="./yp1" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"EDUCATIONAL WORK" | translate}}</p>
                             </a>
-                            <a routerLink="./yp2" mat-button><p style="margin: 0; text-align: left" class="navigation2">Учебно-методическая
-                                <br> работа</p></a>
+                            <a routerLink="./yp2" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"EDUCATIONAL AND METHODOLOGICAL WORK" | translate}}</p></a>
                             <a routerLink="./yp3" mat-button><p style="margin: 0; text-align: left" class="navigation2">
-                                Научно-исследовательская <br> работа</p></a>
-                            <a routerLink="./yp4" mat-button><p style="margin: 0; text-align: left" class="navigation2">Бюджетные НИР/ <br>
-                                Руководство НИРС</p></a>
+                                {{"RESEARCH WORK" | translate}}</p></a>
+                            <a routerLink="./yp4" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"BUDGET RESEARCH AND STEERING GUIDANCE" | translate}}</p></a>
                             <a routerLink="./yp5" mat-button><p style="margin: 0; text-align: left" class="navigation2">
-                                Организационно-методическая <br> работа</p></a>
-                            <a routerLink="./yp6" mat-button><p style="margin: 0; text-align: left" class="navigation2">Прочая
-                                деятельность</p></a>
+                                {{"ORGANIZATIONAL AND METHODOLOGICAL WORK" | translate}}</p></a>
+                            <a routerLink="./yp6" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"OTHER ACTIVITIES" | translate}}</p></a>
                         </mat-expansion-panel>
                     </mat-accordion>
                     <mat-accordion>
@@ -174,21 +170,19 @@
                                              (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    <p style="margin-bottom: 0;" class="navigation2">Сотрудник отдела по науке</p>
+                                    <p style="margin-bottom: 0;" class="navigation2">{{"Science Department Officer" | translate}}</p>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <div fxLayout="column" fxLayoutGap="0" style="margin: 0; padding: 0;">
-                                <a routerLink="./opportunities/all-patents" mat-button><p style="margin: 0; text-align: left" class="navigation2">Патенты</p></a>
-                                <a routerLink="./opportunities/all-publications" mat-button><p style="margin: 0; text-align: left" class="navigation2">Публикации</p>
+                                <a routerLink="./opportunities/all-patents" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"Patents" | translate}}</p></a>
+                                <a routerLink="./opportunities/all-publications" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"Publications" | translate}}</p>
                                 </a>
-                                <a routerLink="./opportunities/all-dissets" mat-button><p style="margin: 0; text-align: left" class="navigation2">Диссертационные
-                                    советы</p></a>
-                                <a mat-button><p style="margin: 0; text-align: left" class="navigation2">Научные
-                                    проекты</p></a>
+                                <a routerLink="./opportunities/all-dissets" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"Dissertation Councils" | translate}}</p></a>
+                                <a routerLink="./opportunities/all-science-projects" mat-button><p style="margin: 0; text-align: left" class="navigation2">{{"Scientific projects" | translate}}</p></a>
                             </div>
                         </mat-expansion-panel>
                     </mat-accordion>
-                    <a routerLink="./help" mat-button><p class="navigation2">Помощь<span style="color: #FF0000; font-weight: bold; margin-left: 2%">?</span>
+                    <a routerLink="./help" mat-button><p class="navigation2">{{"Apply" | translate}}
                     </p></a>
                     <a (click)="logOut()" mat-button><p class="navigation2">{{"Log out" | translate}}</p></a>
                 </div>

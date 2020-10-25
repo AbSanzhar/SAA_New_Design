@@ -17,6 +17,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .navigation2 {
     color: #FFFFFF;
     font-size: 18px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 .textM {
     font-weight: 600;

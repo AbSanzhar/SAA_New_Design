@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddNewExMemberDialogComponent} from '../add-new-ex-member-dialog/add-new-ex-member-dialog.component';
 import {ChangeDetection} from '@angular/cli/lib/config/schema';
 import {TranslateService} from '@ngx-translate/core';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-add-member-dialog',
@@ -18,7 +19,8 @@ export class AddMemberDialogComponent implements AfterViewInit {
   members: any;
   exUsers: any;
   disMember: any;
-
+  width;
+  isMobile;
 
   elements: Sourse[] = [
     // {value: 'Внутренний сотрудник', viewValue: 'Внутренний сотрудник'},
@@ -34,12 +36,20 @@ export class AddMemberDialogComponent implements AfterViewInit {
               private service: ApiService,
               private dialog: MatDialog,
               private cd: ChangeDetectorRef,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private deviceDetectorService: DeviceDetectorService) {
     this.membersForm = formBuilder.group({
       disMember: this.formBuilder.array([]),
     });
     this.getDisMemerTypes(this.translateService.currentLang);
     this.getDisPositions(this.translateService.currentLang);
+    this.isMobile = this.deviceDetectorService.isMobile();
+    if (!this.isMobile) {
+      this.width = '50%';
+    }
+    else {
+      this.width = '100%';
+    }
   }
 
   ngAfterViewInit(): void {
@@ -104,7 +114,7 @@ export class AddMemberDialogComponent implements AfterViewInit {
 
   addNewMember(): void {
     const dialogRef = this.dialog.open(AddNewExMemberDialogComponent, {
-      width: '50%',
+      width: this.width,
     });
     dialogRef.afterClosed().subscribe(
         newUser => {

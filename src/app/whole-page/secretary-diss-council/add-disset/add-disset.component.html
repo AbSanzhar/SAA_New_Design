@@ -1,53 +1,112 @@
-<div class="container">
-  <div class="content">
-    <div class="nav-text">
-      <button routerLink="../" class="btn-nav-header">{{"Add. capabilities" | translate}}</button>
-      <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
-      {{"Add dissertation council" | translate}}
+<div *ngIf="!isMobile" class="container">
+    <div class="content">
+        <div class="nav-text">
+            <button routerLink="../" class="btn-nav-header">{{"Add. capabilities" | translate}}</button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+            {{"Add dissertation council" | translate}}
+        </div>
+
+        <div class="form-box">
+            <form [formGroup]="form">
+                <p style="color: darkred; font-weight: 500; font-size: 18px">{{"New dissertation council" | translate}}
+                    : </p>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>{{"University" | translate}}</mat-label>
+                    <select matNativeControl formControlName="universityId" name="car">
+                        <option *ngFor="let i of universities" [value]="i.value">
+                            {{i.viewValue}}
+                        </option>
+                    </select>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{"From" | translate}}</mat-label>
+                    <input matInput formControlName="disStartDate" type="date" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{"To" | translate}}</mat-label>
+                    <input matInput formControlName="disStopDate" type="date" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{"Basis of the publication (Order No. of the MES RK)" | translate}}</mat-label>
+                    <input matInput formControlName="ministryOrder" type="text" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{"Quantitative composition (people)" | translate}}</mat-label>
+                    <input matInput formControlName="membersNum" type="number" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
+
+                <!--TODO [disabled]="form.invalid"-->
+                <button [disabled]="form.invalid" mat-raised-button color="primary"><p
+                        style="color: white; margin: 0; padding: 0" (click)="add()">{{"Add" | translate}}</p></button>
+            </form>
+        </div>
     </div>
+</div>
 
-    <div class="form-box">
-      <form [formGroup]="form">
-        <p style="color: darkred; font-weight: 500; font-size: 18px">{{"New dissertation council" | translate}}: </p>
+<div *ngIf="isMobile" fxLayout="row">
+    <div fxFlex="5"></div>
+    <div fxFlex="90" style="padding-top: 5%">
+        <div class="nav-text">
+            <button routerLink="../" class="btn-nav-header">{{"Add. capabilities" | translate}}</button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+            {{"Add dissertation council" | translate}}
+        </div>
+        <div>
+            <form [formGroup]="form" style="width: 100%; padding-top: 5%">
+                <p style="color: darkred; font-weight: 500; font-size: 18px">{{"New dissertation council" | translate}}
+                    : </p>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>{{"University" | translate}}</mat-label>
-          <select matNativeControl formControlName="universityId" name="car">
-            <option *ngFor="let i of universities" [value]="i.value">
-              {{i.viewValue}}
-            </option>
-          </select>
-          <mat-error>{{"This is the required field!" | translate}}</mat-error>
-        </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>{{"University" | translate}}</mat-label>
+                    <select matNativeControl formControlName="universityId" name="car">
+                        <option *ngFor="let i of universities" [value]="i.value">
+                            {{i.viewValue}}
+                        </option>
+                    </select>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{"From" | translate}}</mat-label>
-          <input matInput formControlName="disStartDate" type="date" required>
-          <mat-error>{{"This is the required field!" | translate}}</mat-error>
-        </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{"From" | translate}}</mat-label>
+                    <input matInput formControlName="disStartDate" type="date" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{"To" | translate}}</mat-label>
-          <input matInput formControlName="disStopDate" type="date" required>
-          <mat-error>{{"This is the required field!" | translate}}</mat-error>
-        </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{"To" | translate}}</mat-label>
+                    <input matInput formControlName="disStopDate" type="date" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{"Basis of the publication (Order No. of the MES RK)" | translate}}</mat-label>
-          <input matInput formControlName="ministryOrder" type="text" required>
-          <mat-error>{{"This is the required field!" | translate}}</mat-error>
-        </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{"Basis of the publication (Order No. of the MES RK)" | translate}}</mat-label>
+                    <input matInput formControlName="ministryOrder" type="text" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{"Quantitative composition (people)" | translate}}</mat-label>
-          <input matInput formControlName="membersNum" type="number" required>
-          <mat-error>{{"This is the required field!" | translate}}</mat-error>
-        </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{"Quantitative composition (people)" | translate}}</mat-label>
+                    <input matInput formControlName="membersNum" type="number" required>
+                    <mat-error>{{"This is the required field!" | translate}}</mat-error>
+                </mat-form-field>
 
-        <!--TODO [disabled]="form.invalid"-->
-        <button [disabled]="form.invalid" mat-raised-button color="primary" ><p
-                style="color: white; margin: 0; padding: 0" (click)="add()">{{"Add" | translate}}</p></button>
-      </form>
+                <div fxLayoutAlign="center center">
+                    <button [disabled]="form.invalid" mat-raised-button color="primary"><p
+                            style="color: white; margin: 0; padding: 0" (click)="add()">{{"Add" | translate}}</p>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
+    <div fxFlex="5"></div>
 </div>

@@ -6,27 +6,27 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Title</mat-label>
+            <mat-label>{{"Title" | translate}}</mat-label>
             <input matInput formControlName="newsTitle">
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Article</mat-label>
+            <mat-label>{{"Article" | translate}}</mat-label>
             <input matInput formControlName="bodyTitle">
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Date</mat-label>
+            <mat-label>{{"Date" | translate}}</mat-label>
             <input matInput [value]="date | date" disabled>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Author ID</mat-label>
+            <mat-label>{{"Author" | translate}} ID</mat-label>
             <input formControlName="authorId" matInput>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Author Email</mat-label>
+            <mat-label>{{"Author" | translate}} Email</mat-label>
             <input formControlName="email" matInput>
         </mat-form-field>
         <button mat-flat-button color="primary" (click)="update('Успешно изменено', 'OK')">Save</button>

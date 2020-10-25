@@ -10,7 +10,7 @@
                     <!--        <div style="justify-content: center; display:flex;">-->
                     <!--          <img src="./assets/images/login/user.png" width="8%" alt="">-->
 
-                    <input matInput formControlName="username" placeholder="Username" required>
+                    <input matInput formControlName="username" placeholder="{{'Username' | translate}}" required>
                     <!--        </div>-->
                 </mat-form-field>
             </div>
@@ -19,15 +19,15 @@
                 <mat-form-field color="accent">
                     <!--        <div style="justify-content: center; display:flex;">-->
                     <!--          <img src="./assets/images/login/passwd.png" width="8%" alt="">-->
-                    <input matInput formControlName="password" type="password" placeholder="Password" required>
+                    <input matInput formControlName="password" type="password" placeholder="{{'Password' | translate}}" required>
                     <!--        </div>-->
                 </mat-form-field>
             </div>
-            <mat-error *ngIf="error2">Login or password are incorrect!</mat-error>
+            <mat-error *ngIf="error2">{{"Login or password are incorrect!" | translate}}</mat-error>
             <!--      <div style="margin: 8rem 4rem 2rem 4rem;">-->
             <!--          <input (click)="signIn()" id="sign-in-button" type="submit" value="Sign in">-->
             <!--        </div>-->
-            <button (click)="signIn()" type="submit" class="signInbtn" mat-stroked-button>Sign in
+            <button (click)="signIn()" type="submit" class="signInbtn" mat-stroked-button>{{"Sign In" | translate}}
             </button>
 
         </form>
