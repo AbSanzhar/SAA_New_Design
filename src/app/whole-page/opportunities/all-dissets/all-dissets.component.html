@@ -1,106 +1,116 @@
-<div *ngIf="!isMobile" fxLayout="row">
-  <div fxFlex="10"></div>
-  <div fxFlex="80" fxLayout="row">
-    <div fxLayout="column" fxFlex="25">
-      <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
-      <div fxLayout="column">
-        <a routerLink="../" style="text-decoration: none;" class="linkTable">{{"Teachers" | translate}}</a>
-        <a routerLink="../all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Patents" | translate}}</a>
-        <a routerLink="../all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Publications" | translate}}</a>
-        <a routerLink="../all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Dissertation Councils" | translate}}</a>
-        <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Scientific projects" | translate}}</a>
-      </div>
+<div *ngIf="!isMobile" fxLayout="column" fxLayoutGap="5%">
+    <div></div>
+    <div fxLayout="row">
+        <div fxFlex="5"></div>
+        <div fxFlex="90" fxLayout="row">
+            <div fxLayout="column" fxFlex="14">
+                <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
+                <div fxLayout="column">
+                    <a routerLink="../" style="text-decoration: none;" class="linkTable">{{"Teachers" | translate}}</a>
+                    <a routerLink="../all-patents" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Patents" | translate}}</a>
+                    <a routerLink="../all-publications" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Publications" | translate}}</a>
+                    <a routerLink="../all-dissets" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Dissertation Councils" | translate}}</a>
+                    <a routerLink="../all-science-projects" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Scientific projects" | translate}}</a>
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex="90">
+                <mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="index">
+                        <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                        <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="universityName">
+                        <mat-header-cell *matHeaderCellDef> {{"University" | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
+                    </ng-container>
+
+                    <!--        <ng-container matColumnDef="role">-->
+                    <!--          <mat-header-cell *matHeaderCellDef> {{"Role" | translate}} </mat-header-cell>-->
+                    <!--          <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>-->
+                    <!--        </ng-container>-->
+
+                    <!--        <ng-container matColumnDef="specialty">-->
+                    <!--          <mat-header-cell *matHeaderCellDef> {{"Specialty" | translate}} </mat-header-cell>-->
+                    <!--          <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>-->
+                    <!--        </ng-container>-->
+
+                    <ng-container matColumnDef="activityPeriod">
+                        <mat-header-cell *matHeaderCellDef> {{"Period of activity" | translate}} </mat-header-cell>
+                        <mat-cell
+                                *matCellDef="let disset"> {{ disset.disStartDate | date}} {{disset.disStopDate | date }} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="orderNumberAndOrder">
+                        <mat-header-cell *matHeaderCellDef> {{"Order number and date" | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let disset"> {{ disset.ministryOrder}}
+                            , {{ disset.disStartDate | date }} </mat-cell>
+                    </ng-container>
+
+                    <!--        <ng-container matColumnDef="actions">-->
+                    <!--          <mat-header-cell *matHeaderCellDef> {{"Action" | translate}} </mat-header-cell>-->
+                    <!--          <mat-cell *matCellDef="let disset">-->
+                    <!--            <button mat-flat-button color="accent" class="btn-style">{{"Accept" | translate}}</button>-->
+                    <!--          </mat-cell>-->
+                    <!--        </ng-container>-->
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let disset; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </div>
+        <div fxFlex="5"></div>
     </div>
-    <div fxLayout="column" fxFlex="75">
-      <mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="index">
-          <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-          <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="universityName">
-          <mat-header-cell *matHeaderCellDef> {{"University" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
-        </ng-container>
-
-<!--        <ng-container matColumnDef="role">-->
-<!--          <mat-header-cell *matHeaderCellDef> {{"Role" | translate}} </mat-header-cell>-->
-<!--          <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>-->
-<!--        </ng-container>-->
-
-<!--        <ng-container matColumnDef="specialty">-->
-<!--          <mat-header-cell *matHeaderCellDef> {{"Specialty" | translate}} </mat-header-cell>-->
-<!--          <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>-->
-<!--        </ng-container>-->
-
-        <ng-container matColumnDef="activityPeriod">
-          <mat-header-cell *matHeaderCellDef> {{"Period of activity" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{ disset.disStartDate | date}} {{disset.disStopDate | date }} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="orderNumberAndOrder">
-          <mat-header-cell *matHeaderCellDef> {{"Order number and date" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let disset"> {{ disset.ministryOrder}}, {{ disset.disStartDate | date }} </mat-cell>
-        </ng-container>
-
-<!--        <ng-container matColumnDef="actions">-->
-<!--          <mat-header-cell *matHeaderCellDef> {{"Action" | translate}} </mat-header-cell>-->
-<!--          <mat-cell *matCellDef="let disset">-->
-<!--            <button mat-flat-button color="accent" class="btn-style">{{"Accept" | translate}}</button>-->
-<!--          </mat-cell>-->
-<!--        </ng-container>-->
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let disset; columns: displayedColumns;"></mat-row>
-      </mat-table>
-    </div>
-  </div>
-  <div fxFlex="10"></div>
+    <div></div>
 </div>
 
 <div style="width: 1000px" fxLayoutAlign="center start" *ngIf="isMobile" fxLayout="column">
-  <h2 style="color: #827878; margin: 15px;">{{"Information about the university" | translate}}</h2>
-  <div style="width: 1000px">
-    <mat-table style="width: 100%;" [dataSource]="dataSource">
-      <ng-container matColumnDef="index">
-        <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-        <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>
-      </ng-container>
+    <h2 style="color: #827878; margin: 15px;">{{"Information about the university" | translate}}</h2>
+    <div style="width: 1000px">
+        <mat-table style="width: 100%;" [dataSource]="dataSource">
+            <ng-container matColumnDef="index">
+                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                <mat-cell *matCellDef="let disset, let i = index"> {{i + 1}} </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="universityName">
-        <mat-header-cell *matHeaderCellDef> {{"University" | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.universityName}} </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="universityName">
+                <mat-header-cell *matHeaderCellDef> {{"University" | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.universityName}} </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="role">
-        <mat-header-cell *matHeaderCellDef> {{"Role" | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="role">
+                <mat-header-cell *matHeaderCellDef> {{"Role" | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.role}} </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="specialty">
-        <mat-header-cell *matHeaderCellDef> {{"Specialty" | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="specialty">
+                <mat-header-cell *matHeaderCellDef> {{"Specialty" | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="activityPeriod">
-        <mat-header-cell *matHeaderCellDef> {{"Period of activity" | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.activityPeriod}} </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="activityPeriod">
+                <mat-header-cell *matHeaderCellDef> {{"Period of activity" | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.activityPeriod}} </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="orderNumberAndOrder">
-        <mat-header-cell *matHeaderCellDef> {{"Order number and date" | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let disset"> {{disset.orderNumber + ' ' + disset.date}} </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="orderNumberAndOrder">
+                <mat-header-cell *matHeaderCellDef> {{"Order number and date" | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let disset"> {{disset.orderNumber + ' ' + disset.date}} </mat-cell>
+            </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> действие </mat-header-cell>
-        <mat-cell *matCellDef="let disset">
-          <button mat-flat-button color="accent" class="btn-style">{{"Accept" | translate}}</button>
-        </mat-cell>
-      </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> действие</mat-header-cell>
+                <mat-cell *matCellDef="let disset">
+                    <button mat-flat-button color="accent" class="btn-style">{{"Accept" | translate}}</button>
+                </mat-cell>
+            </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let disset; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let disset; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
 </div>

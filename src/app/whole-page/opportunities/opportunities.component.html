@@ -1,55 +1,65 @@
-<div fxLayout="row">
-  <div fxFlex="5"></div>
-  <div fxFlex="90" fxLayout="row">
-    <div fxLayout="column" fxFlex="15">
-        <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
-        <div fxLayout="column">
-            <a routerLink="./" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Teachers" | translate}}</a>
-            <a routerLink="./all-patents" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Patents" | translate}}</a>
-            <a routerLink="./all-publications" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Publications" | translate}}</a>
-            <a routerLink="./all-dissets" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Dissertation Councils" | translate}}</a>
-            <a routerLink="./all-science-projects" style="text-decoration: none;" routerLinkActive="active" class="linkTable">{{"Scientific projects" | translate}}</a>
+<div fxLayout="column" fxLayoutGap="5%">
+    <div></div>
+    <div fxFlex="90" fxLayout="row">
+        <div fxFlex="5"></div>
+        <div fxFlex="90" fxLayout="row">
+            <div fxLayout="column" fxFlex="15">
+                <h2 style="color: #827878;">{{"Information about the university" | translate}}</h2>
+                <div fxLayout="column">
+                    <a routerLink="./" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Teachers" | translate}}</a>
+                    <a routerLink="./all-patents" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Patents" | translate}}</a>
+                    <a routerLink="./all-publications" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Publications" | translate}}</a>
+                    <a routerLink="./all-dissets" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Dissertation Councils" | translate}}</a>
+                    <a routerLink="./all-science-projects" style="text-decoration: none;" routerLinkActive="active"
+                       class="linkTable">{{"Scientific projects" | translate}}</a>
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex="85">
+                <mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="index">
+                        <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                        <mat-cell *matCellDef="let employee, let i = index"> {{i + 1}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastName">
+                        <mat-header-cell *matHeaderCellDef> {{"Surname" | translate}}</mat-header-cell>
+                        <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="firstName">
+                        <mat-header-cell *matHeaderCellDef> {{"Name" | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="middleName">
+                        <mat-header-cell *matHeaderCellDef> {{"Patronymic" | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let employee"> {{employee.patronymic}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="e-mail">
+                        <mat-header-cell *matHeaderCellDef> e-mail</mat-header-cell>
+                        <mat-cell *matCellDef="let employee"> {{employee.email}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
+                        <mat-cell *matCellDef="let employee" (click)="openDialogEdit(employee)">
+                            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let employee; columns: displayedColumns;"></mat-row>
+                </mat-table>
+
+            </div>
         </div>
+        <div fxFlex="5"></div>
     </div>
-    <div fxLayout="column" fxFlex="85">
-      <mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="index">
-          <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-          <mat-cell *matCellDef="let employee, let i = index"> {{i + 1}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="lastName">
-          <mat-header-cell *matHeaderCellDef> {{"Surname" | translate}}</mat-header-cell>
-          <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="firstName">
-          <mat-header-cell *matHeaderCellDef> {{"Name" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="middleName">
-          <mat-header-cell *matHeaderCellDef> {{"Patronymic" | translate}} </mat-header-cell>
-          <mat-cell *matCellDef="let employee"> {{employee.patronymic}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="e-mail">
-          <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
-          <mat-cell *matCellDef="let employee"> {{employee.email}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> {{"Action" | translate}}</mat-header-cell>
-          <mat-cell *matCellDef="let employee" (click)="openDialogEdit(employee)">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
-          </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let employee; columns: displayedColumns;"></mat-row>
-      </mat-table>
-
-    </div>
-  </div>
-  <div fxFlex="5"></div>
+    <div fxFlex="5"></div>
+    <div></div>
 </div>

@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {YearPlanComponent} from '../../year-plan/year-plan.component';
 
 @Component({
   selector: 'app-update-news',
@@ -19,7 +18,7 @@ export class UpdateNewsComponent implements OnInit {
               // tslint:disable-next-line:variable-name
               private _snackBar: MatSnackBar,
               // tslint:disable-next-line:variable-name
-              private _dialog: MatDialogRef<YearPlanComponent>
+              private _dialog: MatDialogRef<UpdateNewsComponent>
   ) {
   }
 

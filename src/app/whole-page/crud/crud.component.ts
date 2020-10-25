@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../api/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {UpdateNewsComponent} from './update-news/update-news.component';
+import {AddNewsComponent} from './add-news/add-news.component';
 
 @Component({
   selector: 'app-crud',
@@ -53,4 +54,19 @@ export class CrudComponent implements OnInit {
       this.getAllNews();
     });
   }
+
+    add() {
+      this._dialog.open(AddNewsComponent, {
+        width: '700px'
+      }).afterClosed().subscribe(res => {
+        console.log(res);
+        if (typeof res !== 'undefined' && res !== 'false') {
+          this._api.uploadNews(res).subscribe(result => {
+            this.getAllNews();
+          }, error => {
+            console.log(error);
+          });
+        }
+      });
+    }
 }

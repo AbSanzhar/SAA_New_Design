@@ -50,52 +50,48 @@ li {
   color: #015349;
   text-decoration: none;
 }
-
-table {
-  width: 100%;
-}
 .mat-column-index {
   flex: 2rem;
   max-width: 2rem;
 }
-.mat-column-patentNumber {
-  flex: 2rem;
-  max-width: 4rem;
-}
-.mat-column-country {
-  flex: 2rem;
-  max-width: 7rem;
-}
+/*.mat-column-patentNumber {*/
+/*  flex: 2rem;*/
+/*  max-width: 4rem;*/
+/*}*/
+/*.mat-column-country {*/
+/*  flex: 2rem;*/
+/*  max-width: 7rem;*/
+/*}*/
 .mat-column-actions {
   text-align: center;
   flex: 2rem;
-  max-width: 5rem;
+  max-width: 12rem;
 }
-.mat-column-inventionPatent {
-  flex: 2rem;
-  max-width: 5rem;
-}
-/*.mat-column-author {*/
+/*.mat-column-inventionPatent {*/
 /*  flex: 2rem;*/
-/*  max-width: 11rem;*/
+/*  max-width: 5rem;*/
 /*}*/
-.mat-column-insertedDay {
-  flex: 2rem;
-  max-width: 5rem;
-}
-.mat-column-issueDate {
-  flex: 2rem;
-  max-width: 5rem;
-}
-.mat-column-status {
-  flex: 2rem;
-  max-width: 7rem;
-}
-/*.mat-column-checkedUser {*/
+/*!*.mat-column-author {*!*/
+/*!*  flex: 2rem;*!*/
+/*!*  max-width: 11rem;*!*/
+/*!*}*!*/
+/*.mat-column-insertedDay {*/
 /*  flex: 2rem;*/
-/*  max-width: 11rem;*/
+/*  max-width: 5rem;*/
 /*}*/
+/*.mat-column-issueDate {*/
+/*  flex: 2rem;*/
+/*  max-width: 5rem;*/
+/*}*/
+/*.mat-column-status {*/
+/*  flex: 2rem;*/
+/*  max-width: 7rem;*/
+/*}*/
+/*!*.mat-column-checkedUser {*!*/
+/*!*  flex: 2rem;*!*/
+/*!*  max-width: 11rem;*!*/
+/*!*}*!*/
 .mat-column-kz, .mat-column-ru, .mat-column-en {
   flex: 2rem;
-  max-width: 2rem;
+  max-width: 4rem;
 }

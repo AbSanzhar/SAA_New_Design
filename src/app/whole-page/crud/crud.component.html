@@ -43,5 +43,5 @@
         <mat-header-row *matHeaderRowDef="displayedColumnsNews"></mat-header-row>
         <mat-row *matRowDef="let publication; columns: displayedColumnsNews;"></mat-row>
     </table>
-    <button mat-flat-button color="primary" style="color: white; width: 200px">Add News</button>
+    <button (click)="add()" mat-flat-button color="primary" style="color: white; width: 200px">Add News</button>
 </div>

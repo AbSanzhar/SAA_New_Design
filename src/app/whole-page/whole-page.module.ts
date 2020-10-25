@@ -80,6 +80,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { DiscoverNewsComponent } from './news/discover-news/discover-news.component';
 import { CrudComponent } from './crud/crud.component';
 import { UpdateNewsComponent } from './crud/update-news/update-news.component';
+import { AddNewsComponent } from './crud/add-news/add-news.component';
 
 
 const r: Routes = [
@@ -172,6 +173,7 @@ const r: Routes = [
         DiscoverNewsComponent,
         CrudComponent,
         UpdateNewsComponent,
+        AddNewsComponent,
     ],
     imports: [
         CommonModule,

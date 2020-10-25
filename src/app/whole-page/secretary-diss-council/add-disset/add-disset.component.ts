@@ -5,6 +5,7 @@ import {AddMemberDialogComponent} from './add-member-dialog/add-member-dialog.co
 import * as jwt_decode from 'jwt-decode';
 import {ApiService} from '../../../api/api.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-add-disset',
@@ -18,7 +19,8 @@ export class AddDissetComponent implements OnInit {
                 // tslint:disable-next-line:variable-name
                 private _api: ApiService,
                 private translateService: TranslateService,
-                private cd: ChangeDetectorRef) {
+                private cd: ChangeDetectorRef,
+                private router: Router) {
         this.form = new FormGroup({
             universityId: new FormControl('', Validators.required),
             disStartDate: new FormControl('', Validators.required),
@@ -75,14 +77,14 @@ export class AddDissetComponent implements OnInit {
                 if (typeof res !== 'undefined' && res !== 'false') {
                     const control = res;
                     const members = control.value.disMember;
-                    console.log(members);
+                    // console.log(members);
                     this._api.uploadDisSovet(this.form.value).subscribe(
                         disId => {
                             console.log(disId);
                             // tslint:disable-next-line:prefer-for-of
                             for (let i = 0; i < members.length; i++) {
                                 members[i].disId = disId;
-                                console.log(members[i]);
+                                // console.log(members[i]);
                                 this._api.uploadDisMember(disId, members[i]).subscribe(
                                     mem => {
                                         console.log(mem);
@@ -97,8 +99,13 @@ export class AddDissetComponent implements OnInit {
                         }
                     );
                 }
-                console.log(res);
+                // console.log(res);
                 this.form.reset();
+                this.router.navigateByUrl('whole/secretary-of-the-diss-council');
             });
+    }
+
+    test() {
+        this.router.navigateByUrl('whole/secretary-of-the-diss-council');
     }
 }

@@ -1,0 +1,30 @@
+<div style="width: 100%">
+    <form [formGroup]="Form" fxLayout="column" style="width: 100%;">
+
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="newsTitle">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Article</mat-label>
+            <input matInput formControlName="bodyTitle">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput [value]="date | date" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Author ID</mat-label>
+            <input formControlName="authorId" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Author Email</mat-label>
+            <input formControlName="email" matInput>
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="add('Успешно сохранено', 'OK')">Save</button>
+    </form>
+</div>
