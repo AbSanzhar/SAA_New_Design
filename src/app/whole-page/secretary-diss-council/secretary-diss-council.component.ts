@@ -23,7 +23,10 @@ export class SecretaryDissCouncilComponent implements OnInit {
 
   ngOnInit(): void {
     this.lang = this.translateService.currentLang;
-      this.getAllDissets(this.lang);
+      this.getAllDissets(this.translateService.currentLang);
+      this.translateService.onLangChange.subscribe(
+          lang => this.getAllDissets(lang.lang)
+      );
     this.detectDevice();
   }
 

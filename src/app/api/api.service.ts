@@ -637,7 +637,7 @@ export class ApiService {
 
   getNews(): Observable<any> {
     const url = 'news/getAll/';
-    return this.http.get(this.base + url + this.lang);
+    return this.http.get(this.base + url + this.translateService.currentLang);
   }
 
   deleteNews(newsId): Observable<any> {
