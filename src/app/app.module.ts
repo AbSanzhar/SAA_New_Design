@@ -40,6 +40,7 @@ import '@angular/common/locales/global/pl';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MissingTranslationService} from './services/missing-translation-service.service';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
+import {NgxPaginationModule} from 'ngx-pagination';
 // import localeEn from '@angular/common/locales/en';
 // import localeRu from '@angular/common/locales/ru';
 // import {registerLocaleData} from '@angular/common';
@@ -92,6 +93,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         MatListModule,
         MatExpansionModule,
         MatCardModule,
+        NgxPaginationModule,
         MatCarouselModule.forRoot(),
         TranslateModule.forRoot({
             loader: {

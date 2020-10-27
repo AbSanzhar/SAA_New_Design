@@ -81,6 +81,7 @@ import { DiscoverNewsComponent } from './news/discover-news/discover-news.compon
 import { CrudComponent } from './crud/crud.component';
 import { UpdateNewsComponent } from './crud/update-news/update-news.component';
 import { AddNewsComponent } from './crud/add-news/add-news.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 const r: Routes = [
@@ -203,11 +204,11 @@ const r: Routes = [
         MatFileUploadModule,
         MatAutocompleteModule,
         MatChipsModule,
-        MatTableModule,
         FlexLayoutModule,
         DeviceDetectorModule,
         TranslateModule,
-        MatTooltipModule
+        MatTooltipModule,
+        NgxPaginationModule,
     ],
     providers: [
         {

@@ -53,95 +53,56 @@
                         <input [(ngModel)]="to" type="number">
                     </div>
                 </div>
-                <div>
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 0">
-                        <mat-table [dataSource]="TeacherPublications">
-                            <ng-container matColumnDef="pubId">
-                                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
+                <div style="overflow-x: auto">
+                    <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center" *ngIf="whichTable === 0">
 
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubId}} </div>
-                                </mat-cell>
-                            </ng-container>
 
-                            <ng-container matColumnDef="Title">
-                                <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubName}}</div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="pubType">
-                                <mat-header-cell *matHeaderCellDef> {{"Post type" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubType}}</div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Collaborators">
-                                <mat-header-cell *matHeaderCellDef> {{"Co-authors" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear">
-                                        <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">
-                                            {{i + 1}}
-                                            ) {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}
-                                        </div>
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 2rem;">№</th>
+                                <th style="width: 15rem">{{"Title" | translate}}</th>
+                                <th style="width: 11rem">{{"Post type" | translate}}</th>
+                                <th style="width: 12rem">{{"Co-authors" | translate}}</th>
+                                <th style="width: 4rem">{{"Year" | translate}}</th>
+                                <th style="width: 7rem">{{"City" | translate}}</th>
+                                <th style="width: 8rem">{{"Publisher" | translate}}</th>
+                                <th style="width: 5rem">{{"Pages" | translate}}</th>
+                                <th style="width: 2rem">URL</th>
+                                <th style="width: 5rem">DOI</th>
+                                <th style="width: 9rem">{{"Status" | translate}}</th>
+                                <th style="width: 5rem">{{"File" | translate}}</th>
+                                <th style="width: 8rem">{{"Action" | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;"
+                                *ngFor="let publication of TeacherPublications | paginate: { id: 'publications', itemsPerPage: 10, currentPage: p }">
+                                <th *ngIf="from <= publication.pubYear && to >= publication.pubYear"
+                                    style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{publication.pubId}}</th>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubName}}</td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubType}}</td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                                    <div *ngFor="let coAuthors of publication.pubCoAuthor; let i = index">
+                                        {{i + 1}}
+                                        ) {{coAuthors.coAuthorUser.firstName}} {{coAuthors.coAuthorUser.lastName}}
                                     </div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Year">
-                                <mat-header-cell *matHeaderCellDef> {{"Year" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubYear}}</div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="City">
-                                <mat-header-cell *matHeaderCellDef> {{"City" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubCity}}</div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Publisher">
-                                <mat-header-cell *matHeaderCellDef> {{"Publisher" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPubName}} </div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Page">
-                                <mat-header-cell *matHeaderCellDef> {{"Pages" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubPage}}
-                                        - {{publication.pubEndPage}}</div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Url">
-                                <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a
-                                            href="{{publication.pubUrl}}">
+                                </td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubYear}}</td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubCity}}</td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubPubName}}</td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubPage}}
+                                    - {{publication.pubEndPage}}</td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                                    <a href="{{publication.pubUrl}}">
                                         <mat-icon color="primary">public</mat-icon>
-                                    </a></div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Doi">
-                                <mat-header-cell *matHeaderCellDef> DOI</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"> {{publication.pubDoi}}</div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="pubStatus">
-                                <mat-header-cell *matHeaderCellDef> {{"Status" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div style="word-wrap: break-word;"
-                                         *ngIf="from <= publication.pubYear && to >= publication.pubYear">
-                                        <mat-icon style="color: green;" *ngIf="publication.pubStatus == 'Confirmed'">
+                                    </a>
+                                </td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubDoi}}</td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                                    <div style="word-wrap: break-word;">
+                                        <mat-icon style="color: green;"
+                                                  *ngIf="publication.pubStatus == 'Confirmed'">
                                             done
                                         </mat-icon>
                                         <mat-icon style="color: red"
@@ -149,238 +110,296 @@
                                         </mat-icon>
                                         <p *ngIf="publication.pubStatus == 'Under review'">На рассмотреннии</p>
                                     </div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="File">
-                                <mat-header-cell *matHeaderCellDef> File</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
-                                    <div *ngIf="from <= publication.pubYear && to >= publication.pubYear"><a
-                                            href="https://nir.iitu.kz/{{publication.pubFile}}" download="">
+                                </td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">
+                                    <a href="https://nir.iitu.kz/{{publication.pubFile}}" download="">
                                         <mat-icon color="primary">get_app</mat-icon>
-                                    </a></div>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Action">
-                                <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
-                                <mat-cell *matCellDef="let publication">
+                                    </a>
+                                </td>
+                                <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">
                                     <button (click)="deletePub(publication.pubId)" mat-stroked-button
                                             color="warn">{{"Delete" | translate}}</button>
-                                </mat-cell>
-                            </ng-container>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                            <mat-header-row *matHeaderRowDef="displayedColumnsPublication"></mat-header-row>
-                            <mat-row *matRowDef="let publication; columns: displayedColumnsPublication;"></mat-row>
-                        </mat-table>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="publications"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"
+                        ></pagination-controls>
+
+
                         <div fxLayoutAlign="center center">
                             <button (click)="create('pub')" color="primary"
                                     mat-stroked-button>
                                 {{"Add" | translate}}
                                 <mat-icon color="primary">add_task</mat-icon>
                             </button>
-                            <!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                            <!--                                       [pageSize]="paginator.size"-->
-                            <!--                                       [pageIndex]="paginator.page"-->
-                            <!--                                       (change)="changeTableList($event)"-->
-                            <!--                                       (page)="changeTableList($event)"-->
-                            <!--                                       showFirstLastButtons></mat-paginator>-->
                         </div>
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 1">
-                        <mat-table [dataSource]="TeacherEvents" class="">
-                            <ng-container matColumnDef="eventId">
-                                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.eventId}} </mat-cell>
-                            </ng-container>
+                    <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center" *ngIf="whichTable === 1">
 
-                            <ng-container matColumnDef="eventType">
-                                <mat-header-cell *matHeaderCellDef> {{"Event type" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.eventType}} </mat-cell>
-                            </ng-container>
 
-                            <ng-container matColumnDef="eventRole">
-                                <mat-header-cell *matHeaderCellDef> {{"Role" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.eventRole}} </mat-cell>
-                            </ng-container>
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Title</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">№</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Event type</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Role</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Date</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">City</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">URL</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">File</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;" *ngFor="let item of TeacherEvents | paginate: config">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{item.eventId}}</th>
+                                <td>{{item.eventName}}</td>
+                                <td>{{item.eventType}}</td>
+                                <td>{{item.eventRole}}</td>
+                                <td>{{item.eventDate}}</td>
+                                <td>{{item.eventCity}}</td>
+                                <td>
+                                    <a href="{{item.eventUrl}}">
+                                        <mat-icon color="primary">public</mat-icon>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="https://nir.iitu.kz/{{item.eventFile}}"
+                                       download="">
+                                        <mat-icon color="primary">get_app</mat-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                            <ng-container matColumnDef="eventDate">
-                                <mat-header-cell *matHeaderCellDef> {{"Date" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.eventDate}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="eventTitle">
-                                <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.eventName}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="eventCity">
-                                <mat-header-cell *matHeaderCellDef> {{"City" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.eventCity}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Url">
-                                <mat-header-cell *matHeaderCellDef> URL</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"><a
-                                        href="{{activity.eventUrl}}">
-                                    <mat-icon color="primary">public</mat-icon>
-                                </a></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="File">
-                                <mat-header-cell *matHeaderCellDef> File</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"><a
-                                        href="https://nir.iitu.kz/{{activity.eventFile}}"
-                                        download="">
-                                    <mat-icon color="primary">get_app</mat-icon>
-                                </a></mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="displayedColumnsEvent"></mat-header-row>
-                            <mat-row *matRowDef="let activity; columns: displayedColumnsEvent;"></mat-row>
-                        </mat-table>
+                        <pagination-controls (pageChange)="pageChanged($event)"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"
+                        ></pagination-controls>
 
                         <div fxLayoutAlign="center center">
                             <button (click)="create('event')" color="primary"
                                     mat-stroked-button>{{"Add" | translate}}
                                 <mat-icon color="primary">add_task</mat-icon>
                             </button>
-                            <!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                            <!--                                       [pageSize]="paginator.size"-->
-                            <!--                                       [pageIndex]="paginator.page"-->
-                            <!--                                       (change)="changeTableList($event)"-->
-                            <!--                                       (page)="changeTableList($event)"-->
-                            <!--                                       showFirstLastButtons></mat-paginator>-->
                         </div>
 
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 2">
-                        <mat-table [dataSource]="TeacherDisSovet" class="">
-                            <ng-container matColumnDef="disId">
-                                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>
-                            </ng-container>
+                    <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center" *ngIf="whichTable === 2">
 
-                            <ng-container matColumnDef="university">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Higher educational institution" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>
-                            </ng-container>
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 2rem;">№</th>
+                                <th style="width: 11rem">{{"Higher educational institution" | translate}}</th>
+                                <th style="width: 12rem">{{"Role in the dissertation council" | translate}}</th>
+                                <th style="width: 4rem">{{"Doctoral specialty / direction of training" | translate}}</th>
+                                <th style="width: 7rem">{{"Period of activity" | translate}}</th>
+                                <th style="width: 8rem">{{"Order number and date" | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;"
+                                *ngFor="let disset of TeacherDisSovet | paginate: { id: 'disset', itemsPerPage: 10, currentPage: p }">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{disset.disId}}</th>
+                                <td>{{disset.disInfo}}</td>
+                                <td>{{disset.disPosition}}</td>
+                                <td>{{disset.memberType}}</td>
+                                <td>{{disset.disStartDate | date}} - {{disset.disStopDate | date}}</td>
+                                <td>{{disset.ministryOrder}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                            <ng-container matColumnDef="disRole">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Role in the dissertation council" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let disset"> {{disset.disRole}} </mat-cell>
-                            </ng-container>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="disset"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"
+                        ></pagination-controls>
 
-                            <ng-container matColumnDef="specialty">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Doctoral specialty / direction of training" | translate}}
-                                </mat-header-cell>
-                                <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>
-                            </ng-container>
+                        <!--                        <mat-table [dataSource]="TeacherDisSovet" class="">-->
+                        <!--                            <ng-container matColumnDef="disId">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let disset"> {{disset.disId}} </mat-cell>-->
+                        <!--                            </ng-container>-->
 
-                            <ng-container matColumnDef="stopDate">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Period of activity" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let disset"> {{disset.disStopDate | date}} </mat-cell>
-                            </ng-container>
+                        <!--                            <ng-container matColumnDef="university">-->
+                        <!--                                <mat-header-cell-->
+                        <!--                                        *matHeaderCellDef> {{"Higher educational institution" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let disset"> {{disset.disInfo}} </mat-cell>-->
+                        <!--                            </ng-container>-->
 
-                            <ng-container matColumnDef="numberAndDate">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Order number and date" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let disset"> {{disset.ministryOrder}} </mat-cell>
-                            </ng-container>
+                        <!--                            <ng-container matColumnDef="disRole">-->
+                        <!--                                <mat-header-cell-->
+                        <!--                                        *matHeaderCellDef> {{"Role in the dissertation council" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let disset"> {{disset.disRole}} </mat-cell>-->
+                        <!--                            </ng-container>-->
 
-                            <mat-header-row *matHeaderRowDef="displayedColumnsDisSovet"></mat-header-row>
-                            <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>
-                        </mat-table>
+                        <!--                            <ng-container matColumnDef="specialty">-->
+                        <!--                                <mat-header-cell-->
+                        <!--                                        *matHeaderCellDef> {{"Doctoral specialty / direction of training" | translate}}-->
+                        <!--                                </mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let disset"> {{disset.specialty}} </mat-cell>-->
+                        <!--                            </ng-container>-->
 
-                        <!--                    <div style="align-items: center; display: flex;">-->
-                        <!--                        <button style="margin: 0 10% 0 35%" (click)="create('dissovet')" color="primary"-->
-                        <!--                                mat-stroked-button>{{"Add" | translate}}-->
-                        <!--                            <mat-icon color="primary">add_task</mat-icon>-->
-                        <!--                        </button>-->
-                        <!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                        <!--                                       [pageSize]="paginator.size"-->
-                        <!--                                       [pageIndex]="paginator.page"-->
-                        <!--                                       (change)="changeTableList($event)"-->
-                        <!--                                       (page)="changeTableList($event)"-->
-                        <!--                                       showFirstLastButtons></mat-paginator>-->
-                        <!--                    </div>-->
+                        <!--                            <ng-container matColumnDef="stopDate">-->
+                        <!--                                <mat-header-cell-->
+                        <!--                                        *matHeaderCellDef> {{"Period of activity" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let disset"> {{disset.disStopDate | date}} </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="numberAndDate">-->
+                        <!--                                <mat-header-cell-->
+                        <!--                                        *matHeaderCellDef> {{"Order number and date" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let disset"> {{disset.ministryOrder}} </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <mat-header-row *matHeaderRowDef="displayedColumnsDisSovet"></mat-header-row>-->
+                        <!--                            <mat-row *matRowDef="let disset; columns: displayedColumnsDisSovet;"></mat-row>-->
+                        <!--                        </mat-table>-->
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 3">
-                        <mat-table [dataSource]="TeacherPatents" class="">
-                            <ng-container matColumnDef="ptntNumber">
-                                <mat-header-cell *matHeaderCellDef> {{"Patent number" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>
-                            </ng-container>
+                    <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center" *ngIf="whichTable === 3">
 
-                            <ng-container matColumnDef="ptntId">
-                                <mat-header-cell *matHeaderCellDef> {{"Type of patent" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>
-                            </ng-container>
 
-                            <ng-container matColumnDef="ptntCountry">
-                                <mat-header-cell *matHeaderCellDef> {{"Country" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="ptntIssueDate">
-                                <mat-header-cell *matHeaderCellDef> {{"Date of issue" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="ptntPublishedTR">
-                                <mat-header-cell *matHeaderCellDef> {{"Published in TR" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"> {{patent.ptntPublishedTR}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="ptntOwnerName">
-                                <mat-header-cell *matHeaderCellDef> {{"Author" | translate}}</mat-header-cell>
-                                <mat-cell
-                                        *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="status">
-                                <mat-header-cell *matHeaderCellDef> {{"Status" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent">
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 5rem;">{{"Patent number" | translate}}</th>
+                                <th style="width: 6rem">{{"Type of patent" | translate}}</th>
+                                <th style="width: 10rem">{{"Country" | translate}}</th>
+                                <th style="width: 6rem">{{"Date of issue" | translate}}</th>
+                                <th style="width: 6rem">{{"Published in TR" | translate}}</th>
+                                <th style="width: 12rem">{{"Author" | translate}}</th>
+                                <th style="width: 8rem">{{"Status" | translate}}</th>
+                                <th style="width: 8rem">{{"Date of entry into the database" | translate}}</th>
+                                <th style="width: 8rem">{{"Verified by" | translate}}</th>
+                                <th style="width: 2rem">File</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;"
+                                *ngFor="let patent of TeacherPatents | paginate: { id: 'patent', itemsPerPage: 10, currentPage: p }">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{patent.ptntNumber}}</th>
+                                <td>{{patent.ptntType}}</td>
+                                <td>{{patent.ptntCountry}}</td>
+                                <td>{{patent.ptntIssueDate}}</td>
+                                <td>{{patent.ptntPublishedTR}}</td>
+                                <td>{{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}}</td>
+                                <td>
                                     <mat-icon style="color: green;" *ngIf="patent.ptntStatus == 'Confirmed'">done
                                     </mat-icon>
                                     <mat-icon style="color: red" *ngIf="patent.ptntStatus == 'Returned for revision'">
                                         clear
                                     </mat-icon>
                                     <p *ngIf="patent.ptntStatus == 'Under review'">На рассмотреннии</p>
-                                </mat-cell>
-                            </ng-container>
+                                </td>
+                                <td>{{patent.ptntInsertedDate}}</td>
+                                <td>
+                                    <p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p>
+                                </td>
+                                <td>
+                                    <a href="https://nir.iitu.kz/{{patent.ptntFileUrl}}"
+                                       download="">
+                                        <mat-icon color="primary">get_app</mat-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                            <ng-container matColumnDef="insertDate">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Date of entry into the database" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>
-                            </ng-container>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="patent"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"></pagination-controls>
 
-                            <ng-container matColumnDef="whoCheck">
-                                <mat-header-cell *matHeaderCellDef> {{"Verified by" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"><p
-                                        *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p>
-                                </mat-cell>
-                            </ng-container>
+                        <!--                        <mat-table [dataSource]="TeacherPatents" class="">-->
+                        <!--                            <ng-container matColumnDef="ptntNumber">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Patent number" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent"> {{patent.ptntNumber}} </mat-cell>-->
+                        <!--                            </ng-container>-->
 
-                            <ng-container matColumnDef="File">
-                                <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>
-                                <mat-cell *matCellDef="let patent"><a href="https://nir.iitu.kz/{{patent.ptntFileUrl}}"
-                                                                      download="">
-                                    <mat-icon color="primary">get_app</mat-icon>
-                                </a></mat-cell>
-                            </ng-container>
+                        <!--                            <ng-container matColumnDef="ptntId">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Type of patent" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent"> {{patent.ptntType}} </mat-cell>-->
+                        <!--                            </ng-container>-->
 
-                            <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>
-                            <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>
-                        </mat-table>
+                        <!--                            <ng-container matColumnDef="ptntCountry">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Country" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent"> {{patent.ptntCountry}} </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="ptntIssueDate">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Date of issue" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent"> {{patent.ptntIssueDate}} </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="ptntPublishedTR">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Published in TR" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent"> {{patent.ptntPublishedTR}} </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="ptntOwnerName">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Author" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell-->
+                        <!--                                        *matCellDef="let patent"> {{patent.ptntUser.firstName}} {{patent.ptntUser.lastName}} </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="status">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Status" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent">-->
+                        <!--                                    <mat-icon style="color: green;" *ngIf="patent.ptntStatus == 'Confirmed'">done-->
+                        <!--                                    </mat-icon>-->
+                        <!--                                    <mat-icon style="color: red" *ngIf="patent.ptntStatus == 'Returned for revision'">-->
+                        <!--                                        clear-->
+                        <!--                                    </mat-icon>-->
+                        <!--                                    <p *ngIf="patent.ptntStatus == 'Under review'">На рассмотреннии</p>-->
+                        <!--                                </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="insertDate">-->
+                        <!--                                <mat-header-cell-->
+                        <!--                                        *matHeaderCellDef> {{"Date of entry into the database" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent"> {{patent.ptntInsertedDate}} </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="whoCheck">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> {{"Verified by" | translate}}</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent">-->
+                        <!--                                    <p *ngIf="patent.ptntCheckedUser"> {{patent.ptntCheckedUser.firstName}} {{patent.ptntCheckedUser.lastName}}</p>-->
+                        <!--                                </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <ng-container matColumnDef="File">-->
+                        <!--                                <mat-header-cell *matHeaderCellDef> Файл</mat-header-cell>-->
+                        <!--                                <mat-cell *matCellDef="let patent">-->
+                        <!--                                    <a href="https://nir.iitu.kz/{{patent.ptntFileUrl}}"-->
+                        <!--                                                                      download="">-->
+                        <!--                                    <mat-icon color="primary">get_app</mat-icon>-->
+                        <!--                                </a>-->
+                        <!--                                </mat-cell>-->
+                        <!--                            </ng-container>-->
+
+                        <!--                            <mat-header-row *matHeaderRowDef="displayedColumnsPatent"></mat-header-row>-->
+                        <!--                            <mat-row *matRowDef="let patent; columns: displayedColumnsPatent;"></mat-row>-->
+                        <!--                        </mat-table>-->
+
                         <div fxLayoutAlign="center center">
                             <button (click)="create('patent')" color="primary"
                                     mat-stroked-button>{{"Add" | translate}}
@@ -395,141 +414,87 @@
                         </div>
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 4">
-                        <mat-table [dataSource]="DepUsers" class="">
-                            <ng-container matColumnDef="userId">
-                                <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
-                                <mat-cell *matCellDef="let employee"> {{employee.userId}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="lastName">
-                                <mat-header-cell *matHeaderCellDef> {{"Surname" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="firstName">
-                                <mat-header-cell *matHeaderCellDef> {{"Name" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="email">
-                                <mat-header-cell *matHeaderCellDef> E-mail</mat-header-cell>
-                                <mat-cell *matCellDef="let employee"> {{employee.email}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="description">
-                                <mat-header-cell *matHeaderCellDef> {{"Description" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let employee"> {{employee.description}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="userType">
-                                <mat-header-cell *matHeaderCellDef> {{"Employee type" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let employee"> {{employee.userType}} </mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="displayedColumnsDepUsers"></mat-header-row>
-                            <mat-row *matRowDef="let employee; columns: displayedColumnsDepUsers;"></mat-row>
-                        </mat-table>
+                    <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center" *ngIf="whichTable === 4">
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 5rem;">ID</th>
+                                <th style="width: 6rem">{{"Surname" | translate}}</th>
+                                <th style="width: 10rem">{{"Name" | translate}}</th>
+                                <th style="width: 6rem">E-mail</th>
+                                <th style="width: 6rem">{{"Description" | translate}}</th>
+                                <th style="width: 12rem">{{"Employee type" | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;"
+                                *ngFor="let employee of DepUsers | paginate: { id: 'employee', itemsPerPage: 10, currentPage: p }">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{employee.userId}}</th>
+                                <td>{{employee.lastName}}</td>
+                                <td>{{employee.firstName}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.description}}</td>
+                                <td>{{employee.userType}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="employee"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"></pagination-controls>
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" style="overflow-x: scroll" *ngIf="whichTable === 5">
-                        <mat-table [dataSource]="TeacherScienceProjects" style="width: 150rem">
-                            <ng-container matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef> ИРН</mat-header-cell>
-                                <mat-cell *matCellDef="let project"> {{project.scId}} </mat-cell> <!--class="Razdely"-->
-                            </ng-container>
+                    <div fxLayout="column" fxLayoutGap="2%" style="width: 100rem" fxLayoutAlign="start center"
+                         *ngIf="whichTable === 5">
+                        <table>
+                                <thead>
+                                <tr>
+                                    <th style="width: 2rem">ИРН</th>
+                                    <th style="width: 10rem">{{"Title" | translate}}</th>
+                                    <th style="width: 10rem">{{"The Type" | translate}}</th>
+                                    <th style="width: 10rem">{{"Section" | translate}}</th>
+                                    <th style="width: 10rem">{{"Subsection" | translate}}</th>
+                                    <th style="width: 10rem">{{"Subsection" | translate}}</th>
+                                    <th style="width: 7rem">{{"Executor" | translate}}</th>
+                                    <th style="width: 7rem">{{"Customer" | translate}}</th>
+                                    <th style="width: 7rem">{{"Supervisor" | translate}}</th>
+                                    <th style="width: 5rem">{{"Subdivision" | translate}}</th>
+                                    <th style="width: 5rem">{{"Agreement date" | translate}}</th>
+                                    <th style="width: 3rem">{{"Registration number" | translate}}</th>
+                                    <th style="width: 5rem">{{"Project start date" | translate}}</th>
+                                    <th style="width: 5rem">{{"Project completion date" | translate}}</th>
+                                    <th style="width: 3rem">{{"Total grant amount" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="text-align: center;"
+                                    *ngFor="let project of TeacherScienceProjects | paginate: { id: 'project', itemsPerPage: 3, currentPage: p }">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{project.scId}}</th>
+                                    <td>{{project.scName}}</td>
+                                    <td>{{project.scType}}</td>
+                                    <td>{{project.scPriority}}</td>
+                                    <td>{{project.scSubPriority}}</td>
+                                    <td>{{project.scSubSubPriority}}</td>
+                                    <td>{{project.scExecutor}}</td>
+                                    <td>{{project.scCustomer}}</td>
+                                    <td>{{project.scDirFullName}}</td>
+                                    <td>{{project.scDept}}</td>
+                                    <td>{{project.scAgrDate | date}}</td>
+                                    <td>{{project.scNum | date}}</td>
+                                    <td>{{project.scStDate | translate}}</td>
+                                    <td>{{project.scTotalSum}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-                            <ng-container matColumnDef="name">
-                                <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"> {{project.scName}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="type">
-                                <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"> {{project.scType}} </mat-cell>
-                            </ng-container>
-
-                            <!--              <ng-container matColumnDef="priority">-->
-                            <!--                <mat-header-cell *matHeaderCellDef> Раздел </mat-header-cell>-->
-                            <!--                <mat-cell *matCellDef="let project"> {{project.scPriority}} </mat-cell>-->
-                            <!--              </ng-container>-->
-
-                            <!--              <ng-container matColumnDef="subPriority">-->
-                            <!--                <mat-header-cell *matHeaderCellDef> Подраздел </mat-header-cell>-->
-                            <!--                <mat-cell *matCellDef="let project"> {{project.scSubPriority}} </mat-cell>-->
-                            <!--              </ng-container>-->
-
-                            <ng-container matColumnDef="priority">
-                                <mat-header-cell *matHeaderCellDef> {{"Section" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scPriority}}</p>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="subPriority">
-                                <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scSubPriority}}</p>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="subSubPriority">
-                                <mat-header-cell *matHeaderCellDef> {{"Subsection" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scSubSubPriority}}</p>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="executor">
-                                <mat-header-cell *matHeaderCellDef> {{"Executor" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scExecutor}}</p></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="customer">
-                                <mat-header-cell *matHeaderCellDef> {{"Customer" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scCustomer}}</p></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="dirFullName">
-                                <mat-header-cell *matHeaderCellDef> {{"Supervisor" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scDirFullName}}</p>
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="dept">
-                                <mat-header-cell *matHeaderCellDef> {{"Subdivision" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scDept}}</p></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="agrDate">
-                                <mat-header-cell *matHeaderCellDef> {{"Agreement date" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scAgrDate | date}}</p></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="registerNumber">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Registration number" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scNum}}</p></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="startDate">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Project start date" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scStDate | date}}</p></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="endDate">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Project completion date" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scEndDate | date}}</p></mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="totalSum">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Total grant amount" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let project"><p>{{project.scTotalSum}}</p></mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
-                            <mat-row *matRowDef="let project; columns: displayedColumns5;"></mat-row>
-                        </mat-table>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="project"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"></pagination-controls>
                         <div fxLayoutAlign="center center">
                             <button (click)="create('science')" color="primary"
                                     mat-stroked-button>{{"Add" | translate}}
@@ -544,284 +509,206 @@
                         </div>
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 6">
-                        <mat-table [dataSource]="TeacherCourses" class="">
-                            <ng-container matColumnDef="courseId">
-                                <mat-header-cell *matHeaderCellDef>№ п.п.</mat-header-cell>
-                                <mat-cell *matCellDef="let course">{{course.courseId}}</mat-cell>
-                            </ng-container>
+                    <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center" *ngIf="whichTable === 6">
 
-                            <ng-container matColumnDef="FL">
-                                <mat-header-cell *matHeaderCellDef>{{"Full name" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.courseUser.firstName}} {{course.courseUser.lastName}} {{course.courseUser.patronymic}}</mat-cell>
-                            </ng-container>
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 5rem;">№</th>
+                                <th style="width: 10rem">{{"Full name" | translate}}</th>
+                                <th style="width: 10rem">{{"Form of study and topic" | translate}}</th>
+                                <th style="width: 10rem">{{"Basic training center" | translate}}</th>
+                                <th style="width: 6rem">{{"Amount of time" | translate}}</th>
+                                <th style="width: 12rem">{{"Course cost" | translate}}</th>
+                                <th style="width: 12rem">{{"Terms of passage" | translate}}</th>
+                                <th style="width: 12rem">№{{"Certificate" | translate}} & {{"Date" | translate}}</th>
+                                <th style="width: 12rem">{{"Level" | translate}}</th>
+                                <th style="width: 5rem">File</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;"
+                                *ngFor="let course of TeacherCourses | paginate: { id: 'course', itemsPerPage: 10, currentPage: p }">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{course.courseId}}</th>
+                                <td>{{course.courseUser.firstName}} {{course.courseUser.lastName}}</td>
+                                <td>{{course.courseForm}}</td>
+                                <td>{{course.courseCenter}}</td>
+                                <td>{{course.courseHours}}</td>
+                                <td>{{course.coursePrice}}</td>
+                                <td>{{course.startdate}}</td>
+                                <td>{{course.courseCertificateNumber}}</td>
+                                <td>{{course.courseDegree}}</td>
+                                <td>
+                                    <a href="https://nir.iitu.kz/{{course.courseFile}}"
+                                       download="">
+                                        <mat-icon color="primary">get_app</mat-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                            <ng-container matColumnDef="form">
-                                <mat-header-cell
-                                        *matHeaderCellDef>{{"Form of study and topic" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.courseForm}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="center">
-                                <mat-header-cell
-                                        *matHeaderCellDef>{{"Basic training center" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.courseCenter}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="hours">
-                                <mat-header-cell *matHeaderCellDef>{{"Amount of time" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.courseHours}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="price">
-                                <mat-header-cell *matHeaderCellDef>{{"Course cost" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.coursePrice}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="deadlines">
-                                <mat-header-cell *matHeaderCellDef>{{"Terms of passage" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.startdate}}
-                                    - {{course.enddate}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="certificates">
-                                <mat-header-cell *matHeaderCellDef>№ {{"Certificate" | translate}}
-                                    & {{"Date" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.courseCertificateNumber}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="level">
-                                <mat-header-cell *matHeaderCellDef>{{"Level" | translate}}</mat-header-cell>
-                                <mat-cell style="color: darkred!important;"
-                                          *matCellDef="let course">{{course.courseDegree}}</mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="File">
-                                <mat-header-cell *matHeaderCellDef> File</mat-header-cell>
-                                <mat-cell *matCellDef="let course"><a href="https://nir.iitu.kz/{{course.courseFile}}"
-                                                                      download="">
-                                    <mat-icon color="primary">get_app</mat-icon>
-                                </a></mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="displayedColumns6"></mat-header-row>
-                            <mat-row *matRowDef="let project; columns: displayedColumns6;"></mat-row>
-
-                        </mat-table>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="course"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"></pagination-controls>
 
                         <div fxLayoutAlign="center center">
                             <button (click)="create('course')" color="primary"
                                     mat-stroked-button>{{"Add" | translate}}
                                 <mat-icon color="primary">add_task</mat-icon>
                             </button>
-                            <!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                            <!--                                       [pageSize]="paginator.size"-->
-                            <!--                                       [pageIndex]="paginator.page"-->
-                            <!--                                       (change)="changeTableList($event)"-->
-                            <!--                                       (page)="changeTableList($event)"-->
-                            <!--                                       showFirstLastButtons></mat-paginator>-->
                         </div>
 
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 7">
-                        <mat-table [dataSource]="TeacherExhibitions" class="">
-                            <ng-container matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.exId}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="name">
-                                <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.exName}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="date">
-                                <mat-header-cell *matHeaderCellDef> {{"Date" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.exDate | date}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="place">
-                                <mat-header-cell *matHeaderCellDef> {{"Location" | translate}} </mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.exPlace}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="role">
-                                <mat-header-cell *matHeaderCellDef> {{"Role" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.exRole}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="level">
-                                <mat-header-cell *matHeaderCellDef> {{"Level" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.exLevel}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="type">
-                                <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.exType}} </mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="displayedColumnsExhibition"></mat-header-row>
-                            <mat-row *matRowDef="let activity; columns: displayedColumnsExhibition;"></mat-row>
-                        </mat-table>
-
+                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 7" fxLayoutAlign="start center">
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 5rem;">№</th>
+                                <th style="width: 10rem">{{"Title" | translate}}</th>
+                                <th style="width: 10rem">{{"Date" | translate}}</th>
+                                <th style="width: 10rem">{{"Location" | translate}}</th>
+                                <th style="width: 6rem">{{"Role" | translate}}</th>
+                                <th style="width: 12rem">{{"Level" | translate}}</th>
+                                <th style="width: 12rem">{{"The Type" | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;"
+                                *ngFor="let activity of TeacherExhibitions | paginate: { id: 'activity', itemsPerPage: 10, currentPage: p }">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.exId}}</th>
+                                <td>{{activity.exName}}</td>
+                                <td>{{activity.exDate | date}}</td>
+                                <td>{{activity.exPlace}}</td>
+                                <td>{{activity.exRole}}</td>
+                                <td>{{activity.exLevel}}</td>
+                                <td>{{activity.exType}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="activity"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"></pagination-controls>
                         <div fxLayoutAlign="center center">
                             <button (click)="create('exhibition')" color="primary"
                                     mat-stroked-button>{{"Add" | translate}}
                                 <mat-icon color="primary">add_task</mat-icon>
                             </button>
-                            <!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                            <!--                                       [pageSize]="paginator.size"-->
-                            <!--                                       [pageIndex]="paginator.page"-->
-                            <!--                                       (change)="changeTableList($event)"-->
-                            <!--                                       (page)="changeTableList($event)"-->
-                            <!--                                       showFirstLastButtons></mat-paginator>-->
                         </div>
-
                     </div>
 
-                    <div fxLayout="column" fxLayoutGap="2%" *ngIf="whichTable === 8">
+                    <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center" *ngIf="whichTable === 8">
 
-                        <mat-table [dataSource]="TeacherAwards">
-                            <ng-container matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.awardId}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="name">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Name of the award / prize" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.awardName}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="type">
-                                <mat-header-cell *matHeaderCellDef> {{"The Type" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.awardType}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="date">
-                                <mat-header-cell
-                                        *matHeaderCellDef> {{"Date of award / award" | translate}} </mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.awardDate | date}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="by_whom">
-                                <mat-header-cell *matHeaderCellDef> {{"Awarded by" | translate}}</mat-header-cell>
-                                <mat-cell *matCellDef="let activity"> {{activity.awardBy}} </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="to_whom">
-                                <mat-header-cell *matHeaderCellDef> {{"Who is awarded" | translate}}</mat-header-cell>
-                                <mat-cell
-                                        *matCellDef="let activity"> {{activity.awardUserId.firstName}} {{activity.awardUserId.lastName}} </mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="displayedColumnsAward"></mat-header-row>
-                            <mat-row *matRowDef="let activity; columns: displayedColumnsAward;"></mat-row>
-                        </mat-table>
+                        <table style="width: 100%;">
+                            <thead>
+                            <tr>
+                                <th style="width: 5rem;">№</th>
+                                <th style="width: 10rem">{{"Name of the award / prize" | translate}}</th>
+                                <th style="width: 10rem">{{"The Type" | translate}}</th>
+                                <th style="width: 10rem">{{"Date of award / award" | translate}}</th>
+                                <th style="width: 10rem">{{"Awarded by" | translate}}</th>
+                                <th style="width: 10rem">{{"Who is awarded" | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="text-align: center;"
+                                *ngFor="let activity of TeacherAwards | paginate: { id: 'award', itemsPerPage: 10, currentPage: p }">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.awardId}}</th>
+                                <td>{{activity.awardName}}</td>
+                                <td>{{activity.awardType}}</td>
+                                <td>{{activity.awardDate | date}}</td>
+                                <td>{{activity.awardBy}}</td>
+                                <td>{{activity.awardUserId.firstName}} {{activity.awardUserId.lastName}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="p = $event"
+                                             id="award"
+                                             autoHide="true"
+                                             responsive="true"
+                                             previousLabel="Previous"
+                                             nextLabel="Next"></pagination-controls>
 
                         <div fxLayoutAlign="center center">
                             <button (click)="create('award')" color="primary"
                                     mat-stroked-button>{{"Add" | translate}}
                                 <mat-icon color="primary">add_task</mat-icon>
                             </button>
-                            <!--                        <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                            <!--                                       [pageSize]="paginator.size"-->
-                            <!--                                       [pageIndex]="paginator.page"-->
-                            <!--                                       (change)="changeTableList($event)"-->
-                            <!--                                       (page)="changeTableList($event)"-->
-                            <!--                                       showFirstLastButtons></mat-paginator>-->
                         </div>
                     </div>
 
                     <div *ngIf="whichTable === 9">
-                        <div fxLayout="column" fxLayoutGap="2%" style="height: 70vh; margin: 0 0 10% 0; overflow-y: auto;">
+                        <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center"
+                             style="height: 70vh; margin: 0 0 10% 0; overflow-y: auto;">
                             <h2 class="textM">{{"Participation in working groups, development of proposals for bills, regulatory legal acts, programs and their expertise" | translate}}</h2>
-                            <mat-table [dataSource]="Activity1">
-                                <ng-container matColumnDef="id">
-                                    <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
-                                </ng-container>
-
-                                <!--                        <ng-container matColumnDef="teacherID">-->
-                                <!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
-                                <!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
-                                <!--                        </ng-container>-->
-
-                                <ng-container matColumnDef="actName">
-                                    <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="startDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="endDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <mat-header-row *matHeaderRowDef="displayedColumnsActivity1"></mat-header-row>
-                                <mat-row *matRowDef="let activity; columns: displayedColumnsActivity1;"></mat-row>
-                            </mat-table>
-
+                            <table style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 5rem;">№</th>
+                                    <th style="width: 10rem">{{"Title" | translate}}</th>
+                                    <th style="width: 10rem">{{"From" | translate}}</th>
+                                    <th style="width: 10rem">{{"To" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="text-align: center;"
+                                    *ngFor="let activity of Activity1 | paginate: { id: 'activity1', itemsPerPage: 10, currentPage: p }">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.activityId}}</th>
+                                    <td>{{activity.activityName}}</td>
+                                    <td>{{activity.activityFromDate | date}}</td>
+                                    <td>{{activity.activityToDate | date}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="p = $event"
+                                                 id="activity1"
+                                                 autoHide="true"
+                                                 responsive="true"
+                                                 previousLabel="Previous"
+                                                 nextLabel="Next"></pagination-controls>
                             <div fxLayoutAlign="center center">
                                 <button (click)="create('activity1')" color="primary"
                                         mat-stroked-button>{{"Add" | translate}}
                                     <mat-icon color="primary">add_task</mat-icon>
                                 </button>
-                                <!--                            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                                <!--                                           [pageSize]="paginator.size"-->
-                                <!--                                           [pageIndex]="paginator.page"-->
-                                <!--                                           (change)="changeTableList($event)"-->
-                                <!--                                           (page)="changeTableList($event)"-->
-                                <!--                                           showFirstLastButtons></mat-paginator>-->
                             </div>
                         </div>
-                        <div fxLayout="column" fxLayoutGap="2%" style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
+                        <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center"
+                             style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
                             <h2 class="textM">{{"Participation in the examination of scientific, scientific and technical programs, projects, research reports, dissertations, scientific publications as part of the editorial boards of journals" | translate}}</h2>
-                            <mat-table [dataSource]="Activity2">
-                                <ng-container matColumnDef="id">
-                                    <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
-                                </ng-container>
 
-                                <!--                        <ng-container matColumnDef="teacherID">-->
-                                <!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
-                                <!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
-                                <!--                        </ng-container>-->
-
-                                <ng-container matColumnDef="actName">
-                                    <mat-header-cell *matHeaderCellDef> {{"Title"}}</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="startDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="endDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <mat-header-row *matHeaderRowDef="displayedColumnsActivity2"></mat-header-row>
-                                <mat-row *matRowDef="let activity; columns: displayedColumnsActivity2;"></mat-row>
-                            </mat-table>
+                            <table style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 5rem;">№</th>
+                                    <th style="width: 10rem">{{"Title" | translate}}</th>
+                                    <th style="width: 10rem">{{"From" | translate}}</th>
+                                    <th style="width: 10rem">{{"To" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="text-align: center;"
+                                    *ngFor="let activity of Activity1 | paginate: { id: 'activity2', itemsPerPage: 10, currentPage: p }">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.activityId}}</th>
+                                    <td>{{activity.activityName}}</td>
+                                    <td>{{activity.activityFromDate | date}}</td>
+                                    <td>{{activity.activityToDate | date}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="p = $event"
+                                                 id="activity2"
+                                                 autoHide="true"
+                                                 responsive="true"
+                                                 previousLabel="Previous"
+                                                 nextLabel="Next"></pagination-controls>
 
                             <div fxLayoutAlign="center center">
                                 <button (click)="create('activity2')" color="primary"
@@ -836,152 +723,114 @@
                                 <!--                                           showFirstLastButtons></mat-paginator>-->
                             </div>
                         </div>
-                        <div fxLayout="column" fxLayoutGap="2%" style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
+                        <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center"
+                             style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
                             <h2 class="textM">{{"Participation in congresses, conferences, symposia, seminars of the international and republican level" | translate}}</h2>
-                            <mat-table [dataSource]="Activity3">
-                                <ng-container matColumnDef="id">
-                                    <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
-                                </ng-container>
-
-                                <!--                        <ng-container matColumnDef="teacherID">-->
-                                <!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
-                                <!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
-                                <!--                        </ng-container>-->
-
-                                <ng-container matColumnDef="actName">
-                                    <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="startDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="endDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <mat-header-row *matHeaderRowDef="displayedColumnsActivity3"></mat-header-row>
-                                <mat-row *matRowDef="let activity; columns: displayedColumnsActivity3;"></mat-row>
-                            </mat-table>
-
+                            <table style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 5rem;">№</th>
+                                    <th style="width: 10rem">{{"Title" | translate}}</th>
+                                    <th style="width: 10rem">{{"From" | translate}}</th>
+                                    <th style="width: 10rem">{{"To" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="text-align: center;"
+                                    *ngFor="let activity of Activity1 | paginate: { id: 'activity3', itemsPerPage: 10, currentPage: p }">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.activityId}}</th>
+                                    <td>{{activity.activityName}}</td>
+                                    <td>{{activity.activityFromDate | date}}</td>
+                                    <td>{{activity.activityToDate | date}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="p = $event"
+                                                 id="activity3"
+                                                 autoHide="true"
+                                                 responsive="true"
+                                                 previousLabel="Previous"
+                                                 nextLabel="Next"></pagination-controls>
                             <div fxLayoutAlign="center center">
                                 <button style="margin: 0 10% 0 35%" (click)="create('activity3')" color="primary"
                                         mat-stroked-button>{{"Add" | translate}}
                                     <mat-icon color="primary">add_task</mat-icon>
                                 </button>
-                                <!--                            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                                <!--                                           [pageSize]="paginator.size"-->
-                                <!--                                           [pageIndex]="paginator.page"-->
-                                <!--                                           (change)="changeTableList($event)"-->
-                                <!--                                           (page)="changeTableList($event)"-->
-                                <!--                                           showFirstLastButtons></mat-paginator>-->
                             </div>
                         </div>
-                        <div fxLayout="column" fxLayoutGap="2%" style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
+                        <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start center"
+                             style="height: 70vh; margin: 5% 0 10% 0; overflow-y: auto;">
                             <h2 class="textM">{{"Number of appearances on television and radio, publications in magazines, newspapers and electronic editions of republican and local newspapers" | translate}}</h2>
-                            <mat-table [dataSource]="Activity4">
-                                <ng-container matColumnDef="id">
-                                    <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityId }} </mat-cell>
-                                </ng-container>
 
-                                <!--                        <ng-container matColumnDef="teacherID">-->
-                                <!--                            <mat-header-cell *matHeaderCellDef> ID преподавателя</mat-header-cell>-->
-                                <!--                            <mat-cell *matCellDef="let activity"> teacherID </mat-cell>-->
-                                <!--                        </ng-container>-->
-
-                                <ng-container matColumnDef="actName">
-                                    <mat-header-cell *matHeaderCellDef> {{"Title" | translate}}</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="startDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"From" | translate}} </mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityFromDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="endDate">
-                                    <mat-header-cell *matHeaderCellDef> {{"To" | translate}}</mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.activityToDate | date}} </mat-cell>
-                                </ng-container>
-
-                                <mat-header-row *matHeaderRowDef="displayedColumnsActivity4"></mat-header-row>
-                                <mat-row *matRowDef="let activity; columns: displayedColumnsActivity4;"></mat-row>
-                            </mat-table>
+                            <table style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 5rem;">№</th>
+                                    <th style="width: 10rem">{{"Title" | translate}}</th>
+                                    <th style="width: 10rem">{{"From" | translate}}</th>
+                                    <th style="width: 10rem">{{"To" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="text-align: center;"
+                                    *ngFor="let activity of Activity4 | paginate: { id: 'activity4', itemsPerPage: 10, currentPage: p }">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.activityId}}</th>
+                                    <td>{{activity.activityName}}</td>
+                                    <td>{{activity.activityFromDate | date}}</td>
+                                    <td>{{activity.activityToDate | date}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="p = $event"
+                                                 id="activity4"
+                                                 autoHide="true"
+                                                 responsive="true"
+                                                 previousLabel="Previous"
+                                                 nextLabel="Next"></pagination-controls>
 
                             <div fxLayoutAlign="center center">
                                 <button (click)="create('activity4')" color="primary"
                                         mat-stroked-button>{{"Add" | translate}}
                                     <mat-icon color="primary">add_task</mat-icon>
                                 </button>
-                                <!--                            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                                <!--                                           [pageSize]="paginator.size"-->
-                                <!--                                           [pageIndex]="paginator.page"-->
-                                <!--                                           (change)="changeTableList($event)"-->
-                                <!--                                           (page)="changeTableList($event)"-->
-                                <!--                                           showFirstLastButtons></mat-paginator>-->
                             </div>
                         </div>
                     </div>
 
                     <div *ngIf="whichTable === 10">
-                        <div >
+                        <div>
                             <h2 class="textM">{{"The activity of the teachers of the department" | translate}}</h2>
-                            <mat-table [dataSource]="StaffActivity">
-                                <ng-container matColumnDef="id">
-                                    <mat-header-cell *matHeaderCellDef> №</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.id }} </mat-cell>
-                                </ng-container>
 
-                                <ng-container matColumnDef="teacherId">
-                                    <mat-header-cell *matHeaderCellDef> {{"Teacher ID" | translate}}</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.teacherId }} </mat-cell>
-                                </ng-container>
+                            <table style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 5rem;">№</th>
+                                    <th style="width: 10rem">{{"Teacher ID" | translate}}</th>
+                                    <th style="width: 10rem">{{"Teacher Name" | translate}}</th>
+                                    <th style="width: 10rem">{{"Uploaded date" | translate}}</th>
+                                    <th style="width: 10rem">{{"Publication Name" | translate}}</th>
+                                    <th style="width: 10rem">{{"Type of activity" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="text-align: center;"
+                                    *ngFor="let activity of StaffActivity | paginate: { id: 'staffAct', itemsPerPage: 10, currentPage: p }">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.id}}</th>
+                                    <td>{{activity.teacherId}}</td>
+                                    <td>{{activity.teacherName}}</td>
+                                    <td>{{activity.date | date}}</td>
+                                    <td>{{activity.publicationName}}</td>
+                                    <td>{{activity.type}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="p = $event"
+                                                 id="staffAct"
+                                                 autoHide="true"
+                                                 responsive="true"
+                                                 previousLabel="Previous"
+                                                 nextLabel="Next"></pagination-controls>
 
-                                <ng-container matColumnDef="teacherName">
-                                    <mat-header-cell *matHeaderCellDef> {{"Teacher Name" | translate}}</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.teacherName }} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="date">
-                                    <mat-header-cell
-                                            *matHeaderCellDef> {{"Uploaded date" | translate}} </mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.date | date}} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="publicationName">
-                                    <mat-header-cell
-                                            *matHeaderCellDef> {{"Publication Name" | translate}}</mat-header-cell>
-                                    <mat-cell
-                                            *matCellDef="let activity"> {{ activity.publicationName | date}} </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="activity">
-                                    <mat-header-cell
-                                            *matHeaderCellDef> {{"Type of activity" | translate}}</mat-header-cell>
-                                    <mat-cell *matCellDef="let activity"> {{ activity.activity | date}} </mat-cell>
-                                </ng-container>
-
-                                <mat-header-row *matHeaderRowDef="displayedColumnsStaffActivity"></mat-header-row>
-                                <mat-row *matRowDef="let activity; columns: displayedColumnsStaffActivity;"></mat-row>
-                            </mat-table>
-
-                            <div fxLayoutAlign="center center">
-                                <!--                            <mat-paginator [pageSizeOptions]="[1, 2, 3, 4, 10]" [length]="paginator.length"-->
-                                <!--                                           [pageSize]="paginator.size"-->
-                                <!--                                           [pageIndex]="paginator.page"-->
-                                <!--                                           (change)="changeTableList($event)"-->
-                                <!--                                           (page)="changeTableList($event)"-->
-                                <!--                                           showFirstLastButtons></mat-paginator>-->
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -991,3 +840,14 @@
     </div>
     <div fxFlex="5"></div>
 </div>
+
+
+<!--<ul>-->
+<!--    <li *ngFor="let item of TeacherEvents | paginate: { id: 'event', itemsPerPage: 10, currentPage: p }"> {{item.eventId}} </li>-->
+<!--    <li *ngFor="let item of TeacherEvents | paginate: { id: 'event', itemsPerPage: 10, currentPage: p }"> {{item.eventType}} </li>-->
+<!--</ul>-->
+<!--<pagination-controls id="event" (pageChange)="p = $event" autoHide="true" responsive="true" previousLabel="Previous"-->
+<!--                     nextLabel="Next"-->
+<!--                     screenReaderPaginationLabel="Pagination"-->
+<!--                     screenReaderPageLabel="page"-->
+<!--                     screenReaderCurrentLabel="You're on page"></pagination-controls>-->

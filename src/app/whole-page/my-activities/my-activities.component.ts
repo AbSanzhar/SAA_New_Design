@@ -16,18 +16,22 @@ import {TranslateService} from '@ngx-translate/core';
     styleUrls: ['./my-activities.component.css']
 })
 export class MyActivitiesComponent implements OnInit {
+
+    config: any;
+    p = 1;
+    collection = { count: 60, data: [] };
+
+    TeacherEvents: any[] = [];
+
+
     from: any = 1900;
     to: any = 2021;
-    paginator = {
-        length: 0,
-        size: 1,
-        page: 0,
-    };
     isHeadOfDept: boolean;
     lang: any;
     public DecodedToken = this.getDecodedAccessToken(localStorage.getItem('token'));
     public IdToken = this.DecodedToken.jti;
     private name: any;
+
 
     PubTypeCounts;
     UserDegreeCounts;
@@ -40,7 +44,7 @@ export class MyActivitiesComponent implements OnInit {
     activityRoleCount;
 
     TeacherPublications: any[] = [];
-    TeacherEvents: any[] = [];
+    // TeacherEvents: any[] = [];
     TeacherDisSovet: any[] = [];
     TeacherPatents: any[] = [];
     DepUsers: any[] = [];
@@ -54,20 +58,11 @@ export class MyActivitiesComponent implements OnInit {
     Activity3: any[] = [];
     Activity4: any[] = [];
 
-    displayedColumnsPublication = ['pubId', 'Title', 'pubType', 'Collaborators', 'Year', 'City', 'Publisher', 'Page', 'Url', 'Doi', 'pubStatus', 'File', 'Action'];
-    displayedColumnsEvent = ['eventId', 'eventTitle', 'eventType', 'eventRole', 'eventDate', 'eventCity', 'Url', 'File'];
-    displayedColumnsDisSovet = ['disId', 'university', 'disRole', 'specialty', 'stopDate', 'numberAndDate'];
-    displayedColumnsPatent = ['ptntNumber', 'ptntId', 'ptntCountry', 'ptntIssueDate', 'ptntPublishedTR', 'ptntOwnerName', 'status', 'insertDate', 'whoCheck', 'File'];
-    displayedColumnsDepUsers = ['userId', 'lastName', 'firstName', 'email', 'description', 'userType'];
-    displayedColumns5 = ['id', 'name', 'type', 'priority', 'subPriority', 'subSubPriority', 'executor', 'customer', 'dirFullName', 'dept', 'agrDate', 'registerNumber', 'startDate', 'endDate', 'totalSum'];
-    displayedColumns6 = ['courseId', 'FL', 'form', 'center', 'hours', 'price', 'deadlines', 'certificates', 'level', 'File'];
-    displayedColumnsExhibition = ['id', 'name', 'date', 'place', 'type', 'role', 'level'];
-    displayedColumnsAward = ['id', 'name', 'type', 'date', 'by_whom', 'to_whom'];
-    displayedColumnsStaffActivity = ['id', 'teacherId', 'teacherName', 'date', 'publicationName', 'activity'];
-    displayedColumnsActivity1 = ['id', 'actName', 'startDate', 'endDate'];
-    displayedColumnsActivity2 = ['id', 'actName', 'startDate', 'endDate'];
-    displayedColumnsActivity3 = ['id', 'actName', 'startDate', 'endDate'];
-    displayedColumnsActivity4 = ['id', 'actName', 'startDate', 'endDate'];
+    paginator = {
+        length: 100,
+        size: 1,
+        page: 0,
+    };
 
     public s = this.getDecodedAccessToken(localStorage.getItem('token'));
     public tokenId = this.s.jti;
@@ -93,6 +88,23 @@ export class MyActivitiesComponent implements OnInit {
                 // tslint:disable-next-line:variable-name
                 private _dialog: MatDialog,
                 private translateService: TranslateService) {
+        for (var i = 0; i < this.collection.count; i++) {
+            this.collection.data.push(
+                {
+                    id: i + 1,
+                    value: 'items number ' + (i + 1)
+                }
+            );
+        }
+        this.config = {
+            itemsPerPage: 10,
+            currentPage: 1,
+            totalItems: this.TeacherEvents.length
+        };
+    }
+
+    pageChanged(event){
+        this.config.currentPage = event;
     }
 
     onChangePage(pageOfItems: Array<any>) {
@@ -100,6 +112,7 @@ export class MyActivitiesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // console.log(this.eventColumns);
         this.lang = this.translateService.store.currentLang;
         this.translateService.onLangChange.subscribe(
             lang => {
@@ -245,12 +258,6 @@ export class MyActivitiesComponent implements OnInit {
         // }, err => {
         //   console.log(err);
         // });
-    }
-
-    changeTableList(event) {
-        this.paginator.page = event.pageIndex;
-        this.paginator.size = event.pageSize;
-        this.getTeacherPublications(this.lang);
     }
 
     getTeacherEvents(lang) {
@@ -444,6 +451,7 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherActivities(userId) {
         this._api.getTeacherActivities(userId).subscribe(
             res => {
+                console.log(res);
                 // tslint:disable-next-line:prefer-for-of
                 for (let i = 0; i < res.length; i++) {
                     if (res[i].activityTypeId.activityTypeId === 1) {

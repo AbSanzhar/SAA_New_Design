@@ -85,10 +85,13 @@ export class AddDissetComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(
             res => {
+                console.log("TESTTTTTTT")
                 if (typeof res !== 'undefined' && res !== 'false') {
                     const control = res;
+                    console.log("RESUUULT")
+                    console.log(res);
                     const members = control.value.disMember;
-                    // console.log(members);
+                    console.log(members);
                     this._api.uploadDisSovet(this.form.value).subscribe(
                         disId => {
                             console.log(disId);
@@ -98,7 +101,9 @@ export class AddDissetComponent implements OnInit {
                                 // console.log(members[i]);
                                 this._api.uploadDisMember(disId, members[i]).subscribe(
                                     mem => {
+                                        console.log("MEM");
                                         console.log(mem);
+                                        console.log("MEM TEST");
                                     },
                                     memErr => {
                                         console.log(memErr);

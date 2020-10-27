@@ -2,6 +2,15 @@
     color: #DC5441 !important;
 }
 
+th, td {
+    border-bottom: 1px solid #ddd;
+    word-break: break-word;
+}
+
+th {
+    color: #8C8C8C; font-size: 12px; font-weight: 400
+}
+
 label {
     color: #A8A4A4;
 }
