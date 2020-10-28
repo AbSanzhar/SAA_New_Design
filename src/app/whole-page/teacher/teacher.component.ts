@@ -1186,8 +1186,8 @@ export class TeacherComponent implements OnInit {
       this._api.getPublicationType(lang).subscribe(
           res => {
               console.log(res);
-              for(let i = 0; i < res.length; i++) {
-                  let temp = {
+              for (let i = 0; i < res.length; i++) {
+                  const temp = {
                     value: res[i].type_id,
                     viewValue: res[i].type_name
                   };
@@ -1204,10 +1204,10 @@ export class TeacherComponent implements OnInit {
           res => {
               console.log(res);
               for (let i = 0; i < res.length; i++) {
-                  let temp = {
+                  const temp = {
                       value: res[i].place_id,
                       viewValue: res[i].place_name
-                  }
+                  };
                   this.elements1[i] = temp;
               }
           }, err => {
@@ -1220,8 +1220,8 @@ export class TeacherComponent implements OnInit {
       this._api.getEventTypes(lang).subscribe(
           res => {
               console.log(res);
-              for(let i = 0; i < res.length; i++) {
-                  let temp = {
+              for (let i = 0; i < res.length; i++) {
+                  const temp = {
                       value: res[i].type_id,
                       viewValue: res[i].type_name
                   };
@@ -1237,8 +1237,8 @@ export class TeacherComponent implements OnInit {
         this._api.getEventRoles(lang).subscribe(
             res => {
                 console.log(res);
-                for(let i = 0; i < res.length; i++) {
-                    let temp = {
+                for (let i = 0; i < res.length; i++) {
+                    const temp = {
                         value: res[i].role_id,
                         viewValue: res[i].role_name
                     };
@@ -1254,8 +1254,8 @@ export class TeacherComponent implements OnInit {
       this._api.getPatentTypes(lang).subscribe(
           res => {
               console.log(res);
-              for(let i = 0; i < res.length; i++) {
-                  let temp = {
+              for (let i = 0; i < res.length; i++) {
+                  const temp = {
                     value: res[i].type_id,
                     viewValue: res[i].type_name
                   };
@@ -1271,8 +1271,8 @@ export class TeacherComponent implements OnInit {
       this._api.getCourseDegree(lang).subscribe(
           res => {
               console.log(res);
-              for(let i = 0; i < res.length; i++) {
-                  let temp = {
+              for (let i = 0; i < res.length; i++) {
+                  const temp = {
                     value: parseInt(res[i].degree_id),
                     viewValue: res[i].degree_name
                   };
@@ -1288,7 +1288,7 @@ export class TeacherComponent implements OnInit {
       this._api.getCourseForm(lang).subscribe(
           res => {
               console.log(res);
-              for(let i = 0; i < res.length; i++) {
+              for (let i = 0; i < res.length; i++) {
                   const temp = {
                       // tslint:disable-next-line:radix
                       value: parseInt(res[i].form_id),
@@ -1308,10 +1308,10 @@ export class TeacherComponent implements OnInit {
           res => {
               console.log(res);
               for (let i = 0; i < res.length; i++) {
-                  let temp = {
+                  const temp = {
                       value: res[i].exLevelId,
                       viewValue: res[i].exLevelRu,
-                  }
+                  };
                   this.exhibitionLevels[i] = temp;
               }
           }, err => console.log(err)
@@ -1323,10 +1323,10 @@ export class TeacherComponent implements OnInit {
           res => {
               console.log(res);
               for (let i = 0; i < res.length; i++) {
-                  let temp = {
+                  const temp = {
                       value: res[i].exRoleId,
                       viewValue: res[i].exRoleRu,
-                  }
+                  };
                   this.exhibitionRoles[i] = temp;
               }
           }, err => console.log(err)
@@ -1338,7 +1338,7 @@ export class TeacherComponent implements OnInit {
           res => {
               console.log(res);
               for (let i = 0; i < res.length; i++) {
-                  let temp = {
+                  const temp = {
                       value: res[i].exTypeId,
                       viewValue: res[i].exTypeRu
                   };
@@ -1354,7 +1354,7 @@ export class TeacherComponent implements OnInit {
               console.log(res);
               for (let i = 0; i < res.length; i++) {
                   let temp;
-                  if(lang == 'kz' || lang == 'en') {
+                  if (lang == 'kz' || lang == 'en') {
                       temp = {
                           value: res[i].awardTypeId,
                           viewValue: res[i]['awardTypeName' + String(lang)[0].toUpperCase() + String(lang)[1]]
@@ -1384,7 +1384,7 @@ export class TeacherComponent implements OnInit {
           res => {
               console.log(res);
               for (let i = 0; i < res.length; i++) {
-                  let temp = {
+                  const temp = {
                       value: res[i].activityRoleId,
                       viewValue: res[i].activityRoleName
                   };
@@ -1811,16 +1811,22 @@ export class TeacherComponent implements OnInit {
 
     }
 
+
     onPubFileChange(event) {
 
         if (event.target.files.length > 0) {
             const file = event.target.files[0] as File;
-            this.publicationForm.patchValue({
-                fileSource: file
-            });
-            this.selectedPublicationFile = file;
-            console.log(this.selectedPublicationFile);
-            this.uploadPublicationFile();
+            if (file.size > 10000000) {
+                alert('Превышает лимит. Попробуйте уменьшить  размер файла.');
+            }
+            else {
+                this.publicationForm.patchValue({
+                    fileSource: file
+                });
+                this.selectedPublicationFile = file;
+                console.log(this.selectedPublicationFile);
+                this.uploadPublicationFile();
+            }
         }
 
     }
@@ -1829,6 +1835,9 @@ export class TeacherComponent implements OnInit {
 
         if (event.target.files.length > 0) {
             const file = event.target.files[0];
+            if (file.size > 10000000) {
+                alert('Превышает лимит. Попробуйте уменьшить  размер файла.');
+            }
             this.patentForm.patchValue({
                 fileSource: file
             });
@@ -1843,6 +1852,9 @@ export class TeacherComponent implements OnInit {
 
         if (event.target.files.length > 0) {
             const file = event.target.files[0];
+            if (file.size > 10000000) {
+                alert('Превышает лимит. Попробуйте уменьшить  размер файла.');
+            }
             this.teacherCourseForm.patchValue({
                 fileSource: file
             });
@@ -1857,6 +1869,9 @@ export class TeacherComponent implements OnInit {
 
         if (event.target.files.length > 0) {
             const file = event.target.files[0];
+            if (file.size > 10000000) {
+                alert('Превышает лимит. Попробуйте уменьшить  размер файла.');
+            }
             this.activity3Form.patchValue({
                 activity_file: file
             });
