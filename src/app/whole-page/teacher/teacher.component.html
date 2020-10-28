@@ -131,8 +131,9 @@
 
 
                     <div>
-                        <input  type="file"
+                        <input type="file"
                                (change)="onPubFileChange($event)">
+                        <p>{{"Maximum file size is 10MB" | translate}}</p>
                     </div>
 
                     <button mat-raised-button color="primary" [disabled]="publicationForm.invalid" style="margin-top: 3%;">
@@ -260,6 +261,7 @@
                     <div>
                         <input type="file"
                                (change)="onPatentFileChange($event)">
+                        <p>{{"Maximum file size is 10MB" | translate}}</p>
                     </div>
 
 <!--                    <div>-->
@@ -721,6 +723,7 @@
                     <div>
                         <input type="file"
                                (change)="onScienceProjFileChange($event)">
+                        <p>{{"Maximum file size is 10MB" | translate}}</p>
                     </div>
 
 
@@ -737,10 +740,10 @@
 
     <div class="Inner" *ngIf="_data === 'exhibition'">
         <form [formGroup]="exhibitionForm" class="example-form">
-            <p style="color: darkred; font-weight: 500; font-size: 18px">Добавить выставку: </p>
+            <p style="color: darkred; font-weight: 500; font-size: 18px">{{"Add exhibition" | translate}}: </p>
 
             <mat-form-field>
-                <mat-label>Тип </mat-label>
+                <mat-label>{{"The Type" | translate}} </mat-label>
                 <mat-select required formControlName="ex_type_id">
                     <mat-option *ngFor="let i of exhibitionTypes" [value]="i.value">
                         {{i.viewValue}}
@@ -750,7 +753,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Роль</mat-label>
+                <mat-label>{{"Role" | translate}}</mat-label>
                 <mat-select  required formControlName="ex_role_id">
                     <mat-option *ngFor="let i of exhibitionRoles" [value]="i.value">
                         {{i.viewValue}}
@@ -760,13 +763,13 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Название</mat-label>
+                <mat-label>{{"Title" | translate}}</mat-label>
                 <input matInput formControlName="ex_name" type="text" placeholder="Ex. Smth." required>
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Дата</mat-label>
+                <mat-label>{{"Date" | translate}}</mat-label>
                 <input matInput formControlName="ex_date" type="date" required>
                 <mat-error>This is the required field!</mat-error>
             </mat-form-field>
@@ -779,7 +782,7 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
                 <mat-label>Уровень</mat-label>
                 <mat-select required formControlName="ex_level_id">
                     <mat-option *ngFor="let i of exhibitionLevels" [value]="i.value">
@@ -926,6 +929,7 @@
             <div>
                 <input type="file"
                        (change)="onActivity3ProjFileChange($event)">
+                <p>{{"Maximum file size is 10MB" | translate}}</p>
             </div>
 
             <button mat-raised-button color="primary" [disabled]="activity3Form.invalid" style="margin-top: 3%" (click)="sendTeacherActivity3('Successfully saved', 'OK')">

@@ -193,6 +193,7 @@
   "Uploaded date": "Uploaded date",
   "Add News": "Add News",
   "Apply": "Apply",
+  "Add exhibition": "Add exhibition",
   "Your data": "Your data",
   "Organization Name": "Organization Name",
   "Publication Name": "Publication Name",
@@ -203,5 +204,7 @@
   "Executor": "Executor",
   "Teachers activity": "Teachers activity",
   "The activity of the teachers of the department": "The activity of the teachers of the department",
-  "My events": "My events"
+  "My events": "My events",
+  "Maximum file size is 10MB": "Maximum file size is 10MB",
+  "More": "More"
 }
