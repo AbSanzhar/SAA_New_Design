@@ -620,8 +620,8 @@
                     <mat-form-field class="example-full-width">
                         <mat-label>{{"Form of study" | translate}}</mat-label>
                         <mat-select formControlName="courseFormId" required>
-                            <mat-option *ngFor="let i of courseForms" [value]="i.form_name">
-                                {{i.form_name}}
+                            <mat-option *ngFor="let i of courseForms" [value]="i.value">
+                                {{i.viewValue}}
                             </mat-option>
                         </mat-select>
                         <mat-error>{{"This is the required field!" | translate}}</mat-error>
