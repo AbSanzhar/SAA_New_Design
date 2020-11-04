@@ -18,7 +18,7 @@
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 5}"
                                       (click)="setWhichTable(5)">{{"My scientific projects" | translate}}</a></div>
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 6}"
-                                      (click)="setWhichTable(6)">{{"My courses" | translate}}</a>
+                                      (click)="setWhichTable(6)">{{"Training" | translate}}</a>
             </div>
             <div class="linkTable"><a [ngClass]="{'is-active': whichTable === 7}"
                                       (click)="setWhichTable(7)">{{"Exhibitions" | translate}}</a>
@@ -77,9 +77,9 @@
                             </thead>
                             <tbody>
                             <tr style="text-align: center;"
-                                *ngFor="let publication of TeacherPublications | paginate: { id: 'publications', itemsPerPage: 10, currentPage: p }">
+                                *ngFor="let publication of TeacherPublications | paginate: { id: 'publications', itemsPerPage: 10, currentPage: p }, let index = index">
                                 <th *ngIf="from <= publication.pubYear && to >= publication.pubYear"
-                                    style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{publication.pubId}}</th>
+                                    style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{index+1}}</th> <!--{{publication.pubId}}-->
                                 <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubName}}</td>
                                 <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">{{publication.pubType}}</td>
                                 <td *ngIf="from <= publication.pubYear && to >= publication.pubYear">
@@ -148,19 +148,19 @@
                         <table style="width: 100%;">
                             <thead>
                             <tr>
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Title</th>
                                 <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">№</th>
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Event type</th>
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Role</th>
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">Date</th>
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">City</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{"Title" | translate}}</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{"Event type" | translate}}</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{"Role" | translate}}</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{"Date" | translate}}</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{"City" | translate}}</th>
                                 <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">URL</th>
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">File</th>
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{"File" | translate}}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr style="text-align: center;" *ngFor="let item of TeacherEvents | paginate: config">
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{item.eventId}}</th>
+                            <tr style="text-align: center;" *ngFor="let item of TeacherEvents | paginate: config, let index = index">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{index+1}}</th>
                                 <td>{{item.eventName}}</td>
                                 <td>{{item.eventType}}</td>
                                 <td>{{item.eventRole}}</td>
@@ -212,8 +212,8 @@
                             </thead>
                             <tbody>
                             <tr style="text-align: center;"
-                                *ngFor="let disset of TeacherDisSovet | paginate: { id: 'disset', itemsPerPage: 10, currentPage: p }">
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{disset.disId}}</th>
+                                *ngFor="let disset of TeacherDisSovet | paginate: { id: 'disset', itemsPerPage: 10, currentPage: p }, let index = index">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{index+1}}</th>
                                 <td>{{disset.disInfo}}</td>
                                 <td>{{disset.disPosition}}</td>
                                 <td>{{disset.memberType}}</td>
@@ -288,7 +288,7 @@
                                 <th style="width: 8rem">{{"Status" | translate}}</th>
                                 <th style="width: 8rem">{{"Date of entry into the database" | translate}}</th>
                                 <th style="width: 8rem">{{"Verified by" | translate}}</th>
-                                <th style="width: 2rem">File</th>
+                                <th style="width: 2rem">{{"File" | translate}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -523,7 +523,7 @@
                                 <th style="width: 12rem">{{"Terms of passage" | translate}}</th>
                                 <th style="width: 12rem">№{{"Certificate" | translate}} & {{"Date" | translate}}</th>
                                 <th style="width: 12rem">{{"Level" | translate}}</th>
-                                <th style="width: 5rem">File</th>
+                                <th style="width: 5rem">{{"File" | translate}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -579,8 +579,8 @@
                             </thead>
                             <tbody>
                             <tr style="text-align: center;"
-                                *ngFor="let activity of TeacherExhibitions | paginate: { id: 'activity', itemsPerPage: 10, currentPage: p }">
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.exId}}</th>
+                                *ngFor="let activity of TeacherExhibitions | paginate: { id: 'activity', itemsPerPage: 10, currentPage: p }, let index = index">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{index+1}}</th>
                                 <td>{{activity.exName}}</td>
                                 <td>{{activity.exDate | date}}</td>
                                 <td>{{activity.exPlace}}</td>
@@ -619,8 +619,8 @@
                             </thead>
                             <tbody>
                             <tr style="text-align: center;"
-                                *ngFor="let activity of TeacherAwards | paginate: { id: 'award', itemsPerPage: 10, currentPage: p }">
-                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.awardId}}</th>
+                                *ngFor="let activity of TeacherAwards | paginate: { id: 'award', itemsPerPage: 10, currentPage: p }, let index = index">
+                                <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{index+1}}</th>
                                 <td>{{activity.awardName}}</td>
                                 <td>{{activity.awardType}}</td>
                                 <td>{{activity.awardDate | date}}</td>
@@ -773,8 +773,8 @@
                                 </thead>
                                 <tbody>
                                 <tr style="text-align: center;"
-                                    *ngFor="let activity of Activity4 | paginate: { id: 'activity4', itemsPerPage: 10, currentPage: p }">
-                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.activityId}}</th>
+                                    *ngFor="let activity of Activity4 | paginate: { id: 'activity4', itemsPerPage: 10, currentPage: p }, let index = index">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{index+1}}</th>
                                     <td>{{activity.activityName}}</td>
                                     <td>{{activity.activityFromDate | date}}</td>
                                     <td>{{activity.activityToDate | date}}</td>
@@ -814,8 +814,8 @@
                                 </thead>
                                 <tbody>
                                 <tr style="text-align: center;"
-                                    *ngFor="let activity of StaffActivity | paginate: { id: 'staffAct', itemsPerPage: 10, currentPage: p }">
-                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{activity.id}}</th>
+                                    *ngFor="let activity of StaffActivity | paginate: { id: 'staffAct', itemsPerPage: 10, currentPage: p }, let index = index">
+                                    <th style="color: #8C8C8C; font-size: 12px; font-weight: 400">{{index+1}}</th>
                                     <td>{{activity.teacherId}}</td>
                                     <td>{{activity.teacherName}}</td>
                                     <td>{{activity.date | date}}</td>

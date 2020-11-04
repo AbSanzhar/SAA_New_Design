@@ -932,7 +932,7 @@ export class TeacherComponent implements OnInit {
   getYear() {
     const today = new Date();
     this.yy = today.getFullYear();
-    for (let i = (this.yy - 100); i <= this.yy; i++){
+    for (let i = this.yy; i >= this.yy-20; i--){
       this.years.push(i);
     }
   }

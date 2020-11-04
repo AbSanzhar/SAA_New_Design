@@ -1,7 +1,9 @@
 {
   "My page": "My page",
+  "File": "File",
   "Change password": "Change password",
   "Home": "Home",
+  "Training": "Training",
   "Login or password are incorrect!": "Login or password are incorrect!",
   "Statistics": "Statistics",
   "About the project": "About the project",
@@ -188,7 +190,7 @@
   "Username": "Username",
   "Teacher Name": "Teacher Name",
   "For people interested": "For people interested",
-  "in science!": "адамдар ушін",
+  "in science!": "in science!",
   "JOIN FOR FREE": "JOIN FOR FREE",
   "Uploaded date": "Uploaded date",
   "Add News": "Add News",

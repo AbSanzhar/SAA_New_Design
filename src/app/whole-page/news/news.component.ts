@@ -15,6 +15,8 @@ export class NewsComponent implements OnInit {
     isDesktop;
     isTablet;
     allNews: any;
+    newsType = 'all';
+    today = new Date();
 
   news: News[] = [
       {id: 1, title: 'Заголовок Статьи', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: 'assets/images/news/news1.png', url: '#'},
@@ -59,5 +61,19 @@ export class NewsComponent implements OnInit {
             width: '50%',
             data: id
         });
+    }
+
+    sortNews(all: string) {
+        this.newsType = all;
+        if (all === 'last') {
+            for (let i = 0; i < this.allNews.length; i++) {
+                // if (this.today.getFullYear() === this.allNews[i].date.getFullYear()) {
+                    console.log(this.today.getFullYear());
+                // }
+            }
+            this.allNews = ['test'];
+        } else{
+            this.getAllNews();
+        }
     }
 }
