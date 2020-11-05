@@ -112,7 +112,9 @@ export class MyActivitiesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // console.log(this.eventColumns);
+        this.getTeacherExhibitions(this.IdToken);
+        this.getTeacherAwards(this.IdToken);
+        this.getTeacherActivities(this.IdToken);
         this.lang = this.translateService.store.currentLang;
         this.translateService.onLangChange.subscribe(
             lang => {
@@ -418,9 +420,9 @@ export class MyActivitiesComponent implements OnInit {
             res => {
                 this.TeacherExhibitions = res;
                 for (let i = 0; i < res.length; i++) {
-                    const langRoleSelector = 'exRole' + String(this.lang[0]).toUpperCase() + this.lang[1];
-                    const langTypeSelector = 'exType' + String(this.lang[0]).toUpperCase() + this.lang[1];
-                    const langLevelSelector = 'exLevel' + String(this.lang[0]).toUpperCase() + this.lang[1];
+                    const langRoleSelector = 'exRole' + String(this.translateService.currentLang[0]).toUpperCase() + this.translateService.currentLang[1];
+                    const langTypeSelector = 'exType' + String(this.translateService.currentLang[0]).toUpperCase() + this.translateService.currentLang[1];
+                    const langLevelSelector = 'exLevel' + String(this.translateService.currentLang[0]).toUpperCase() + this.translateService.currentLang[1];
                     this.TeacherExhibitions[i].exRole = res[i].exRoleId[langRoleSelector];
                     this.TeacherExhibitions[i].exType = res[i].exTypeId[langTypeSelector];
                     this.TeacherExhibitions[i].exLevel = res[i].exLevelId[langLevelSelector];
@@ -440,7 +442,7 @@ export class MyActivitiesComponent implements OnInit {
                     if (this.lang === 'ru') {
                         langTypeSelector = 'awardTypeName';
                     } else {
-                        langTypeSelector = 'awardTypeName' + String(this.lang[0]).toUpperCase() + this.lang[1];
+                        langTypeSelector = 'awardTypeName' + String(this.translateService.currentLang[0]).toUpperCase() + this.translateService.currentLang[1];
                     }
                     this.TeacherAwards[i].awardType = res[i].awardTypeEntity[langTypeSelector];
                 }
@@ -451,7 +453,6 @@ export class MyActivitiesComponent implements OnInit {
     getTeacherActivities(userId) {
         this._api.getTeacherActivities(userId).subscribe(
             res => {
-                console.log(res);
                 // tslint:disable-next-line:prefer-for-of
                 for (let i = 0; i < res.length; i++) {
                     if (res[i].activityTypeId.activityTypeId === 1) {
@@ -574,6 +575,7 @@ export class MyActivitiesComponent implements OnInit {
 
     public download2(): void {
         const documentCreator = new ScienceListGenerator();
+        console.log(this.TeacherPublications);
         const doc = documentCreator.create(this.name, this.TeacherPublications);
         Packer.toBlob(doc).then(blob => {
             saveAs(blob, 'Список научных трудов.docx');

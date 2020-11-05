@@ -13,19 +13,6 @@ export class ScienceListGenerator {
                 new Paragraph({
                     children: [
                         new TextRun({
-                            text: 'Образец',
-                            size: 24,
-                            font: {
-                                name: 'Times New Roman',
-                            },
-                        }),
-                    ],
-                    // heading: HeadingLevel.HEADING_1,
-                    alignment: AlignmentType.CENTER
-                }),
-                new Paragraph({
-                    children: [
-                        new TextRun({
                             text: 'МЕЖДУНАРОДНЫЙ  УНИВЕРСИТЕТ ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ',
                             size: 24,
                             font: {
@@ -119,22 +106,9 @@ export class ScienceListGenerator {
                                 new TableCell({
                                     children: [
                                         new Paragraph({
-                                        children: [
-                                            new TextRun({
-                                                text: 'Характер',
-                                                size: 24,
-                                                font: {
-                                                    name: 'Times New Roman',
-                                                },
-                                                color: 'black'
-                                            }),
-                                        ],
-                                        alignment: AlignmentType.CENTER
-                                    }),
-                                        new Paragraph({
                                             children: [
                                                 new TextRun({
-                                                    text: 'работы',
+                                                    text: 'Тип',
                                                     size: 24,
                                                     font: {
                                                         name: 'Times New Roman',
@@ -413,7 +387,7 @@ export class ScienceListGenerator {
                         new Paragraph({
                             children: [
                                 new TextRun({
-                                    text: `${AcadMeth.pubName}`,
+                                    text: `${AcadMeth.pubName}// ${AcadMeth.pubPubName}, ${AcadMeth.pubCity ? AcadMeth.pubCity + ',' : ''} ${AcadMeth.pubYear}${ AcadMeth.pubPage ? ', ' + AcadMeth.pubPage + '-' + AcadMeth.pubEndPage : '' }${AcadMeth.pubDoi ? ', DOI ' + AcadMeth.pubDoi : '' }`,
                                     size: 24,
                                     font: {
                                         name: 'Times New Roman',
@@ -435,7 +409,7 @@ export class ScienceListGenerator {
                         new Paragraph({
                             children: [
                                 new TextRun({
-                                    text: `печатная`,
+                                    text: `${AcadMeth.pubType}`,
                                     size: 24,
                                     font: {
                                         name: 'Times New Roman',
@@ -459,7 +433,7 @@ export class ScienceListGenerator {
                             return new Paragraph({
                                 children: [
                                     new TextRun({
-                                        text: `${coauthor.coAuthorUser.lastName} ${coauthor.coAuthorUser.firstName} ${coauthor.coAuthorUser.patronymic}`,
+                                        text: `${coauthor.coAuthorUser.lastName} ${coauthor.coAuthorUser.firstName} ${coauthor.coAuthorUser.patronymic || ''}`,
                                         size: 24,
                                         font: {
                                             name: 'Times New Roman',
@@ -468,7 +442,7 @@ export class ScienceListGenerator {
                                     }),
                                 ],
                                 alignment: AlignmentType.LEFT
-                            })
+                            });
                         }),
                         // new Paragraph({
                         //     children: [
