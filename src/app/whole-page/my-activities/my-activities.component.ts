@@ -356,10 +356,22 @@ export class MyActivitiesComponent implements OnInit {
     }
 
     getTeacherScienceProjects() {
-        this._api.getOneScienceProject(14, 'en').subscribe(res => {
-        });
+        // this._api.getOneScienceProject(this.tokenId, this.translateService.currentLang).subscribe(res => {
+        //     console.log(res);
+        //     this.TeacherScienceProjects = res;
+        //     this.TeacherScienceProjects.sort(function(a, b) {
+        //         if (a.scId > b.scId) {
+        //             return -1;
+        //         }
+        //         if (b.scId > a.scId) {
+        //             return 1;
+        //         }
+        //         return 0;
+        //     });
+        // });
         this._api.getScienceProject().subscribe(
             res => {
+                console.log(res);
                 this.TeacherScienceProjects = res;
                 // tslint:disable-next-line:only-arrow-functions
                 this.TeacherScienceProjects.sort(function(a, b) {

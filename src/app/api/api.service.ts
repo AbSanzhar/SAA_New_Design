@@ -670,4 +670,9 @@ export class ApiService {
     return this.http.get(this.base + url);
   }
 
+  getScPriority(id, lang): Observable<any> {
+    const url = 'projects/priority';
+    return this.http.get(`${this.base}${url}/${id}/${lang}`);
+  }
+
 }
